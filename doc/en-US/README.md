@@ -47,7 +47,7 @@ It's about this number (**7,6 thousand**) that we are lost and with hands tied, 
 
 [Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demo-page.html) to experience and better understand how it works:
 
-![Demo Page](../../images/doc/en-US/demo.png)
+![Demo Page](../../images/doc/en-US/demo-page.png)
 
 ## Going deeper
 

@@ -43,7 +43,7 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 ## Experimente!
 
 [Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar e entender melhor o seu funcionamento:
-![Demo Page](images/doc/pt-BR/demo.png)
+![Demo Page](images/doc/pt-BR/demo-page.png)
 
 ## Se aprofunde no tema
 
