@@ -17,7 +17,7 @@
     }
   },
   "icons": {
-    "16": "images/icons/128.png",
+    "16": "images/icons/16.png",
     "20": "images/icons/20.png",
     "24": "images/icons/24.png",
     "32": "images/icons/32.png",
@@ -29,7 +29,7 @@
   },
   "browser_action": {
     "default_icon": {
-      "16": "images/icons/128.png",
+      "16": "images/icons/16.png",
       "20": "images/icons/20.png",
       "24": "images/icons/24.png",
       "32": "images/icons/32.png",
