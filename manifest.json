@@ -1,0 +1,72 @@
+{
+  "manifest_version": 2,
+  "name": "__MSG_manifestName__",
+  "description": "__MSG_manifestDescription__",
+  "version": "0.0.1",
+  "author": "Guilherme Baptista",
+  "developer": {
+    "name": "Guilherme Baptista",
+    "url": "http://gbaptista.com"
+  },
+  "default_locale": "en_US",
+  "homepage_url": "https://gbaptista.github.io/luminous",
+  "applications": {
+    "gecko": {
+      "id": "luminous@gbaptista.com"
+    }
+  },
+  "icons": {
+    "16": "images/icons/128.png",
+    "20": "images/icons/20.png",
+    "24": "images/icons/24.png",
+    "32": "images/icons/32.png",
+    "48": "images/icons/48.png",
+    "64": "images/icons/64.png",
+    "128": "images/icons/128.png",
+    "256": "images/icons/256.png",
+    "512": "images/icons/512.png"
+  },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icons/128.png",
+      "20": "images/icons/20.png",
+      "24": "images/icons/24.png",
+      "32": "images/icons/32.png",
+      "48": "images/icons/48.png",
+      "64": "images/icons/64.png",
+      "128": "images/icons/128.png",
+      "256": "images/icons/256.png",
+      "512": "images/icons/512.png"
+    },
+    "default_popup": "html/popup/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "js/content/injections/interceptor.js",
+        "js/content/injections/options.js",
+        "js/utils/numbers.js",
+        "js/content/injections/data.js",
+        "js/vendor/jquery/jquery-3.2.1.slim.min.js",
+        "js/content/readers/data.js"
+      ],
+      "run_at" : "document_start"
+    }
+  ],
+  "background": {
+    "scripts": [
+      "js/background/set_current_tab.js",
+      "js/utils/colors.js",
+      "js/background/update_badge.js"
+    ]
+  },
+  "permissions" : [
+    "activeTab", "storage", "unlimitedStorage",
+    "webRequest", "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "web_accessible_resources": [
+    "js/content/interceptor.js"
+  ]
+}

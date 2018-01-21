@@ -1,0 +1,139 @@
+<html>
+  <head>
+    <title>Demo</title>
+    <style type="text/css">
+      body {
+        height: 200%;
+      }
+
+      #container {
+        position: fixed;
+        top: 10px;
+      }
+
+      .demo-box {
+        display: inline-block;
+        padding: 30px;
+        border: 4px solid #CCC;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+        font-size: 14px;
+        margin-right: 6px;
+        vertical-align: top;
+      }
+
+      #input-detection {
+        font-size: 12px;
+      }
+
+      #input-detection span {
+        display: inline-block;
+        width: 90px;
+      }
+
+      #input {
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <button id="click">click me!</button>
+
+      <button id="click-online" onclick="alert('clicked! (inline code)');">click me! (inline code)</button>
+
+      <br><br>
+
+      <input type="text" id="input" placeholder="type something...">
+      <p id="input-detection"></p>
+
+      <div id="wheel-position" class="demo-box">use the mouse wheel!</div>
+      <div id="scroll-position" class="demo-box">scroll the document!</div>
+
+      <br><br>
+
+      <div id="mouse-move" class="demo-box">try mousemove!</div>
+
+      <div id="mouse-over" class="demo-box">try mouseover!</div>
+    </div>
+
+    <script type="text/javascript">
+      (function() { setTimeout(function() {
+
+        var input_detections = [];
+
+        var current_time = function() {
+          var d = new Date();
+
+          return d.getHours()	+ ':' + d.getMinutes() + ':' + d.getSeconds() + '.' + d.getMilliseconds();
+        }
+
+        var update_input_detections = function(detection) {
+          input_detections.push('<span>' + current_time() + '</span> detected: ' + detection);
+
+          document.getElementById(
+            'input-detection'
+          ).innerHTML = input_detections.slice(-10).reverse().join('<br>');
+        }
+
+        document.getElementById('input').addEventListener('input', function() {
+          update_input_detections('input');
+        });
+
+        document.getElementById('input').addEventListener('keydown', function() {
+          update_input_detections('keydown');
+        });
+
+        document.getElementById('input').addEventListener('keyup', function() {
+          update_input_detections('keyup');
+        });
+
+        document.getElementById('input').addEventListener('keypress', function() {
+          update_input_detections('keypress');
+        });
+
+        document.getElementById('input').addEventListener('focus', function() {
+          update_input_detections('focus');
+        });
+
+        document.getElementById('input').addEventListener('focusout', function() {
+          update_input_detections('focusout');
+        });
+
+        document.getElementById('input').addEventListener('blur', function() {
+          update_input_detections('blur');
+        });
+
+        document.addEventListener('wheel', function() {
+          document.getElementById('wheel-position').innerHTML = current_time() + ' whell detected: ' + document.body.scrollTop;
+        });
+
+        document.addEventListener('scroll', function() {
+          document.getElementById('scroll-position').innerHTML = current_time() + ' scroll detected: ' + document.body.scrollTop;
+        });
+
+        document.getElementById('mouse-over').addEventListener('mouseover', function() {
+          document.getElementById('mouse-over').innerHTML = current_time() + ' mouseover...';
+        });
+
+        document.getElementById('mouse-over').addEventListener('mouseout', function() {
+          document.getElementById('mouse-over').innerHTML = 'try mouseover!';
+        });
+
+        document.getElementById('mouse-move').addEventListener('mousemove', function() {
+          document.getElementById('mouse-move').innerHTML = current_time() + ' mousemove...';
+        });
+
+        document.getElementById('mouse-move').addEventListener('mouseout', function() {
+          document.getElementById('mouse-move').innerHTML = 'try mousemove!';
+        });
+
+        document.getElementById('click').addEventListener('click', function() {
+          alert(current_time() + ' clicked!');
+        });
+
+      }, 100); })();
+    </script>
+  </body>
+</html>

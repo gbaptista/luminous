@@ -1,0 +1,120 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 10px;
+}
+
+@-moz-document url-prefix() {
+  html, body {
+    height: auto;
+    overflow-x: hidden;
+  }
+}
+
+h2 {
+  font-size: 11px;
+}
+
+#help-link {
+  display: inline-block;
+  float: right;
+  padding: 10px;
+}
+
+.interceptions {
+  margin: 6px;
+  width: 538px;
+}
+
+
+@-moz-document url-prefix() {
+  .interceptions {
+    width: 552px;
+  }
+}
+
+.interceptions .calls {
+  font-size: 9px;
+  position: relative;
+  margin: 0 2px 12px;
+  width: 120px;
+  padding: 6px 4px 14px 4px;
+  background-color:#e0e0e0;
+  color: #333;
+  display: inline-block;
+  text-align: center;
+}
+
+.interceptions .calls:hover {
+  background-color: #d8cedd;
+  cursor: pointer;
+}
+
+.interceptions .calls.disabled {
+  background-color: #edccc7;
+}
+.interceptions .calls.disabled:hover {
+  background-color: #f2bbb3;
+}
+
+.interceptions .calls .name {
+  display: inline-block;
+  overflow: hidden;
+  text-align: center;
+  width: 80%;
+  white-space: nowrap;
+}
+
+.interceptions .calls.disabled .name {
+  text-decoration: line-through;
+}
+
+.interceptions .calls .allowed, .interceptions .calls .blocked {
+  padding: 2px 4px 1px 4px;
+  font-size: 9px;
+  position: absolute;
+  bottom: -5px;
+  color: #FFF;
+}
+
+.interceptions .calls .allowed {
+  border-left:4px solid #20b203;
+  left: 10px;
+}
+
+.interceptions .calls .blocked {
+  border-right:4px solid #ea1004;
+  right: 10px;
+}
+
+.nothing-detected, .nothing-detected-full {
+  text-align: left;
+  color: #999;
+  padding: 10px 0 20px 10px;
+}
+
+.nothing-detected-full {
+  width: 500px;
+}
+
+.tippy-tooltip.js-sample-theme {
+   background-color: #FFF;
+   color:#666;
+   border: 1px solid #CCC;
+   font-size: 11px;
+   text-align: left;
+}
+
+.tippy-tooltip.js-sample-theme pre {
+  border-top:1px solid #CCC;
+  padding-top: 6px;
+  overflow: auto;
+  overflow-y: scroll;
+  min-height: 30px;
+  max-height: 100px;
+}
+
+.tippy-tooltip.js-sample-theme pre code {
+  font-size: 10px;
+  white-space: normal;
+}

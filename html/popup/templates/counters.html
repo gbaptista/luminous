@@ -1,0 +1,38 @@
+{{#nothing_detected}}
+  <div class="nothing-detected-full">
+    {{nothing_detected_message}}
+  </div>
+{{/nothing_detected}}
+{{^nothing_detected}}
+  <div class="interceptions">
+    <h2>{{handle_event_title}}:</h2>
+
+    {{#handle_event_calls}}
+      <div class="calls {{#disabled_class}}handleEvent,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="handleEvent" data-type="{{name}}">
+        <span class="name">{{name}}</span>
+        <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
+      </div>
+    {{/handle_event_calls}}
+    {{^handle_event_calls}}
+      <div class="nothing-detected">
+        {{nothing_detected_message}}
+      </div>
+    {{/handle_event_calls}}
+
+    <h2>{{add_event_listener_title}}:</h2>
+
+    {{#add_event_listener_calls}}
+      <div class="calls {{#disabled_class}}addEventListener,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="addEventListener" data-type="{{name}}">
+        <span class="name">{{name}}</span>
+        <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
+      </div>
+    {{/add_event_listener_calls}}
+    {{^add_event_listener_calls}}
+      <div class="nothing-detected">
+        {{nothing_detected_message}}
+      </div>
+    {{/add_event_listener_calls}}
+  </div>
+{{/nothing_detected}}

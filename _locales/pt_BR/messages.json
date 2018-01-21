@@ -1,0 +1,15 @@
+{
+  "manifestName": { "message": "Luminous: Interceptador de eventos JavaScript" },
+  "manifestDescription": { "message": "Uma extensão experimental para identificar, analisar e bloquear a execução de códigos e a coleta de eventos via JavaScript em seu navegador." },
+
+  "linkHelpText": { "message": "ajuda" },
+  "linkHelpHref": { "message": "https://gbaptista.github.io/luminous" },
+
+  "checkboxInjectionEnabledGeneral": { "message": "todos os sites" },
+  "checkboxShowListenerFunctions": { "message": "mostrar detalhes do código interceptado" },
+
+  "titleHandleEvent": { "message": "eventos disparados (handleEvent)" },
+  "titleAddEventListener": { "message": "eventos adicionados (addEventListener)" },
+
+  "messageNothingDetected": { "message": "nada foi detectado até o momento" }
+}
