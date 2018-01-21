@@ -63,9 +63,7 @@
     ]
   },
   "permissions" : [
-    "activeTab", "storage", "unlimitedStorage",
-    "webRequest", "webRequestBlocking",
-    "<all_urls>"
+    "storage", "unlimitedStorage", "<all_urls>"
   ],
   "web_accessible_resources": [
     "js/content/interceptor.js"
