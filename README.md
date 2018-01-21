@@ -36,8 +36,8 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 
 ## Como instalar
 
-- Chromium e Google Chorme: *aguardando revisão (Chrome Web Store)*
-- Mozilla Firefox: *aguardando revisão (Firefox Add-ons)*
+- Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
+- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
 - Opera: *aguardando revisão (Opera add-ons)*
 
 ## Experimente!
