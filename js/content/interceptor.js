@@ -58,29 +58,38 @@ var get_options = function() {
 }
 
 if(get_options()['injection_disabled'] !== true) {
+  var original_setTimeout = window.setTimeout;
+
   var reload_requested = false;
 
   var counters = { addEventListener: {}, handleEvent: {}, timer: {} };
   var counters_changed = false;
 
   var increment_counter = function(kind, type, result, details) {
-    if(counters[kind][type] == undefined) {
-      counters[kind][type] = { allowed: 0, blocked: 0 };
-    }
+    original_setTimeout(function() {
+      details = {
+        target: '' + details['target'],
+        code: ('' + details['code']).slice(0, 400)
+      };
 
-    counters[kind][type][result] += 1;
+      if(counters[kind][type] == undefined) {
+        counters[kind][type] = { allowed: 0, blocked: 0 };
+      }
 
-    if(!counters[kind][type]['samples']) {
-      counters[kind][type]['samples'] = [];
-    }
+      counters[kind][type][result] += 1;
 
-    counters[kind][type]['samples'].push(details);
+      if(!counters[kind][type]['samples']) {
+        counters[kind][type]['samples'] = [];
+      }
 
-    if(counters[kind][type]['samples'].length > 3) {
-      counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
-    }
+      counters[kind][type]['samples'].push(details);
 
-    counters_changed = true;
+      if(counters[kind][type]['samples'].length > 3) {
+        counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
+      }
+
+      counters_changed = true;
+    }, 0);
   }
 
   var is_allowed = function(kind, type) {
@@ -97,10 +106,7 @@ if(get_options()['injection_disabled'] !== true) {
   EventTarget.prototype.addEventListener = function(type, listener, options) {
     var super_this = this;
 
-    var details = {
-      target: '' + super_this,
-      code: ('' + listener).slice(0, 400)
-    }
+    var details = { target: super_this, code: listener };
 
     if(!is_allowed('addEventListener', type)) {
       increment_counter('addEventListener', type, 'blocked', details);
@@ -127,17 +133,14 @@ if(get_options()['injection_disabled'] !== true) {
     }
   }
 
-  original_setInterval = window.setInterval;
+  var original_setInterval = window.setInterval;
 
   window.setInterval = function(
     function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
   ) {
     var super_this = this;
 
-    var details = {
-      target: '' + super_this,
-      code: ('' + function_or_code).slice(0, 400)
-    }
+    var details = { target: super_this, code: function_or_code }
 
     if(!is_allowed('timer', 'setInterval')) {
       increment_counter('timer', 'setInterval', 'blocked', details);
@@ -164,8 +167,6 @@ if(get_options()['injection_disabled'] !== true) {
       )
     }
   }
-
-  original_setTimeout = window.setTimeout;
 
   window.setTimeout = function(
     function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
