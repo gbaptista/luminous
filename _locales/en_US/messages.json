@@ -10,6 +10,7 @@
 
   "titleHandleEvent": { "message": "triggered events (handleEvent)" },
   "titleAddEventListener": { "message": "attached events (addEventListener)" },
+  "titleTimer": { "message": "timers (setTimeout | setInterval)" },
 
   "messageNothingDetected": { "message": "nothing detected so far" }
 }

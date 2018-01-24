@@ -95,8 +95,6 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
       load_template('html/popup/templates/counters.html', function(template) {
         if(local_data[tab_id] && local_data[tab_id]['counters']) {
-          var add_event_listener_calls = [];
-
           var tooltip_content = function(name, samples) {
             var target = samples[0]['target'].replace('[object ', '').replace(']', '');
 
@@ -105,7 +103,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
               var codes = [];
 
-              for(key in samples) { codes.push(samples[key]['listener']) }
+              for(key in samples) { codes.push(samples[key]['code']) }
 
               return Mustache.render(
                 '<strong>{{name}}</strong> -> <strong>{{target}}</strong><br>' +
@@ -119,6 +117,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               );
             }
           }
+          var add_event_listener_calls = [];
 
           $.each(local_data[tab_id]['counters']['addEventListener'], function(name, value) {
             add_event_listener_calls.push({
@@ -144,25 +143,39 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             });
           });
 
+          var timer_calls = [];
+
+          $.each(local_data[tab_id]['counters']['timer'], function(name, value) {
+            timer_calls.push({
+              name: name,
+              allowed: short_number_for_counter(value['allowed']),
+              blocked: short_number_for_counter(value['blocked']),
+              allowed_color: background_color_for_counter(value['allowed']),
+              blocked_color: background_color_for_counter(value['blocked']),
+              title_for_tooltip: tooltip_content(name, value['samples'])
+            });
+          });
+
           var sort_by_name = function(a, b) {
             return (a.name.toLowerCase() > b.name.toLowerCase()) ? 1 : ((b.name.toLowerCase() > a.name.toLowerCase()) ? -1 : 0);
           };
 
           add_event_listener_calls.sort(sort_by_name);
           handle_event_calls.sort(sort_by_name);
-
-          $('.tippy-popper').remove(); // TODO improve this idea...
+          timer_calls.sort(sort_by_name);
 
           $('#counters-container').html(
             Mustache.render(template, {
               add_event_listener_calls: add_event_listener_calls,
               handle_event_calls: handle_event_calls,
+              timer_calls: timer_calls,
               options_json: JSON.stringify(
                 sync_data['options']['disabled'][domain], null, 2
               ),
               nothing_detected: false,
               nothing_detected_message: chrome.i18n.getMessage('messageNothingDetected'),
               handle_event_title: chrome.i18n.getMessage('titleHandleEvent'),
+              timer_title: chrome.i18n.getMessage('titleTimer'),
               add_event_listener_title: chrome.i18n.getMessage('titleAddEventListener'),
               disabled_class: function() {
                 return function (text, render) {
@@ -191,10 +204,17 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           tippy('.interceptions .calls', {
             theme: 'js-sample', animateFill: false, size: 'small',
-            performance: true, interactive: sync_data['options']['show_listener_functions']
+            performance: true, interactive: sync_data['options']['show_listener_functions'],
+            duration: [0, 0],
+            onShown: function() {
+              $('.tippy-popper:not(:last-child)').remove();
+            },
+            onHidde: function() {
+              $('.tippy-popper').remove();
+            }
           });
         } else {
-          $('.tippy-popper').remove(); // TODO improve this idea...
+          $('.tippy-popper').remove();
 
           $('#counters-container').html(
             Mustache.render(template, {
