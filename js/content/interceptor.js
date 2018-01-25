@@ -198,20 +198,20 @@ if(get_options()['injection_disabled'] !== true) {
 
     var details = { target: super_this, code: function_or_code };
 
-    if(!is_allowed('WebAPIs', 'window.setInterval')) {
-      increment_counter('WebAPIs', 'window.setInterval', 'blocked', details);
+    if(!is_allowed('WebAPIs', 'setInterval')) {
+      increment_counter('WebAPIs', 'setInterval', 'blocked', details);
     } else {
-      increment_counter('WebAPIs', 'window.setInterval', 'allowed', details);
+      increment_counter('WebAPIs', 'setInterval', 'allowed', details);
 
       wraped_function_or_code = function(
         p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
       ) {
-        if(!is_allowed('WebAPIs', 'window.setInterval.call')) {
-          increment_counter('WebAPIs', 'window.setInterval.call', 'blocked', details);
+        if(!is_allowed('WebAPIs', 'setInterval.call')) {
+          increment_counter('WebAPIs', 'setInterval.call', 'blocked', details);
 
           return 0;
         } else {
-          increment_counter('WebAPIs', 'window.setInterval.call', 'allowed', details);
+          increment_counter('WebAPIs', 'setInterval.call', 'allowed', details);
 
           if(typeof function_or_code === 'string' || function_or_code instanceof String) {
             return eval(function_or_code);
@@ -235,10 +235,10 @@ if(get_options()['injection_disabled'] !== true) {
 
     var details = { target: super_this, code: input };
 
-    if(!is_allowed('WebAPIs', 'window.fetch')) {
-      increment_counter('WebAPIs', 'window.fetch', 'blocked', details);
+    if(!is_allowed('WebAPIs', 'fetch')) {
+      increment_counter('WebAPIs', 'fetch', 'blocked', details);
     } else {
-      increment_counter('WebAPIs', 'window.fetch', 'allowed', details);
+      increment_counter('WebAPIs', 'fetch', 'allowed', details);
 
       return original_window_fetch.call(super_this, input, init);
     }
@@ -251,20 +251,20 @@ if(get_options()['injection_disabled'] !== true) {
 
     var details = { target: super_this, code: function_or_code };
 
-    if(!is_allowed('WebAPIs', 'window.setTimeout')) {
-      increment_counter('WebAPIs', 'window.setTimeout', 'blocked', details);
+    if(!is_allowed('WebAPIs', 'setTimeout')) {
+      increment_counter('WebAPIs', 'setTimeout', 'blocked', details);
     } else {
-      increment_counter('WebAPIs', 'window.setTimeout', 'allowed', details);
+      increment_counter('WebAPIs', 'setTimeout', 'allowed', details);
 
       wraped_function_or_code = function(
         p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
       ) {
-        if(!is_allowed('WebAPIs', 'window.setTimeout.call')) {
-          increment_counter('WebAPIs', 'window.setTimeout.call', 'blocked', details);
+        if(!is_allowed('WebAPIs', 'setTimeout.call')) {
+          increment_counter('WebAPIs', 'setTimeout.call', 'blocked', details);
 
           return 0;
         } else {
-          increment_counter('WebAPIs', 'window.setTimeout.call', 'allowed', details);
+          increment_counter('WebAPIs', 'setTimeout.call', 'allowed', details);
 
           if(typeof function_or_code === 'string' || function_or_code instanceof String) {
             return eval(function_or_code);
