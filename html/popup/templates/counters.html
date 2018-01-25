@@ -5,6 +5,21 @@
 {{/nothing_detected}}
 {{^nothing_detected}}
   <div class="interceptions">
+    <h2>{{web_apis_title}}:</h2>
+
+    {{#web_apis_calls}}
+      <div class="calls {{#disabled_class}}WebAPIs,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="WebAPIs" data-type="{{name}}">
+        <span class="name">{{name}}</span>
+        <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
+      </div>
+    {{/web_apis_calls}}
+    {{^web_apis_calls}}
+      <div class="nothing-detected">
+        {{nothing_detected_message}}
+      </div>
+    {{/web_apis_calls}}
+
     <h2>{{handle_event_title}}:</h2>
 
     {{#handle_event_calls}}

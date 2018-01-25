@@ -10,6 +10,7 @@
 
   "titleHandleEvent": { "message": "triggered events (handleEvent)" },
   "titleAddEventListener": { "message": "attached events (addEventListener)" },
+  "titleWebAPIs": { "message": "Web APIs" },
 
   "messageNothingDetected": { "message": "nothing detected so far" }
 }
