@@ -10,7 +10,7 @@
 
   "titleHandleEvent": { "message": "eventos disparados (handleEvent)" },
   "titleAddEventListener": { "message": "eventos adicionados (addEventListener)" },
-  "titleTimer": { "message": "temporizadores (setTimeout | setInterval)" },
+  "titleWebAPIs": { "message": "APIs Web" },
 
   "messageNothingDetected": { "message": "nada foi detectado até o momento" }
 }

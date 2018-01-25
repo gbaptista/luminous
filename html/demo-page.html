@@ -11,16 +11,20 @@
         top: 10px;
       }
 
-      .demo-box {
+      .demo-box, .small-demo-box {
         display: inline-block;
-        padding: 30px;
+        padding: 20px 30px;
         border: 4px solid #CCC;
         text-align: center;
-        width: 100px;
+        width: 160px;
         height: 30px;
         font-size: 14px;
         margin-right: 6px;
         vertical-align: top;
+      }
+
+      .small-demo-box {
+        padding: 10px 30px;
       }
 
       #input-detection {
@@ -54,20 +58,66 @@
       <br><br>
 
       <div id="mouse-move" class="demo-box">try mousemove!</div>
-
       <div id="mouse-over" class="demo-box">try mouseover!</div>
+
+      <br><br>
+
+      <div id="setIntervalFunction" class="small-demo-box">interval function...</div>
+      <div id="setIntervalString" class="small-demo-box">interval string...</div>
+
+      <br><br>
+
+      <div id="setTimeoutFunction" class="small-demo-box">timeout function...</div>
+      <div id="setTimeoutString" class="small-demo-box">timeout string...</div>
+
+      <br><br>
+
+      <div id="ajaxContent" class="small-demo-box">XMLHttpRequest request...</div>
+      <div id="fetchContent" class="small-demo-box">fetch request...</div>
     </div>
 
     <script type="text/javascript">
       (function() { setTimeout(function() {
 
-        var input_detections = [];
+        var request = new XMLHttpRequest();
 
         var current_time = function() {
           var d = new Date();
 
           return d.getHours()	+ ':' + d.getMinutes() + ':' + d.getSeconds() + '.' + d.getMilliseconds();
         }
+
+        request.onreadystatechange = function() {
+          if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+            document.getElementById('ajaxContent').innerHTML = current_time() + '<br>XMLHttp: ' + request.responseText;
+          }
+        }
+        request.open('GET', 'demo-ajax.txt', true);
+        request.send();
+
+        setInterval(function(param) {
+          document.getElementById(
+            'setIntervalFunction'
+          ).innerHTML = 'interval: fn->(' + param + ') ' + current_time()
+        }, 1000, 'i');
+
+        setInterval(
+          "document.getElementById('setIntervalString').innerHTML = 'interval: eval -> string ' + Math.random();",
+          1500
+        );
+
+        setTimeout(function(param) {
+          document.getElementById(
+            'setTimeoutFunction'
+          ).innerHTML = 'timeout: fn->(' + param + ') ' + current_time()
+        }, 1500, 't');
+
+        setTimeout(
+          "document.getElementById('setTimeoutString').innerHTML = 'timeout: eval -> string ' + Math.random();",
+          2000
+        );
+
+        var input_detections = [];
 
         var update_input_detections = function(detection) {
           input_detections.push('<span>' + current_time() + '</span> detected: ' + detection);
@@ -131,6 +181,12 @@
 
         document.getElementById('click').addEventListener('click', function() {
           alert(current_time() + ' clicked!');
+        });
+
+        fetch('demo-ajax.txt').then(function(response) {
+          return response.text();
+        }).then(function(text) {
+          document.getElementById('fetchContent').innerHTML = current_time() + '<br>fetch: ' + text;
         });
 
       }, 100); })();

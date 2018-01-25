@@ -15,6 +15,4 @@ load_interceptor(function(content) {
   javascript_injection.type = 'text/javascript';
   javascript_injection.innerHTML = content;
   document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
-
-  load_options_for_domain(window.location.hostname);
 });

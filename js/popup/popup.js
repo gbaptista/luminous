@@ -143,10 +143,10 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             });
           });
 
-          var timer_calls = [];
+          var web_apis_calls = [];
 
-          $.each(local_data[tab_id]['counters']['timer'], function(name, value) {
-            timer_calls.push({
+          $.each(local_data[tab_id]['counters']['WebAPIs'], function(name, value) {
+            web_apis_calls.push({
               name: name,
               allowed: short_number_for_counter(value['allowed']),
               blocked: short_number_for_counter(value['blocked']),
@@ -162,20 +162,20 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           add_event_listener_calls.sort(sort_by_name);
           handle_event_calls.sort(sort_by_name);
-          timer_calls.sort(sort_by_name);
+          web_apis_calls.sort(sort_by_name);
 
           $('#counters-container').html(
             Mustache.render(template, {
               add_event_listener_calls: add_event_listener_calls,
               handle_event_calls: handle_event_calls,
-              timer_calls: timer_calls,
+              web_apis_calls: web_apis_calls,
               options_json: JSON.stringify(
                 sync_data['options']['disabled'][domain], null, 2
               ),
               nothing_detected: false,
               nothing_detected_message: chrome.i18n.getMessage('messageNothingDetected'),
               handle_event_title: chrome.i18n.getMessage('titleHandleEvent'),
-              timer_title: chrome.i18n.getMessage('titleTimer'),
+              web_apis_title: chrome.i18n.getMessage('titleWebAPIs'),
               add_event_listener_title: chrome.i18n.getMessage('titleAddEventListener'),
               disabled_class: function() {
                 return function (text, render) {
