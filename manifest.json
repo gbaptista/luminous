@@ -57,13 +57,16 @@
   ],
   "background": {
     "scripts": [
+      "js/background/set_response_headers.js",
       "js/background/set_current_tab.js",
       "js/utils/colors.js",
       "js/background/update_badge.js"
     ]
   },
   "permissions" : [
-    "storage", "unlimitedStorage", "tabs", "<all_urls>"
+    "storage", "unlimitedStorage", "tabs",
+    "webRequest", "webRequestBlocking",
+    "<all_urls>"
   ],
   "web_accessible_resources": [
     "js/content/interceptor.js"
