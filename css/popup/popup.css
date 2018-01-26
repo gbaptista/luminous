@@ -3,14 +3,7 @@ html, body {
   text-rendering: optimizeLegibility;
   margin: 0;
   padding: 0;
-  height: 10px;
-}
-
-@-moz-document url-prefix() {
-  html, body {
-    height: auto;
-    overflow-x: hidden;
-  }
+  overflow-x: hidden;
 }
 
 h2 {
