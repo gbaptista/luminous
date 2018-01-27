@@ -49,7 +49,6 @@
         "js/content/injections/options.js",
         "js/utils/numbers.js",
         "js/content/injections/data.js",
-        "js/vendor/jquery/jquery-3.2.1.slim.min.js",
         "js/content/readers/data.js"
       ],
       "run_at" : "document_start"

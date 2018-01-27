@@ -35,16 +35,15 @@ var render_data = function(document_data, tab_id) {
 }
 
 setInterval(function() {
-  if($) {
-    var data_element = $('#luminous-data[data-changed=true]');
-    if(data_element.length) {
-      var tab_id = $(data_element).attr('data-tab');
+  var data_element = document.getElementById('luminous-data');
 
-      if(tab_id) {
-        $(data_element).attr('data-changed', 'false');
+  if(data_element && data_element.getAttribute('data-changed') == 'true') {
+    var tab_id = data_element.getAttribute('data-tab');
 
-        render_data(JSON.parse($(data_element).html()), tab_id);
-      }
+    if(tab_id) {
+      data_element.setAttribute('data-changed', 'false');
+
+      render_data(JSON.parse(data_element.innerHTML), tab_id);
     }
   }
 }, 200);
