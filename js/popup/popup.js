@@ -96,6 +96,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
         );
 
         $('#options-container input').change(function() {
+          $('#loading').fadeIn(200);
+
           var value = $(this).is(':checked');
           var name = $(this).attr('name');
 
@@ -207,6 +209,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           );
 
           $('.interceptions .calls').click(function() {
+            $('#loading').fadeIn(200);
+
             var kind = $(this).data('kind');
             var type = $(this).data('type');
             var value = !$(this).hasClass('disabled');
@@ -243,6 +247,11 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             })
           )
         }
+
+        if(should_hidde_loading) {
+          should_hidde_loading = false;
+          $('#loading').fadeOut(200);
+        }
       });
     });
   });
@@ -265,9 +274,13 @@ chrome.tabs.query({ currentWindow:true, active: true, lastFocusedWindow: true },
 });
 
 var should_reload = false;
+var should_hidde_loading = false;
 
 chrome.storage.onChanged.addListener(function(changes, _namespace) {
   if(changes[current_tab_id] || changes['options']) {
+    if(changes['options']) {
+      should_hidde_loading = true;
+    }
     should_reload = true;
   }
 });
@@ -277,10 +290,11 @@ setInterval(function() {
     should_reload = false;
     load_stored_data();
   }
-}, 600);
+}, 300);
 
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));
+  $('#loading').html(chrome.i18n.getMessage('messageLoading'));
   $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
   $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
 });

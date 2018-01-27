@@ -10,6 +10,23 @@ h2 {
   font-size: 11px;
 }
 
+#loading {
+  position: fixed;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color:#FFF;
+  vertical-align: center;
+  padding-top: 76px;
+  display:none;
+  color: #CCC;
+  text-align: center;
+  z-index: 999;
+  opacity: 0.95;
+  font-style: italic;
+}
+
 #help-link {
   display: inline-block;
   float: right;
