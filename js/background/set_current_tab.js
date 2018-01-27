@@ -1,4 +1,4 @@
-chrome.tabs.onCreated.addListener(function() {
+chrome.tabs.onCreated.addListener(function(tab) {
   var tab_id = tab.id.toString();
 
   chrome.storage.local.get(tab_id, function(current_storage_data) {

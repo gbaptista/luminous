@@ -1,4 +1,4 @@
-# Luminous: Interceptador de eventos JavaScript ![Icon](images/icons/48.png)
+# Luminous: Bloqueador de eventos JavaScript ![Icon](images/icons/48.png)
 
 > [en-US](doc/en-US) | pt-BR
 
