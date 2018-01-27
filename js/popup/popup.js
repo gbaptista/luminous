@@ -290,7 +290,7 @@ setInterval(function() {
     should_reload = false;
     load_stored_data();
   }
-}, 300);
+}, 450);
 
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));
