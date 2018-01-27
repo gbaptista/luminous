@@ -1,4 +1,4 @@
-# Luminous: JavaScript events interceptor ![Icon](../../images/icons/48.png)
+# Luminous: JavaScript events blocker ![Icon](../../images/icons/48.png)
 
 > en-US | [pt-BR](https://gbaptista.github.io/luminous)
 

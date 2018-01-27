@@ -1,5 +1,5 @@
 {
-  "manifestName": { "message": "Luminous: JavaScript events interceptor" },
+  "manifestName": { "message": "Luminous: JavaScript events blocker" },
   "manifestDescription": { "message": "An experimental extension to identify, analyze and block code execution and event collection through JavaScript in your browser." },
 
   "linkHelpText": { "message": "help" },

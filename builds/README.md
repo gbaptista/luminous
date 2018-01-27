@@ -4,7 +4,7 @@
 
 Update the version on `manifest.json`:
 ```json
-"version": "0.0.2"
+"version": "0.0.3"
 ```
 
 Copy all folders and files to the `builds/current/` directory.
@@ -48,6 +48,7 @@ var load_interceptor = function(callback_function) {
 load_interceptor(function(content) {
   var javascript_injection = document.createElement('script');
   javascript_injection.type = 'text/javascript';
+  javascript_injection.setAttribute('nonce', '3b34aae43a');
   javascript_injection.innerHTML = content;
   document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
 });
@@ -59,6 +60,7 @@ var content = 'UGLIFYJS_RESULT';
 
 var javascript_injection = document.createElement('script');
 javascript_injection.type = 'text/javascript';
+javascript_injection.setAttribute('nonce', '3b34aae43a');
 javascript_injection.innerHTML = content;
 document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
 ```
@@ -70,4 +72,4 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-2.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0-0-3.zip` and contact the repository owner to publish in all stores.
