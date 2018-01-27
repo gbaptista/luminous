@@ -65,7 +65,18 @@ if(get_options()['injection_disabled'] !== true) {
   var reload_requested = false;
 
   var counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
+  var last_url = window.location.href.replace(/#.*/, '');
   var counters_changed = false;
+
+  setInterval(function() {
+    var current_url = window.location.href.replace(/#.*/, '');
+
+    if(last_url != current_url) {
+      last_url = current_url;
+      counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
+      counters_changed = true;
+    }
+  }, 0);
 
   var increment_counter = function(kind, type, result, details) {
     original_window_setTimeout(function() {

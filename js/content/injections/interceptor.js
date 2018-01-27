@@ -13,6 +13,7 @@ var load_interceptor = function(callback_function) {
 load_interceptor(function(content) {
   var javascript_injection = document.createElement('script');
   javascript_injection.type = 'text/javascript';
+  javascript_injection.setAttribute('nonce', '3b34aae43a');
   javascript_injection.innerHTML = content;
   document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
 });

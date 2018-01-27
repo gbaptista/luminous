@@ -12,5 +12,6 @@
   "titleAddEventListener": { "message": "attached events (addEventListener)" },
   "titleWebAPIs": { "message": "Web APIs" },
 
-  "messageNothingDetected": { "message": "nothing detected so far" }
+  "messageNothingDetected": { "message": "nothing detected so far" },
+  "messageLoading": { "message": "loading..." }
 }

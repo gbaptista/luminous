@@ -49,7 +49,6 @@
         "js/content/injections/options.js",
         "js/utils/numbers.js",
         "js/content/injections/data.js",
-        "js/vendor/jquery/jquery-3.2.1.slim.min.js",
         "js/content/readers/data.js"
       ],
       "run_at" : "document_start"
@@ -57,13 +56,16 @@
   ],
   "background": {
     "scripts": [
+      "js/background/set_response_headers.js",
       "js/background/set_current_tab.js",
       "js/utils/colors.js",
       "js/background/update_badge.js"
     ]
   },
   "permissions" : [
-    "storage", "unlimitedStorage", "tabs", "<all_urls>"
+    "storage", "unlimitedStorage", "tabs",
+    "webRequest", "webRequestBlocking",
+    "<all_urls>"
   ],
   "web_accessible_resources": [
     "js/content/interceptor.js"
