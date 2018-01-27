@@ -1,13 +1,21 @@
-var load_template = function(path, callback_function) {
-  var request = new XMLHttpRequest();
+var cached_templates = {};
 
-  request.onreadystatechange = function() {
-    if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-      callback_function(request.responseText);
+var load_template = function(path, callback_function) {
+  if(cached_templates[path]) {
+    callback_function(cached_templates[path]);
+  } else {
+    var request = new XMLHttpRequest();
+
+    request.onreadystatechange = function() {
+      if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
+        cached_templates[path] = request.responseText;
+
+        callback_function(cached_templates[path]);
+      }
     }
+    request.open('GET', chrome.extension.getURL(path), true);
+    request.send(null);
   }
-  request.open('GET', chrome.extension.getURL(path), true);
-  request.send(null);
 }
 
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
@@ -203,15 +211,15 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             var type = $(this).data('type');
             var value = !$(this).hasClass('disabled');
 
+            set_sync_option_disabled_for_kind_and_type(
+              domain, kind, type, value
+            );
+
             if($(this).hasClass('disabled')) {
               $(this).removeClass('disabled');
             } else {
               $(this).addClass('disabled');
             }
-
-            set_sync_option_disabled_for_kind_and_type(
-              domain, kind, type, value
-            );
           });
 
           tippy('.interceptions .calls', {
@@ -269,7 +277,7 @@ setInterval(function() {
     should_reload = false;
     load_stored_data();
   }
-}, 500);
+}, 600);
 
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));
