@@ -11,44 +11,50 @@ var load_template = function(path, callback_function) {
 }
 
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
-  chrome.storage.sync.get(null, function(sync_data) {
-    if(!sync_data) sync_data = {};
-    if(!sync_data['options']) sync_data['options'] = {};
-    if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
+  setTimeout(function() {
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data) sync_data = {};
+      if(!sync_data['options']) sync_data['options'] = {};
+      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
 
-    if(!sync_data['options']['disabled'][domain]) {
-      sync_data['options']['disabled'][domain] = {};
-    }
+      if(!sync_data['options']['disabled'][domain]) {
+        sync_data['options']['disabled'][domain] = {};
+      }
 
-    if(!sync_data['options']['disabled'][domain][kind]) {
-      sync_data['options']['disabled'][domain][kind] = {};
-    }
+      if(!sync_data['options']['disabled'][domain][kind]) {
+        sync_data['options']['disabled'][domain][kind] = {};
+      }
 
-    sync_data['options']['disabled'][domain][kind][type] = value;
+      sync_data['options']['disabled'][domain][kind][type] = value;
 
-    chrome.storage.sync.set(sync_data);
-  });
+      chrome.storage.sync.set(sync_data);
+    });
+  }, 0);
 }
 
 var set_sync_option = function(name, value) {
-  chrome.storage.sync.get(null, function(sync_data) {
-    if(!sync_data['options']) sync_data['options'] = {}
+  setTimeout(function() {
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data['options']) sync_data['options'] = {}
 
-    sync_data['options'][name] = value;
+      sync_data['options'][name] = value;
 
-    chrome.storage.sync.set(sync_data);
-  });
+      chrome.storage.sync.set(sync_data);
+    });
+  }, 0);
 };
 
 var set_sync_option_injection_disabled_for_name = function(name, value) {
-  chrome.storage.sync.get(null, function(sync_data) {
-    if(!sync_data['options']) sync_data['options'] = {}
-    if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {}
+  setTimeout(function() {
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data['options']) sync_data['options'] = {}
+      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {}
 
-    sync_data['options']['injection_disabled'][name] = value;
+      sync_data['options']['injection_disabled'][name] = value;
 
-    chrome.storage.sync.set(sync_data);
-  });
+      chrome.storage.sync.set(sync_data);
+    });
+  }, 0);
 }
 
 var load_store_data_from_tab = function(tab_id, current_tab_url) {
@@ -197,6 +203,12 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             var type = $(this).data('type');
             var value = !$(this).hasClass('disabled');
 
+            if($(this).hasClass('disabled')) {
+              $(this).removeClass('disabled');
+            } else {
+              $(this).addClass('disabled');
+            }
+
             set_sync_option_disabled_for_kind_and_type(
               domain, kind, type, value
             );
@@ -244,9 +256,20 @@ chrome.tabs.query({ currentWindow:true, active: true, lastFocusedWindow: true },
   load_stored_data();
 });
 
+var should_reload = false;
+
 chrome.storage.onChanged.addListener(function(changes, _namespace) {
-  if(changes[current_tab_id] || changes['options']) load_stored_data();
+  if(changes[current_tab_id] || changes['options']) {
+    should_reload = true;
+  }
 });
+
+setInterval(function() {
+  if(should_reload) {
+    should_reload = false;
+    load_stored_data();
+  }
+}, 500);
 
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));

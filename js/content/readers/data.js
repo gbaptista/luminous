@@ -9,7 +9,7 @@ var render_data = function(document_data, tab_id) {
           var blocked = document_data['counters'][key][sub_key]['blocked'];
 
           // calls += allowed + blocked;
-          calls += allowed;
+          if(key != 'WebAPIs') calls += allowed;
         }
       }
     } else {
