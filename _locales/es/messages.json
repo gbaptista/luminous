@@ -1,6 +1,6 @@
 {
   "manifestName": { "message": "Luminous: Bloqueador de eventos JavaScript" },
-  "manifestDescription": { "message": "Extensión experimental para identificar, analizar y bloquear codigo y eventos JavaScript en tu navegador." },
+  "manifestDescription": { "message": "Extensión experimental para identificar, analizar y bloquear código y eventos JavaScript en tu navegador." },
 
   "linkHelpText": { "message": "Ayuda" },
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/en-US" },
