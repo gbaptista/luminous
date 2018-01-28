@@ -1,116 +1,115 @@
-# Luminous: Bloqueador de eventos JavScript ![Icon](../../images/icons/48.png)
+# Luminous: Bloqueador de eventos JavaScript ![Icon](images/icons/48.png)
 
-> [en-US](doc/en-US) | [pt-BR] (https://gbaptista.github.io/luminous) | es
+> [en-US](doc/en-US) | pt-BR | [es](doc/es)
 
-Una extensión experimental para identificar, analizar y bloquear la ejecución de código y la recopilación de eventos a través de *JavaScript* en su navegador.
+Uma extensão experimental para identificar, analisar e bloquear a execução de códigos e a coleta de eventos via *JavaScript* em seu navegador.
 
-- [¿Por qué?](#why)
-- [Comprender la interfaz de usuario](#understanding-the-ui)
-- [Cómo instalar](#how-to-install)
-- [¡Pruébalo!](#try-it)
-- [Yendo más profundo](#going-deeper)
-- [Cómo contribuir](#how-to-contribute)
-- [Problemas conocidos](#known-issues)
-- [Entender el código](#understanding-the-code)
-- [Licencia](#license)
-- [Donaciones](#donations)
+- [Por quê?](#por-qu%C3%AA)
+- [Entendendo a interface do usuário](#entendendo-a-interface-do-usu%C3%A1rio)
+- [Como instalar](#como-instalar)
+- [Experimente!](#experimente)
+- [Se aprofunde no tema](#se-aprofunde-no-tema)
+- [Como colaborar](#como-colaborar)
+- [Problemas conhecidos](#problemas-conhecidos)
+- [Entendendo o código](#entendendo-o-c%C3%B3digo)
+- [Licença](#licen%C3%A7a)
+- [Doações](#doa%C3%A7%C3%B5es)
 
-## ¿Por qué?
+## Por quê?
 
-Tenemos proyectos increíbles como [*Lightbeam*](https://www.mozilla.org/en-US/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) y muchos otros. Todos tienen la propuesta de identificar y / o prevenir la ejecución de códigos y solicitudes cuestionables.
+Existem projetos incríveis como o [*Lightbeam*](https://www.mozilla.org/pt-BR/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) e diversos outros. Todos possuem a proposta de identificar e/ou impedir a execução de códigos e requisições questionáveis.
 
+Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões para conseguir acessar muitos sites já que a utilização de *JavaScript* é massiva na web. Ao acessar por exemplo o [*Google Tradutor*](https://translate.google.com), utilizando um combo de 3 extensões (*HTTPS Everywhere*, *uBlock Origin* e *ScriptSafe*) com a *Luminous* temos o seguinte resultado após um breve momento de utilização do website:
 
-Estas herramientas son vitales, pero inevitablemente debemos hacer concesiones para acceder a muchos sitios web ya que tenemos un uso masivo de *JavaScript* en la web. Cuando accedes, por ejemplo, al sitio web [*Google Translate*](https://translate.google.com), con un combo de 3 extensiones (*HTTPS Everywhere*, *uBlock Origin* y *ScriptSafe*) y *Luminous*, tenemos el siguiente resultado después de unos momentos:
+> ![Icon](images/doc/global/google-translator.jpg)
 
-> ![Icon](../../images/doc/global/google-translator.jpg)
+- **6** requisições influenciadas pela *HTTPS Everywhere*
+- **75** requisições bloqueadas pela *uBlock Origin*
+- **4** itens bloqueados pela *ScriptSafe*
+- **7,6 mil** execuções de *JavaScript* detectadas pela *Luminous*
 
-- **6** solicitudes influenciadas por *HTTPS en todas partes*
-- **75** solicitudes bloqueadas por *uBlock Origin*
-- **4** elementos bloqueados por *ScriptSafe*
-- **7,6 mil** *JavaScript* ejecuciones detectadas por *Luminous*
+É sobre este número (**7,6 mil**) que estamos perdidos e de mãos atadas, é alí que não sabemos o que acontece e ainda não temos a liberdade de decidir o que pode e o que não pode ser executado. Este é o principal objetivo do projeto, preencher esta lacuna e conseguir ver e controlar o que acontece. Como efeito colateral acabamos tendo também uma ferramenta interessante que ajuda no desenvolvimento de códigos em *JavaScript* ao nos dar visibilidade sobre o que está acontecendo.
 
-Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas, es que no sabemos qué pasa y aún no tenemos la libertad de decidir qué se puede o no se puede ejecutar . Este es el objetivo principal del proyecto, llenar este vacío y poder ver y controlar lo que sucede. Como efecto secundario, también tenemos una herramienta interesante que ayuda en el proceso de desarrollo del código *JavaScript* al darnos visibilidad sobre lo que está sucediendo.
+## Entendendo a interface do usuário
 
-## Comprender la UI
+![Interface Overview](images/doc/pt-BR/interface-overview.png)
 
-![Interface Overview](../../images/doc/es/interface-overview.png)
-
-## Cómo instalar
+## Como instalar
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
-- Opera: *pending review (Opera add-ons)*
+- Opera: *aguardando revisão (Opera add-ons)*
 
-## ¡Pruébalo!
+## Experimente!
 
-[Instalar](#how-to-install) la extensión e ir a nuestra [página de demostración] (https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar y comprender mejor cómo funciona :
+[Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar e entender melhor o seu funcionamento:
+![Demo Page](images/doc/pt-BR/demo-page.png)
 
-![Demo Page](../../images/doc/es/demo-page.png)
+## Se aprofunde no tema
 
-## Yendo más profundo
+Este experimento faz parte de um livro que está sendo escrito de *WebExtensions API* sob a ótica de temas como liberdade e privacidade nos meios digitais. Se deseja saber novidades sobre a publicação do mesmo, deixe aqui o seu email: [https://gbaptistas.typeform.com/to/jCzkkm](
+https://gbaptistas.typeform.com/to/jCzkkm)
 
-Este experimento es parte de un libro que se está escribiendo sobre *WebExtensions API* desde la perspectiva de temas como libertad y privacidad en el mundo digital. Si desea recibir noticias sobre la publicación, deje su correo electrónico: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
+Enquanto o livro não é publicado, sugiro as seguintes referências para expandir a sua visão sobre o tema:
 
-Si bien el libro no está publicado, sugiero las siguientes referencias para ampliar su opinión sobre el tema:
+- Documentário: [*Do Not Track*](https://donottrack-doc.com)
+- Livro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B009XE662U)
+- Livro: [*Cypherpunks. Liberdade e o Futuro da Internet*](https://www.amazon.com.br/Cypherpunks-Liberdade-internet-Julian-Assange-ebook/dp/B018SLCLPO)
+- Livro: [*O filtro invisível: O que a internet está escondendo de você*](https://www.amazon.com.br/filtro-invisível-internet-está-escondendo-ebook/dp/B008OHONOU)
+- Página na web: [*A Armadilha do JavaScript*](https://www.gnu.org/philosophy/javascript-trap.pt-br.html)
+- Página na web: [*Saúde da Internet*](https://www.mozilla.org/pt-BR/internet-health/)  
+- Página na web: [*Sobre o Lightbeam*](https://www.mozilla.org/pt-BR/lightbeam/about)
 
-- Documental: [*Do Not Track*] (https://donottrack-doc.com)
-- Libro: [*1984*] (https://www.amazon.com/1984-George-Orwell-ebook/dp/B003JTHWKU)
-- Libro: [*Cypherpunks: La libertad y el futuro de Internet*] (https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
-- Libro: [*The Filter Bubble: Cómo la nueva web personalizada está cambiando lo que leemos y cómo pensamos*] (https://www.amazon.com/Filter-Bubble-Personalized-Changing-Think-ebook/dp/ B004IYJE6A)
-- Página web: [*The JavaScript Trap*] (https://www.gnu.org/philosophy/javascript-trap.en.html)
-- Página web: [*Internet Health*] (https://www.mozilla.org/en-US/internet-health/)
-- Página web: [*Acerca de Lightbeam*] (https://www.mozilla.org/en-US/lightbeam/about)
+## Como colaborar
 
-## Cómo contribuir
+  - [Espalhe a ideia](#espalhe-a-ideia)
+    - [Compartilhe](#compartilhe)
+    - [Escreva e fale sobre](#escreva-e-fale-sobre)
+    - [Ajude na tradução para outros idiomas](#ajude-na-tradu%C3%A7%C3%A3o-para-outros-idiomas)
+  - [Reporte problemas](#reporte-problemas)
+    - [Problemas em sites específicos](#problemas-em-sites-espec%C3%ADficos)
+    - [Problemas em algum navegador](#problemas-em-algum-navegador)
+  - [Bote a mão na massa](#bote-a-m%C3%A3o-na-massa)
+    - [Ajude a melhorar a interface do usuário](#ajude-a-melhorar-a-interface-do-usu%C3%A1rio)
+    - [Melhore o desempenho](#melhore-o-desempenho)
+    - [Crie novas funcionalidades](#crie-novas-funcionalidades)
+    - [Melhore a qualidade do código](#melhore-a-qualidade-do-c%C3%B3digo)
 
-  - [Corre la voz] (# spread-the-word)
-    - [Comparte](#share)
-    - [Escribir y hablar de ello](#write-and-talk-about-it)
-    - [Ayuda con traducciones](#help-with-translations)
-  - [Informar problemas](#report-issues)
-    - [Problemas en sitios específicos](#issues-on-specific-sites)
-    - [Problemas en algunos navegadores](#issues-in-some-browser)
-  - [Ensuciate las manos](#get-your-hands-dirty)
-    - [Mejorar la UI](#improve-the-ui)
-    - [Mejorar el rendimiento](#improve-performance)
-    - [Crear nuevas características](#create-new-features)
-    - [Mejorar la calidad del código](#improve-code-quality)
+### Espalhe a ideia
 
-### Difundir la palabra
+#### Compartilhe
 
-#### Compartir
+Conte aos seus amigos, familiares e colegas de trabalho sobre como a extensão foi utilizada para melhorar a sua experiência na web e os ensine a utilizá-la também!
 
-¡Cuénteles a sus amigos, familiares y compañeros de trabajo cómo se usó la extensión para mejorar su experiencia web y enséñeles a usarla también!
+#### Escreva e fale sobre
 
-#### Escribir y hablar sobre eello
+Descobriu que algum site estava invadindo a sua privacidade? Conseguiu bloquear eventos que não desejava? Conseguiu facilitar o desenvolvimento do seu código ou a depuração de erros? Grave um video, prepare uma palestra, escreva um artigo ou qualquer coisa do gênero contando como foi feito, explicando como a extensão o ajudou e mostrando as possibilidades.
 
-¿Encontraste un sitio web invadiendo tu privacidad? ¿Bloqueaste eventos que no querías? ¿Le hizo más fácil desarrollar su código o corregir errores? Grabe un video, prepare una charla, escriba un artículo o algo así para contar cómo se hizo, explicando cómo le ayudó la extensión y mostrando las posibilidades.
+#### Ajude na tradução para outros idiomas
 
-#### Ayuda con traducciones
+Traduza os arquivos `.md` encontrados dentro do diretório `doc/` e os arquivos `.json` dentro do diretório `_locales/` para o seu idioma e nos ajude a atingir mais pessoas!
 
-Traduzca los archivos `.md` que se encuentran dentro del directorio `doc/` y los archivos `.json` en el directorio `_locales/` de su idioma y ¡ayúdenos a llegar a más personas!
+### Reporte problemas
 
-### Informar problemas
+#### Problemas em sites específicos
 
-#### Problemas en sitios específicos
+Teve problemas ao acessar algum site por causa da extensão? Ficou lento? Causou erros? O site parou de funcionar? Nem todos os eventos foram identificados? Abra uma [*issue*](https://github.com/gbaptista/luminous/issues) e conte pra gente sobre o que aconteceu.
 
-¿Tuvo problemas para acceder a un sitio debido a la extensión? ¿Fue lento? ¿Causado errores? ¿El sitio ha dejado de funcionar? No todos los eventos fueron identificados? Abra un [* problema *] (https://github.com/gbaptista/luminous/issues) y díganos qué sucedió.
+#### Problemas em algum navegador
 
-#### Problemas en algunos navegadores
+Abra uma [*issue*](https://github.com/gbaptista/luminous/issues) se algo não funcionou como você esperava em algum navegador. Queremos que tudo funcione bem em todos os navegadores possíveis!
 
-Abra un [*issue*](https://github.com/gbaptista/luminous/issues) si algo no funcionó como se esperaba en un navegador. ¡Queremos que todo funcione bien para todos los navegadores posibles!
+### Bote a mão na massa
 
-### Ensuciate las manos
+#### Ajude a melhorar a interface do usuário
 
-#### Mejora la UI
+Não temos a interface mais bonita e amigável possível. [Discussões](https://github.com/gbaptista/luminous/issues) e [propostas](https://github.com/gbaptista/luminous/pulls) sobre uma nova interface ou melhorias na já existente (*`html/interface-sample.html`*) serão muito bem-vindas! Não subestime o poder desse tipo de colaboração: [better_errors#6](https://github.com/charliesome/better_errors/issues/6) - [better_errors#22](https://github.com/charliesome/better_errors/pull/22)
 
-No tenemos la interfaz más bella y amigable del mundo. [Discusiones](https://github.com/gbaptista/luminous/issues) y [propuestas](https://github.com/gbaptista/luminous/pulls) en una nueva interfaz o mejoras a la existente (*`html/interface-sample.html`*) será muy bienvenido! No subestime el poder de este tipo de colaboración: [better_errors#6](https://github.com/charliesome/better_errors/issues/6) - [better_errors#22](https://github.com/charliesome/better_errors/pull/22)
+#### Melhore o desempenho
 
-#### Mejorar el rendimiento
+**Exemplo 1**: Quanto mais cedo conseguirmos injetar o código nos websites e quanto menos recursos utilizarmos para processar as informações, mais execuções seremos capazes de identificar e melhor será a nossa experiência ao ter uma extensão que não deixe a navegação lenta.
 
-**Ejemplo 1**: Cuanto antes podamos inyectar código en los sitios web y cuantos menos recursos usemos para procesar la información, más ejecuciones podremos identificar y mejor será nuestra experiencia al tener una extensión que no disminuya. navegación.
-
-Busque, por ejemplo, nuestra página de demostración (*`html/demo-page.html`*):
+Olhe por exemplo para a nossa página de demonstração (*`html/demo-page.html`*):
 
 ```javascript
 (function() { setTimeout(function() {
@@ -118,17 +117,18 @@ Busque, por ejemplo, nuestra página de demostración (*`html/demo-page.html`*):
 }, 100); })();
 ```
 
-Esta demora de 100 milisegundos existe porque sin ella el código se ejecuta demasiado rápido y no podemos interceptarlo. ¿Cómo podemos mejorar esto para no necesitar este retraso o poder reducirlo?
+Esse delay de 100 milessegundos existe pois sem ele o código é executado rápido demais e não conseguimos interceptá-lo. Como podemos melhorar isso para não precisarmos desse delay ou então conseguir diminuí-lo?
 
-**Ejemplo 2**: capturamos solo una parte de la función interceptada, porque puede ser muy grande y dejar que la lectura de la información sea lenta (*`js/content/interceptor.js`*):
+
+**Exemplo 2**: Capturamos apenas um pedaço da função interceptada, pois ela pode ser muito grande e deixar a leitura das informações lenta (*`js/content/interceptor.js`*):
 
 ```javascript
 listener: ('' + listener).slice(0, 400)
 ```
 
-¿Cómo podemos mejorar esto? ¿Es esta la mejor manera de lidiar con este problema?
+Como podemos melhorar isso? Essa é a melhor maneira de lidar com este problema?
 
-**Ejemplo 3**: La forma en que encontramos pasar mensajes del contexto del documento al contexto de la extensión fue mediante el análisis de los datos en *JSON* leyendo un elemento *HTML* (*`js/content/readers/data.js`*):
+**Exemplo 3**: A maneira que encontramos de passar mensagens do contexto do documento para o contexto da extensão foi realizando o *parser* dos dados em *JSON* lendo um elemento *HTML* (*`js/content/readers/data.js`*):
 
 ```javascript
 render_data(
@@ -136,71 +136,69 @@ render_data(
   tab_id
 );
 ```
+Existem alternativas? Fazer o *parse* das informações constantemente é a melhor opção?
 
-¿Hay alternativas? ¿Analizar la información constantemente es la mejor opción?
+#### Crie novas funcionalidades
 
-#### Crear nuevas características
+Começamos com uma ideia básica: identificar e bloquear eventos. Podemos expandir essa ideia, alguns pensamentos que já surgiram:
 
-Comenzamos con una idea básica: identificar y bloquear eventos. Podemos ampliar esta idea, algunos pensamientos que ya han surgido:
-
-- Solo interceptamos llamadas a `addEventListener` y` handleEvent`. ¿No sería interesante también interceptar llamadas a `XMLHttpRequest` y otras?
-
-
-- No estamos interceptando *eventos definidos* en línea (`<a onclick="someAction()">`), ¿no sería interesante hacerlo?
+- Interceptamos apenas chamadas para o `addEventListener` e o `handleEvent`. Não seria interessante interceptarmos também chamadas para o `XMLHttpRequest` e outros?
 
 
-- Hoy podemos bloquear eventos por dominio: *"Bloquear la ejecución de mouseover en el dominio somesite.com"*. ¿No sería interesante tener reglas más elaboradas y bloquear un evento solo si su objetivo es un elemento de tipo X o si el código ejecutado coincide con alguna expresión regular?
-
-#### Mejora la calidad del código
-
-Este es un proyecto experimental que creció de manera incontrolada, no tenemos un estándar definido de nomenclatura, una organización sólida basada en algún *patrón de diseño* o pruebas automatizadas. ¡Las discusiones para mejorar la calidad del código serán bienvenidas!
-
-## Problemas conocidos
-
- - No hemos interceptado *códigos* en línea (`<a onclick="someAction()">`).
+- Não estamos interceptando eventos definidos *inline* (`<a onclick="someAction()">`), não seria interessante fazer isso?
 
 
- - Se puede ejecutar un código antes de que podamos inyectar el interceptor. Es raro, pero posible.
+- Hoje podemos bloquear os eventos por domínio: *"Bloquear a execução de `mouseover` no domínio `somesite.com`"*. Não seria interessante ter regras mais elaboradas e bloquear um evento apenas se o seu alvo for um tipo de elemento X ou o código executado for de acordo com alguma expressão regular?
+
+#### Melhore a qualidade do código
+
+Este é um projeto experimental que cresceu de forma descontrolada, não temos um padrão definido de nomenclatura, uma forte organização baseada em algum *design pattern* ou testes automatizados. Discussões para melhorar a qualidade do código nesse sentido serão muito bem-vindas!
+
+## Problemas conhecidos
+
+ - Não interceptamos codigos *inline* (`<a onclick="someAction()">`).
 
 
- - Algunos sitios con una cantidad absurda de eventos *JavaScript* pueden ralentizar la experiencia de navegación debido a la recopilación de datos en los códigos interceptados.
+ - Um código pode ser executado antes de conseguirmos injetar o interceptador. É raro, mas possível.
 
-## Comprender el código
 
-- [Fondo](#background)
-- [Contenido](#content)
-- [Ventana emergente](#pop-up)
-- [Utiles](#utils)
-- [Bibliotecas de terceros](#third-party-libraries)
+ - Alguns sites com uma quantidade absurda de eventos *JavaScript* pode deixar o navegador lento por conta da coleta de dados sobre as interceptações realizadas.
 
-### Fondo
+## Entendendo o código
+
+- [Background](#background)
+- [Content](#content)
+- [Pop-up](#pop-up)
+- [Utilidades](#utilidades)
+- [Bibliotecas de terceiros](#bibliotecas-de-terceiros)
+
+### Background
 
 `js/background`:
 
-- `js/background/set_current_tab.js`: responsable de inyectar la *pestaña* *ID* actual en el documento.
+- `js/background/set_current_tab.js`: Responsável por injetar o *ID* da *tab* atual no documento.
 
-- `js/background/update_badge.js`: Responsable de actualizar el contador en el ícono de la extensión.
+- `js/background/update_badge.js`: Responsável por atualizar o contador mostrado no ícone da extensão.
 
-### Contenido
+### Content
 
 `/content/injections`:
 
- - `/content/injections/data.js`: responsable de inyectar el elemento *HTML* que almacenará los datos recopilados de las intercepciones.
+ - `/content/injections/data.js`: Responsável por injetar o elemento *HTML* que armazenará os dados coletados das interceptações.
 
- - `/content/injections/interceptor.js`: responsable de inyectar el código que realmente ejecutará las intercepciones en el documento.
+ - `/content/injections/interceptor.js`: Responsável por injetar o código que executará as interceptações de fato no documento.
 
-- `/content/injections/options.js`: responsable de inyectar el elemento *HTML* que almacenará las opciones definidas por el usuario.
-
+- `/content/injections/options.js`: Responsável por injetar o elemento *HTML* que armazenará os opções definidas pelo usuário.
 
 `/content/readers`:
 
-- `/content/readers/data.js`: responsable de leer los datos en el elemento *HTML* del documento que almacena los detalles recopilados de las intercepciones y los pasa a la extensión.
+- `/content/readers/data.js`: Responsável por ler os dados no elemento *HTML* do documento que armazena os detalhes coletados das interceptações e repassa-los à extensão.
 
-`/content/interceptor.js`: responsable de interceptar ejecuciones de códigos *JavaScript* en el contexto del documento y recopilar detalles sobre ellos.
+`/content/interceptor.js`: Responsável por interceptar execuções de códigos *JavaScript* no contexto do documento e coletar detalhes sobre elas.
 
-### Ventana Emergente
+### Pop-up
 
-Responsable de procesar y cuidar las interacciones realizadas en la ventana emergente que se abre al hacer clic en el ícono de la extensión:
+Responsáveis por renderizar e cuidar das interações feitas no pop-up que é aberto ao clicar no ícone da extensão:
 
 - `html/popup/popup.html`
 - `html/popup/templates/counters.html`
@@ -208,26 +206,26 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 - `js/popup/popup.js`
 - `css/popup/popup.css`
 
-### Utiles
+### Utilidades
 
-- `js/utils/colors.js`: Función utilizada para determinar el color mostrado en función del valor del contador.
-- `js/utils/number.js`: Función utilizada para formatear el número según su tamaño.
+- `js/utils/colors.js`: Função utilizada para determinar a cor exibida com base no valor do contador.
+- `js/utils/number.js`: Função utilizada para formatar o número de acordo com seu tamanho.
 
-### Bibliotecas de terceros
+### Bibliotecas de terceiros
 
 - `js/vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
-- `js/vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
-- `js/vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)
+- `js/vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
+- `js/vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
 
-## License
+## Licença
 
-Este proyecto está licenciado bajo la licencia [*GPLv3*](LICENSE).
+Este projeto está licenciado sob a [*GPLv3*](LICENSE).
 
-## Donaciones
+## Doações
 
-No hay ningún tipo de organización para recibir donaciones en este momento. Consulte nuestra guía sobre "[cómo contribuir](#how-to-contribute)" a otras formas de contribuir y también vea sobre el libro escrito en "[profundizando](#going-deeper)". Si realmente quieres hacer una donación, aquí hay algunos fundamentos increíbles que comparten algunos ideales de este proyecto que puedes ayudar:
+Não há nenhum tipo de organização para o recebimento de doações no momento. Veja nosso guia sobre *"[como colaborar](#como-colaborar)"* para outras maneiras de contribuição e também sobre o livro que está sendo escrito em *"[se aprofunde no tema](#se-aprofunde-no-tema)"*. Se deseja realmente realizar uma doação, eis algumas fundações incríveis que vão de encontro com os temas abordados neste projeto que você pode ajudar:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)
-- [*Fundación Mozilla*](https://donate.mozilla.org)
+- [*Mozilla Foundation*](https://donate.mozilla.org)
 - [*Tor Project*](https://donate.torproject.org)
