@@ -1,6 +1,6 @@
 # Luminous: Bloqueador de eventos JavScript ![Icon](../../images/icons/48.png)
 
-> [en-US](doc/en-US) | [pt-BR] (https://gbaptista.github.io/luminous) | es
+> [en-US](doc/en-US) | [pt-BR](https://gbaptista.github.io/luminous) | es
 
 Una extensión experimental para identificar, analizar y bloquear la ejecución de código y la recopilación de eventos a través de *JavaScript* en su navegador.
 
