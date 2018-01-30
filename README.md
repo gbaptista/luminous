@@ -195,6 +195,8 @@ No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](h
 
 - `js/background/set_current_tab.js`: Responsável por injetar o *ID* da *tab* atual no documento.
 
+- `js/background/set_response_headers.js`: Responsável por alterar o *header* de *Content-Security-Policy* das requisições.
+
 - `js/background/update_badge.js`: Responsável por atualizar o contador mostrado no ícone da extensão.
 
 ### Content
