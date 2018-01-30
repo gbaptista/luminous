@@ -1,6 +1,6 @@
 # Luminous: Bloqueador de eventos JavaScript ![Icon](images/icons/48.png)
 
-> [en-US](doc/en-US) | pt-BR
+> [en-US](doc/en-US) | pt-BR | [es](doc/es)
 
 Uma extensão experimental para identificar, analisar e bloquear a execução de códigos e a coleta de eventos via *JavaScript* em seu navegador.
 
