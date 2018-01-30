@@ -156,8 +156,8 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 
 ## Problemas conhecidos
 
- - [Sem soluções alternativas](#sem-solu-es-alternativas)
- - [Com soluções alternativas](#com-solu-es-alternativas)
+ - [Sem soluções alternativas](#sem-solu%C3%A7%C3%B5es-alternativas)
+ - [Com soluções alternativas](#com-solu%C3%A7%C3%B5es-alternativas)
    - [Service Workers no Mozila Firefox](#service-workers-no-mozila-firefox)
 
 ### Sem soluções alternativas
@@ -177,7 +177,7 @@ No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](h
 
  - Acesse a tela de *Service Workers* em: `about:debugging#workers`
  - Clique em *unregister* no *Service Worker* do site desejado:
- 
+
   ![Service Workers](images/doc/global/firefox-service-workers.jpg)
  - Recarregue o site.
 
