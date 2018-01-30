@@ -156,6 +156,11 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 
 ## Problemas conhecidos
 
+ - [Sem soluções alternativas](#sem-solu-es-alternativas)
+ - [Com soluções alternativas](#com-solu-es-alternativas)
+   - [Service Workers no Mozila Firefox](#service-workers-no-mozila-firefox)
+
+### Sem soluções alternativas
  - Não interceptamos codigos *inline* (`<a onclick="someAction()">`).
 
 
@@ -163,6 +168,18 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 
 
  - Alguns sites com uma quantidade absurda de eventos *JavaScript* pode deixar o navegador lento por conta da coleta de dados sobre as interceptações realizadas.
+
+### Com soluções alternativas
+
+#### Service Workers no Mozila Firefox
+
+No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (como o [*WhatsApp Web*](https://web.whatsapp.com/)) podem bloquear o código de interceptação por conta de um *bug* na interceptação dos headers com as diretrizes de [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy). A solução alternativa atual consiste em recarregar o *Service Worker*:
+
+ - Acesse a tela de *Service Workers* em: `about:debugging#workers`
+ - Clique em *unregister* no *Service Worker* do site desejado:
+ 
+  ![Service Workers](images/doc/global/firefox-service-workers.jpg)
+ - Recarregue o site.
 
 ## Entendendo o código
 
