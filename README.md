@@ -156,6 +156,11 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 
 ## Problemas conhecidos
 
+ - [Sem soluções alternativas](#sem-solu%C3%A7%C3%B5es-alternativas)
+ - [Com soluções alternativas](#com-solu%C3%A7%C3%B5es-alternativas)
+   - [Service Workers no Mozilla Firefox](#service-workers-no-mozilla-firefox)
+
+### Sem soluções alternativas
  - Não interceptamos codigos *inline* (`<a onclick="someAction()">`).
 
 
@@ -163,6 +168,18 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 
 
  - Alguns sites com uma quantidade absurda de eventos *JavaScript* pode deixar o navegador lento por conta da coleta de dados sobre as interceptações realizadas.
+
+### Com soluções alternativas
+
+#### Service Workers no Mozilla Firefox
+
+No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (como o [*WhatsApp Web*](https://web.whatsapp.com/)) podem bloquear o código de interceptação por conta de um *bug* na interceptação dos *headers* com as diretrizes de [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy). A solução alternativa atual consiste em recarregar o *Service Worker*:
+
+ - Acesse a tela de *Service Workers* em: `about:debugging#workers`
+ - Clique em *unregister* no *Service Worker* do site desejado:
+
+  ![Service Workers](images/doc/global/firefox-service-workers.jpg)
+ - Recarregue o site.
 
 ## Entendendo o código
 
@@ -177,6 +194,8 @@ Este é um projeto experimental que cresceu de forma descontrolada, não temos u
 `js/background`:
 
 - `js/background/set_current_tab.js`: Responsável por injetar o *ID* da *tab* atual no documento.
+
+- `js/background/set_response_headers.js`: Responsável por alterar o *header* de *Content-Security-Policy* das requisições.
 
 - `js/background/update_badge.js`: Responsável por atualizar o contador mostrado no ícone da extensão.
 
