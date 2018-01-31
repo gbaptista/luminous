@@ -257,5 +257,3 @@ original_window_setInterval(function() {
     element.setAttribute('data-changed', 'true');
   }
 }, 300);
-
-original_window_setInterval(function() { get_options(); }, 500);
