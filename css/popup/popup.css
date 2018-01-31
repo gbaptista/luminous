@@ -33,6 +33,15 @@ h2 {
   padding: 10px;
 }
 
+#version {
+  float: right;
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 5px;
+  color: #CCC;
+  border-left: 1px solid #DDD;
+}
+
 .interceptions {
   margin: 6px;
   width: 548px;
