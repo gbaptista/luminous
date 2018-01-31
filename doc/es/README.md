@@ -17,7 +17,7 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 
 ## ¿Por qué?
 
-Tenemos proyectos increíbles como [*Lightbeam*](https://www.mozilla.org/en-US/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) y muchos otros. Todos tienen la propuesta de identificar y / o prevenir la ejecución de códigos y solicitudes cuestionables.
+Tenemos proyectos increíbles como [*Lightbeam*](https://www.mozilla.org/es-ES/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) y muchos otros. Todos tienen la propuesta de identificar y / o prevenir la ejecución de códigos y solicitudes cuestionables.
 
 
 Estas herramientas son vitales, pero inevitablemente debemos hacer concesiones para acceder a muchos sitios web ya que tenemos un uso masivo de *JavaScript* en la web. Cuando accedes, por ejemplo, al sitio web [*Google Translate*](https://translate.google.com), con un combo de 3 extensiones (*HTTPS Everywhere*, *uBlock Origin* y *ScriptSafe*) y *Luminous*, tenemos el siguiente resultado después de unos momentos:
@@ -38,8 +38,8 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 ## Cómo instalar
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
-- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
-- Opera: *pending review (Opera add-ons)*
+- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es-ES/firefox/addon/luminous/)
+- Opera: *revisión pendiente (Opera add-ons)*
 
 ## ¡Pruébalo!
 
