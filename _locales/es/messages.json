@@ -2,16 +2,16 @@
   "manifestName": { "message": "Luminous: Bloqueador de eventos JavaScript" },
   "manifestDescription": { "message": "Extensión experimental para identificar, analizar y bloquear código y eventos JavaScript en tu navegador." },
 
-  "linkHelpText": { "message": "Ayuda" },
-  "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/en-US" },
+  "linkHelpText": { "message": "ayuda" },
+  "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/es" },
 
-  "checkboxInjectionEnabledGeneral": { "message": "Todas las Webs" },
-  "checkboxShowListenerFunctions": { "message": "Mostrar detalles de código interceptado" },
+  "checkboxInjectionEnabledGeneral": { "message": "todas las webs" },
+  "checkboxShowListenerFunctions": { "message": "mostrar detalles de código interceptado" },
 
-  "titleHandleEvent": { "message": "Eventos activados (handleEvent)" },
-  "titleAddEventListener": { "message": "Eventos ligados (addEventListener)" },
+  "titleHandleEvent": { "message": "eventos activados (handleEvent)" },
+  "titleAddEventListener": { "message": "eventos ligados (addEventListener)" },
   "titleWebAPIs": { "message": "Web APIs" },
 
-  "messageNothingDetected": { "message": "Nada detectado de momento" },
-  "messageLoading": { "message": "Cargando..." }
+  "messageNothingDetected": { "message": "nada detectado de momento" },
+  "messageLoading": { "message": "cargando..." }
 }
