@@ -38,7 +38,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 ## Cómo instalar
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
-- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es-ES/firefox/addon/luminous/)
+- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es/firefox/addon/luminous/)
 - Opera: *revisión pendiente (Opera add-ons)*
 
 ## ¡Pruébalo!
