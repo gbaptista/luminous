@@ -213,6 +213,8 @@ No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](h
 
 - `/content/readers/data.js`: Responsável por ler os dados no elemento *HTML* do documento que armazena os detalhes coletados das interceptações e repassa-los à extensão.
 
+`/content/injections_controller.js`: Responsável por tomar decisões sobre a injeção de códigos.
+
 `/content/interceptor.js`: Responsável por interceptar execuções de códigos *JavaScript* no contexto do documento e coletar detalhes sobre elas.
 
 ### Pop-up

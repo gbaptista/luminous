@@ -217,6 +217,8 @@ In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*]
 
 - `/content/readers/data.js`: Responsible for reading the data in the *HTML* element of the document that stores the collected details of the interceptions and passes them to the extension.
 
+`/content/injections_controller.js`: Responsible for making decisions about the code injections.
+
 `/content/interceptor.js`: Responsible for intercepting executions of *JavaScript* codes in the context of the document and collecting details about them.
 
 ### Pop-up
