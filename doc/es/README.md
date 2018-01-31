@@ -1,23 +1,23 @@
 # Luminous: Bloqueador de eventos JavScript ![Icon](../../images/icons/48.png)
 
-> [en-US](doc/en-US) | [pt-BR](https://gbaptista.github.io/luminous) | es
+> [en-US](../en-US) | es | [pt-BR](https://gbaptista.github.io/luminous)
 
 Una extensión experimental para identificar, analizar y bloquear la ejecución de código y la recopilación de eventos a través de *JavaScript* en su navegador.
 
-- [¿Por qué?](#why)
-- [Comprender la interfaz de usuario](#understanding-the-ui)
-- [Cómo instalar](#how-to-install)
-- [¡Pruébalo!](#try-it)
-- [Yendo más profundo](#going-deeper)
-- [Cómo contribuir](#how-to-contribute)
-- [Problemas conocidos](#known-issues)
-- [Entender el código](#understanding-the-code)
+- [¿Por qué?](#por-qu%C3%A9)
+- [Comprender la interfaz de usuario](#comprender-la-ui)
+- [Cómo instalar](#c%C3%B3mo-instalar)
+- [¡Pruébalo!](#pru%C3%A9balo)
+- [Yendo más profundo](#yendo-m%C3%A1s-profundo)
+- [Cómo contribuir](#c%C3%B3mo-contribuir)
+- [Problemas conocidos](#problemas-conocidos)
+- [Entender el código](#comprender-el-c%C3%B3digo)
 - [Licencia](#license)
-- [Donaciones](#donations)
+- [Donaciones](#donaciones)
 
 ## ¿Por qué?
 
-Tenemos proyectos increíbles como [*Lightbeam*](https://www.mozilla.org/en-US/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) y muchos otros. Todos tienen la propuesta de identificar y / o prevenir la ejecución de códigos y solicitudes cuestionables.
+Tenemos proyectos increíbles como [*Lightbeam*](https://www.mozilla.org/es-ES/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) y muchos otros. Todos tienen la propuesta de identificar y / o prevenir la ejecución de códigos y solicitudes cuestionables.
 
 
 Estas herramientas son vitales, pero inevitablemente debemos hacer concesiones para acceder a muchos sitios web ya que tenemos un uso masivo de *JavaScript* en la web. Cuando accedes, por ejemplo, al sitio web [*Google Translate*](https://translate.google.com), con un combo de 3 extensiones (*HTTPS Everywhere*, *uBlock Origin* y *ScriptSafe*) y *Luminous*, tenemos el siguiente resultado después de unos momentos:
@@ -38,12 +38,12 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 ## Cómo instalar
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
-- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
-- Opera: *pending review (Opera add-ons)*
+- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es-ES/firefox/addon/luminous/)
+- Opera: *revisión pendiente (Opera add-ons)*
 
 ## ¡Pruébalo!
 
-[Instalar](#how-to-install) la extensión e ir a nuestra [página de demostración] (https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar y comprender mejor cómo funciona :
+[Instalar](#c%C3%B3mo-instalar) la extensión e ir a nuestra [página de demostración](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar y comprender mejor cómo funciona:
 
 ![Demo Page](../../images/doc/es/demo-page.png)
 
@@ -53,28 +53,28 @@ Este experimento es parte de un libro que se está escribiendo sobre *WebExtensi
 
 Si bien el libro no está publicado, sugiero las siguientes referencias para ampliar su opinión sobre el tema:
 
-- Documental: [*Do Not Track*] (https://donottrack-doc.com)
-- Libro: [*1984*] (https://www.amazon.com/1984-George-Orwell-ebook/dp/B003JTHWKU)
-- Libro: [*Cypherpunks: La libertad y el futuro de Internet*] (https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
-- Libro: [*The Filter Bubble: Cómo la nueva web personalizada está cambiando lo que leemos y cómo pensamos*] (https://www.amazon.com/Filter-Bubble-Personalized-Changing-Think-ebook/dp/ B004IYJE6A)
-- Página web: [*The JavaScript Trap*] (https://www.gnu.org/philosophy/javascript-trap.en.html)
-- Página web: [*Internet Health*] (https://www.mozilla.org/en-US/internet-health/)
-- Página web: [*Acerca de Lightbeam*] (https://www.mozilla.org/en-US/lightbeam/about)
+- Documental: [*Do Not Track*](https://donottrack-doc.com)
+- Libro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B00BFGQYRQ)
+- Libro: [*Cypherpunks: La libertad y el futuro de Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
+- Libro: [*El filtro burbuja: Cómo la web decide lo que leemos y lo que pensamos*](https://www.amazon.com.br/El-filtro-burbuja-decide-pensamos-ebook/dp/B01N6VIJ4S)
+- Página web: [*La trampa de JavaScript*](https://www.gnu.org/philosophy/javascript-trap.es.html)
+- Página web: [*Integridad de Internet*](https://www.mozilla.org/es-ES/internet-health/)
+- Página web: [*Acerca de Lightbeam*](https://www.mozilla.org/es-ES/lightbeam/about/)
 
 ## Cómo contribuir
 
-  - [Corre la voz](#spread-the-word)
-    - [Comparte](#share)
-    - [Escribir y hablar de ello](#write-and-talk-about-it)
-    - [Ayuda con traducciones](#help-with-translations)
-  - [Informar problemas](#report-issues)
-    - [Problemas en sitios específicos](#issues-on-specific-sites)
-    - [Problemas en algunos navegadores](#issues-in-some-browser)
-  - [Ensuciate las manos](#get-your-hands-dirty)
-    - [Mejorar la UI](#improve-the-ui)
-    - [Mejorar el rendimiento](#improve-performance)
-    - [Crear nuevas características](#create-new-features)
-    - [Mejorar la calidad del código](#improve-code-quality)
+  - [Corre la voz](#difundir-la-palabra)
+    - [Comparte](#compartir)
+    - [Escribir y hablar de ello](#escribir-y-hablar-sobre-eello)
+    - [Ayuda con traducciones](#ayuda-con-traducciones)
+  - [Informar problemas](#informar-problemas)
+    - [Problemas en sitios específicos](#problemas-en-sitios-espec%C3%ADficos)
+    - [Problemas en algunos navegadores](#problemas-en-algunos-navegadores)
+  - [Ensuciate las manos](#ensuciate-las-manos)
+    - [Mejorar la UI](#mejora-la-ui)
+    - [Mejorar el rendimiento](#mejorar-el-rendimiento)
+    - [Crear nuevas características](#crear-nuevas-caracter%C3%ADsticas)
+    - [Mejorar la calidad del código](#mejora-la-calidad-del-c%C3%B3digo)
 
 ### Difundir la palabra
 
@@ -94,7 +94,7 @@ Traduzca los archivos `.md` que se encuentran dentro del directorio `doc/` y los
 
 #### Problemas en sitios específicos
 
-¿Tuvo problemas para acceder a un sitio debido a la extensión? ¿Fue lento? ¿Causado errores? ¿El sitio ha dejado de funcionar? No todos los eventos fueron identificados? Abra un [* problema *] (https://github.com/gbaptista/luminous/issues) y díganos qué sucedió.
+¿Tuvo problemas para acceder a un sitio debido a la extensión? ¿Fue lento? ¿Causado errores? ¿El sitio ha dejado de funcionar? No todos los eventos fueron identificados? Abra un [*issue*](https://github.com/gbaptista/luminous/issues) y díganos qué sucedió.
 
 #### Problemas en algunos navegadores
 
@@ -167,11 +167,11 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 ## Comprender el código
 
-- [Fondo](#background)
-- [Contenido](#content)
-- [Ventana emergente](#pop-up)
-- [Utiles](#utils)
-- [Bibliotecas de terceros](#third-party-libraries)
+- [Fondo](#fondo)
+- [Contenido](#contenido)
+- [Ventana emergente](#ventana-emergente)
+- [Utiles](#utiles)
+- [Bibliotecas de terceros](#bibliotecas-de-terceros)
 
 ### Fondo
 
@@ -225,7 +225,7 @@ Este proyecto está licenciado bajo la licencia [*GPLv3*](LICENSE).
 
 ## Donaciones
 
-No hay ningún tipo de organización para recibir donaciones en este momento. Consulte nuestra guía sobre "[cómo contribuir](#how-to-contribute)" a otras formas de contribuir y también vea sobre el libro escrito en "[profundizando](#going-deeper)". Si realmente quieres hacer una donación, aquí hay algunos fundamentos increíbles que comparten algunos ideales de este proyecto que puedes ayudar:
+No hay ningún tipo de organización para recibir donaciones en este momento. Consulte nuestra guía sobre "[cómo contribuir](#c%C3%B3mo-contribuir)" a otras formas de contribuir y también vea sobre el libro escrito en "[profundizando](#yendo-m%C3%A1s-profundo)". Si realmente quieres hacer una donación, aquí hay algunos fundamentos increíbles que comparten algunos ideales de este proyecto que puedes ayudar:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)
