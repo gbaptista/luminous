@@ -1,6 +1,6 @@
 # Luminous: JavaScript events blocker ![Icon](../../images/icons/48.png)
 
-> en-US | [es](../doc/es) | [pt-BR](https://gbaptista.github.io/luminous)
+> en-US | [es](../es) | [pt-BR](https://gbaptista.github.io/luminous)
 
 An experimental extension to identify, analyze and block code execution and event collection through *JavaScript* in your browser.
 

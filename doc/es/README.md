@@ -1,6 +1,6 @@
 # Luminous: Bloqueador de eventos JavScript ![Icon](../../images/icons/48.png)
 
-> [en-US](../doc/en-US) | es | [pt-BR](https://gbaptista.github.io/luminous)
+> [en-US](../en-US) | es | [pt-BR](https://gbaptista.github.io/luminous)
 
 Una extensión experimental para identificar, analizar y bloquear la ejecución de código y la recopilación de eventos a través de *JavaScript* en su navegador.
 
@@ -43,7 +43,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 ## ¡Pruébalo!
 
-[Instalar](#how-to-install) la extensión e ir a nuestra [página de demostración] (https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar y comprender mejor cómo funciona :
+[Instalar](#c%C3%B3mo-instalar) la extensión e ir a nuestra [página de demostración](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar y comprender mejor cómo funciona:
 
 ![Demo Page](../../images/doc/es/demo-page.png)
 
