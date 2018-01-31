@@ -157,6 +157,12 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 ## Problemas conocidos
 
+- [Sin soluciones](#sin-soluciones)
+- [Con soluciones](#con-soluciones)
+  - [Mozilla Firefox Service Workers](#mozilla-firefox-service-workers)
+
+### Sin soluciones
+
  - No hemos interceptado *códigos* en línea (`<a onclick="someAction()">`).
 
 
@@ -164,6 +170,17 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 
  - Algunos sitios con una cantidad absurda de eventos *JavaScript* pueden ralentizar la experiencia de navegación debido a la recopilación de datos en los códigos interceptados.
+
+### Con soluciones
+
+#### Mozilla Firefox Service Workers
+
+En *Mozilla Firefox* y derivados, algunos sitios web que usan [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (como [*WhatsApp Web*](https://web.whatsapp.com/)) pueden bloquear la interceptación del código debido a un error en la interceptación de las cabeceras con las pautas de [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy). La solución actual es volver a cargar el *Service Worker*:
+
+ - Acceda a la pantalla *Service Workers* en: `about:debugging#workers`
+ - Haga clic en *unregister* en el *Service Worker* del sitio web deseado:
+  ![Service Workers](../../images/doc/global/firefox-service-workers.jpg)
+ - Recargar el sitio web.
 
 ## Comprender el código
 
@@ -195,6 +212,8 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 `/content/readers`:
 
 - `/content/readers/data.js`: responsable de leer los datos en el elemento *HTML* del documento que almacena los detalles recopilados de las intercepciones y los pasa a la extensión.
+
+`/content/injections_controller.js`: Responsable de tomar decisiones sobre las inyecciones de código.
 
 `/content/interceptor.js`: responsable de interceptar ejecuciones de códigos *JavaScript* en el contexto del documento y recopilar detalles sobre ellos.
 
