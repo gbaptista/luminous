@@ -1,5 +1,5 @@
-chrome.tabs.onCreated.addListener(function(tab) {
-  var tab_id = tab.id.toString();
+var reset_counters_for_tab = function(tab_id) {
+  var tab_id = tab_id.toString();
 
   chrome.storage.local.get(tab_id, function(current_storage_data) {
     var data_to_write = current_storage_data;
@@ -12,7 +12,10 @@ chrome.tabs.onCreated.addListener(function(tab) {
 
     chrome.storage.local.set(data_to_write);
   });
-});
+}
+
+chrome.tabs.onCreated.addListener(function(tab) { reset_counters_for_tab(tab.id); });
+chrome.tabs.onUpdated.addListener(function(tab_id) { reset_counters_for_tab(tab_id); });
 
 setInterval(function() {
   chrome.tabs.query({ currentWindow: true, active: true, lastFocusedWindow: true }, function(tabs) {
