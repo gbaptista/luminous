@@ -45,6 +45,7 @@
     {
       "matches": ["<all_urls>"],
       "js": [
+        "js/content/injections_controller.js",
         "js/content/injections/interceptor.js",
         "js/content/injections/options.js",
         "js/utils/numbers.js",
