@@ -1,4 +1,4 @@
-# Luminous: Bloqueador de eventos JavScript ![Icon](../../images/icons/48.png)
+# Luminous: Bloqueador de eventos JavaScript ![Icon](../../images/icons/48.png)
 
 > [en-US](../en-US) | es | [pt-BR](https://gbaptista.github.io/luminous)
 
