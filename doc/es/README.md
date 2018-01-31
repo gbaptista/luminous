@@ -57,7 +57,7 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 - Libro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B00BFGQYRQ)
 - Libro: [*Cypherpunks: La libertad y el futuro de Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
 - Libro: [*El filtro burbuja: Cómo la web decide lo que leemos y lo que pensamos*](https://www.amazon.com.br/El-filtro-burbuja-decide-pensamos-ebook/dp/B01N6VIJ4S)
-- Página web: [*The JavaScript Trap*](https://www.gnu.org/philosophy/javascript-trap.es.html)
+- Página web: [*La trampa de JavaScript*](https://www.gnu.org/philosophy/javascript-trap.es.html)
 - Página web: [*Integridad de Internet*](https://www.mozilla.org/es-ES/internet-health/)
 - Página web: [*Acerca de Lightbeam*](https://www.mozilla.org/es-ES/lightbeam/about/)
 
@@ -94,7 +94,7 @@ Traduzca los archivos `.md` que se encuentran dentro del directorio `doc/` y los
 
 #### Problemas en sitios específicos
 
-¿Tuvo problemas para acceder a un sitio debido a la extensión? ¿Fue lento? ¿Causado errores? ¿El sitio ha dejado de funcionar? No todos los eventos fueron identificados? Abra un [* problema *] (https://github.com/gbaptista/luminous/issues) y díganos qué sucedió.
+¿Tuvo problemas para acceder a un sitio debido a la extensión? ¿Fue lento? ¿Causado errores? ¿El sitio ha dejado de funcionar? No todos los eventos fueron identificados? Abra un [*issue*](https://github.com/gbaptista/luminous/issues) y díganos qué sucedió.
 
 #### Problemas en algunos navegadores
 
@@ -167,11 +167,11 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 ## Comprender el código
 
-- [Fondo](#background)
-- [Contenido](#content)
-- [Ventana emergente](#pop-up)
-- [Utiles](#utils)
-- [Bibliotecas de terceros](#third-party-libraries)
+- [Fondo](#fondo)
+- [Contenido](#contenido)
+- [Ventana emergente](#ventana-emergente)
+- [Utiles](#utiles)
+- [Bibliotecas de terceros](#bibliotecas-de-terceros)
 
 ### Fondo
 
