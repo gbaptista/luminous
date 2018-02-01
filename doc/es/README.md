@@ -8,7 +8,7 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 - [Comprender la interfaz de usuario](#comprender-la-ui)
 - [Cómo instalar](#c%C3%B3mo-instalar)
 - [¡Pruébalo!](#pru%C3%A9balo)
-- [Yendo más profundo](#yendo-m%C3%A1s-profundo)
+- [Profundizando](#yendo-m%C3%A1s-profundo)
 - [Cómo contribuir](#c%C3%B3mo-contribuir)
 - [Problemas conocidos](#problemas-conocidos)
 - [Entender el código](#comprender-el-c%C3%B3digo)
@@ -47,7 +47,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 ![Demo Page](../../images/doc/es/demo-page.png)
 
-## Yendo más profundo
+## Profundizando
 
 Este experimento es parte de un libro que se está escribiendo sobre *WebExtensions API* desde la perspectiva de temas como libertad y privacidad en el mundo digital. Si desea recibir noticias sobre la publicación, deje su correo electrónico: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
 
@@ -108,7 +108,7 @@ No tenemos la interfaz más bella y amigable del mundo. [Discusiones](https://gi
 
 #### Mejorar el rendimiento
 
-**Ejemplo 1**: Cuanto antes podamos inyectar código en los sitios web y cuantos menos recursos usemos para procesar la información, más ejecuciones podremos identificar y mejor será nuestra experiencia al tener una extensión que no disminuya. navegación.
+**Ejemplo 1**: Cuanto antes podamos inyectar código en los sitios web y cuantos menos recursos usemos para procesar la información, más ejecuciones podremos identificar y mejor será nuestra experiencia al tener una extensión que no disminuya la velocidad de navegación.
 
 Busque, por ejemplo, nuestra página de demostración (*`html/demo-page.html`*):
 
