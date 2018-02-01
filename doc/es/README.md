@@ -37,7 +37,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 ## Cómo instalar
 
-- Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
+- Chromium y Google Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es/firefox/addon/luminous/)
 - Opera: *revisión pendiente (Opera add-ons)*
 
@@ -82,7 +82,7 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 
 ¡Cuénteles a sus amigos, familiares y compañeros de trabajo cómo se usó la extensión para mejorar su experiencia web y enséñeles a usarla también!
 
-#### Escribir y hablar sobre eello
+#### Escribir y hablar sobre ello
 
 ¿Encontraste un sitio web invadiendo tu privacidad? ¿Bloqueaste eventos que no querías? ¿Le hizo más fácil desarrollar su código o corregir errores? Grabe un video, prepare una charla, escriba un artículo o algo así para contar cómo se hizo, explicando cómo le ayudó la extensión y mostrando las posibilidades.
 
@@ -238,7 +238,7 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 - `js/vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
 - `js/vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)
 
-## License
+## Licencia
 
 Este proyecto está licenciado bajo la licencia [*GPLv3*](LICENSE).
 
