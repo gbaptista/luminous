@@ -8,7 +8,7 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 - [Comprender la interfaz de usuario](#comprender-la-ui)
 - [Cómo instalar](#c%C3%B3mo-instalar)
 - [¡Pruébalo!](#pru%C3%A9balo)
-- [Profundizando](#profunsizando)
+- [Profundizando](#profundizando)
 - [Cómo contribuir](#c%C3%B3mo-contribuir)
 - [Problemas conocidos](#problemas-conocidos)
 - [Entender el código](#comprender-el-c%C3%B3digo)
