@@ -1,3 +1,9 @@
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if(message.action == 'current_tab_id') {
+    sendResponse({ current_tab_id: sender.tab.id });
+  }
+});
+
 var reset_counters_for_tab = function(tab_id) {
   var tab_id = tab_id.toString();
 
@@ -16,18 +22,3 @@ var reset_counters_for_tab = function(tab_id) {
 
 chrome.tabs.onCreated.addListener(function(tab) { reset_counters_for_tab(tab.id); });
 chrome.tabs.onUpdated.addListener(function(tab_id) { reset_counters_for_tab(tab_id); });
-
-setInterval(function() {
-  chrome.tabs.query({ currentWindow: true, active: true, lastFocusedWindow: true }, function(tabs) {
-    if(tabs[0]) {
-      current_tab = tabs[0];
-
-      // Error: Could not establish connection. Receiving end does not exist.
-      if(/^http/.test(current_tab.url)) {
-        chrome.tabs.sendMessage(
-          current_tab.id, { action: 'set_current_tab_id', current_tab: current_tab }
-        );
-      }
-    }
-  })
-}, 0);
