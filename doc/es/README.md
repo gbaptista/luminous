@@ -8,11 +8,11 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 - [Comprender la interfaz de usuario](#comprender-la-ui)
 - [Cómo instalar](#c%C3%B3mo-instalar)
 - [¡Pruébalo!](#pru%C3%A9balo)
-- [Yendo más profundo](#yendo-m%C3%A1s-profundo)
+- [Profundizando](#profundizando)
 - [Cómo contribuir](#c%C3%B3mo-contribuir)
 - [Problemas conocidos](#problemas-conocidos)
 - [Entender el código](#comprender-el-c%C3%B3digo)
-- [Licencia](#license)
+- [Licencia](#licencia)
 - [Donaciones](#donaciones)
 
 ## ¿Por qué?
@@ -37,7 +37,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 ## Cómo instalar
 
-- Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
+- Chromium y Google Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es/firefox/addon/luminous/)
 - Opera: *revisión pendiente (Opera add-ons)*
 
@@ -47,7 +47,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 ![Demo Page](../../images/doc/es/demo-page.png)
 
-## Yendo más profundo
+## Profundizando
 
 Este experimento es parte de un libro que se está escribiendo sobre *WebExtensions API* desde la perspectiva de temas como libertad y privacidad en el mundo digital. Si desea recibir noticias sobre la publicación, deje su correo electrónico: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
 
@@ -65,7 +65,7 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 
   - [Corre la voz](#difundir-la-palabra)
     - [Comparte](#compartir)
-    - [Escribir y hablar de ello](#escribir-y-hablar-sobre-eello)
+    - [Escribir y hablar sobre ello](#escribir-y-hablar-sobre-ello)
     - [Ayuda con traducciones](#ayuda-con-traducciones)
   - [Informar problemas](#informar-problemas)
     - [Problemas en sitios específicos](#problemas-en-sitios-espec%C3%ADficos)
@@ -82,7 +82,7 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 
 ¡Cuénteles a sus amigos, familiares y compañeros de trabajo cómo se usó la extensión para mejorar su experiencia web y enséñeles a usarla también!
 
-#### Escribir y hablar sobre eello
+#### Escribir y hablar sobre ello
 
 ¿Encontraste un sitio web invadiendo tu privacidad? ¿Bloqueaste eventos que no querías? ¿Le hizo más fácil desarrollar su código o corregir errores? Grabe un video, prepare una charla, escriba un artículo o algo así para contar cómo se hizo, explicando cómo le ayudó la extensión y mostrando las posibilidades.
 
@@ -108,7 +108,7 @@ No tenemos la interfaz más bella y amigable del mundo. [Discusiones](https://gi
 
 #### Mejorar el rendimiento
 
-**Ejemplo 1**: Cuanto antes podamos inyectar código en los sitios web y cuantos menos recursos usemos para procesar la información, más ejecuciones podremos identificar y mejor será nuestra experiencia al tener una extensión que no disminuya. navegación.
+**Ejemplo 1**: Cuanto antes podamos inyectar código en los sitios web y cuantos menos recursos usemos para procesar la información, más ejecuciones podremos identificar y mejor será nuestra experiencia al tener una extensión que no disminuya la velocidad de navegación.
 
 Busque, por ejemplo, nuestra página de demostración (*`html/demo-page.html`*):
 
@@ -157,6 +157,12 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 ## Problemas conocidos
 
+- [Sin soluciones](#sin-soluciones)
+- [Con soluciones](#con-soluciones)
+  - [Mozilla Firefox Service Workers](#mozilla-firefox-service-workers)
+
+### Sin soluciones
+
  - No hemos interceptado *códigos* en línea (`<a onclick="someAction()">`).
 
 
@@ -164,6 +170,17 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 
  - Algunos sitios con una cantidad absurda de eventos *JavaScript* pueden ralentizar la experiencia de navegación debido a la recopilación de datos en los códigos interceptados.
+
+### Con soluciones
+
+#### Mozilla Firefox Service Workers
+
+En *Mozilla Firefox* y derivados, algunos sitios web que usan [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (como [*WhatsApp Web*](https://web.whatsapp.com/)) pueden bloquear la interceptación del código debido a un error en la interceptación de las cabeceras con las pautas de [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy). La solución actual es volver a cargar el *Service Worker*:
+
+ - Acceda a la pantalla *Service Workers* en: `about:debugging#workers`
+ - Haga clic en *unregister* en el *Service Worker* del sitio web deseado:
+  ![Service Workers](../../images/doc/global/firefox-service-workers.jpg)
+ - Recargar el sitio web.
 
 ## Comprender el código
 
@@ -196,6 +213,8 @@ Este es un proyecto experimental que creció de manera incontrolada, no tenemos 
 
 - `/content/readers/data.js`: responsable de leer los datos en el elemento *HTML* del documento que almacena los detalles recopilados de las intercepciones y los pasa a la extensión.
 
+`/content/injections_controller.js`: Responsable de tomar decisiones sobre las inyecciones de código.
+
 `/content/interceptor.js`: responsable de interceptar ejecuciones de códigos *JavaScript* en el contexto del documento y recopilar detalles sobre ellos.
 
 ### Ventana Emergente
@@ -219,7 +238,7 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 - `js/vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
 - `js/vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)
 
-## License
+## Licencia
 
 Este proyecto está licenciado bajo la licencia [*GPLv3*](LICENSE).
 
