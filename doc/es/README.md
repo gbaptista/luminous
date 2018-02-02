@@ -12,7 +12,7 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 - [Cómo contribuir](#c%C3%B3mo-contribuir)
 - [Problemas conocidos](#problemas-conocidos)
 - [Entender el código](#comprender-el-c%C3%B3digo)
-- [Licencia](#license)
+- [Licencia](#licencia)
 - [Donaciones](#donaciones)
 
 ## ¿Por qué?
@@ -65,7 +65,7 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 
   - [Corre la voz](#difundir-la-palabra)
     - [Comparte](#compartir)
-    - [Escribir y hablar de ello](#escribir-y-hablar-sobre-eello)
+    - [Escribir y hablar sobre ello](#escribir-y-hablar-sobre-ello)
     - [Ayuda con traducciones](#ayuda-con-traducciones)
   - [Informar problemas](#informar-problemas)
     - [Problemas en sitios específicos](#problemas-en-sitios-espec%C3%ADficos)
