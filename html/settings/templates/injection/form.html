@@ -1,0 +1,29 @@
+<div class="alert alert-warning" role="alert">
+  Qualquer domínio terá o código injetado por padrão a não ser que ele esteja desabilitado na lista abaixo.
+</div>
+<br>
+<form>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}}>
+      {{general_injection_enabled_title}}
+    </label>
+  </div>
+  <br>
+  <div class="input-group">
+    <input id="new-domain" type="text" class="form-control" placeholder="new domain" aria-label="new domain" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-primary" type="submit">add domain</button>
+    </div>
+  </div>
+  <br>
+  {{#domains}}
+    <div class="form-check">
+      <label class="form-check-label">
+        <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}}>
+        {{domain}}
+      </label>
+      <button data-domain="{{domain}}" class="btn btn-outline-danger btn-sm remove-domain">remove</button>
+    </div>
+  {{/domains}}
+</form>
