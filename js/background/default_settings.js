@@ -1,5 +1,5 @@
 var set_default_settings = function() {
-  chrome.storage.sync.get(null, function(sync_data) {
+  chrome.storage.sync.get('options', function(sync_data) {
     if(!sync_data) sync_data = {};
 
     if(!sync_data['options']) sync_data['options'] = {};

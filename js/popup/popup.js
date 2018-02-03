@@ -1,10 +1,6 @@
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
   setTimeout(function() {
-    chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data) sync_data = {};
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-
+    chrome.storage.sync.get('options', function(sync_data) {
       if(!sync_data['options']['disabled'][domain]) {
         sync_data['options']['disabled'][domain] = {};
       }
@@ -22,7 +18,7 @@ var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, va
 
 var set_sync_popup_option = function(name, value) {
   setTimeout(function() {
-    chrome.storage.sync.get(null, function(sync_data) {
+    chrome.storage.sync.get('options', function(sync_data) {
       sync_data['options']['popup'][name] = value;
 
       chrome.storage.sync.set(sync_data);
@@ -32,10 +28,7 @@ var set_sync_popup_option = function(name, value) {
 
 var set_sync_option_injection_disabled_for_name = function(name, value) {
   setTimeout(function() {
-    chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {}
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {}
-
+    chrome.storage.sync.get('options', function(sync_data) {
       sync_data['options']['injection_disabled'][name] = value;
 
       chrome.storage.sync.set(sync_data);
@@ -51,11 +44,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
     a_element.href = current_tab_url;
     var domain = a_element.hostname;
 
-    chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data) sync_data = {};
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {};
-      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
+    chrome.storage.sync.get('options', function(sync_data) {
       if(!sync_data['options']['disabled'][domain]) {
         sync_data['options']['disabled'][domain] = {};
       }
