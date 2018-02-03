@@ -1,6 +1,5 @@
 $(document).ready(function() {
   var loaded = function() {
-    $('html, body').css('overflow', 'auto');
     $('#loading').fadeOut(200);
   }
 

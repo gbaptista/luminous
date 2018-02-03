@@ -2,7 +2,6 @@ html, body {
   font-family: 'Open Sans', arial, sans-serif;
   text-rendering: optimizeLegibility;
   font-size: 13px;
-  overflow: hidden;
 }
 
 pre {
