@@ -57,6 +57,7 @@
   ],
   "background": {
     "scripts": [
+      "js/background/default_settings.js",
       "js/background/set_response_headers.js",
       "js/background/set_current_tab.js",
       "js/utils/colors.js",
