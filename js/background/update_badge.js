@@ -1,9 +1,7 @@
 var load_store_data_from_tab = function(tab_id, url, update_badge = false, update_icon = false) {
   if(update_badge) {
     chrome.storage.local.get(tab_id, function(data) {
-      if(!data) { data = {}; }
-
-      if(data[tab_id] && data[tab_id]['badge']) {
+      if(data && data[tab_id] && data[tab_id]['badge']) {
         chrome.browserAction.setBadgeText(
           { text: data[tab_id]['badge']['text'].toString() }
         );

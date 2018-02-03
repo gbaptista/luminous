@@ -8,7 +8,7 @@ $(document).ready(function() {
   }
 
   var load_json = function() {
-    chrome.storage.sync.get(null, function(sync_data) {
+    chrome.storage.sync.get('options', function(sync_data) {
       load_template('html/settings/templates/stored-data/json.html', function(template) {
         $('.options').html('');
 

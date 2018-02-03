@@ -3,8 +3,12 @@ injections_controller(function() {
   chrome.storage.sync.get('options', function(sync_options) {
     var badge_counter = sync_options['options']['badge_counter'];
 
-    chrome.storage.onChanged.addListener(function(changes, _namespace) {
-      if(changes['options'] && changes['options'].newValue && changes['options'].newValue['badge_counter']) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(
+        namespace == 'sync' && changes['options']
+        &&
+        changes['options'].newValue && changes['options'].newValue['badge_counter']
+      ) {
         badge_counter = changes['options'].newValue['badge_counter'];
       }
     });
@@ -85,7 +89,7 @@ injections_controller(function() {
           render_data(JSON.parse(data_element.innerHTML), tab_id);
         }
       }
-    }, 200);
+    }, 300);
   });
 
 });
