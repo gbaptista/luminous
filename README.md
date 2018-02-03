@@ -234,9 +234,9 @@ Responsáveis por renderizar e cuidar das interações feitas no pop-up que é a
 
 ### Bibliotecas de terceiros
 
-- `js/vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
-- `js/vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
-- `js/vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
+- `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
+- `vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
+- `vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
 
 ## Licença
 
