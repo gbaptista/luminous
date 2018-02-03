@@ -13,7 +13,7 @@ $(document).ready(function() {
   });
 
   $('#clear').click(function() {
-    if(confirm('are you sure?')) {
+    if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
       chrome.storage.sync.clear(function() {
         location.reload();
       });
@@ -37,7 +37,9 @@ $(document).ready(function() {
         if(Object.keys(sync_data).length == 0) {
           load_template('html/settings/templates/stored-data/empty.html', function(template) {
             $('.options').html(
-              Mustache.render(template, { text: 'empty' } )
+              Mustache.render(
+                template, { text: chrome.i18n.getMessage('settingsStorageEmptyText') }
+              )
             );
           });
         }

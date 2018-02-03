@@ -9,7 +9,7 @@ $(document).ready(function() {
   });
 
   $('#clear').click(function() {
-    if(confirm('are you sure?')) {
+    if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
       chrome.storage.local.clear(function() {
         location.reload();
       });
@@ -23,7 +23,7 @@ $(document).ready(function() {
       for(tab_id in local_data) {
         $('.tabs').append(
           Mustache.render(template, {
-            title: 'Tab ' + tab_id + ' (closed):',
+            title: chrome.i18n.getMessage('settingsTabText') + ' ' + tab_id + ' (' + chrome.i18n.getMessage('settingsTabClosedText') + '):',
             id: 'tab-' + tab_id,
             json: JSON.stringify(local_data[tab_id], 1, ' ')
           })
@@ -31,15 +31,18 @@ $(document).ready(function() {
 
         chrome.tabs.get(parseInt(tab_id), function(tab) {
           if(tab) {
-            $('#tab-' + tab.id).html('Tab ' + tab.id + ' (' + tab.url + '):');
+            $('#tab-' + tab.id).html(chrome.i18n.getMessage('settingsTabText') + ' ' + tab.id + ' (' + tab.url + '):');
           }
         });
       }
 
       if(Object.keys(local_data).length == 0) {
         load_template('html/settings/templates/stored-data/empty.html', function(template) {
+          settingsStorageEmptyText
           $('.tabs').html(
-            Mustache.render(template, { text: 'empty' } )
+            Mustache.render(
+              template, { text: chrome.i18n.getMessage('settingsStorageEmptyText') }
+            )
           );
         });
       }

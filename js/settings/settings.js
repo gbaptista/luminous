@@ -2,6 +2,14 @@ $(document).ready(function() {
   $('#loading').html(chrome.i18n.getMessage('messageLoading'));
   $('title').html(chrome.i18n.getMessage('manifestName'));
 
+  $('.locale').each(function() {
+    $(this).html(chrome.i18n.getMessage($(this).data('locale')));
+  });
+
+  $('.locale-url').each(function() {
+    $(this).attr('href', chrome.i18n.getMessage($(this).data('locale-url')));
+  });
+
   load_template('html/settings/templates/nav.html', function(template) {
     $('nav').html(
       Mustache.render(template, {
