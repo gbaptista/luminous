@@ -36,6 +36,11 @@
     "default_popup": "html/popup/popup.html"
   },
   "options_page": "html/settings/advanced.html",
+  "options_ui": {
+    "page": "html/settings/advanced.html",
+    "open_in_tab": true,
+    "browser_style": false
+  },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
