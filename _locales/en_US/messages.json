@@ -3,6 +3,7 @@
   "manifestDescription": { "message": "An experimental extension to identify, analyze and block code execution and event collection through JavaScript in your browser." },
 
   "linkHelpText": { "message": "help" },
+  "linkSettingsText": { "message": "settings" },
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/en-US" },
 
   "checkboxInjectionEnabledGeneral": { "message": "all websites" },
