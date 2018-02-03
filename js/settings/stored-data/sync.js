@@ -7,9 +7,13 @@ $(document).ready(function() {
     $('#loading').fadeIn(200);
   }
 
-  chrome.storage.sync.getBytesInUse(null, function(bytesUsed) {
-    $('#used').html((bytesUsed/1000000).toFixed(2) + ' MB');
-  });
+  try {
+    chrome.storage.sync.getBytesInUse(null, function(bytesUsed) {
+      $('#used').html((bytesUsed/1000000).toFixed(2) + ' MB | ');
+    });
+  } catch (_) {
+    $('#used').remove();
+  }
 
   $('#clear').click(function() {
     if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
