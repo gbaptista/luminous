@@ -4,8 +4,10 @@ html, body {
   font-size: 13px;
 }
 
-pre {
+.tabs pre {
   max-height: 300px;
+}
+pre {
   padding: 10px;
   margin:0 50px 10px 10px;
   overflow: auto;

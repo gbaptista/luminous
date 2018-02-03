@@ -3,8 +3,10 @@ $(document).ready(function() {
     $('#loading').fadeOut(200);
   };
 
-  var loading = function() {
-    $('#loading').fadeIn(200);
+  var loading = function(callback) {
+    $('#loading').fadeIn(200, function() {
+      callback();
+    });
   }
 
   try {
@@ -15,24 +17,16 @@ $(document).ready(function() {
     $('#used').remove();
   }
 
-  $('#clear').click(function() {
-    if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
-      chrome.storage.sync.clear(function() {
-        location.reload();
-      });
-    }
-  });
-
   var load_json = function() {
     chrome.storage.sync.get(null, function(sync_data) {
       load_template('html/settings/templates/stored-data/json.html', function(template) {
         $('.options').html('');
 
-        for(key in sync_data) {
+        for(key in sync_data['options']) {
           $('.options').append(
             Mustache.render(template, {
               title: key + ':',
-              json: JSON.stringify(sync_data[key], 1, ' ')
+              json: JSON.stringify(sync_data['options'][key], 1, ' ')
             })
           );
         }
@@ -56,8 +50,27 @@ $(document).ready(function() {
 
   chrome.storage.onChanged.addListener(function(_changes, namespace) {
     if(namespace == 'sync') {
-      loading();
-      load_json();
+      loading(function() {
+        load_json();
+      });
+    }
+  });
+
+  $('#clear').click(function() {
+    if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
+      loading(function() {
+        load_template('html/settings/templates/stored-data/empty.html', function(template) {
+          $('.options').html(
+            Mustache.render(
+              template, { text: chrome.i18n.getMessage('settingsStorageEmptyText') }
+            )
+          );
+
+          chrome.storage.sync.clear(function() {
+            chrome.runtime.sendMessage({ action: 'set_default_settings' });
+          });
+        });
+      });
     }
   });
 

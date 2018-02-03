@@ -1,17 +1,44 @@
 <form>
-  <h3>{{popup_options}}</h3>
+  {{#badge_options}}
+    <h3>{{title}}</h3>
+    {{#counter}}
+      <h4>{{title}}</h4>
+
+      {{#executions}}
+        <label>
+          <input type="radio" data-namespace="badge_counter" name="executions" value="{{value}}" {{#checked}}checked{{/checked}} /> {{label}}
+        </label>
+      {{/executions}}
+      <br>
+      {{#kinds}}
+        <label>
+          <input type="checkbox" data-value-as-namespace="true" data-namespace="badge_counter" name="kinds" value="{{value}}" {{#checked}}checked{{/checked}} /> {{label}}
+        </label>
+      {{/kinds}}
+      <br>
+      {{#group_by}}
+        <label>
+          <input type="radio" data-namespace="badge_counter" name="group_by" value="{{value}}" {{#checked}}checked{{/checked}} /> {{label}}
+        </label>
+      {{/group_by}}
+      <br>
+    {{/counter}}
+  {{/badge_options}}
+
+  <h3>{{popup_options_title}}</h3>
   <label>
-    <input type="checkbox" name="show_listener_functions" value="true" {{#show_listener_functions}} checked {{/show_listener_functions}} /> {{show_listener_functions_title}}
+    <input type="checkbox" data-namespace="popup" name="show_listener_functions" value="true" {{#show_listener_functions}} checked {{/show_listener_functions}} /> {{show_listener_functions_title}}
   </label>
+
   <h3>{{injection_title}}</h3>
   <label>
-    <input type="checkbox" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}} /> {{general_injection_enabled_title}}
+    <input type="checkbox" data-namespace="injection_disabled" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}} /> {{general_injection_enabled_title}}
   </label>
   <br>
   {{#domains}}
     <br>
     <label>
-      <input type="checkbox" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}} /> {{domain}}
+      <input type="checkbox" data-namespace="injection_disabled" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}} /> {{domain}}
     </label>
   {{/domains}}
 </form>

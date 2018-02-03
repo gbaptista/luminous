@@ -20,12 +20,10 @@ var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, va
   }, 0);
 }
 
-var set_sync_option = function(name, value) {
+var set_sync_popup_option = function(name, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {}
-
-      sync_data['options'][name] = value;
+      sync_data['options']['popup'][name] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -71,7 +69,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             show_listener_functions_title: chrome.i18n.getMessage('checkboxShowListenerFunctions'),
             general_injection_enabled: !sync_data['options']['injection_disabled']['general'],
             domain_injection_enabled: !sync_data['options']['injection_disabled'][domain],
-            show_listener_functions: sync_data['options']['show_listener_functions']
+            show_listener_functions: sync_data['options']['popup']['show_listener_functions']
           })
         );
 
@@ -82,7 +80,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           var name = $(this).attr('name');
 
           if(name == 'show_listener_functions') {
-            set_sync_option(name, value);
+            set_sync_popup_option(name, value);
           } else {
             set_sync_option_injection_disabled_for_name(name, !value);
           }
@@ -94,7 +92,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           var tooltip_content = function(name, samples) {
             var target = samples[0]['target'].replace('[object ', '').replace(']', '');
 
-            if(sync_data['options']['show_listener_functions']) {
+            if(sync_data['options']['popup']['show_listener_functions']) {
               var text = '';
 
               var codes = [];
@@ -208,7 +206,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           tippy('.interceptions .calls', {
             theme: 'js-sample', animateFill: false, size: 'small',
-            performance: true, interactive: sync_data['options']['show_listener_functions'],
+            performance: true, interactive: sync_data['options']['popup']['show_listener_functions'],
             duration: [0, 0],
             onShown: function() {
               $('.tippy-popper:not(:last-child)').remove();

@@ -3,6 +3,12 @@ $(document).ready(function() {
     $('#loading').fadeOut(200);
   };
 
+  var loading = function(callback) {
+    $('#loading').fadeIn(200, function() {
+      callback();
+    });
+  }
+
   try {
     chrome.storage.local.getBytesInUse(null, function(bytesUsed) {
       $('#used').html((bytesUsed/1000000).toFixed(2) + ' MB | ');
@@ -13,9 +19,11 @@ $(document).ready(function() {
 
   $('#clear').click(function() {
     if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
-      chrome.storage.local.clear(function() {
-        location.reload();
-      });
+      loading(function() {
+        chrome.storage.local.clear(function() {
+          location.reload();
+        });
+      })
     }
   });
 

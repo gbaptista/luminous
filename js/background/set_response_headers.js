@@ -49,7 +49,7 @@ chrome.storage.sync.get('options', function(sync_data) {
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-  if(namespace == 'sync' && changes['options'] && changes['options'].newValue['injection_disabled']) {
+  if(namespace == 'sync' && changes['options'] && changes['options'].newValue && changes['options'].newValue['injection_disabled']) {
     injection_disabled = changes['options'].newValue['injection_disabled'];
   }
 });
