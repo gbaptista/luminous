@@ -36,6 +36,18 @@ pre code {
   vertical-align: bottom;
 }
 
+h1 {
+  display: inline-block;
+}
+
+#version {
+  display: inline-block;
+  color: #CCC;
+  padding-left: 6px;
+  border-left: 1px solid #CCC;
+  margin-left: 6px;
+}
+
 p.empty {
   padding: 20px;
   color: #CCC;
