@@ -35,6 +35,7 @@
     },
     "default_popup": "html/popup/popup.html"
   },
+  "options_page": "html/settings/advanced.html",
   "content_scripts": [
     {
       "matches": ["<all_urls>"],

@@ -1,0 +1,17 @@
+<form>
+  <h3>{{popup_options}}</h3>
+  <label>
+    <input type="checkbox" name="show_listener_functions" value="true" {{#show_listener_functions}} checked {{/show_listener_functions}} /> {{show_listener_functions_title}}
+  </label>
+  <h3>{{injection_title}}</h3>
+  <label>
+    <input type="checkbox" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}} /> {{general_injection_enabled_title}}
+  </label>
+  <br>
+  {{#domains}}
+    <br>
+    <label>
+      <input type="checkbox" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}} /> {{domain}}
+    </label>
+  {{/domains}}
+</form>

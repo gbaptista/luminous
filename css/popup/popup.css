@@ -17,7 +17,6 @@ h2 {
   width: 100%;
   height: 100%;
   background-color:#FFF;
-  vertical-align: center;
   padding-top: 76px;
   display:none;
   color: #CCC;
@@ -27,19 +26,19 @@ h2 {
   font-style: italic;
 }
 
-#help-link {
+.top-link {
   display: inline-block;
   float: right;
-  padding: 10px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-right: 1px solid #DDD;
 }
 
 #version {
   float: right;
   display: inline-block;
-  padding: 5px 10px;
-  margin: 5px;
+  padding: 10px;
   color: #CCC;
-  border-left: 1px solid #DDD;
 }
 
 .interceptions {

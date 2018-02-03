@@ -1,23 +1,3 @@
-var cached_templates = {};
-
-var load_template = function(path, callback_function) {
-  if(cached_templates[path]) {
-    callback_function(cached_templates[path]);
-  } else {
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-      if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-        cached_templates[path] = request.responseText;
-
-        callback_function(cached_templates[path]);
-      }
-    }
-    request.open('GET', chrome.extension.getURL(path), true);
-    request.send(null);
-  }
-}
-
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
@@ -297,4 +277,5 @@ $(document).ready(function() {
   $('#loading').html(chrome.i18n.getMessage('messageLoading'));
   $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
   $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
+  $('#settings-link').html(chrome.i18n.getMessage('linkSettingsText'));
 });

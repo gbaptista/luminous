@@ -234,9 +234,9 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 
 ### Bibliotecas de terceros
 
-- `js/vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
-- `js/vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
-- `js/vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)
+- `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
+- `vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
+- `vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)
 
 ## Licencia
 
