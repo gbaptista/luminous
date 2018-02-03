@@ -232,19 +232,9 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 
 Responsable de renderizar y manejar las interacciones en las páginas de ajustes:
 
-- `html/settings/stored-data/local.html`
-- `html/settings/stored-data/sync.html`
-- `html/settings/templates/advanced/form.html`
-- `html/settings/templates/stored-data/empty.html`
-- `html/settings/templates/stored-data/json.html`
-- `html/settings/templates/header.html`
-- `html/settings/templates/nav.html`
-- `html/settings/advanced.html`
-- `js/settings/stored-data/local.js`
-- `js/settings/stored-data/sync.js`
-- `js/settings/advanced.js`
-- `js/settings/settings.js`
-- `css/settings/settings.css`
+- `html/settings/*.html`
+- `js/settings/*.js`
+- `css/settings/*.css`
 
 ### Utiles
 
@@ -253,6 +243,7 @@ Responsable de renderizar y manejar las interacciones en las páginas de ajustes
 
 ### Bibliotecas de terceros
 
+- `vendor/bootstrap`: [*Bootstrap: biblioteca de componente front-end*](https://github.com/twbs/bootstrap)
 - `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
 - `vendor/mustachejs`: [*Plantilla mínima con {{bigotes}} en JavaScript*](https://github.com/janl/mustache.js)
 - `vendor/tippyjs`: [*Una biblioteca ligera, vainilla JS tooltip*](https://github.com/atomiks/tippyjs)

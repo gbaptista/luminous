@@ -1,0 +1,55 @@
+<form>
+  {{#badge_options}}
+    {{#counter}}
+      <div class="card">
+        <div class="card-header">
+          {{executions_title}}
+        </div>
+        <div class="card-body">
+          {{#executions}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" data-namespace="badge_counter" name="executions" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{label}}
+              </label>
+            </div>
+          {{/executions}}
+        </div>
+      </div>
+      <br>
+
+      <div class="card">
+        <div class="card-header">
+          {{kinds_title}}
+        </div>
+        <div class="card-body">
+          {{#kinds}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" data-value-as-namespace="true" data-namespace="badge_counter" name="kinds" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{label}}
+              </label>
+            </div>
+          {{/kinds}}
+        </div>
+      </div>
+      <br>
+
+      <div class="card">
+        <div class="card-header">
+          {{sum_by_title}}
+        </div>
+        <div class="card-body">
+          {{#sum_by}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" data-namespace="badge_counter" name="sum_by" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{label}}
+              </label>
+            </div>
+          {{/sum_by}}
+        </div>
+      </div>
+    {{/counter}}
+  {{/badge_options}}
+</form>

@@ -236,19 +236,9 @@ Responsible for rendering and handle interactions on the pop-up that is opened b
 
 Responsible for rendering and handle interactions on the settings pages:
 
-- `html/settings/stored-data/local.html`
-- `html/settings/stored-data/sync.html`
-- `html/settings/templates/advanced/form.html`
-- `html/settings/templates/stored-data/empty.html`
-- `html/settings/templates/stored-data/json.html`
-- `html/settings/templates/header.html`
-- `html/settings/templates/nav.html`
-- `html/settings/advanced.html`
-- `js/settings/stored-data/local.js`
-- `js/settings/stored-data/sync.js`
-- `js/settings/advanced.js`
-- `js/settings/settings.js`
-- `css/settings/settings.css`
+- `html/settings/*.html`
+- `js/settings/*.js`
+- `css/settings/*.css`
 
 ### Utils
 
@@ -257,6 +247,7 @@ Responsible for rendering and handle interactions on the settings pages:
 
 ### Third party libraries
 
+- `vendor/bootstrap`: [*Bootstrap front-end component library*](https://github.com/twbs/bootstrap)
 - `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
 - `vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
 - `vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)

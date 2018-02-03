@@ -7,7 +7,7 @@
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/es" },
 
   "checkboxInjectionEnabledGeneral": { "message": "todas las webs" },
-  "checkboxShowListenerFunctions": { "message": "mostrar detalles de código interceptado" },
+  "checkboxShowCodeDetails": { "message": "mostrar detalles de código interceptado" },
 
   "titleHandleEvent": { "message": "eventos activados (handleEvent)" },
   "titleAddEventListener": { "message": "eventos ligados (addEventListener)" },
@@ -16,16 +16,33 @@
   "messageNothingDetected": { "message": "nada detectado de momento" },
   "messageLoading": { "message": "cargando..." },
 
-  "settingsTitle": { "message": "Ajustes" },
-  "settingsAdvancedTitle": { "message": "Avanzado" },
-  "settingsStoredDataLocalTitle": { "message": "Datos almacenados localmente" },
-  "settingsStoredDataSyncTitle": { "message": "Datos almacenados sincronizados" },
-  "settingsReadMoreText": { "message": "Lea más sobre" },
+  "settingsCodeInjectionTitle": { "message": "inyecciones de código" },
+  "settingsPopupTitle": { "message": "ventana emergente" },
+  "settingsBadgeCounterTitle": { "message": "contador del icono" },
+  "settingsStoredDataLocalTitle": { "message": "datos locales" },
+  "settingsStoredDataSyncTitle": { "message": "datos sincronizados" },
+  "settingsReadMoreText": { "message": "lea más sobre" },
   "settingsStorageSyncMdnHref": { "message": "https://developer.mozilla.org/es/Add-ons/WebExtensions/API/storage/sync" },
   "settingsStorageLocalMdnHref": { "message": "https://developer.mozilla.org/es/Add-ons/WebExtensions/API/storage/local" },
-  "settingsClearAllButtonText": { "message": "apagar tudo" },
-  "settingsConfirmWindowText": { "message": "¿estás seguro?" },
+  "settingsClearAllButtonText": { "message": "quitar todo" },
+  "settingsConfirmWindowText": { "message": "estás seguro?" },
   "settingsStorageEmptyText": { "message": "nada almacenado" },
-  "settingsTabText": { "message": "Pestaña" },
-  "settingsTabClosedText": { "message": "cerrada" }
+  "settingsTabText": { "message": "lengüeta" },
+  "settingsTabClosedText": { "message": "cerrada" },
+    "settingsResetToDefaultText": { "message": "restaurar valores predeterminados" },
+  "settingsInjectionWarningText": { "message": "cualquier dominio tendrá el código inyectado a menos que esté deshabilitado en la lista siguiente:" },
+  "settingsAddDomainButtonText": { "message": "agregar dominio" },
+  "settingsNewDomainPlaceHolderText": { "message": "nuevo dominio" },
+  "settingsRemoveButtonText": { "message": "eliminar" },
+  "settingsPopupTooltipTitle": { "message": "tooltip mostrado al pasar el ratón en el código interceptado" },
+  "settingsBadgeCounterSumByTitle": { "message": "¿cómo debemos sumar los códigos interceptados?" },
+  "settingsBadgeCounterSumByExecutionsLabel": { "message": "por el total de ejecuciones" },
+  "settingsBadgeCounterSumByKindLabel": { "message": "por el tipo de código interceptado" },
+  "settingsBadgeCounterExectutionsTitle": { "message": "¿qué tipos de ejecuciones deben incluirse en la suma?" },
+  "settingsBadgeCounterKindsTitle": { "message": "¿qué tipo de código interceptado se debe incluir en la suma?" },
+
+  "allowedText": { "message": "permitidas" },
+  "blockedText": { "message": "bloqueadas" },
+
+  "settingsInvalidDomainMessage": { "message": "dominio no válido" }
 }

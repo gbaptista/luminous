@@ -232,19 +232,9 @@ Responsáveis por renderizar e cuidar das interações feitas no pop-up que é a
 
 Responsáveis por renderizar e cuidar das interações feitas nas páginas de configurações:
 
-- `html/settings/stored-data/local.html`
-- `html/settings/stored-data/sync.html`
-- `html/settings/templates/advanced/form.html`
-- `html/settings/templates/stored-data/empty.html`
-- `html/settings/templates/stored-data/json.html`
-- `html/settings/templates/header.html`
-- `html/settings/templates/nav.html`
-- `html/settings/advanced.html`
-- `js/settings/stored-data/local.js`
-- `js/settings/stored-data/sync.js`
-- `js/settings/advanced.js`
-- `js/settings/settings.js`
-- `css/settings/settings.css`
+- `html/settings/*.html`
+- `js/settings/*.js`
+- `css/settings/*.css`
 
 ### Utilidades
 
@@ -253,6 +243,8 @@ Responsáveis por renderizar e cuidar das interações feitas nas páginas de co
 
 ### Bibliotecas de terceiros
 
+- `vendor/bootstrap`: [*Bootstrap: biblioteca de componentes front-end
+*](https://github.com/twbs/bootstrap)
 - `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
 - `vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
 - `vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
