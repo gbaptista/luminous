@@ -189,6 +189,7 @@ In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*]
 - [Background](#background)
 - [Content](#content)
 - [Pop-up](#pop-up)
+- [Settings](#settings)
 - [Utils](#utils)
 - [Third party libraries](#third-party-libraries)
 
@@ -223,13 +224,31 @@ In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*]
 
 ### Pop-up
 
-Responsible for rendering and taking care of the interactions made in the pop-up that is opened by clicking the extension icon:
+Responsible for rendering and handle interactions on the pop-up that is opened by clicking the extension icon:
 
 - `html/popup/popup.html`
 - `html/popup/templates/counters.html`
 - `html/popup/templates/options.html`
 - `js/popup/popup.js`
 - `css/popup/popup.css`
+
+### Settings
+
+Responsible for rendering and handle interactions on the settings pages:
+
+- `html/settings/stored-data/local.html`
+- `html/settings/stored-data/sync.html`
+- `html/settings/templates/advanced/form.html`
+- `html/settings/templates/stored-data/empty.html`
+- `html/settings/templates/stored-data/json.html`
+- `html/settings/templates/header.html`
+- `html/settings/templates/nav.html`
+- `html/settings/advanced.html`
+- `js/settings/stored-data/local.js`
+- `js/settings/stored-data/sync.js`
+- `js/settings/advanced.js`
+- `js/settings/settings.js`
+- `css/settings/settings.css`
 
 ### Utils
 

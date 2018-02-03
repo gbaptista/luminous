@@ -3,6 +3,7 @@
   "manifestDescription": { "message": "Uma extensão experimental para identificar, analisar e bloquear a execução de códigos e a coleta de eventos via JavaScript em seu navegador." },
 
   "linkHelpText": { "message": "ajuda" },
+  "linkSettingsText": { "message": "configurações" },
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous" },
 
   "checkboxInjectionEnabledGeneral": { "message": "todos os sites" },
@@ -13,5 +14,18 @@
   "titleWebAPIs": { "message": "APIs Web" },
 
   "messageNothingDetected": { "message": "nada foi detectado até o momento" },
-  "messageLoading": { "message": "carregando..." }
+  "messageLoading": { "message": "carregando..." },
+
+  "settingsTitle": { "message": "Configurações" },
+  "settingsAdvancedTitle": { "message": "Avançado" },
+  "settingsStoredDataLocalTitle": { "message": "Dados armazenados localmente" },
+  "settingsStoredDataSyncTitle": { "message": "Dados armazenados sincronizados" },
+  "settingsReadMoreText": { "message": "Leia mais sobre" },
+  "settingsStorageSyncMdnHref": { "message": "https://developer.mozilla.org/pt-BR/Add-ons/WebExtensions/API/storage/sync" },
+  "settingsStorageLocalMdnHref": { "message": "https://developer.mozilla.org/pt-BR/Add-ons/WebExtensions/API/storage/local" },
+  "settingsClearAllButtonText": { "message": "apagar tudo" },
+  "settingsConfirmWindowText": { "message": "você tem certeza?" },
+  "settingsStorageEmptyText": { "message": "nada armazenado" },
+  "settingsTabText": { "message": "Aba" },
+  "settingsTabClosedText": { "message": "fechada" }
 }
