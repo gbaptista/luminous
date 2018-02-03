@@ -187,6 +187,7 @@ En *Mozilla Firefox* y derivados, algunos sitios web que usan [*Service Workers*
 - [Fondo](#fondo)
 - [Contenido](#contenido)
 - [Ventana emergente](#ventana-emergente)
+- [Ajustes](#ajustes)
 - [Utiles](#utiles)
 - [Bibliotecas de terceros](#bibliotecas-de-terceros)
 
@@ -226,6 +227,28 @@ Responsable de procesar y cuidar las interacciones realizadas en la ventana emer
 - `html/popup/templates/options.html`
 - `js/popup/popup.js`
 - `css/popup/popup.css`
+
+### Ajustes
+
+Responsable de renderizar y manejar las interacciones en las páginas de ajustes:
+
+- `html/settings/stored-data/local.html`
+- `html/settings/stored-data/sync.html`
+- `html/settings/templates/advanced/form.html`
+- `html/settings/templates/stored-data/empty.html`
+- `html/settings/templates/stored-data/json.html`
+- `html/settings/templates/header.html`
+- `html/settings/templates/nav.html`
+- `html/settings/advanced.html`
+
+
+- `js/settings/stored-data/local.js`
+- `js/settings/stored-data/sync.js`
+- `js/settings/advanced.js`
+- `js/settings/settings.js`
+
+
+- `css/settings/settings.css`
 
 ### Utiles
 

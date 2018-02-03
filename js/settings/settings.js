@@ -14,9 +14,18 @@ $(document).ready(function() {
     $('nav').html(
       Mustache.render(template, {
         links: [
-          { title: 'Advanced', url: chrome.extension.getURL('html/settings/advanced.html') },
-          { title: 'Stored Data: Sync', url: chrome.extension.getURL('html/settings/stored-data/sync.html') },
-          { title: 'Stored Data: Local', url: chrome.extension.getURL('html/settings/stored-data/local.html') },
+          {
+            title: chrome.i18n.getMessage('settingsAdvancedTitle'),
+            url: chrome.extension.getURL('html/settings/advanced.html')
+          },
+          {
+            title: chrome.i18n.getMessage('settingsStoredDataSyncTitle'),
+            url: chrome.extension.getURL('html/settings/stored-data/sync.html')
+          },
+          {
+            title: chrome.i18n.getMessage('settingsStoredDataLocalTitle'),
+            url: chrome.extension.getURL('html/settings/stored-data/local.html')
+          },
         ]
       })
     );
@@ -26,7 +35,7 @@ $(document).ready(function() {
     $('header').html(Mustache.render(
       template,
       {
-        title: 'Settings',
+        title: chrome.i18n.getMessage('settingsTitle'),
         icon_path: chrome.extension.getURL('images/icons/32.png')
       },
     ));

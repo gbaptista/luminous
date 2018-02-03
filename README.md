@@ -186,6 +186,7 @@ No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](h
 - [Background](#background)
 - [Content](#content)
 - [Pop-up](#pop-up)
+- [Configurações](#configurações)
 - [Utilidades](#utilidades)
 - [Bibliotecas de terceiros](#bibliotecas-de-terceiros)
 
@@ -226,6 +227,28 @@ Responsáveis por renderizar e cuidar das interações feitas no pop-up que é a
 - `html/popup/templates/options.html`
 - `js/popup/popup.js`
 - `css/popup/popup.css`
+
+### Configurações
+
+Responsáveis por renderizar e cuidar das interações feitas nas páginas de configurações:
+
+- `html/settings/stored-data/local.html`
+- `html/settings/stored-data/sync.html`
+- `html/settings/templates/advanced/form.html`
+- `html/settings/templates/stored-data/empty.html`
+- `html/settings/templates/stored-data/json.html`
+- `html/settings/templates/header.html`
+- `html/settings/templates/nav.html`
+- `html/settings/advanced.html`
+
+
+- `js/settings/stored-data/local.js`
+- `js/settings/stored-data/sync.js`
+- `js/settings/advanced.js`
+- `js/settings/settings.js`
+
+
+- `css/settings/settings.css`
 
 ### Utilidades
 
