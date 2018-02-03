@@ -37,7 +37,6 @@ $(document).ready(function() {
 
       if(Object.keys(local_data).length == 0) {
         load_template('html/settings/templates/stored-data/empty.html', function(template) {
-          settingsStorageEmptyText
           $('.tabs').html(
             Mustache.render(
               template, { text: chrome.i18n.getMessage('settingsStorageEmptyText') }
