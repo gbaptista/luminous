@@ -35,9 +35,9 @@
     },
     "default_popup": "html/popup/popup.html"
   },
-  "options_page": "html/settings/advanced.html",
+  "options_page": "html/settings/injection/enabled.html",
   "options_ui": {
-    "page": "html/settings/advanced.html",
+    "page": "html/settings/injection/enabled.html",
     "open_in_tab": true,
     "browser_style": false
   },

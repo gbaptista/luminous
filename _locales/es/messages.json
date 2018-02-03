@@ -7,7 +7,7 @@
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/es" },
 
   "checkboxInjectionEnabledGeneral": { "message": "todas las webs" },
-  "checkboxShowListenerFunctions": { "message": "mostrar detalles de código interceptado" },
+  "checkboxShowCodeDetails": { "message": "mostrar detalles de código interceptado" },
 
   "titleHandleEvent": { "message": "eventos activados (handleEvent)" },
   "titleAddEventListener": { "message": "eventos ligados (addEventListener)" },

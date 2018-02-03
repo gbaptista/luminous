@@ -8,8 +8,8 @@ var set_default_settings = function() {
       sync_data['options']['badge_counter'] = {};
     }
 
-    if(sync_data['options']['badge_counter']['group_by'] == undefined) {
-      sync_data['options']['badge_counter']['group_by'] = 'executions';
+    if(sync_data['options']['badge_counter']['sum_by'] == undefined) {
+      sync_data['options']['badge_counter']['sum_by'] = 'executions';
     }
 
     if(sync_data['options']['badge_counter']['executions'] == undefined) {
@@ -44,8 +44,8 @@ var set_default_settings = function() {
       sync_data['options']['popup'] = {};
     }
 
-    if(sync_data['options']['popup']['show_listener_functions'] == undefined) {
-      sync_data['options']['popup']['show_listener_functions'] = false;
+    if(sync_data['options']['popup']['show_code_details'] == undefined) {
+      sync_data['options']['popup']['show_code_details'] = false;
     }
 
     // web.whatsapp.com

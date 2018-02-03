@@ -1,7 +1,13 @@
+<!doctype html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
     <title></title>
+
+    <link rel="stylesheet" type="text/css" href="../../../vendor/bootstrap/bootstrap.min.css">
+
     <link rel="stylesheet" type="text/css" href="../../../css/settings/settings.css">
     <script src="../../../vendor/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="../../../vendor/mustachejs/mustache.min.js" type="text/javascript"></script>
@@ -11,18 +17,22 @@
   </head>
   <body>
     <div id="loading"></div>
-    <header></header>
-    <nav></nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <nav class="navbar"></nav>
+        </div>
+        <div class="col-8 settings-content">
+          <div class="alert alert-warning" role="alert">
+            <span class="locale" data-locale="settingsReadMoreText"></span>
+            <a target="_blank" class="locale-url alert-link" data-locale-url="settingsStorageSyncMdnHref" href="">storage.sync</a>.
+          </div>
 
-    <h2 class="locale" data-locale="settingsStoredDataSyncTitle"></h2>
-
-    <span class="locale" data-locale="settingsReadMoreText"></span>
-    <a target="_blank" class="locale-url" data-locale-url="settingsStorageSyncMdnHref" href="">storage.sync</a>.
-
-    <br><br>
-
-    <span id="used"></span><button id="clear" class="locale" data-locale="settingsClearAllButtonText"></button>
-
-    <div class="options"></div>
+          <span id="used"></span><button id="clear" class="locale btn btn-warning" data-locale="settingsResetToDefaultText"></button>
+          <br><br>
+          <div class="options"></div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

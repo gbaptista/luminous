@@ -19,7 +19,7 @@ injections_controller(function() {
               var allowed = 0;
               var blocked = 0;
 
-              if(badge_counter['group_by'] == 'executions') {
+              if(badge_counter['sum_by'] == 'executions') {
                 allowed = document_data['counters'][key][sub_key]['allowed'];
                 blocked = document_data['counters'][key][sub_key]['blocked'];
               } else {

@@ -7,7 +7,7 @@
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/en-US" },
 
   "checkboxInjectionEnabledGeneral": { "message": "all websites" },
-  "checkboxShowListenerFunctions": { "message": "show intercepted code details" },
+  "checkboxShowCodeDetails": { "message": "show intercepted code details" },
 
   "titleHandleEvent": { "message": "triggered events (handleEvent)" },
   "titleAddEventListener": { "message": "attached events (addEventListener)" },
@@ -27,5 +27,6 @@
   "settingsConfirmWindowText": { "message": "are you sure?" },
   "settingsStorageEmptyText": { "message": "nothing stored" },
   "settingsTabText": { "message": "Tab" },
-  "settingsTabClosedText": { "message": "closed" }
+  "settingsTabClosedText": { "message": "closed" },
+  "settingsResetToDefaultText": { "message": "reset to default" }
 }
