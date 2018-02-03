@@ -246,10 +246,12 @@ Responsible for rendering and handle interactions on the settings pages:
 - `html/settings/advanced.html`
 
 
+
 - `js/settings/stored-data/local.js`
 - `js/settings/stored-data/sync.js`
 - `js/settings/advanced.js`
 - `js/settings/settings.js`
+
 
 
 - `css/settings/settings.css`
