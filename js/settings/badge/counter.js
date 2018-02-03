@@ -8,47 +8,53 @@ $(document).ready(function() {
             show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
 
             badge_options: {
-              title: 'Badge options:',
               counter: {
-                title: 'Counter displayed:',
-                sum_by_title: 'somar por:',
+                sum_by_title: chrome.i18n.getMessage('settingsBadgeCounterSumByTitle'),
                 sum_by: [
                   {
-                    label: 'executions', value: 'executions',
+                    label: chrome.i18n.getMessage('settingsBadgeCounterSumByExecutionsLabel'),
+                    value: 'executions',
                     checked: 'executions' ==  sync_data['options']['badge_counter']['sum_by']
                   },
                   {
-                    label: 'kind', value: 'kind',
+                    label: chrome.i18n.getMessage('settingsBadgeCounterSumByKindLabel'),
+                    value: 'kind',
                     checked: 'kind' ==  sync_data['options']['badge_counter']['sum_by']
                   },
                 ],
-                executions_title: 'contar uma execução quando ela for:',
+                executions_title: chrome.i18n.getMessage('settingsBadgeCounterExectutionsTitle'),
                 executions: [
                   {
-                    label: 'Allowed + blocked', value: 'allowed_blocked',
+                    label: chrome.i18n.getMessage('allowedText') + ' + ' + chrome.i18n.getMessage('blockedText'),
+                    value: 'allowed_blocked',
                     checked: 'allowed_blocked' ==  sync_data['options']['badge_counter']['executions']
                   },
                   {
-                    label: 'Allowed', value: 'allowed',
+                    label: chrome.i18n.getMessage('allowedText'),
+                    value: 'allowed',
                     checked: 'allowed' ==  sync_data['options']['badge_counter']['executions']
                   },
                   {
-                    label: 'blocked', value: 'blocked',
+                    label: chrome.i18n.getMessage('blockedText'),
+                    value: 'blocked',
                     checked: 'blocked' ==  sync_data['options']['badge_counter']['executions']
                   }
                 ],
-                kinds_title: 'tipos de execuções contadas:',
+                kinds_title: chrome.i18n.getMessage('settingsBadgeCounterKindsTitle'),
                 kinds: [
                   {
-                    label: 'WebAPIs', value: 'WebAPIs',
+                    label: chrome.i18n.getMessage('titleWebAPIs'),
+                    value: 'WebAPIs',
                     checked: sync_data['options']['badge_counter']['kinds']['WebAPIs']
                   },
                   {
-                    label: 'handleEvent', value: 'handleEvent',
+                    label: chrome.i18n.getMessage('titleHandleEvent'),
+                    value: 'handleEvent',
                     checked: sync_data['options']['badge_counter']['kinds']['handleEvent']
                   },
                   {
-                    label: 'addEventListener', value: 'addEventListener',
+                    label: chrome.i18n.getMessage('titleAddEventListener'),
+                    value: 'addEventListener',
                     checked: sync_data['options']['badge_counter']['kinds']['addEventListener']
                   }
                 ]

@@ -4,7 +4,6 @@ $(document).ready(function() {
       chrome.storage.sync.get(null, function(sync_data) {
         $('#form').html(
           Mustache.render(template, {
-            popup_options_title: 'Popup options:',
             show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
             show_code_details: sync_data['options']['popup']['show_code_details']
           })

@@ -16,8 +16,8 @@ $(document).ready(function() {
         $('#form').html(
           Mustache.render(template, {
             general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
-            injection_title: 'Injection enabled for:',
             general_injection_enabled: !sync_data['options']['injection_disabled']['general'],
+            placeholder: chrome.i18n.getMessage('settingsNewDomainPlaceHolderText'),
             domains: domains
           })
         );
@@ -27,7 +27,7 @@ $(document).ready(function() {
         $('.remove-domain').click(function() {
           event.preventDefault();
 
-          if(confirm('are you sure?')) {
+          if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
             remove_sync_option('injection_disabled', $(this).data('domain'));
           }
         });
@@ -45,7 +45,7 @@ $(document).ready(function() {
               set_sync_option(a_element.hostname, true, 'injection_disabled');
               $('#new-domain').val('');
             } else {
-              alert('invalid domain');
+              alert(chrome.i18n.getMessage('settingsInvalidDomainMessage'));
               loaded();
             }
           });

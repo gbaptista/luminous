@@ -16,8 +16,6 @@
   "messageNothingDetected": { "message": "nada detectado de momento" },
   "messageLoading": { "message": "cargando..." },
 
-  "settingsTitle": { "message": "Ajustes" },
-  "settingsAdvancedTitle": { "message": "Avanzado" },
   "settingsStoredDataLocalTitle": { "message": "Datos almacenados localmente" },
   "settingsStoredDataSyncTitle": { "message": "Datos almacenados sincronizados" },
   "settingsReadMoreText": { "message": "Lea más sobre" },

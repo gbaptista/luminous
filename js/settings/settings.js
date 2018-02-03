@@ -2,6 +2,11 @@ var loaded = function() {
   $('#loading').fadeOut(200);
 }
 
+var loading = function(callback) {
+  $('#loading').fadeIn(200, function() {
+    if(callback) callback();
+  });
+}
 
 var remove_sync_option = function(namespace, key) {
   setTimeout(function() {
@@ -34,13 +39,11 @@ var set_sync_option = function(name, value, namespace, value_as_namespace) {
   }, 0);
 };
 
-var loading = function(callback) {
-  $('#loading').fadeIn(200, function() {
-    if(callback) callback();
-  });
-}
-
 var observe_form = function() {
+  $('.locale').each(function() {
+    $(this).html(chrome.i18n.getMessage($(this).data('locale')));
+  });
+
   $('#form form').submit(function(event) {
     event.preventDefault();
   });
@@ -85,17 +88,17 @@ $(document).ready(function() {
       Mustache.render(template, {
         links: [
           {
-            title: 'Code Injection',
+            title: chrome.i18n.getMessage('settingsCodeInjectionTitle'),
             url: chrome.extension.getURL('html/settings/injection/enabled.html'),
             active: (document.location.pathname == '/html/settings/injection/enabled.html')
           },
           {
-            title: 'Popup',
+            title: chrome.i18n.getMessage('settingsPopupTitle'),
             url: chrome.extension.getURL('html/settings/popup/options.html'),
             active: (document.location.pathname == '/html/settings/popup/options.html')
           },
           {
-            title: 'Badge Counter',
+            title: chrome.i18n.getMessage('settingsBadgeCounterTitle'),
             url: chrome.extension.getURL('html/settings/badge/counter.html'),
             active: (document.location.pathname == '/html/settings/badge/counter.html')
           },

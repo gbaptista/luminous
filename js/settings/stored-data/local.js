@@ -1,14 +1,4 @@
 $(document).ready(function() {
-  var loaded = function() {
-    $('#loading').fadeOut(200);
-  };
-
-  var loading = function(callback) {
-    $('#loading').fadeIn(200, function() {
-      callback();
-    });
-  }
-
   try {
     chrome.storage.local.getBytesInUse(null, function(bytesUsed) {
       $('#used').html((bytesUsed/1000000).toFixed(2) + ' MB | ');
