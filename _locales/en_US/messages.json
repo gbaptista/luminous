@@ -30,7 +30,7 @@
   "settingsTabText": { "message": "tab" },
   "settingsTabClosedText": { "message": "closed" },
   "settingsResetToDefaultText": { "message": "reset to default" },
-  "settingsInjectionWarningText": { "message": "any domain will have the code injected by default unless it is disabled in the list below." },
+  "settingsInjectionWarningText": { "message": "any domain will have the code injected by default unless it is disabled in the list below:" },
   "settingsAddDomainButtonText": { "message": "add domain" },
   "settingsNewDomainPlaceHolderText": { "message": "new domain" },
   "settingsRemoveButtonText": { "message": "remove" },
