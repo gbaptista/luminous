@@ -240,16 +240,10 @@ Responsáveis por renderizar e cuidar das interações feitas nas páginas de co
 - `html/settings/templates/header.html`
 - `html/settings/templates/nav.html`
 - `html/settings/advanced.html`
-
-
-
 - `js/settings/stored-data/local.js`
 - `js/settings/stored-data/sync.js`
 - `js/settings/advanced.js`
 - `js/settings/settings.js`
-
-
-
 - `css/settings/settings.css`
 
 ### Utilidades

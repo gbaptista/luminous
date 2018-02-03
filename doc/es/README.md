@@ -240,16 +240,10 @@ Responsable de renderizar y manejar las interacciones en las páginas de ajustes
 - `html/settings/templates/header.html`
 - `html/settings/templates/nav.html`
 - `html/settings/advanced.html`
-
-
-
 - `js/settings/stored-data/local.js`
 - `js/settings/stored-data/sync.js`
 - `js/settings/advanced.js`
 - `js/settings/settings.js`
-
-
-
 - `css/settings/settings.css`
 
 ### Utiles
