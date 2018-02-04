@@ -93,6 +93,11 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/injection/enabled.html')
           },
           {
+            title: chrome.i18n.getMessage('settingsBlockPerDomainTitle'),
+            url: chrome.extension.getURL('html/settings/blocks/per-domain.html'),
+            active: (document.location.pathname == '/html/settings/blocks/per-domain.html')
+          },
+          {
             title: chrome.i18n.getMessage('settingsPopupTitle'),
             url: chrome.extension.getURL('html/settings/popup/options.html'),
             active: (document.location.pathname == '/html/settings/popup/options.html')
