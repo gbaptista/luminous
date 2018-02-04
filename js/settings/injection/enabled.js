@@ -24,7 +24,7 @@ $(document).ready(function() {
 
         observe_form();
 
-        $('.remove-domain').click(function() {
+        $('.remove-domain').click(function(event) {
           event.preventDefault();
 
           if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
