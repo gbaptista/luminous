@@ -40,9 +40,16 @@
   "settingsBadgeCounterSumByKindLabel": { "message": "by kind of code intercepted" },
   "settingsBadgeCounterExectutionsTitle": { "message": "what code executions should be included in the sum?" },
   "settingsBadgeCounterKindsTitle": { "message": "what kind of code executions should be included in the sum?" },
+  "settingsBlockPerDomainTitle": { "message": "website rules" },
 
   "allowedText": { "message": "allowed" },
   "blockedText": { "message": "blocked" },
 
-  "settingsInvalidDomainMessage": { "message": "invalid domain" }
+  "settingsInvalidDomainMessage": { "message": "invalid domain" },
+  "settingsInvalidKindMessage": { "message": "invalid kind (should be handleEvent, addEventListener or WebAPIs)" },
+  "settingsInvalidCodeMessage": { "message": "invalid code" },
+  "settingsAddRuleButtonText": { "message": "add rule" },
+  "settingsSearchByDomainPlaceHolderText": { "message": "search by domain" },
+  "settingsNothingFoundText": { "message": "nothing found" },
+  "settingsFilterWebsitesText": { "message": "filter websites:" }
 }

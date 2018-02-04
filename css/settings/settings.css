@@ -7,6 +7,30 @@ body {
   padding-top: 20px;
 }
 
+.nothing-found {
+  padding-top: 30px;
+  display: none;
+  text-align: center;
+  color: #CCC;
+}
+
+.domain-card {
+  margin-bottom: 22px;
+}
+
+.general-injection {
+  padding-top: 0.5em;
+}
+
+.remove-code {
+  padding: 0 4px;
+  font-size: 11px
+}
+
+.remove-code, .toggle-code {
+  margin-left: 10px;
+}
+
 .remove-domain {
   margin-right: 20px;
   margin-bottom: 5px;

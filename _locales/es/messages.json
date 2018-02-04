@@ -29,7 +29,7 @@
   "settingsStorageEmptyText": { "message": "nada almacenado" },
   "settingsTabText": { "message": "lengüeta" },
   "settingsTabClosedText": { "message": "cerrada" },
-    "settingsResetToDefaultText": { "message": "restaurar valores predeterminados" },
+  "settingsResetToDefaultText": { "message": "restaurar valores predeterminados" },
   "settingsInjectionWarningText": { "message": "cualquier dominio tendrá el código inyectado a menos que esté deshabilitado en la lista siguiente:" },
   "settingsAddDomainButtonText": { "message": "agregar dominio" },
   "settingsNewDomainPlaceHolderText": { "message": "nuevo dominio" },
@@ -40,9 +40,16 @@
   "settingsBadgeCounterSumByKindLabel": { "message": "por el tipo de código interceptado" },
   "settingsBadgeCounterExectutionsTitle": { "message": "¿qué tipos de ejecuciones deben incluirse en la suma?" },
   "settingsBadgeCounterKindsTitle": { "message": "¿qué tipo de código interceptado se debe incluir en la suma?" },
+  "settingsBlockPerDomainTitle": { "message": "reglas por sitio web" },
 
-  "allowedText": { "message": "permitidas" },
-  "blockedText": { "message": "bloqueadas" },
+  "allowedText": { "message": "permitido" },
+  "blockedText": { "message": "bloqueado" },
 
-  "settingsInvalidDomainMessage": { "message": "dominio no válido" }
+  "settingsInvalidDomainMessage": { "message": "dominio no válido" },
+  "settingsInvalidKindMessage": { "message": "tipo no válido (debe ser handleEvent, addEventListener o WebAPIs)" },
+  "settingsInvalidCodeMessage": { "message": "código no válido" },
+  "settingsAddRuleButtonText": { "message": "agregar regla" },
+  "settingsSearchByDomainPlaceHolderText": { "message": "buscar por dominio" },
+  "settingsNothingFoundText": { "message": "nada encontrado" },
+  "settingsFilterWebsitesText": { "message": "filtrar sitios web:" }
 }

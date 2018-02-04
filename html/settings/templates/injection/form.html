@@ -12,7 +12,7 @@
       <div class="alert alert-warning locale" data-locale="settingsInjectionWarningText" role="alert">
       </div>
 
-      <div class="form-check">
+      <div class="form-check general-injection">
         <label class="form-check-label">
           <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}}>
           {{general_injection_enabled_title}}
@@ -25,7 +25,7 @@
             <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}}>
             {{domain}}
           </label>
-          <button type="button" data-domain="{{domain}}" class="btn btn-outline-danger btn-sm remove-domain locale" data-locale="settingsRemoveButtonText"></button>
+          <button type="button" data-domain="{{domain}}" class="btn btn-outline-secondary btn-sm remove-domain locale" data-locale="settingsRemoveButtonText"></button>
         </div>
       {{/domains}}
     </div>
