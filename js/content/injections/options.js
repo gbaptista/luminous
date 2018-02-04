@@ -6,6 +6,21 @@ injections_controller(function() {
         sync_data['options']['disabled'][domain] = {};
       }
 
+      // Apply default rules
+      for(kind in sync_data['options']['default_disabled']) {
+        if(!sync_data['options']['disabled'][domain][kind]) {
+          sync_data['options']['disabled'][domain][kind] = {};
+        }
+
+        for(code in sync_data['options']['default_disabled'][kind]) {
+          if(sync_data['options']['disabled'][domain][kind][code] == undefined) {
+            if(sync_data['options']['default_disabled'][kind][code]) {
+              sync_data['options']['disabled'][domain][kind][code] = sync_data['options']['default_disabled'][kind][code];
+            }
+          }
+        }
+      }
+
       var options = {}
 
       options['disabled'] = sync_data['options']['disabled'][domain];

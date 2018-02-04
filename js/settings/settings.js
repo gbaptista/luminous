@@ -93,9 +93,14 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/injection/enabled.html')
           },
           {
+            title: chrome.i18n.getMessage('settingsBlockDefaultTitle'),
+            url: chrome.extension.getURL('html/settings/rules/default.html'),
+            active: (document.location.pathname == '/html/settings/rules/default.html')
+          },
+          {
             title: chrome.i18n.getMessage('settingsBlockPerDomainTitle'),
-            url: chrome.extension.getURL('html/settings/blocks/per-domain.html'),
-            active: (document.location.pathname == '/html/settings/blocks/per-domain.html')
+            url: chrome.extension.getURL('html/settings/rules/per-domain.html'),
+            active: (document.location.pathname == '/html/settings/rules/per-domain.html')
           },
           {
             title: chrome.i18n.getMessage('settingsPopupTitle'),

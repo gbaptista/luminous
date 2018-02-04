@@ -14,7 +14,7 @@
     </form>
   </div>
   <div class="card-body">
-    {{#blocks}}
+    {{#rules}}
       <div class="card">
         <div class="card-header">
           {{kind}}
@@ -24,7 +24,7 @@
             <div class="col-6">
               <ul class="list-group">
                 {{#codes_a}}
-                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                  <li data-code="{{code}}" class="list-group-item item-code list-group-item-action d-flex justify-content-between align-items-center">
                     {{code}}
                     <div class="code-actions">
                       <a href="#" data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" class="badge toggle-code {{#disabled}}badge-danger{{/disabled}} {{^disabled}}badge-success{{/disabled}} badge-pill">{{badge}}</a>
@@ -37,7 +37,7 @@
             <div class="col-6">
               <ul class="list-group">
                 {{#codes_b}}
-                  <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                  <li data-code="{{code}}" class="list-group-item item-code list-group-item-action d-flex justify-content-between align-items-center">
                     {{code}}
                     <div class="code-actions">
                       <a href="#" data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" class="badge toggle-code {{#disabled}}badge-danger{{/disabled}} {{^disabled}}badge-success{{/disabled}} badge-pill">{{badge}}</a>
@@ -51,6 +51,6 @@
         </div>
       </div>
       <br>
-    {{/blocks}}
+    {{/rules}}
   </div>
 </div>

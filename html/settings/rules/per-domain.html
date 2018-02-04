@@ -13,7 +13,8 @@
     <script src="../../../vendor/mustachejs/mustache.min.js" type="text/javascript"></script>
     <script src="../../../js/utils/load_template.js" type="text/javascript"></script>
     <script src="../../../js/settings/settings.js" type="text/javascript"></script>
-    <script src="../../../js/settings/blocks/per-domain.js" type="text/javascript"></script>
+    <script src="../../../js/settings/rules/rules.js" type="text/javascript"></script>
+    <script src="../../../js/settings/rules/per-domain.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="loading"></div>
@@ -23,8 +24,12 @@
           <nav class="navbar"></nav>
         </div>
         <div class="col-8 settings-content">
+          <div class="alert alert-info rules-info" role="alert">
+            <span class="locale" data-locale="settingsReadMoreText"></span>
+            <a target="_blank" class="locale locale-url alert-link" data-locale-url="settingsJavaScriptEventsHref" data-locale="settingsJavaScriptEventsText" href=""></a>.
+          </div>
           <div class="search"></div>
-          <div class="blocks"></div>
+          <div class="rules"></div>
         </div>
       </div>
     </div>
