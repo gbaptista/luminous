@@ -80,6 +80,74 @@ var set_default_settings = function() {
       sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']['wheel'] = true;
     }
 
+    // default
+    if(!sync_data['options']['default_disabled']) sync_data['options']['default_disabled'] = {};
+
+    if(!sync_data['options']['default_disabled']['WebAPIs']) {
+      sync_data['options']['default_disabled']['WebAPIs'] = {}
+    }
+
+    if(!sync_data['options']['default_disabled']['handleEvent']) {
+      sync_data['options']['default_disabled']['handleEvent'] = {}
+    }
+
+    if(!sync_data['options']['default_disabled']['addEventListener']) {
+      sync_data['options']['default_disabled']['addEventListener'] = {}
+    }
+
+    // From "Most Common Categories" at https://developer.mozilla.org/en-US/docs/Web/Events
+    event_names = [
+      // Resource Events
+      'beforeunload', 'unload',
+      // Focus Events
+      'focus', 'blur',
+      // Websocket Events
+      'open', 'message', 'error', 'close',
+      // Session History Events
+      'pagehide', 'pageshow', 'popstate',
+      // Form Events
+      'reset', 'submit',
+      // Text Composition Events
+      'compositionstart', 'compositionupdate', 'compositionend',
+      // View Events
+      'resize', 'scroll',
+      // Clipboard Events
+      'cut', 'copy', 'paste',
+      // Keyboard Events
+      'keydown', 'keypress', 'keyup',
+      // Mouse Events
+      'mouseenter', 'mouseover', 'mousemove', 'mousedown', 'mouseup',
+      'auxclick', 'click', 'dblclick', 'contextmenu', 'wheel', 'mouseleave',
+      'mouseout', 'select', 'pointerlockchange', 'pointerlockerror',
+      // Drag & Drop Events
+      'dragstart', 'drag', 'dragend', 'dragenter', 'dragover', 'dragleave', 'drop',
+      // Storage events
+      'change', 'storage'
+    ];
+
+    for(i in event_names) {
+      if(sync_data['options']['default_disabled']['addEventListener'][event_names[i]] == undefined) {
+        sync_data['options']['default_disabled']['addEventListener'][event_names[i]] = false;
+      }
+
+      if(sync_data['options']['default_disabled']['handleEvent'][event_names[i]] == undefined) {
+        sync_data['options']['default_disabled']['handleEvent'][event_names[i]] = false;
+      }
+    }
+
+    var event_names = [
+      'fetch',
+      'setInterval', 'setInterval.call',
+      'setTimeout', 'setTimeout.call',
+      'XMLHttpRequest.open', 'XMLHttpRequest.send'
+    ];
+
+    for(i in event_names) {
+      if(sync_data['options']['default_disabled']['WebAPIs'][event_names[i]] == undefined) {
+        sync_data['options']['default_disabled']['WebAPIs'][event_names[i]] = false;
+      }
+    }
+
     chrome.storage.sync.set(sync_data);
   });
 }

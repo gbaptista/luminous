@@ -1,47 +1,5 @@
 $(document).ready(function() {
 
-  var add_code = function(domain, kind, code) {
-    loading();
-
-    setTimeout(function() {
-      chrome.storage.sync.get('options', function(sync_data) {
-        if(!sync_data['options']['disabled'][domain][kind]) {
-          sync_data['options']['disabled'][domain][kind] = {};
-        }
-
-        if(!sync_data['options']['disabled'][domain][kind][code]) {
-          sync_data['options']['disabled'][domain][kind][code] = false;
-        }
-
-        chrome.storage.sync.set(sync_data, function() {
-          loaded();
-        });
-      });
-    }, 0);
-  }
-
-  var toggle_code = function(domain, kind, code, remove = false) {
-    loading();
-
-    setTimeout(function() {
-      chrome.storage.sync.get('options', function(sync_data) {
-        if(remove) {
-          delete sync_data['options']['disabled'][domain][kind][code];
-        } else {
-          if(sync_data['options']['disabled'][domain][kind][code]) {
-            sync_data['options']['disabled'][domain][kind][code] = false;
-          } else {
-            sync_data['options']['disabled'][domain][kind][code] = true;
-          }
-        }
-
-        chrome.storage.sync.set(sync_data, function() {
-          loaded();
-        });
-      });
-    }, 0);
-  };
-
   var filter_cards = function() {
     setTimeout(function() {
       $('.nothing-found').hide();
@@ -67,9 +25,10 @@ $(document).ready(function() {
     }, 0);
   };
 
-  load_template('html/settings/templates/blocks/search.html', function(template) {
+  load_template('html/settings/templates/rules/search.html', function(template) {
     $('.search').html(
       Mustache.render(template, {
+        title: chrome.i18n.getMessage('settingsFilterWebsitesText'),
         placeholder_filter: chrome.i18n.getMessage('settingsSearchByDomainPlaceHolderText')
       })
     );
@@ -79,14 +38,14 @@ $(document).ready(function() {
     });
   });
 
-  var load_blocks = function() {
+  var load_rules = function() {
     chrome.storage.sync.get('options', function(sync_data) {
-      load_template('html/settings/templates/blocks/codes.html', function(template) {
-        $('.blocks').html('');
+      load_template('html/settings/templates/rules/codes.html', function(template) {
+        $('.rules').html('');
 
         for(domain in sync_data['options']['disabled']) {
 
-          var blocks = [];
+          var rules = [];
 
           for(kind in sync_data['options']['disabled'][domain]) {
             var codes = [];
@@ -112,17 +71,17 @@ $(document).ready(function() {
             var codes_a = codes.slice(0, half);
             var codes_b = codes.slice(half, codes.length);
 
-            blocks.push({
+            rules.push({
               kind: kind,
               codes_a: codes_a,
               codes_b: codes_b
             });
           }
 
-          $('.blocks').append(
+          $('.rules').append(
             Mustache.render(template, {
               domain: domain,
-              blocks: blocks,
+              rules: rules,
               placeholder_kind: 'handleEvent',
               placeholder_code: 'mousemove'
             })
@@ -177,30 +136,12 @@ $(document).ready(function() {
     });
   }
 
-  load_blocks();
+  load_rules();
 
   chrome.storage.onChanged.addListener(function(_changes, namespace) {
     if(namespace == 'sync') {
       loading(function() {
-        load_blocks();
-      });
-    }
-  });
-
-  $('#clear').click(function() {
-    if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
-      loading(function() {
-        load_template('html/settings/templates/stored-data/empty.html', function(template) {
-          $('.blocks').html(
-            Mustache.render(
-              template, { text: chrome.i18n.getMessage('settingsStorageEmptyText') }
-            )
-          );
-
-          chrome.storage.sync.clear(function() {
-            chrome.runtime.sendMessage({ action: 'set_default_settings' });
-          });
-        });
+        load_rules();
       });
     }
   });

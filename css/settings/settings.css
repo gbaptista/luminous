@@ -7,6 +7,14 @@ body {
   padding-top: 20px;
 }
 
+.alert {
+  font-style: italic;
+}
+
+.rules-info {
+  margin-bottom: 22px;
+}
+
 .nothing-found {
   padding-top: 30px;
   display: none;
