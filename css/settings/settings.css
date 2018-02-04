@@ -18,6 +18,10 @@ body {
   margin-bottom: 22px;
 }
 
+.general-injection {
+  padding-top: 0.5em;
+}
+
 .remove-code {
   padding: 0 4px;
   font-size: 11px
