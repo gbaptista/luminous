@@ -51,5 +51,13 @@
   "settingsAddRuleButtonText": { "message": "agregar regla" },
   "settingsSearchByDomainPlaceHolderText": { "message": "buscar por dominio" },
   "settingsNothingFoundText": { "message": "nada encontrado" },
-  "settingsFilterWebsitesText": { "message": "filtrar sitios web:" }
+  "settingsFilterWebsitesText": { "message": "filtrar sitios web:" },
+  "settingsBlockDefaultTitle": { "message": "reglas estándar" },
+  "settingsBlockDefaultRuleText": { "message": "regla estándar" },
+
+  "settingsFilterCodesText": { "message": "filtrar códigos:" },
+  "settingsSearchByCodePlaceHolderText": { "message": "buscar el nombre del evento" },
+
+  "settingsJavaScriptEventsText": { "message": "eventos JavaScript" },
+  "settingsJavaScriptEventsHref": { "message": "https://developer.mozilla.org/es/docs/Web/Events" }
 }
