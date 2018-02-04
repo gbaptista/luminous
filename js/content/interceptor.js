@@ -1,12 +1,15 @@
 var original_window_setInterval = window.setInterval;
 
 var cached_options = {};
+var collect_details = undefined;
 
 var get_options = function() {
   var json_options_element = document.getElementById('luminous-options');
 
   if(json_options_element && json_options_element.getAttribute('data-changed') == 'true') {
     cached_options = JSON.parse(json_options_element.innerHTML);
+
+    collect_details = cached_options['collect_details'];
 
     json_options_element.setAttribute('data-changed', 'false');
   }
@@ -30,13 +33,13 @@ setInterval(function() {
     counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
     counters_changed = true;
   }
-}, 0);
+}, 100);
 
 var increment_counter = function(kind, type, result, details) {
   original_window_setTimeout(function() {
     details = {
       target: '' + details['target'],
-      code: ('' + details['code']).slice(0, 400)
+      code: (collect_details ? ('' + details['code']).slice(0, 400) : undefined)
     };
 
     if(counters[kind][type] == undefined) {
@@ -45,14 +48,18 @@ var increment_counter = function(kind, type, result, details) {
 
     counters[kind][type][result] += 1;
 
-    if(!counters[kind][type]['samples']) {
-      counters[kind][type]['samples'] = [];
-    }
+    if(!collect_details) {
+      counters[kind][type]['samples'] = [details];
+    } else {
+      if(!counters[kind][type]['samples']) {
+        counters[kind][type]['samples'] = [];
+      }
 
-    counters[kind][type]['samples'].push(details);
+      counters[kind][type]['samples'].push(details);
 
-    if(counters[kind][type]['samples'].length > 3) {
-      counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
+      if(counters[kind][type]['samples'].length > 3) {
+        counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
+      }
     }
 
     counters_changed = true;

@@ -2,10 +2,6 @@ injections_controller(function() {
 
   var load_options_for_domain = function(domain) {
     chrome.storage.sync.get('options', function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {};
-
       if(!sync_data['options']['disabled'][domain]) {
         sync_data['options']['disabled'][domain] = {};
       }
@@ -16,6 +12,8 @@ injections_controller(function() {
       options['injection_disabled'] = (
         sync_data['options']['injection_disabled']['general'] || sync_data['options']['injection_disabled'][domain]
       );
+
+      options['collect_details'] = sync_data['options']['popup']['show_code_details'];
 
       var json_options_element = document.getElementById('luminous-options');
 
