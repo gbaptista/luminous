@@ -42,37 +42,37 @@ $(document).ready(function() {
     }, 0);
   };
 
+  var filter_cards = function() {
+    setTimeout(function() {
+      $('.nothing-found').hide();
+
+      var search = $('#filter-domains').val();
+      var regex = new RegExp(search, 'i');
+      var some_card = false;
+
+      $('.domain-card').each(function(_i, card) {
+        if(regex.test($(card).data('domain'))) {
+          some_card = true;
+          $(card).show();
+        } else {
+          $(card).hide();
+        }
+      });
+
+      if(some_card) {
+        $('.nothing-found').hide();
+      } else {
+        $('.nothing-found').show();
+      }
+    }, 0);
+  };
+
   load_template('html/settings/templates/blocks/search.html', function(template) {
     $('.search').html(
       Mustache.render(template, {
-        placeholder_filter: 'search by domain'
+        placeholder_filter: chrome.i18n.getMessage('settingsSearchByDomainPlaceHolderText')
       })
     );
-
-    var filter_cards = function() {
-      setTimeout(function() {
-        $('.nothing-found').hide();
-
-        var search = $('#filter-domains').val();
-        var regex = new RegExp(search, 'i');
-        var some_card = false;
-
-        $('.domain-card').each(function(_i, card) {
-          if(regex.test($(card).data('domain'))) {
-            some_card = true;
-            $(card).show();
-          } else {
-            $(card).hide();
-          }
-        });
-
-        if(some_card) {
-          $('.nothing-found').hide();
-        } else {
-          $('.nothing-found').show();
-        }
-      }, 0);
-    };
 
     $('#filter-domains').keydown(function() {
       filter_cards();
@@ -97,7 +97,7 @@ $(document).ready(function() {
               codes.push({
                 code: code,
                 disabled: disabled,
-                badge: (disabled ? 'blocked' : 'allowed')
+                badge: (disabled ? chrome.i18n.getMessage('blockedText') : chrome.i18n.getMessage('allowedText'))
               });
             }
 
@@ -146,10 +146,10 @@ $(document).ready(function() {
             if(code) {
               add_code(domain, kind, code);
             } else {
-              alert('invalid code');
+              alert(chrome.i18n.getMessage('settingsInvalidCodeMessage'));
             }
           } else {
-            alert('invalid kind!')
+            alert(chrome.i18n.getMessage('settingsInvalidKindMessage'));
           }
         });
 
@@ -169,6 +169,8 @@ $(document).ready(function() {
             );
           }
         });
+
+        filter_cards();
 
         loaded();
       });

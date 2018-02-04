@@ -46,5 +46,8 @@
   "blockedText": { "message": "blocked" },
 
   "settingsInvalidDomainMessage": { "message": "invalid domain" },
-  "settingsAddRuleButtonText": { "message": "add rule" }
+  "settingsInvalidKindMessage": { "message": "invalid kind (should be handleEvent, addEventListener or WebAPIs)" },
+  "settingsInvalidCodeMessage": { "message": "invalid code" },
+  "settingsAddRuleButtonText": { "message": "add rule" },
+  "settingsSearchByDomainPlaceHolderText": { "message": "search by domain" }
 }
