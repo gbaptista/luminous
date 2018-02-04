@@ -79,6 +79,10 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
       load_template('html/popup/templates/counters.html', function(template) {
         if(local_data[tab_id] && local_data[tab_id]['counters']) {
           var tooltip_content = function(name, samples) {
+            if(!samples) {
+              samples = [{ name: name, target: target }];
+            }
+
             var target = samples[0]['target'].replace('[object ', '').replace(']', '');
 
             if(sync_data['options']['popup']['show_code_details']) {
