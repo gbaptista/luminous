@@ -40,9 +40,16 @@
   "settingsBadgeCounterSumByKindLabel": { "message": "pelo tipo de código interceptado" },
   "settingsBadgeCounterExectutionsTitle": { "message": "quais tipos de execuções devem ser incluídas na soma?" },
   "settingsBadgeCounterKindsTitle": { "message": "qual tipo de código interceptado deve ser incluído na soma?" },
+  "settingsBlockPerDomainTitle": { "message": "regras por site" },
 
-  "allowedText": { "message": "permitidas" },
-  "blockedText": { "message": "bloqueadas" },
+  "allowedText": { "message": "permitido" },
+  "blockedText": { "message": "bloqueado" },
 
-  "settingsInvalidDomainMessage": { "message": "domínio inválido" }
+  "settingsInvalidDomainMessage": { "message": "domínio inválido" },
+  "settingsInvalidKindMessage": { "message": "tipo inválido (precisa ser handleEvent, addEventListener ou WebAPIs)" },
+  "settingsInvalidCodeMessage": { "message": "código inválido" },
+  "settingsAddRuleButtonText": { "message": "adicionar regra" },
+  "settingsSearchByDomainPlaceHolderText": { "message": "buscar por domínio" },
+  "settingsNothingFoundText": { "message": "nada encontrado" },
+  "settingsFilterWebsitesText": { "message": "filtrar websites:" }
 }

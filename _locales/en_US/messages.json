@@ -49,5 +49,7 @@
   "settingsInvalidKindMessage": { "message": "invalid kind (should be handleEvent, addEventListener or WebAPIs)" },
   "settingsInvalidCodeMessage": { "message": "invalid code" },
   "settingsAddRuleButtonText": { "message": "add rule" },
-  "settingsSearchByDomainPlaceHolderText": { "message": "search by domain" }
+  "settingsSearchByDomainPlaceHolderText": { "message": "search by domain" },
+  "settingsNothingFoundText": { "message": "nothing found" },
+  "settingsFilterWebsitesText": { "message": "filter websites:" }
 }
