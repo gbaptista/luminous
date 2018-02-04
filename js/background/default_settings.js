@@ -48,7 +48,16 @@ var set_default_settings = function() {
       sync_data['options']['popup']['show_code_details'] = false;
     }
 
+    // youtube.com
+    if(sync_data['options']['injection_disabled']['www.youtube.com'] == undefined) {
+      sync_data['options']['injection_disabled']['www.youtube.com'] = true;
+    }
+
     // web.whatsapp.com
+    if(sync_data['options']['injection_disabled']['web.whatsapp.com'] == undefined) {
+      sync_data['options']['injection_disabled']['web.whatsapp.com'] = false;
+    }
+
     if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
 
     if(!sync_data['options']['disabled']['web.whatsapp.com']) {
