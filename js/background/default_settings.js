@@ -53,6 +53,19 @@ var set_default_settings = function() {
       sync_data['options']['injection_disabled']['www.youtube.com'] = true;
     }
 
+    // Add-ons websites
+    if(sync_data['options']['injection_disabled']['addons.mozilla.org'] == undefined) {
+      sync_data['options']['injection_disabled']['addons.mozilla.org'] = true;
+    }
+
+    if(sync_data['options']['injection_disabled']['chrome.google.com'] == undefined) {
+      sync_data['options']['injection_disabled']['chrome.google.com'] = true;
+    }
+
+    if(sync_data['options']['injection_disabled']['addons.opera.com'] == undefined) {
+      sync_data['options']['injection_disabled']['addons.opera.com'] = true;
+    }
+
     // web.whatsapp.com
     if(sync_data['options']['injection_disabled']['web.whatsapp.com'] == undefined) {
       sync_data['options']['injection_disabled']['web.whatsapp.com'] = false;

@@ -15,11 +15,25 @@ body {
   margin-bottom: 22px;
 }
 
+.nothing-found-injection {
+  margin-bottom: 24px;
+}
+
 .nothing-found {
   padding-top: 30px;
   display: none;
   text-align: center;
   color: #CCC;
+}
+
+.no-rules-search {
+  display: none;
+}
+
+.no-rules {
+  text-align: center;
+  color:#CCC;
+  padding: 10px;
 }
 
 .domain-card {

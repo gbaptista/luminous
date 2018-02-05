@@ -12,13 +12,25 @@ $(document).ready(function() {
           $(code).attr('style', 'display:none!important;');
         }
       });
+
+      $('.card-codes').each(function(_i, card) {
+        if(
+          $(card).find('.item-code:visible').length > 0
+          ||
+          $(card).find('.no-rules-empty').length == 1
+        ) {
+          $(card).find('.no-rules-search').hide();
+        } else {
+          $(card).find('.no-rules-search').show();
+        }
+      });
     }, 0);
   };
 
   load_template('html/settings/templates/rules/search.html', function(template) {
     $('.search').html(
       Mustache.render(template, {
-        title: chrome.i18n.getMessage('settingsFilterCodesText'),
+        title: chrome.i18n.getMessage('settingsFilterRulesText'),
         placeholder_filter: chrome.i18n.getMessage('settingsSearchByCodePlaceHolderText')
       })
     );
@@ -71,6 +83,7 @@ $(document).ready(function() {
           Mustache.render(template, {
             domain: chrome.i18n.getMessage('settingsBlockDefaultRuleText'),
             rules: rules,
+            no_rules_found: chrome.i18n.getMessage('settingsNoRulesFoundText'),
             placeholder_kind: 'handleEvent',
             placeholder_code: 'mousemove'
           })
@@ -91,6 +104,9 @@ $(document).ready(function() {
             kind == 'WebAPIs' || kind == 'addEventListener' || kind == 'handleEvent'
           ) {
             if(code) {
+              $('#filter-domains').val('');
+              $(this).find('.input-kind').val('');
+              $(this).find('.input-code').val('');
               add_code(domain, kind, code, true);
             } else {
               alert(chrome.i18n.getMessage('settingsInvalidCodeMessage'));
