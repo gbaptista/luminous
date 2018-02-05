@@ -26,6 +26,12 @@ body {
   color: #CCC;
 }
 
+.storage-empty {
+  text-align: center;
+  color: #CCC;
+  padding: 30px;
+}
+
 .no-rules-search {
   display: none;
 }
