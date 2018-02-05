@@ -78,9 +78,19 @@
       <div id="ajaxContent" class="small-demo-box">XMLHttpRequest request...</div>
       <div id="fetchContent" class="small-demo-box">fetch request...</div>
       <div id="fetchContentAwait" class="small-demo-box">await fetch request...</div>
+
+      <div id="removeEventListener" class="small-demo-box">removeEventListener()</div>
     </div>
 
     <script type="text/javascript">
+      var to_be_removed_function_1 = function() {
+        alert('[1] not removed!');
+      };
+
+      document.getElementById('removeEventListener').addEventListener(
+        'mouseover', to_be_removed_function_1
+      );
+
       (function() { setTimeout(function() {
 
         var timeout_id = setTimeout(function() {
@@ -94,6 +104,22 @@
         }, 1500);
 
         clearInterval(interval_id);
+
+        var to_be_removed_function_2 = function() {
+          alert('[2] not removed!');
+        };
+
+        document.getElementById('removeEventListener').addEventListener(
+          'mouseover', to_be_removed_function_2
+        );
+
+        document.getElementById('removeEventListener').removeEventListener(
+          'mouseover', to_be_removed_function_2
+        );
+
+        document.getElementById('removeEventListener').removeEventListener(
+          'mouseover', to_be_removed_function_1
+        );
 
         var request = new XMLHttpRequest();
 
