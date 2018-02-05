@@ -27,7 +27,9 @@ chrome.tabs.query({}, function(tabs) {
 
   for(i in tabs) { urls.push(tabs[i].url); }
 
-  set_domain_settings_for_urls(urls);
+  setTimeout(function() {
+    set_domain_settings_for_urls(urls);
+  }, 500);
 });
 
 var set_request_settings = function(details) {
