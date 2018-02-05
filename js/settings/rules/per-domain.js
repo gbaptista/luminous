@@ -82,6 +82,7 @@ $(document).ready(function() {
             Mustache.render(template, {
               domain: domain,
               rules: rules,
+              no_rules_found: chrome.i18n.getMessage('settingsNoRulesFoundText'),
               placeholder_kind: 'handleEvent',
               placeholder_code: 'mousemove'
             })

@@ -1,4 +1,42 @@
 $(document).ready(function() {
+  var filter_domain = function() {
+    setTimeout(function() {
+      $('.nothing-found').hide();
+
+      var search = $('#filter-domains').val();
+      var regex = new RegExp(search, 'i');
+      var some_checkbox = false;
+
+      $('.domain-check').each(function(_i, checkbox) {
+        if(regex.test($(checkbox).data('domain'))) {
+          some_checkbox = true;
+          $(checkbox).show();
+        } else {
+          $(checkbox).hide();
+        }
+      });
+
+      if(some_checkbox) {
+        $('.nothing-found').hide();
+      } else {
+        $('.nothing-found').show();
+      }
+    }, 0);
+  };
+
+  load_template('html/settings/templates/rules/search.html', function(template) {
+    $('.search').html(
+      Mustache.render(template, {
+        title: chrome.i18n.getMessage('settingsFilterWebsitesText'),
+        placeholder_filter: chrome.i18n.getMessage('settingsSearchByDomainPlaceHolderText')
+      })
+    );
+
+    $('#filter-domains').keydown(function() {
+      filter_domain();
+    });
+  });
+
   load_template('html/settings/templates/injection/form.html', function(template) {
     var load_sync_data = function() {
       chrome.storage.sync.get('options', function(sync_data) {
@@ -42,6 +80,7 @@ $(document).ready(function() {
             a_element.href = new_domain;
 
             if(a_element.hostname && a_element.hostname != window.location.hostname) {
+              $('#filter-domains').val('');
               set_sync_option(a_element.hostname, true, 'injection_disabled');
               $('#new-domain').val('');
             } else {
@@ -50,6 +89,8 @@ $(document).ready(function() {
             }
           });
         });
+
+        filter_domain();
 
         loaded();
       });

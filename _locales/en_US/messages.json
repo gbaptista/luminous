@@ -55,9 +55,11 @@
   "settingsBlockDefaultTitle": { "message": "default rules" },
   "settingsBlockDefaultRuleText": { "message": "default rule" },
 
-  "settingsFilterCodesText": { "message": "filter codes:" },
+  "settingsFilterRulesText": { "message": "filter rules:" },
   "settingsSearchByCodePlaceHolderText": { "message": "search by event name" },
 
   "settingsJavaScriptEventsText": { "message": "JavaScript events" },
-  "settingsJavaScriptEventsHref": { "message": "https://developer.mozilla.org/en-US/docs/Web/Events" }
+  "settingsJavaScriptEventsHref": { "message": "https://developer.mozilla.org/en-US/docs/Web/Events" },
+
+  "settingsNoRulesFoundText": { "message": "no rules found" }
 }

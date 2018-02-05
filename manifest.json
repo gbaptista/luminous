@@ -60,6 +60,7 @@
       "js/background/default_settings.js",
       "js/background/set_response_headers.js",
       "js/background/set_current_tab.js",
+      "js/background/set_domain_settings.js",
       "js/utils/colors.js",
       "js/background/update_badge.js"
     ]

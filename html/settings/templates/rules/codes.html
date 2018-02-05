@@ -14,12 +14,21 @@
     </form>
   </div>
   <div class="card-body">
+    {{^rules}}
+      <div class="no-rules">{{no_rules_found}}</div>
+    {{/rules}}
     {{#rules}}
       <div class="card">
         <div class="card-header">
           {{kind}}
         </div>
-        <div class="card-body">
+        <div class="card-body card-codes">
+          <div class="no-rules no-rules-search">{{no_rules_found}}</div>
+          {{^codes_a}}
+            {{^codes_b}}
+              <div class="no-rules no-rules-empty">{{no_rules_found}}</div>
+            {{/codes_b}}
+          {{/codes_a}}
           <div class="row">
             <div class="col-6">
               <ul class="list-group">

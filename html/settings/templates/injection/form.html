@@ -20,7 +20,7 @@
       </div>
       <br>
       {{#domains}}
-        <div class="form-check">
+        <div class="form-check domain-check" data-domain="{{domain}}">
           <label class="form-check-label">
             <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}}>
             {{domain}}
@@ -28,6 +28,7 @@
           <button type="button" data-domain="{{domain}}" class="btn btn-outline-secondary btn-sm remove-domain locale" data-locale="settingsRemoveButtonText"></button>
         </div>
       {{/domains}}
+      <div class="nothing-found nothing-found-injection locale" data-locale="settingsNothingFoundText"></div>
     </div>
   </div>
 </form>
