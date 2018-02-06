@@ -3,7 +3,7 @@
   "name": "__MSG_manifestName__",
   "short_name": "Luminous",
   "description": "__MSG_manifestDescription__",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "Guilherme Baptista",
   "developer": {
     "name": "Guilherme Baptista",
