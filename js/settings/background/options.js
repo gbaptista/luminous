@@ -4,52 +4,52 @@ $(document).ready(function() {
       chrome.storage.sync.get('options', function(sync_data) {
         $('#form').html(
           Mustache.render(template, {
-            domain_detected_title: 'when a new website is accessed:',
+            domain_detected_title: chrome.i18n.getMessage('settingsDomainDetectedTitle'),
             add_domain_to_items: [
               {
-                label: 'add to code injection',
+                label: chrome.i18n.getMessage('settingsAddDomainToCodeInjectionLabel'),
                 value: 'code_injection',
                 checked: sync_data['options']['auto_settings']['domains']['code_injection']
               },
               {
-                label: 'add to website rules',
+                label: chrome.i18n.getMessage('settingsAddDomainToWebsiteRulesLabel'),
                 value: 'website_rules',
                 checked: sync_data['options']['auto_settings']['domains']['website_rules']
               }
             ],
-            event_detected_title: 'when a new JavaScript event is detected:',
-            add_event_to_default_rules_title: 'add to default rules:',
+            event_detected_title: chrome.i18n.getMessage('settingsEventDetectedTitle'),
+            add_event_to_default_rules_title: chrome.i18n.getMessage('settingsAddEventToDefaultTitle'),
             add_event_to_default_rules_items: [
               {
-                label: 'nothing',
+                label: chrome.i18n.getMessage('settingsAddEventNothingLabel'),
                 value: 'nothing',
                 checked: 'nothing' == sync_data['options']['auto_settings']['default_events']
               },
               {
-                label: 'common events',
+                label: chrome.i18n.getMessage('settingsAddEventCommonLabel'),
                 value: 'common',
                 checked: 'common' == sync_data['options']['auto_settings']['default_events']
               },
               {
-                label: 'all events',
+                label: chrome.i18n.getMessage('settingsAddEventAllLabel'),
                 value: 'all',
                 checked: 'all' == sync_data['options']['auto_settings']['default_events']
               }
             ],
-            add_event_to_website_rules_title: 'add to website rules:',
+            add_event_to_website_rules_title: chrome.i18n.getMessage('settingsAddEventToWebsiteTitle'),
             add_event_to_website_rules_items: [
               {
-                label: 'nothing',
+                label: chrome.i18n.getMessage('settingsAddEventNothingLabel'),
                 value: 'nothing',
                 checked: 'nothing' == sync_data['options']['auto_settings']['website_events']
               },
               {
-                label: 'common events',
+                label: chrome.i18n.getMessage('settingsAddEventCommonLabel'),
                 value: 'common',
                 checked: 'common' == sync_data['options']['auto_settings']['website_events']
               },
               {
-                label: 'all events',
+                label: chrome.i18n.getMessage('settingsAddEventAllLabel'),
                 value: 'all',
                 checked: 'all' == sync_data['options']['auto_settings']['website_events']
               }
