@@ -25,6 +25,36 @@ $(document).ready(function() {
     }, 0);
   };
 
+  load_template('html/settings/templates/rules/form.html', function(template) {
+    $('.form').html(
+      Mustache.render(template, {
+        placeholder: chrome.i18n.getMessage('settingsNewDomainPlaceHolderText')
+      })
+    );
+
+    $('#new-domain-form').submit(function() {
+      event.preventDefault();
+
+      loading(function() {
+        var new_domain = 'https://' + $('#new-domain').val().toLowerCase().replace(
+          /.*:\/\//, ''
+        ).replace(/\s/g, '');
+
+        var a_element = document.createElement('a');
+        a_element.href = new_domain;
+
+        if(a_element.hostname && a_element.hostname != window.location.hostname) {
+          $('#filter-domains').val('');
+          set_sync_option(a_element.hostname, {}, 'disabled');
+          $('#new-domain').val('');
+        } else {
+          alert(chrome.i18n.getMessage('settingsInvalidDomainMessage'));
+          loaded();
+        }
+      });
+    });
+  });
+
   load_template('html/settings/templates/rules/search.html', function(template) {
     $('.search').html(
       Mustache.render(template, {
@@ -91,6 +121,15 @@ $(document).ready(function() {
 
         $('.locale').each(function() {
           $(this).html(chrome.i18n.getMessage($(this).data('locale')));
+        });
+
+        $('.remove-domain-rules').click(function() {
+          var domain = $(this).data('domain');
+          if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
+            loading(function() {
+              remove_sync_option('disabled', domain);
+            });
+          }
         });
 
         $('.add-code').submit(function(event) {

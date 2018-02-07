@@ -61,5 +61,6 @@
   "settingsJavaScriptEventsText": { "message": "JavaScript events" },
   "settingsJavaScriptEventsHref": { "message": "https://developer.mozilla.org/en-US/docs/Web/Events" },
 
-  "settingsNoRulesFoundText": { "message": "no rules found" }
+  "settingsNoRulesFoundText": { "message": "no rules found" },
+  "settingsRemoveDomainButtonText": { "message": "remove domain" }
 }

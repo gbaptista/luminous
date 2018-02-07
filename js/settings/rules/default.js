@@ -85,7 +85,8 @@ $(document).ready(function() {
             rules: rules,
             no_rules_found: chrome.i18n.getMessage('settingsNoRulesFoundText'),
             placeholder_kind: 'handleEvent',
-            placeholder_code: 'mousemove'
+            placeholder_code: 'mousemove',
+            default: true
           })
         );
 

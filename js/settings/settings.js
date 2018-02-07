@@ -23,19 +23,21 @@ var remove_sync_option = function(namespace, key) {
 var set_sync_option = function(name, value, namespace, value_as_namespace) {
   setTimeout(function() {
     chrome.storage.sync.get('options', function(sync_data) {
-      if(namespace == 'injection_disabled') {
-        value = !value;
-
+      if (namespace == 'disabled') {
         if(sync_data['options']['disabled'][name] == undefined) {
-          sync_data['options']['disabled'][name] = {};
+          sync_data['options']['disabled'][name] = value;
         }
-      }
-
-      if(value_as_namespace) {
-        if(!sync_data['options'][namespace][name]) sync_data['options'][namespace][name] = {};
-        sync_data['options'][namespace][name][value_as_namespace] = value;
       } else {
-        sync_data['options'][namespace][name] = value;
+        if(namespace == 'injection_disabled') {
+          value = !value;
+        }
+
+        if(value_as_namespace) {
+          if(!sync_data['options'][namespace][name]) sync_data['options'][namespace][name] = {};
+          sync_data['options'][namespace][name][value_as_namespace] = value;
+        } else {
+          sync_data['options'][namespace][name] = value;
+        }
       }
 
       chrome.storage.sync.set(sync_data, function() {
