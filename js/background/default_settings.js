@@ -72,50 +72,7 @@ var set_default_settings = function() {
       sync_data['options']['popup']['show_code_details'] = false;
     }
 
-    // youtube.com
-    if(sync_data['options']['injection_disabled']['www.youtube.com'] == undefined) {
-      sync_data['options']['injection_disabled']['www.youtube.com'] = true;
-    }
-
-    // Add-ons websites
-    if(sync_data['options']['injection_disabled']['addons.mozilla.org'] == undefined) {
-      sync_data['options']['injection_disabled']['addons.mozilla.org'] = true;
-    }
-
-    if(sync_data['options']['injection_disabled']['chrome.google.com'] == undefined) {
-      sync_data['options']['injection_disabled']['chrome.google.com'] = true;
-    }
-
-    if(sync_data['options']['injection_disabled']['addons.opera.com'] == undefined) {
-      sync_data['options']['injection_disabled']['addons.opera.com'] = true;
-    }
-
-    // web.whatsapp.com
-    if(sync_data['options']['injection_disabled']['web.whatsapp.com'] == undefined) {
-      sync_data['options']['injection_disabled']['web.whatsapp.com'] = false;
-    }
-
     if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-
-    if(!sync_data['options']['disabled']['web.whatsapp.com']) {
-      sync_data['options']['disabled']['web.whatsapp.com'] = {}
-    }
-
-    if(!sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']) {
-      sync_data['options']['disabled']['web.whatsapp.com']['addEventListener'] = {}
-    }
-
-    if(sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']['wheel'] == undefined) {
-      sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']['wheel'] = true;
-    }
-
-    if(!sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']) {
-      sync_data['options']['disabled']['web.whatsapp.com']['handleEvent'] = {}
-    }
-
-    if(sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']['wheel'] == undefined) {
-      sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']['wheel'] = true;
-    }
 
     // default
     if(!sync_data['options']['default_disabled']) sync_data['options']['default_disabled'] = {};
@@ -160,6 +117,10 @@ var set_default_settings = function() {
       'dragstart', 'drag', 'dragend', 'dragenter', 'dragover', 'dragleave', 'drop',
       // Storage events
       'change', 'storage'
+    ];
+
+    event_names = [
+      'mousemove'
     ];
 
     for(i in event_names) {
