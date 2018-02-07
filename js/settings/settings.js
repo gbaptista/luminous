@@ -121,6 +121,11 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/badge/counter.html')
           },
           {
+            title: chrome.i18n.getMessage('settingsBackgroundOptionsTitle'),
+            url: chrome.extension.getURL('html/settings/background/options.html'),
+            active: (document.location.pathname == '/html/settings/background/options.html')
+          },
+          {
             title: chrome.i18n.getMessage('settingsStoredDataSyncTitle'),
             url: chrome.extension.getURL('html/settings/stored-data/sync.html'),
             active: (document.location.pathname == '/html/settings/stored-data/sync.html')

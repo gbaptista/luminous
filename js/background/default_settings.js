@@ -4,6 +4,30 @@ var set_default_settings = function() {
 
     if(!sync_data['options']) sync_data['options'] = {};
 
+    if(!sync_data['options']['auto_settings']) {
+      sync_data['options']['auto_settings'] = {};
+    }
+
+    if(!sync_data['options']['auto_settings']['domains']) {
+      sync_data['options']['auto_settings']['domains'] = {};
+    }
+
+    if(sync_data['options']['auto_settings']['domains']['code_injection'] == undefined) {
+      sync_data['options']['auto_settings']['domains']['code_injection'] = false;
+    }
+
+    if(sync_data['options']['auto_settings']['domains']['website_rules'] == undefined) {
+      sync_data['options']['auto_settings']['domains']['website_rules'] = false;
+    }
+
+    if(sync_data['options']['auto_settings']['website_events'] == undefined) {
+      sync_data['options']['auto_settings']['website_events'] = 'nothing';
+    }
+
+    if(sync_data['options']['auto_settings']['default_events'] == undefined) {
+      sync_data['options']['auto_settings']['default_events'] = 'nothing';
+    }
+
     if(!sync_data['options']['badge_counter']) {
       sync_data['options']['badge_counter'] = {};
     }
