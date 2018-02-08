@@ -1,21 +1,21 @@
 injections_controller(function() {
 
   var load_options_for_domain = function(domain) {
-    chrome.storage.sync.get('options', function(sync_data) {
-      if(!sync_data['options']['disabled'][domain]) {
-        sync_data['options']['disabled'][domain] = {};
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data['disabled_' + domain]) {
+        sync_data['disabled_' + domain] = {};
       }
 
       // Apply default rules
-      for(kind in sync_data['options']['default_disabled']) {
-        if(!sync_data['options']['disabled'][domain][kind]) {
-          sync_data['options']['disabled'][domain][kind] = {};
+      for(kind in sync_data['default_disabled']) {
+        if(!sync_data['disabled_' + domain][kind]) {
+          sync_data['disabled_' + domain][kind] = {};
         }
 
-        for(code in sync_data['options']['default_disabled'][kind]) {
-          if(sync_data['options']['disabled'][domain][kind][code] == undefined) {
-            if(sync_data['options']['default_disabled'][kind][code]) {
-              sync_data['options']['disabled'][domain][kind][code] = sync_data['options']['default_disabled'][kind][code];
+        for(code in sync_data['default_disabled'][kind]) {
+          if(sync_data['disabled_' + domain][kind][code] == undefined) {
+            if(sync_data['default_disabled'][kind][code]) {
+              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled'][kind][code];
             }
           }
         }
@@ -23,12 +23,12 @@ injections_controller(function() {
 
       var options = {}
 
-      options['disabled'] = sync_data['options']['disabled'][domain];
+      options['disabled'] = sync_data['disabled_' + domain];
       options['injection_disabled'] = (
-        sync_data['options']['injection_disabled']['general'] || sync_data['options']['injection_disabled'][domain]
+        sync_data['injection_disabled']['general'] || sync_data['injection_disabled'][domain]
       );
 
-      options['collect_details'] = sync_data['options']['popup']['show_code_details'];
+      options['collect_details'] = sync_data['popup']['show_code_details'];
 
       var json_options_element = document.getElementById('luminous-options');
 
@@ -50,13 +50,13 @@ injections_controller(function() {
     if(namespace == 'sync') {
       var domain = window.location.hostname;
 
-      if(changes['options']) {
-        changes = changes['options'];
+      if(changes) {
+        changes = changes;
 
         var disabled_for_domain = false;
-        if(changes.newValue['disabled']) {
-          if(changes.oldValue && changes.oldValue['disabled']) {
-            disabled_for_domain = changes.newValue['disabled'][domain] != changes.oldValue['disabled'][domain];
+        if(changes.newValue && changes.newValue['disabled_' + domain]) {
+          if(changes.oldValue && changes.oldValue['disabled_' + domain]) {
+            disabled_for_domain = changes.newValue['disabled_' + domain] != changes.oldValue['disabled_' + domain];
           } else {
             disabled_for_domain = true;
           }
@@ -65,7 +65,7 @@ injections_controller(function() {
         var injection_disabled_for_domain = false;
         var injection_disabled_for_general = false;
 
-        if(changes.newValue['injection_disabled']) {
+        if(changes.newValue && changes.newValue['injection_disabled']) {
           if(changes.oldValue && changes.oldValue['injection_disabled']) {
             injection_disabled_for_domain = changes.newValue['injection_disabled'][domain] != changes.oldValue['injection_disabled'][domain];
             injection_disabled_for_general = changes.newValue['injection_disabled']['general'] != changes.oldValue['injection_disabled']['general'];

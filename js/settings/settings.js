@@ -10,22 +10,24 @@ var loading = function(callback) {
 
 var remove_sync_option = function(namespace, key) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      delete sync_data['options'][namespace][key];
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(key) {
+        delete sync_data[namespace][key];
 
-      chrome.storage.sync.set(sync_data, function() {
-        loaded();
-      });
+        chrome.storage.sync.set(sync_data, function() { loaded(); });
+      } else {
+        chrome.storage.sync.remove(namespace, function() { loaded(); });
+      }
     });
   }, 0);
 };
 
 var set_sync_option = function(name, value, namespace, value_as_namespace) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
+    chrome.storage.sync.get(null, function(sync_data) {
       if (namespace == 'disabled') {
-        if(sync_data['options']['disabled'][name] == undefined) {
-          sync_data['options']['disabled'][name] = value;
+        if(sync_data['disabled_' + name] == undefined) {
+          sync_data['disabled_' + name] = value;
         }
       } else {
         if(namespace == 'injection_disabled') {
@@ -33,10 +35,10 @@ var set_sync_option = function(name, value, namespace, value_as_namespace) {
         }
 
         if(value_as_namespace) {
-          if(!sync_data['options'][namespace][name]) sync_data['options'][namespace][name] = {};
-          sync_data['options'][namespace][name][value_as_namespace] = value;
+          if(!sync_data[namespace][name]) sync_data[namespace][name] = {};
+          sync_data[namespace][name][value_as_namespace] = value;
         } else {
-          sync_data['options'][namespace][name] = value;
+          sync_data[namespace][name] = value;
         }
       }
 

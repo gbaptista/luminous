@@ -18,11 +18,11 @@ var load_store_data_from_tab = function(tab_id, url, update_badge = false, updat
   }
 
   if(update_icon) {
-    chrome.storage.sync.get('options', function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {};
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data) sync_data = {};
+      if(!sync_data['injection_disabled']) sync_data['injection_disabled'] = {};
 
-      injection_disabled = sync_data['options']['injection_disabled'];
+      injection_disabled = sync_data['injection_disabled'];
 
       var a_element = document.createElement('a');
       a_element.href = current_tab_url;
@@ -61,7 +61,7 @@ var load_stored_data = function(update_badge = false, update_icon = false, chang
           update_badge = true;
         }
 
-        if(changes && changes['options'] && changes['options'] && changes['options'].newValue && changes['options'].newValue['injection_disabled']) {
+        if(changes && changes && changes && changes.newValue && changes.newValue['injection_disabled']) {
           update_icon = true;
         }
 

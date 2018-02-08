@@ -69,54 +69,57 @@ $(document).ready(function() {
   });
 
   var load_rules = function() {
-    chrome.storage.sync.get('options', function(sync_data) {
+    chrome.storage.sync.get(null, function(sync_data) {
       load_template('html/settings/templates/rules/codes.html', function(template) {
         $('.rules').html('');
 
-        for(domain in sync_data['options']['disabled']) {
+        for(domain in sync_data) {
+          if(/^disabled_/.test(domain)) {
+            domain = domain.replace(/^disabled_/, '');
 
-          var rules = [];
+            var rules = [];
 
-          for(kind in sync_data['options']['disabled'][domain]) {
-            var codes = [];
+            for(kind in sync_data['disabled_' + domain]) {
+              var codes = [];
 
-            for(code in sync_data['options']['disabled'][domain][kind]) {
-              var disabled = sync_data['options']['disabled'][domain][kind][code];
+              for(code in sync_data['disabled_' + domain][kind]) {
+                var disabled = sync_data['disabled_' + domain][kind][code];
 
-              codes.push({
-                code: code,
-                disabled: disabled,
-                badge: (disabled ? chrome.i18n.getMessage('blockedText') : chrome.i18n.getMessage('allowedText'))
+                codes.push({
+                  code: code,
+                  disabled: disabled,
+                  badge: (disabled ? chrome.i18n.getMessage('blockedText') : chrome.i18n.getMessage('allowedText'))
+                });
+              }
+
+              var sort_by_code = function(a, b) {
+                return (a.code.toLowerCase() > b.code.toLowerCase()) ? 1 : ((b.code.toLowerCase() > a.code.toLowerCase()) ? -1 : 0);
+              };
+
+              codes.sort(sort_by_code);
+
+              var half = Math.ceil(codes.length / 2)
+
+              var codes_a = codes.slice(0, half);
+              var codes_b = codes.slice(half, codes.length);
+
+              rules.push({
+                kind: kind,
+                codes_a: codes_a,
+                codes_b: codes_b
               });
             }
 
-            var sort_by_code = function(a, b) {
-              return (a.code.toLowerCase() > b.code.toLowerCase()) ? 1 : ((b.code.toLowerCase() > a.code.toLowerCase()) ? -1 : 0);
-            };
-
-            codes.sort(sort_by_code);
-
-            var half = Math.ceil(codes.length / 2)
-
-            var codes_a = codes.slice(0, half);
-            var codes_b = codes.slice(half, codes.length);
-
-            rules.push({
-              kind: kind,
-              codes_a: codes_a,
-              codes_b: codes_b
-            });
+            $('.rules').append(
+              Mustache.render(template, {
+                domain: domain,
+                rules: rules,
+                no_rules_found: chrome.i18n.getMessage('settingsNoRulesFoundText'),
+                placeholder_kind: 'handleEvent',
+                placeholder_code: 'mousemove'
+              })
+            );
           }
-
-          $('.rules').append(
-            Mustache.render(template, {
-              domain: domain,
-              rules: rules,
-              no_rules_found: chrome.i18n.getMessage('settingsNoRulesFoundText'),
-              placeholder_kind: 'handleEvent',
-              placeholder_code: 'mousemove'
-            })
-          );
         }
 
         $('.locale').each(function() {
@@ -127,7 +130,7 @@ $(document).ready(function() {
           var domain = $(this).data('domain');
           if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
             loading(function() {
-              remove_sync_option('disabled', domain);
+              remove_sync_option('disabled_' + domain);
             });
           }
         });
@@ -178,8 +181,8 @@ $(document).ready(function() {
 
   load_rules();
 
-  chrome.storage.onChanged.addListener(function(_changes, namespace) {
-    if(namespace == 'sync') {
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    if(namespace == 'sync' && changes) {
       loading(function() {
         load_rules();
       });

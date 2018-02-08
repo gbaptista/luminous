@@ -41,7 +41,7 @@ $(document).ready(function() {
   });
 
   var load_rules = function() {
-    chrome.storage.sync.get('options', function(sync_data) {
+    chrome.storage.sync.get(null, function(sync_data) {
       load_template('html/settings/templates/rules/codes.html', function(template) {
         var rules = [];
 
@@ -51,8 +51,8 @@ $(document).ready(function() {
           var kind = kinds[i];
           var codes = [];
 
-          for(code in sync_data['options']['default_disabled'][kind]) {
-            var disabled = sync_data['options']['default_disabled'][kind][code];
+          for(code in sync_data['default_disabled'][kind]) {
+            var disabled = sync_data['default_disabled'][kind][code];
 
             codes.push({
               code: code,
@@ -144,8 +144,8 @@ $(document).ready(function() {
 
   load_rules();
 
-  chrome.storage.onChanged.addListener(function(_changes, namespace) {
-    if(namespace == 'sync') {
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    if(namespace == 'sync' && changes) {
       loading(function() {
         load_rules();
       });

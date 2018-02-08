@@ -1,15 +1,15 @@
 injections_controller(function() {
 
-  chrome.storage.sync.get('options', function(sync_options) {
-    var badge_counter = sync_options['options']['badge_counter'];
+  chrome.storage.sync.get(null, function(sync_options) {
+    var badge_counter = sync_options['badge_counter'];
 
     chrome.storage.onChanged.addListener(function(changes, namespace) {
       if(
-        namespace == 'sync' && changes['options']
+        namespace == 'sync' && changes
         &&
-        changes['options'].newValue && changes['options'].newValue['badge_counter']
+        changes.newValue && changes.newValue['badge_counter']
       ) {
-        badge_counter = changes['options'].newValue['badge_counter'];
+        badge_counter = changes.newValue['badge_counter'];
       }
     });
 

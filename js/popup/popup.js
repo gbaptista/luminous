@@ -1,15 +1,15 @@
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      if(!sync_data['options']['disabled'][domain]) {
-        sync_data['options']['disabled'][domain] = {};
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data['disabled_' + domain]) {
+        sync_data['disabled_' + domain] = {};
       }
 
-      if(!sync_data['options']['disabled'][domain][kind]) {
-        sync_data['options']['disabled'][domain][kind] = {};
+      if(!sync_data['disabled_' + domain][kind]) {
+        sync_data['disabled_' + domain][kind] = {};
       }
 
-      sync_data['options']['disabled'][domain][kind][type] = value;
+      sync_data['disabled_' + domain][kind][type] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -18,8 +18,8 @@ var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, va
 
 var set_sync_popup_option = function(name, value) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      sync_data['options']['popup'][name] = value;
+    chrome.storage.sync.get(null, function(sync_data) {
+      sync_data['popup'][name] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -28,8 +28,8 @@ var set_sync_popup_option = function(name, value) {
 
 var set_sync_option_injection_disabled_for_name = function(name, value) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      sync_data['options']['injection_disabled'][name] = value;
+    chrome.storage.sync.get(null, function(sync_data) {
+      sync_data['injection_disabled'][name] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -44,21 +44,21 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
     a_element.href = current_tab_url;
     var domain = a_element.hostname;
 
-    chrome.storage.sync.get('options', function(sync_data) {
-      if(!sync_data['options']['disabled'][domain]) {
-        sync_data['options']['disabled'][domain] = {};
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(!sync_data['disabled_' + domain]) {
+        sync_data['disabled_' + domain] = {};
       }
 
       // Apply default rules
-      for(kind in sync_data['options']['default_disabled']) {
-        if(!sync_data['options']['disabled'][domain][kind]) {
-          sync_data['options']['disabled'][domain][kind] = {};
+      for(kind in sync_data['default_disabled']) {
+        if(!sync_data['disabled_' + domain][kind]) {
+          sync_data['disabled_' + domain][kind] = {};
         }
 
-        for(code in sync_data['options']['default_disabled'][kind]) {
-          if(sync_data['options']['disabled'][domain][kind][code] == undefined) {
-            if(sync_data['options']['default_disabled'][kind][code]) {
-              sync_data['options']['disabled'][domain][kind][code] = sync_data['options']['default_disabled'][kind][code];
+        for(code in sync_data['default_disabled'][kind]) {
+          if(sync_data['disabled_' + domain][kind][code] == undefined) {
+            if(sync_data['default_disabled'][kind][code]) {
+              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled'][kind][code];
             }
           }
         }
@@ -71,9 +71,9 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             domain: domain,
             general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
             show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
-            general_injection_enabled: !sync_data['options']['injection_disabled']['general'],
-            domain_injection_enabled: !sync_data['options']['injection_disabled'][domain],
-            show_code_details: sync_data['options']['popup']['show_code_details']
+            general_injection_enabled: !sync_data['injection_disabled']['general'],
+            domain_injection_enabled: !sync_data['injection_disabled'][domain],
+            show_code_details: sync_data['popup']['show_code_details']
           })
         );
 
@@ -100,7 +100,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
             var target = samples[0]['target'].replace('[object ', '').replace(']', '');
 
-            if(sync_data['options']['popup']['show_code_details']) {
+            if(sync_data['popup']['show_code_details']) {
               var text = '';
 
               var codes = [];
@@ -172,7 +172,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               handle_event_calls: handle_event_calls,
               web_apis_calls: web_apis_calls,
               options_json: JSON.stringify(
-                sync_data['options']['disabled'][domain], null, 2
+                sync_data['disabled_' + domain], null, 2
               ),
               nothing_detected: false,
               nothing_detected_message: chrome.i18n.getMessage('messageNothingDetected'),
@@ -184,8 +184,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
                   var keys = render(text).split(',');
                   var disabled = false;
 
-                  if(sync_data['options']['disabled'][domain][keys[0]]) {
-                    disabled = sync_data['options']['disabled'][domain][keys[0]][keys[1]];
+                  if(sync_data['disabled_' + domain][keys[0]]) {
+                    disabled = sync_data['disabled_' + domain][keys[0]][keys[1]];
                   }
 
                   if(disabled) { return 'disabled'; } else { return ''; };
@@ -214,7 +214,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           tippy('.interceptions .calls', {
             theme: 'js-sample', animateFill: false, size: 'small',
-            performance: true, interactive: sync_data['options']['popup']['show_code_details'],
+            performance: true, interactive: sync_data['popup']['show_code_details'],
             duration: [0, 0],
             onShown: function() {
               $('.tippy-popper:not(:last-child)').remove();
@@ -263,8 +263,8 @@ var should_reload = false;
 var should_hidde_loading = false;
 
 chrome.storage.onChanged.addListener(function(changes, _namespace) {
-  if(changes[current_tab_id] || changes['options']) {
-    if(changes['options']) {
+  if(changes[current_tab_id] || changes) {
+    if(changes) {
       should_hidde_loading = true;
     }
     should_reload = true;
