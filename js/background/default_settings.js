@@ -1,5 +1,5 @@
 var migrate_legacy_settings = function(sync_data) {
-  var legacy_data = sync_data;
+  var legacy_data = Object.assign({}, sync_data);
 
   if(sync_data['options']) {
     delete sync_data['options']
@@ -16,10 +16,18 @@ var migrate_legacy_settings = function(sync_data) {
     }
 
     if(legacy_data['options']['injection_disabled'] && !sync_data['injection_disabled']) {
-      sync_data['injection_disabled' = {};
+      sync_data['injection_disabled'] = {};
 
       for(domain in legacy_data['options']['injection_disabled']) {
-        if(legacy_data['options']['injection_disabled'][domain]) {
+        if(
+          domain != 'addons.mozilla.org'
+          &&
+          domain != 'addons.opera.com'
+          &&
+          domain != 'chrome.google.com'
+          &&
+          legacy_data['options']['injection_disabled'][domain]
+        ) {
           sync_data['injection_disabled'][domain] = true;
         }
       }
@@ -51,6 +59,8 @@ var migrate_legacy_settings = function(sync_data) {
         if(!sync_data['disabled_' + domain]) {
           sync_data['disabled_' + domain] = {};
 
+          var has_something = false;
+
           for(i in kinds) {
             var kind = kinds[i];
             if(legacy_data['options']['disabled'][domain][kind]) {
@@ -58,10 +68,17 @@ var migrate_legacy_settings = function(sync_data) {
 
               for(code in legacy_data['options']['disabled'][domain][kind]) {
                 if(legacy_data['options']['disabled'][domain][kind][code]) {
-                  sync_data['disabled_' + domain][kind][code] = true;
+                  if(!(domain == 'web.whatsapp.com' && code == 'wheel')) {
+                    sync_data['disabled_' + domain][kind][code] = true;
+                    has_something = true;
+                  }
                 }
               }
             }
+          }
+
+          if(!has_something) {
+            delete sync_data['disabled_' + domain];
           }
         }
       }
@@ -162,7 +179,9 @@ var set_default_settings = function() {
       sync_data['default_disabled_addEventListener'] = {}
     }
 
-    chrome.storage.sync.set(sync_data);
+    chrome.storage.sync.set(sync_data, function() {
+      chrome.storage.sync.remove('options');
+    });
   });
 }
 
