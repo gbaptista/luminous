@@ -61,5 +61,21 @@
   "settingsJavaScriptEventsText": { "message": "eventos JavaScript" },
   "settingsJavaScriptEventsHref": { "message": "https://developer.mozilla.org/es/docs/Web/Events" },
 
-  "settingsNoRulesFoundText": { "message": "ninguna regla encontrada" }
+  "settingsNoRulesFoundText": { "message": "ninguna regla encontrada" },
+  "settingsRemoveDomainButtonText": { "message": "eliminar dominio" },
+  "settingsBackgroundOptionsTitle": { "message": "configuraciones automáticas" },
+
+  "settingsDomainDetectedTitle": { "message": "cuando se accede a un nuevo sitio:" },
+  "settingsAddDomainToCodeInjectionLabel": { "message": "añadir en [inyecciones de código]" },
+  "settingsAddDomainToWebsiteRulesLabel": { "message": "añadir en [reglas por sitio web]" },
+  "settingsEventDetectedTitle": { "message": "cuando se detecta un nuevo evento JavaScript:" },
+  "settingsAddEventToDefaultTitle": { "message": "añadir en [reglas estándar]:" },
+  "settingsAddEventNoneLabel": { "message": "ningúno" },
+  "settingsAddEventCommonLabel": { "message": "comunes" },
+  "settingsAddEventAllLabel": { "message": "todos" },
+  "settingsAddEventAlmostAllLabel": { "message": "casi todos" },
+  "settingsAddEventToWebsiteTitle": { "message": "añadir en [reglas por sitio web]:" },
+
+  "settingsNotRecommendedText": { "message": "no recomendado" },
+  "settingsDefinitelyNotRecommendedText": { "message": "definitivamente no recomendado" }
 }
