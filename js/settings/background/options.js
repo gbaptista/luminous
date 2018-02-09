@@ -31,12 +31,12 @@ $(document).ready(function() {
                 checked: 'common' == sync_data['auto_settings']['default_events']
               },
               {
-                label: chrome.i18n.getMessage('settingsAddEventAlmostAllLabel'),
+                label: chrome.i18n.getMessage('settingsAddEventAlmostAllLabel') + ' (' + chrome.i18n.getMessage('settingsNotRecommendedText') + ')',
                 value: 'almost_all',
                 checked: 'almost_all' == sync_data['auto_settings']['default_events']
               },
               {
-                label: chrome.i18n.getMessage('settingsAddEventAllLabel'),
+                label: chrome.i18n.getMessage('settingsAddEventAllLabel') + ' (' + chrome.i18n.getMessage('settingsDefinitelyNotRecommendedText') + ')',
                 value: 'all',
                 checked: 'all' == sync_data['auto_settings']['default_events']
               }
@@ -59,7 +59,7 @@ $(document).ready(function() {
                 checked: 'almost_all' == sync_data['auto_settings']['website_events']
               },
               {
-                label: chrome.i18n.getMessage('settingsAddEventAllLabel'),
+                label: chrome.i18n.getMessage('settingsAddEventAllLabel') + ' (' + chrome.i18n.getMessage('settingsNotRecommendedText') + ')',
                 value: 'all',
                 checked: 'all' == sync_data['auto_settings']['website_events']
               }

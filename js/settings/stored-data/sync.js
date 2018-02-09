@@ -46,7 +46,9 @@ $(document).ready(function() {
     }
   });
 
-  $('#clear').click(function() {
+  $('#clear, #reset').click(function() {
+    var button = $(this).attr('id');
+
     if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
       loading(function() {
         load_template('html/settings/templates/stored-data/empty.html', function(template) {
@@ -57,7 +59,11 @@ $(document).ready(function() {
           );
 
           chrome.storage.sync.clear(function() {
-            chrome.runtime.sendMessage({ action: 'set_default_settings' });
+            if(button == 'reset') {
+              chrome.runtime.sendMessage({ action: 'set_default_settings' });
+            } else {
+              loaded();
+            }
           });
         });
       });

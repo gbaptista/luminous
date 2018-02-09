@@ -64,6 +64,10 @@ var set_default_settings = function() {
       sync_data['injection_disabled']['general'] = false;
     }
 
+    if(sync_data['injection_disabled']['www.youtube.com'] == undefined) {
+      sync_data['injection_disabled']['www.youtube.com'] = true;
+    }
+
     if(!sync_data['popup']) {
       sync_data['popup'] = {};
     }
