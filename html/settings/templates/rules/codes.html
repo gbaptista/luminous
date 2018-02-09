@@ -8,8 +8,11 @@
         <input type="text" class="form-control input-kind" placeholder="{{placeholder_kind}}" aria-label="{{placeholder_kind}}" aria-describedby="basic-addon2">
         <input type="text" class="form-control input-code" placeholder="{{placeholder_code}}" aria-label="{{placeholder_code}}" aria-describedby="basic-addon2">
         <div class="input-group-append">
-          <button class="btn btn-primary locale" data-locale="settingsAddRuleButtonText" type="submit"></button>
+          <button class="btn add-rule-button btn-primary locale" data-locale="settingsAddRuleButtonText" type="submit"></button>
         </div>
+        {{^default}}
+          <button type="button" data-domain="{{domain}}" class="btn remove-domain-rules btn-outline-secondary locale" data-locale="settingsRemoveDomainButtonText"></button>
+        {{/default}}
       </div>
     </form>
   </div>

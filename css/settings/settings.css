@@ -15,6 +15,15 @@ body {
   margin-bottom: 22px;
 }
 
+.remove-domain-rules {
+  margin-left: 10px;
+}
+
+.add-rule-button {
+  border-top-right-radius: .25rem!important;
+  border-bottom-right-radius: .25rem!important;
+}
+
 .nothing-found-injection {
   margin-bottom: 24px;
 }

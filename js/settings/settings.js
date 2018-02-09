@@ -10,32 +10,36 @@ var loading = function(callback) {
 
 var remove_sync_option = function(namespace, key) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      delete sync_data['options'][namespace][key];
+    chrome.storage.sync.get(null, function(sync_data) {
+      if(key) {
+        delete sync_data[namespace][key];
 
-      chrome.storage.sync.set(sync_data, function() {
-        loaded();
-      });
+        chrome.storage.sync.set(sync_data, function() { loaded(); });
+      } else {
+        chrome.storage.sync.remove(namespace, function() { loaded(); });
+      }
     });
   }, 0);
 };
 
 var set_sync_option = function(name, value, namespace, value_as_namespace) {
   setTimeout(function() {
-    chrome.storage.sync.get('options', function(sync_data) {
-      if(namespace == 'injection_disabled') {
-        value = !value;
-
-        if(sync_data['options']['disabled'][name] == undefined) {
-          sync_data['options']['disabled'][name] = {};
+    chrome.storage.sync.get(null, function(sync_data) {
+      if (namespace == 'disabled') {
+        if(sync_data['disabled_' + name] == undefined) {
+          sync_data['disabled_' + name] = value;
         }
-      }
-
-      if(value_as_namespace) {
-        if(!sync_data['options'][namespace][name]) sync_data['options'][namespace][name] = {};
-        sync_data['options'][namespace][name][value_as_namespace] = value;
       } else {
-        sync_data['options'][namespace][name] = value;
+        if(namespace == 'injection_disabled') {
+          value = !value;
+        }
+
+        if(value_as_namespace) {
+          if(!sync_data[namespace][name]) sync_data[namespace][name] = {};
+          sync_data[namespace][name][value_as_namespace] = value;
+        } else {
+          sync_data[namespace][name] = value;
+        }
       }
 
       chrome.storage.sync.set(sync_data, function() {
@@ -117,6 +121,11 @@ $(document).ready(function() {
             title: chrome.i18n.getMessage('settingsBadgeCounterTitle'),
             url: chrome.extension.getURL('html/settings/badge/counter.html'),
             active: (document.location.pathname == '/html/settings/badge/counter.html')
+          },
+          {
+            title: chrome.i18n.getMessage('settingsBackgroundOptionsTitle'),
+            url: chrome.extension.getURL('html/settings/background/options.html'),
+            active: (document.location.pathname == '/html/settings/background/options.html')
           },
           {
             title: chrome.i18n.getMessage('settingsStoredDataSyncTitle'),

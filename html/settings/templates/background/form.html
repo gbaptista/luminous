@@ -1,0 +1,65 @@
+<form>
+  <div class="card">
+    <div class="card-header">
+      {{domain_detected_title}}
+    </div>
+    <div class="card-body">
+      {{#add_domain_to_items}}
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" data-value-as-namespace="true" data-namespace="auto_settings" name="domains" value="{{value}}" {{#checked}}checked{{/checked}}>
+            {{label}}
+          </label>
+        </div>
+      {{/add_domain_to_items}}
+    </div>
+  </div>
+
+  <br>
+
+  <div class="card">
+    <div class="card-header">
+      {{event_detected_title}}
+    </div>
+    <div class="card-body">
+      <div class="alert alert-info rules-info" role="info">
+        <span class="locale" data-locale="settingsReadMoreText"></span>
+        <a target="_blank" class="locale locale-url alert-link" data-locale-url="settingsJavaScriptEventsHref" data-locale="settingsJavaScriptEventsText" href=""></a>.
+      </div>
+      <div class="card">
+        <div class="card-header">
+          {{add_event_to_default_rules_title}}
+        </div>
+        <div class="card-body">
+          {{#add_event_to_default_rules_items}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" data-namespace="auto_settings" name="default_events" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{label}}
+              </label>
+            </div>
+          {{/add_event_to_default_rules_items}}
+        </div>
+      </div>
+      <br>
+      <div class="card">
+        <div class="card-header">
+          {{add_event_to_website_rules_title}}
+        </div>
+        <div class="card-body">
+          {{#add_event_to_website_rules_items}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" data-namespace="auto_settings" name="website_events" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{label}}
+              </label>
+            </div>
+          {{/add_event_to_website_rules_items}}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br><br>
+
+</form>

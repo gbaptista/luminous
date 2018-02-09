@@ -13,7 +13,7 @@
     <script src="../../../vendor/mustachejs/mustache.min.js" type="text/javascript"></script>
     <script src="../../../js/utils/load_template.js" type="text/javascript"></script>
     <script src="../../../js/settings/settings.js" type="text/javascript"></script>
-    <script src="../../../js/settings/stored-data/sync.js" type="text/javascript"></script>
+    <script src="../../../js/settings/background/options.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="loading"></div>
@@ -23,21 +23,7 @@
           <nav class="navbar"></nav>
         </div>
         <div class="col-8 settings-content">
-          <div class="alert alert-warning" role="alert">
-            <span class="locale" data-locale="settingsReadMoreText"></span>
-            <a target="_blank" class="locale-url alert-link" data-locale-url="settingsStorageSyncMdnHref" href="">storage.sync</a>.
-          </div>
-
-          <span id="used"></span>
-          <button id="reset" class="locale btn btn-warning" data-locale="settingsResetToDefaultText"></button>
-          <!-- <for-debugging-purposes-only> -->
-            <!--
-              |
-              <button id="clear" class="locale btn btn-danger" data-locale="settingsClearAllButtonText"></button>
-            -->
-          <!-- </for-debugging-purposes-only> -->
-          <br><br>
-          <div class="options"></div>
+          <div id="form"></div>
         </div>
       </div>
     </div>

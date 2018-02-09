@@ -41,14 +41,14 @@ chrome.webRequest.onHeadersReceived.addListener(
   ['responseHeaders', 'blocking']
 );
 
-chrome.storage.sync.get('options', function(sync_data) {
-  if(sync_data && sync_data['options'] && sync_data['options']['injection_disabled']) {
-    injection_disabled = sync_data['options']['injection_disabled'];
+chrome.storage.sync.get(null, function(sync_data) {
+  if(sync_data && sync_data && sync_data['injection_disabled']) {
+    injection_disabled = sync_data['injection_disabled'];
   }
 });
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
-  if(namespace == 'sync' && changes['options'] && changes['options'].newValue && changes['options'].newValue['injection_disabled']) {
-    injection_disabled = changes['options'].newValue['injection_disabled'];
+  if(namespace == 'sync' && changes && changes.newValue && changes.newValue['injection_disabled']) {
+    injection_disabled = changes.newValue['injection_disabled'];
   }
 });

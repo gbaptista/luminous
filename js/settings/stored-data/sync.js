@@ -8,15 +8,15 @@ $(document).ready(function() {
   }
 
   var load_json = function() {
-    chrome.storage.sync.get('options', function(sync_data) {
+    chrome.storage.sync.get(null, function(sync_data) {
       load_template('html/settings/templates/stored-data/json.html', function(template) {
         $('.options').html('');
 
-        for(key in sync_data['options']) {
+        for(key in sync_data) {
           $('.options').append(
             Mustache.render(template, {
               title: key + ':',
-              json: JSON.stringify(sync_data['options'][key], 1, ' ')
+              json: JSON.stringify(sync_data[key], 1, ' ')
             })
           );
         }
@@ -38,15 +38,17 @@ $(document).ready(function() {
 
   load_json();
 
-  chrome.storage.onChanged.addListener(function(_changes, namespace) {
-    if(namespace == 'sync') {
+  chrome.storage.onChanged.addListener(function(changes, namespace) {
+    if(namespace == 'sync' && changes) {
       loading(function() {
         load_json();
       });
     }
   });
 
-  $('#clear').click(function() {
+  $('#clear, #reset').click(function() {
+    var button = $(this).attr('id');
+
     if(confirm(chrome.i18n.getMessage('settingsConfirmWindowText'))) {
       loading(function() {
         load_template('html/settings/templates/stored-data/empty.html', function(template) {
@@ -57,7 +59,11 @@ $(document).ready(function() {
           );
 
           chrome.storage.sync.clear(function() {
-            chrome.runtime.sendMessage({ action: 'set_default_settings' });
+            if(button == 'reset') {
+              chrome.runtime.sendMessage({ action: 'set_default_settings' });
+            } else {
+              loaded();
+            }
           });
         });
       });

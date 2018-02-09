@@ -39,14 +39,14 @@ $(document).ready(function() {
 
   load_template('html/settings/templates/injection/form.html', function(template) {
     var load_sync_data = function() {
-      chrome.storage.sync.get('options', function(sync_data) {
+      chrome.storage.sync.get(null, function(sync_data) {
         var domains = [];
 
-        for(domain in sync_data['options']['injection_disabled']) {
+        for(domain in sync_data['injection_disabled']) {
           if(domain != 'general') {
             domains.push({
               domain: domain,
-              enabled: !sync_data['options']['injection_disabled'][domain]
+              enabled: !sync_data['injection_disabled'][domain]
             });
           }
         }
@@ -54,7 +54,7 @@ $(document).ready(function() {
         $('#form').html(
           Mustache.render(template, {
             general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
-            general_injection_enabled: !sync_data['options']['injection_disabled']['general'],
+            general_injection_enabled: !sync_data['injection_disabled']['general'],
             placeholder: chrome.i18n.getMessage('settingsNewDomainPlaceHolderText'),
             domains: domains
           })
@@ -96,8 +96,8 @@ $(document).ready(function() {
       });
     }
 
-    chrome.storage.onChanged.addListener(function(changes, _namespace) {
-      if(changes['options']) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(namespace == 'sync' && changes) {
         loading();
         load_sync_data();
       }

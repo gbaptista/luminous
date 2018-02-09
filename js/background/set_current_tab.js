@@ -22,6 +22,14 @@ var remove_data_for_tab = function(tab_id) {
   chrome.storage.local.remove(tab_id.toString());
 }
 
-chrome.tabs.onCreated.addListener(function(tab) { reset_counters_for_tab(tab.id); });
+chrome.tabs.onCreated.addListener(function(tab) {
+  reset_counters_for_tab(tab.id);
+  remove_data_for_tab(tab.id);
+});
 chrome.tabs.onUpdated.addListener(function(tab_id) { reset_counters_for_tab(tab_id); });
 chrome.tabs.onRemoved.addListener(function(tab_id) { remove_data_for_tab(tab_id); });
+
+chrome.webRequest.onBeforeRequest.addListener(
+  function(details) { remove_data_for_tab(details.tabId) },
+  { urls: ['<all_urls>'], types: ['main_frame'] }
+);

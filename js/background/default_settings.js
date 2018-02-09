@@ -1,167 +1,187 @@
+var migrate_legacy_settings = function(sync_data) {
+  var legacy_data = Object.assign({}, sync_data);
+
+  if(sync_data['options']) {
+    delete sync_data['options']
+  }
+
+  if(legacy_data['options']) {
+
+    if(legacy_data['options']['badge_counter'] && !sync_data['badge_counter']) {
+      sync_data['badge_counter'] = legacy_data['options']['badge_counter'];
+    }
+
+    if(legacy_data['options']['popup'] && !sync_data['popup']) {
+      sync_data['popup'] = legacy_data['options']['popup'];
+    }
+
+    if(legacy_data['options']['injection_disabled'] && !sync_data['injection_disabled']) {
+      sync_data['injection_disabled'] = {};
+
+      for(domain in legacy_data['options']['injection_disabled']) {
+        if(
+          domain != 'addons.mozilla.org'
+          &&
+          domain != 'addons.opera.com'
+          &&
+          domain != 'chrome.google.com'
+          &&
+          legacy_data['options']['injection_disabled'][domain]
+        ) {
+          sync_data['injection_disabled'][domain] = true;
+        }
+      }
+    }
+
+    kinds = ['WebAPIs', 'addEventListener', 'handleEvent'];
+
+    if(legacy_data['options']['default_disabled']) {
+      for(i in kinds) {
+        var kind = kinds[i];
+        if(
+          legacy_data['options']['default_disabled'][kind]
+          &&
+          !sync_data['default_disabled_' + kind]
+        ) {
+          sync_data['default_disabled_' + kind] = {};
+
+          for(code in legacy_data['options']['default_disabled'][kind]) {
+            if(legacy_data['options']['default_disabled'][kind][code]) {
+              sync_data['default_disabled_' + kind][code] = true;
+            }
+          }
+        }
+      }
+    }
+
+    if(legacy_data['options']['disabled']) {
+      for(domain in legacy_data['options']['disabled']) {
+        if(!sync_data['disabled_' + domain]) {
+          sync_data['disabled_' + domain] = {};
+
+          var has_something = false;
+
+          for(i in kinds) {
+            var kind = kinds[i];
+            if(legacy_data['options']['disabled'][domain][kind]) {
+              sync_data['disabled_' + domain][kind] = {};
+
+              for(code in legacy_data['options']['disabled'][domain][kind]) {
+                if(legacy_data['options']['disabled'][domain][kind][code]) {
+                  if(!(domain == 'web.whatsapp.com' && code == 'wheel')) {
+                    sync_data['disabled_' + domain][kind][code] = true;
+                    has_something = true;
+                  }
+                }
+              }
+            }
+          }
+
+          if(!has_something) {
+            delete sync_data['disabled_' + domain];
+          }
+        }
+      }
+    }
+  }
+
+  return sync_data;
+}
+
 var set_default_settings = function() {
-  chrome.storage.sync.get('options', function(sync_data) {
+  chrome.storage.sync.get(null, function(sync_data) {
     if(!sync_data) sync_data = {};
 
-    if(!sync_data['options']) sync_data['options'] = {};
+    sync_data = migrate_legacy_settings(sync_data);
 
-    if(!sync_data['options']['badge_counter']) {
-      sync_data['options']['badge_counter'] = {};
+    if(!sync_data['auto_settings']) {
+      sync_data['auto_settings'] = {};
     }
 
-    if(sync_data['options']['badge_counter']['sum_by'] == undefined) {
-      sync_data['options']['badge_counter']['sum_by'] = 'executions';
+    if(!sync_data['auto_settings']['domains']) {
+      sync_data['auto_settings']['domains'] = {};
     }
 
-    if(sync_data['options']['badge_counter']['executions'] == undefined) {
-      sync_data['options']['badge_counter']['executions'] = 'allowed';
+    if(sync_data['auto_settings']['domains']['code_injection'] == undefined) {
+      sync_data['auto_settings']['domains']['code_injection'] = false;
     }
 
-    if(!sync_data['options']['badge_counter']['kinds']) {
-      sync_data['options']['badge_counter']['kinds'] = {};
+    if(sync_data['auto_settings']['domains']['website_rules'] == undefined) {
+      sync_data['auto_settings']['domains']['website_rules'] = false;
     }
 
-    if(sync_data['options']['badge_counter']['kinds']['WebAPIs'] == undefined) {
-      sync_data['options']['badge_counter']['kinds']['WebAPIs'] = false;
+    if(sync_data['auto_settings']['website_events'] == undefined) {
+      sync_data['auto_settings']['website_events'] = 'none';
     }
 
-    if(sync_data['options']['badge_counter']['kinds']['addEventListener'] == undefined) {
-      sync_data['options']['badge_counter']['kinds']['addEventListener'] = true;
+    if(sync_data['auto_settings']['default_events'] == undefined) {
+      sync_data['auto_settings']['default_events'] = 'common';
     }
 
-    if(sync_data['options']['badge_counter']['kinds']['handleEvent'] == undefined) {
-      sync_data['options']['badge_counter']['kinds']['handleEvent'] = true;
+    if(!sync_data['badge_counter']) {
+      sync_data['badge_counter'] = {};
     }
 
-    if(!sync_data['options']['injection_disabled']) {
-      sync_data['options']['injection_disabled'] = {};
+    if(sync_data['badge_counter']['sum_by'] == undefined) {
+      sync_data['badge_counter']['sum_by'] = 'executions';
     }
 
-    if(sync_data['options']['injection_disabled']['general'] == undefined) {
-      sync_data['options']['injection_disabled']['general'] = false;
+    if(sync_data['badge_counter']['executions'] == undefined) {
+      sync_data['badge_counter']['executions'] = 'allowed';
     }
 
-    if(!sync_data['options']['popup']) {
-      sync_data['options']['popup'] = {};
+    if(!sync_data['badge_counter']['kinds']) {
+      sync_data['badge_counter']['kinds'] = {};
     }
 
-    if(sync_data['options']['popup']['show_code_details'] == undefined) {
-      sync_data['options']['popup']['show_code_details'] = false;
+    if(sync_data['badge_counter']['kinds']['WebAPIs'] == undefined) {
+      sync_data['badge_counter']['kinds']['WebAPIs'] = false;
     }
 
-    // youtube.com
-    if(sync_data['options']['injection_disabled']['www.youtube.com'] == undefined) {
-      sync_data['options']['injection_disabled']['www.youtube.com'] = true;
+    if(sync_data['badge_counter']['kinds']['addEventListener'] == undefined) {
+      sync_data['badge_counter']['kinds']['addEventListener'] = true;
     }
 
-    // Add-ons websites
-    if(sync_data['options']['injection_disabled']['addons.mozilla.org'] == undefined) {
-      sync_data['options']['injection_disabled']['addons.mozilla.org'] = true;
+    if(sync_data['badge_counter']['kinds']['handleEvent'] == undefined) {
+      sync_data['badge_counter']['kinds']['handleEvent'] = true;
     }
 
-    if(sync_data['options']['injection_disabled']['chrome.google.com'] == undefined) {
-      sync_data['options']['injection_disabled']['chrome.google.com'] = true;
+    if(!sync_data['injection_disabled']) {
+      sync_data['injection_disabled'] = {};
     }
 
-    if(sync_data['options']['injection_disabled']['addons.opera.com'] == undefined) {
-      sync_data['options']['injection_disabled']['addons.opera.com'] = true;
+    if(sync_data['injection_disabled']['general'] == undefined) {
+      sync_data['injection_disabled']['general'] = false;
     }
 
-    // web.whatsapp.com
-    if(sync_data['options']['injection_disabled']['web.whatsapp.com'] == undefined) {
-      sync_data['options']['injection_disabled']['web.whatsapp.com'] = false;
+    if(sync_data['injection_disabled']['www.youtube.com'] == undefined) {
+      sync_data['injection_disabled']['www.youtube.com'] = true;
     }
 
-    if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-
-    if(!sync_data['options']['disabled']['web.whatsapp.com']) {
-      sync_data['options']['disabled']['web.whatsapp.com'] = {}
+    if(!sync_data['popup']) {
+      sync_data['popup'] = {};
     }
 
-    if(!sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']) {
-      sync_data['options']['disabled']['web.whatsapp.com']['addEventListener'] = {}
-    }
-
-    if(sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']['wheel'] == undefined) {
-      sync_data['options']['disabled']['web.whatsapp.com']['addEventListener']['wheel'] = true;
-    }
-
-    if(!sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']) {
-      sync_data['options']['disabled']['web.whatsapp.com']['handleEvent'] = {}
-    }
-
-    if(sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']['wheel'] == undefined) {
-      sync_data['options']['disabled']['web.whatsapp.com']['handleEvent']['wheel'] = true;
+    if(sync_data['popup']['show_code_details'] == undefined) {
+      sync_data['popup']['show_code_details'] = false;
     }
 
     // default
-    if(!sync_data['options']['default_disabled']) sync_data['options']['default_disabled'] = {};
-
-    if(!sync_data['options']['default_disabled']['WebAPIs']) {
-      sync_data['options']['default_disabled']['WebAPIs'] = {}
+    if(!sync_data['default_disabled_WebAPIs']) {
+      sync_data['default_disabled_WebAPIs'] = {}
     }
 
-    if(!sync_data['options']['default_disabled']['handleEvent']) {
-      sync_data['options']['default_disabled']['handleEvent'] = {}
+    if(!sync_data['default_disabled_handleEvent']) {
+      sync_data['default_disabled_handleEvent'] = {}
     }
 
-    if(!sync_data['options']['default_disabled']['addEventListener']) {
-      sync_data['options']['default_disabled']['addEventListener'] = {}
+    if(!sync_data['default_disabled_addEventListener']) {
+      sync_data['default_disabled_addEventListener'] = {}
     }
 
-    // From "Most Common Categories" at https://developer.mozilla.org/en-US/docs/Web/Events
-    event_names = [
-      // Resource Events
-      'beforeunload', 'unload',
-      // Focus Events
-      'focus', 'blur',
-      // Websocket Events
-      'open', 'message', 'error', 'close',
-      // Session History Events
-      'pagehide', 'pageshow', 'popstate',
-      // Form Events
-      'reset', 'submit',
-      // Text Composition Events
-      'compositionstart', 'compositionupdate', 'compositionend',
-      // View Events
-      'resize', 'scroll',
-      // Clipboard Events
-      'cut', 'copy', 'paste',
-      // Keyboard Events
-      'keydown', 'keypress', 'keyup',
-      // Mouse Events
-      'mouseenter', 'mouseover', 'mousemove', 'mousedown', 'mouseup',
-      'auxclick', 'click', 'dblclick', 'contextmenu', 'wheel', 'mouseleave',
-      'mouseout', 'select', 'pointerlockchange', 'pointerlockerror',
-      // Drag & Drop Events
-      'dragstart', 'drag', 'dragend', 'dragenter', 'dragover', 'dragleave', 'drop',
-      // Storage events
-      'change', 'storage'
-    ];
-
-    for(i in event_names) {
-      if(sync_data['options']['default_disabled']['addEventListener'][event_names[i]] == undefined) {
-        sync_data['options']['default_disabled']['addEventListener'][event_names[i]] = false;
-      }
-
-      if(sync_data['options']['default_disabled']['handleEvent'][event_names[i]] == undefined) {
-        sync_data['options']['default_disabled']['handleEvent'][event_names[i]] = false;
-      }
-    }
-
-    var event_names = [
-      'fetch',
-      'setInterval', 'setInterval.call',
-      'setTimeout', 'setTimeout.call',
-      'XMLHttpRequest.open', 'XMLHttpRequest.send'
-    ];
-
-    for(i in event_names) {
-      if(sync_data['options']['default_disabled']['WebAPIs'][event_names[i]] == undefined) {
-        sync_data['options']['default_disabled']['WebAPIs'][event_names[i]] = false;
-      }
-    }
-
-    chrome.storage.sync.set(sync_data);
+    chrome.storage.sync.set(sync_data, function() {
+      chrome.storage.sync.remove('options');
+    });
   });
 }
 

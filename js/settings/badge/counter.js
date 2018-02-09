@@ -1,7 +1,7 @@
 $(document).ready(function() {
   load_template('html/settings/templates/badge/form.html', function(template) {
     var load_sync_data = function() {
-      chrome.storage.sync.get('options', function(sync_data) {
+      chrome.storage.sync.get(null, function(sync_data) {
         $('#form').html(
           Mustache.render(template, {
             general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
@@ -14,12 +14,12 @@ $(document).ready(function() {
                   {
                     label: chrome.i18n.getMessage('settingsBadgeCounterSumByExecutionsLabel'),
                     value: 'executions',
-                    checked: 'executions' ==  sync_data['options']['badge_counter']['sum_by']
+                    checked: 'executions' ==  sync_data['badge_counter']['sum_by']
                   },
                   {
                     label: chrome.i18n.getMessage('settingsBadgeCounterSumByKindLabel'),
                     value: 'kind',
-                    checked: 'kind' ==  sync_data['options']['badge_counter']['sum_by']
+                    checked: 'kind' ==  sync_data['badge_counter']['sum_by']
                   },
                 ],
                 executions_title: chrome.i18n.getMessage('settingsBadgeCounterExectutionsTitle'),
@@ -27,17 +27,17 @@ $(document).ready(function() {
                   {
                     label: chrome.i18n.getMessage('allowedText') + ' + ' + chrome.i18n.getMessage('blockedText'),
                     value: 'allowed_blocked',
-                    checked: 'allowed_blocked' ==  sync_data['options']['badge_counter']['executions']
+                    checked: 'allowed_blocked' ==  sync_data['badge_counter']['executions']
                   },
                   {
                     label: chrome.i18n.getMessage('allowedText'),
                     value: 'allowed',
-                    checked: 'allowed' ==  sync_data['options']['badge_counter']['executions']
+                    checked: 'allowed' ==  sync_data['badge_counter']['executions']
                   },
                   {
                     label: chrome.i18n.getMessage('blockedText'),
                     value: 'blocked',
-                    checked: 'blocked' ==  sync_data['options']['badge_counter']['executions']
+                    checked: 'blocked' ==  sync_data['badge_counter']['executions']
                   }
                 ],
                 kinds_title: chrome.i18n.getMessage('settingsBadgeCounterKindsTitle'),
@@ -45,17 +45,17 @@ $(document).ready(function() {
                   {
                     label: chrome.i18n.getMessage('titleWebAPIs'),
                     value: 'WebAPIs',
-                    checked: sync_data['options']['badge_counter']['kinds']['WebAPIs']
+                    checked: sync_data['badge_counter']['kinds']['WebAPIs']
                   },
                   {
                     label: chrome.i18n.getMessage('titleHandleEvent'),
                     value: 'handleEvent',
-                    checked: sync_data['options']['badge_counter']['kinds']['handleEvent']
+                    checked: sync_data['badge_counter']['kinds']['handleEvent']
                   },
                   {
                     label: chrome.i18n.getMessage('titleAddEventListener'),
                     value: 'addEventListener',
-                    checked: sync_data['options']['badge_counter']['kinds']['addEventListener']
+                    checked: sync_data['badge_counter']['kinds']['addEventListener']
                   }
                 ]
               }
@@ -69,8 +69,8 @@ $(document).ready(function() {
       });
     }
 
-    chrome.storage.onChanged.addListener(function(changes, _namespace) {
-      if(changes['options']) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(namespace == 'sync' && changes) {
         loading();
         load_sync_data();
       }
