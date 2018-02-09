@@ -49,16 +49,27 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
         sync_data['disabled_' + domain] = {};
       }
 
+      var kinds = [];
+
+      for(possible_kind in sync_data) {
+        var regex = /^default_disabled_/;
+        if(regex.test(possible_kind)) {
+          kinds.push(possible_kind.replace(regex, ''));
+        }
+      }
+
       // Apply default rules
-      for(kind in sync_data['default_disabled']) {
+      for(i in kinds) {
+        var kind = kinds[i];
+
         if(!sync_data['disabled_' + domain][kind]) {
           sync_data['disabled_' + domain][kind] = {};
         }
 
-        for(code in sync_data['default_disabled'][kind]) {
+        for(code in sync_data['default_disabled_' + kind]) {
           if(sync_data['disabled_' + domain][kind][code] == undefined) {
-            if(sync_data['default_disabled'][kind][code]) {
-              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled'][kind][code];
+            if(sync_data['default_disabled_' + kind][code]) {
+              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled_' + kind][code];
             }
           }
         }

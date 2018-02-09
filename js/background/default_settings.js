@@ -73,18 +73,16 @@ var set_default_settings = function() {
     }
 
     // default
-    if(!sync_data['default_disabled']) sync_data['default_disabled'] = {};
-
-    if(!sync_data['default_disabled']['WebAPIs']) {
-      sync_data['default_disabled']['WebAPIs'] = {}
+    if(!sync_data['default_disabled_WebAPIs']) {
+      sync_data['default_disabled_WebAPIs'] = {}
     }
 
-    if(!sync_data['default_disabled']['handleEvent']) {
-      sync_data['default_disabled']['handleEvent'] = {}
+    if(!sync_data['default_disabled_handleEvent']) {
+      sync_data['default_disabled_handleEvent'] = {}
     }
 
-    if(!sync_data['default_disabled']['addEventListener']) {
-      sync_data['default_disabled']['addEventListener'] = {}
+    if(!sync_data['default_disabled_addEventListener']) {
+      sync_data['default_disabled_addEventListener'] = {}
     }
 
     chrome.storage.sync.set(sync_data);

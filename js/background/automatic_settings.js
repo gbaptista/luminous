@@ -158,12 +158,12 @@ var set_event_settings_for_tab = function(tab_ids) {
                   }
 
                   if(validates_code(code, sync_data['auto_settings']['default_events'])) {
-                    if(!sync_data['default_disabled'][kind]) {
-                      sync_data['default_disabled'][kind] = {}
+                    if(!sync_data['default_disabled_' + kind]) {
+                      sync_data['default_disabled_' + kind] = {}
                     }
 
-                    if(sync_data['default_disabled'][kind][code] == undefined) {
-                      sync_data['default_disabled'][kind][code] = false;
+                    if(sync_data['default_disabled_' + kind][code] == undefined) {
+                      sync_data['default_disabled_' + kind][code] = false;
                       changed = true;
                     }
                   }

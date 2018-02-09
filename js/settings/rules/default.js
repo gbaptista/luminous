@@ -51,8 +51,8 @@ $(document).ready(function() {
           var kind = kinds[i];
           var codes = [];
 
-          for(code in sync_data['default_disabled'][kind]) {
-            var disabled = sync_data['default_disabled'][kind][code];
+          for(code in sync_data['default_disabled_' + kind]) {
+            var disabled = sync_data['default_disabled_' + kind][code];
 
             codes.push({
               code: code,

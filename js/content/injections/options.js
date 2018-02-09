@@ -6,16 +6,27 @@ injections_controller(function() {
         sync_data['disabled_' + domain] = {};
       }
 
+      var kinds = [];
+
+      for(possible_kind in sync_data) {
+        var regex = /^default_disabled_/;
+        if(regex.test(possible_kind)) {
+          kinds.push(possible_kind.replace(regex, ''));
+        }
+      }
+
       // Apply default rules
-      for(kind in sync_data['default_disabled']) {
+      for(i in kinds) {
+        var kind = kinds[i];
+
         if(!sync_data['disabled_' + domain][kind]) {
           sync_data['disabled_' + domain][kind] = {};
         }
 
-        for(code in sync_data['default_disabled'][kind]) {
+        for(code in sync_data['default_disabled_' + kind]) {
           if(sync_data['disabled_' + domain][kind][code] == undefined) {
-            if(sync_data['default_disabled'][kind][code]) {
-              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled'][kind][code];
+            if(sync_data['default_disabled_' + kind][code]) {
+              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled_' + kind][code];
             }
           }
         }
@@ -54,10 +65,26 @@ injections_controller(function() {
         changes = changes;
 
         var disabled_for_domain = false;
-        if(changes.newValue && changes.newValue['disabled_' + domain]) {
-          if(changes.oldValue && changes.oldValue['disabled_' + domain]) {
-            disabled_for_domain = changes.newValue['disabled_' + domain] != changes.oldValue['disabled_' + domain];
+
+        if(changes['disabled_' + domain] && changes['disabled_' + domain].newValue) {
+          if(changes['disabled_' + domain].oldValue) {
+            disabled_for_domain = changes['disabled_' + domain].newValue != changes['disabled_' + domain].oldValue;
           } else {
+            disabled_for_domain = true;
+          }
+        }
+
+        if(changes) {
+          var default_keys = [];
+
+          for(possible_kind in changes) {
+            var regex = /^default_disabled_/;
+            if(regex.test(possible_kind)) {
+              default_keys.push(possible_kind.replace(regex, ''));
+            }
+          }
+
+          if(default_keys.length > 0) {
             disabled_for_domain = true;
           }
         }
@@ -65,10 +92,10 @@ injections_controller(function() {
         var injection_disabled_for_domain = false;
         var injection_disabled_for_general = false;
 
-        if(changes.newValue && changes.newValue['injection_disabled']) {
-          if(changes.oldValue && changes.oldValue['injection_disabled']) {
-            injection_disabled_for_domain = changes.newValue['injection_disabled'][domain] != changes.oldValue['injection_disabled'][domain];
-            injection_disabled_for_general = changes.newValue['injection_disabled']['general'] != changes.oldValue['injection_disabled']['general'];
+        if(changes['injection_disabled'] && changes['injection_disabled'].newValue) {
+          if(changes['injection_disabled'] && changes['injection_disabled'].oldValue) {
+            injection_disabled_for_domain = changes['injection_disabled'].newValue[domain] != changes['injection_disabled'].oldValue[domain];
+            injection_disabled_for_general = changes['injection_disabled'].newValue['general'] != changes['injection_disabled'].oldValue['general'];
           } else {
             injection_disabled_for_domain = true;
             injection_disabled_for_general = true;

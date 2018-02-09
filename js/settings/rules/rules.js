@@ -4,12 +4,12 @@ var add_code = function(domain, kind, code, is_default) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
       if(is_default) {
-        if(!sync_data['default_disabled'][kind]) {
-          sync_data['default_disabled'][kind] = {};
+        if(!sync_data['default_disabled_' + kind]) {
+          sync_data['default_disabled_' + kind] = {};
         }
 
-        if(!sync_data['default_disabled'][kind][code]) {
-          sync_data['default_disabled'][kind][code] = false;
+        if(!sync_data['default_disabled_' + kind][code]) {
+          sync_data['default_disabled_' + kind][code] = false;
         }
       } else {
         if(!sync_data['disabled_' + domain][kind]) {
@@ -35,12 +35,12 @@ var toggle_code = function(domain, kind, code, remove, is_default) {
     chrome.storage.sync.get(null, function(sync_data) {
       if(is_default) {
         if(remove) {
-          delete sync_data['default_disabled'][kind][code];
+          delete sync_data['default_disabled_' + kind][code];
         } else {
-          if(sync_data['default_disabled'][kind][code]) {
-            sync_data['default_disabled'][kind][code] = false;
+          if(sync_data['default_disabled_' + kind][code]) {
+            sync_data['default_disabled_' + kind][code] = false;
           } else {
-            sync_data['default_disabled'][kind][code] = true;
+            sync_data['default_disabled_' + kind][code] = true;
           }
         }
       } else {
