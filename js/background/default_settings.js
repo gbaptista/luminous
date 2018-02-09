@@ -1,8 +1,81 @@
+var migrate_legacy_settings = function(sync_data) {
+  var legacy_data = sync_data;
+
+  if(sync_data['options']) {
+    delete sync_data['options']
+  }
+
+  if(legacy_data['options']) {
+
+    if(legacy_data['options']['badge_counter'] && !sync_data['badge_counter']) {
+      sync_data['badge_counter'] = legacy_data['options']['badge_counter'];
+    }
+
+    if(legacy_data['options']['popup'] && !sync_data['popup']) {
+      sync_data['popup'] = legacy_data['options']['popup'];
+    }
+
+    if(legacy_data['options']['injection_disabled'] && !sync_data['injection_disabled']) {
+      sync_data['injection_disabled' = {};
+
+      for(domain in legacy_data['options']['injection_disabled']) {
+        if(legacy_data['options']['injection_disabled'][domain]) {
+          sync_data['injection_disabled'][domain] = true;
+        }
+      }
+    }
+
+    kinds = ['WebAPIs', 'addEventListener', 'handleEvent'];
+
+    if(legacy_data['options']['default_disabled']) {
+      for(i in kinds) {
+        var kind = kinds[i];
+        if(
+          legacy_data['options']['default_disabled'][kind]
+          &&
+          !sync_data['default_disabled_' + kind]
+        ) {
+          sync_data['default_disabled_' + kind] = {};
+
+          for(code in legacy_data['options']['default_disabled'][kind]) {
+            if(legacy_data['options']['default_disabled'][kind][code]) {
+              sync_data['default_disabled_' + kind][code] = true;
+            }
+          }
+        }
+      }
+    }
+
+    if(legacy_data['options']['disabled']) {
+      for(domain in legacy_data['options']['disabled']) {
+        if(!sync_data['disabled_' + domain]) {
+          sync_data['disabled_' + domain] = {};
+
+          for(i in kinds) {
+            var kind = kinds[i];
+            if(legacy_data['options']['disabled'][domain][kind]) {
+              sync_data['disabled_' + domain][kind] = {};
+
+              for(code in legacy_data['options']['disabled'][domain][kind]) {
+                if(legacy_data['options']['disabled'][domain][kind][code]) {
+                  sync_data['disabled_' + domain][kind][code] = true;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return sync_data;
+}
+
 var set_default_settings = function() {
   chrome.storage.sync.get(null, function(sync_data) {
     if(!sync_data) sync_data = {};
 
-    if(!sync_data) sync_data = {};
+    sync_data = migrate_legacy_settings(sync_data);
 
     if(!sync_data['auto_settings']) {
       sync_data['auto_settings'] = {};
