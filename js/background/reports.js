@@ -4,9 +4,7 @@ db.version(1).stores({
 	reports: 'id,key,domain,kind,code,allowed,blocked,calls'
 });
 
-db.open().catch(function(error) {
-  console.log('Uh oh : ' + error);
-}).then(function() {
+db.open().then(function() {
 	var update_report = function(data) {
 	  db.reports.where({id: data.id }).first(function(report) {
 	    var put = false;
@@ -23,12 +21,8 @@ db.open().catch(function(error) {
 	    }
 
 	    if(put) {
-	      db.reports.put(data).catch(function(error) {
-	      	console.log('error: ' + JSON.stringify(error));
-	      });;
+	      db.reports.put(data);
 	    }
-	  }).catch(function(error) {
-	    console.log('error: ' + error);
 	  });
 	}
 
