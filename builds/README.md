@@ -4,7 +4,7 @@
 
 Update the version on `manifest.json`:
 ```json
-"version": "0.0.11"
+"version": "0.0.12"
 ```
 
 Copy all folders and files to the `builds/current/` directory.
@@ -80,4 +80,4 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-11.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0-0-12.zip` and contact the repository owner to publish in all stores.
