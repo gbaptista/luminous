@@ -4,6 +4,7 @@ var common_webapis = [
   'setInterval', 'setInterval.call',
   'setTimeout', 'setTimeout.call',
   'XMLHttpRequest.open', 'XMLHttpRequest.send',
+  'geo.getCurrentPosition', 'geo.watchPosition'
 ];
 
 for(i in common_webapis) {
@@ -57,7 +58,7 @@ var validates_code = function(code, validation) {
     return true;
   } else if(validation == 'almost_all') {
     for(i in common_webapis) {
-      if(code == common_webapis[i]) {
+      if(code.toLowerCase() == common_webapis[i]) {
         return true;
       }
     }
@@ -65,13 +66,13 @@ var validates_code = function(code, validation) {
     return !/\W|_/.test(code);
   } else if(validation == 'common') {
     for(i in common_webapis) {
-      if(code == common_webapis[i]) {
+      if(code.toLowerCase() == common_webapis[i]) {
         return true;
       }
     }
 
     for(i in common_events) {
-      if(code == common_events[i]) {
+      if(code.toLowerCase() == common_events[i]) {
         return true;
       }
     }
