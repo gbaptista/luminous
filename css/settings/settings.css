@@ -11,6 +11,14 @@ body {
   font-style: italic;
 }
 
+.executions-card-body {
+  padding-bottom: 0;
+}
+
+.form-data-collection {
+  display: inline-block;
+}
+
 .rules-info {
   margin-bottom: 22px;
 }
@@ -109,24 +117,3 @@ pre code {
   opacity: 0.95;
   font-style: italic;
 }
-
-/* .title-icon {
-  vertical-align: bottom;
-}
-
-h1 {
-  display: inline-block;
-}
-
-#version {
-  display: inline-block;
-  color: #CCC;
-  padding-left: 6px;
-  border-left: 1px solid #CCC;
-  margin-left: 6px;
-}
-
-p.empty {
-  padding: 20px;
-  color: #CCC;
-} */

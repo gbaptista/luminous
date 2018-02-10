@@ -113,6 +113,11 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/rules/per-domain.html')
           },
           {
+            title: chrome.i18n.getMessage('settingsReportsTitle'),
+            url: chrome.extension.getURL('html/settings/reports/charts.html'),
+            active: (document.location.pathname == '/html/settings/reports/charts.html')
+          },
+          {
             title: chrome.i18n.getMessage('settingsPopupTitle'),
             url: chrome.extension.getURL('html/settings/popup/options.html'),
             active: (document.location.pathname == '/html/settings/popup/options.html')
