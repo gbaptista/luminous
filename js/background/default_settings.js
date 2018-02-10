@@ -94,6 +94,14 @@ var set_default_settings = function() {
 
     sync_data = migrate_legacy_settings(sync_data);
 
+    if(!sync_data['reports']) {
+      sync_data['reports'] = {};
+    }
+
+    if(sync_data['reports']['collect_data'] == undefined) {
+      sync_data['reports']['collect_data'] = true;
+    }
+
     if(!sync_data['auto_settings']) {
       sync_data['auto_settings'] = {};
     }

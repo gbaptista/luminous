@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title></title>
+
+    <link rel="stylesheet" type="text/css" href="../../../vendor/bootstrap/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="../../../css/settings/settings.css">
+    <script src="../../../vendor/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script src="../../../vendor/mustachejs/mustache.min.js" type="text/javascript"></script>
+    <script src="../../../js/utils/load_template.js" type="text/javascript"></script>
+    <script src="../../../js/settings/settings.js" type="text/javascript"></script>
+    <script src="../../../vendor/dexiejs/dexie.js" type="text/javascript"></script>
+    <script src="../../../js/settings/reports/charts.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <div id="loading"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3">
+          <nav class="navbar"></nav>
+        </div>
+        <div class="col-8 settings-content">
+
+          <div class="alert alert-warning" role="alert">
+            <span class="locale" data-locale="settingsReadMoreText"></span>
+            <a target="_blank" class="locale-url alert-link" data-locale-url="settingsStorageSyncMdnHref" href="">IndexedDB API</a>.
+          </div>
+
+          <span id="used"></span><button id="clear" class="locale btn btn-warning" data-locale="settingsClearAllButtonText"></button>
+          |
+          <div id="form" class="form-data-collection"></div>
+          <br><br>
+
+          <div class="reports">
+            <div id="per-code"></div>
+            <div id="per-domain"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
