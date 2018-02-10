@@ -1,15 +1,25 @@
 $(document).ready(function() {
+  var limit = 10;
+
   var db = new Dexie('luminous');
 
   db.version(1).stores({
-  	reports: 'id,key,domain,kind,code,allowed,blocked,calls'
+  	reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls'
   });
 
-  db.open().catch(function (err) {
-    console.error('Failed to open db: ' + (err.stack || err));
-  }).then(function() {
+  var complete_loads = 0;
+
+  db.open().then(function() {
+    var is_loaded = function() {
+      complete_loads += 1;
+
+      if(complete_loads > 1) {
+        loaded();
+      }
+    }
+
     db.reports.count(function(count) {
-      $('#used').html(count + ' rows | ');
+      $('#used').html(count + ' ' + chrome.i18n.getMessage('settingsRecordsText') + ' | ');
     });
 
     $('#clear').click(function() {
@@ -27,23 +37,14 @@ $(document).ready(function() {
         chrome.storage.sync.get(null, function(sync_data) {
           $('#form').html(
             Mustache.render(template, {
-              collect_data_title: 'enable reports collection',
+              collect_data_title: chrome.i18n.getMessage('settingsEnableReportsGenerationText'),
               collect_data: sync_data['reports']['collect_data']
             })
           );
 
           observe_form();
-
-          loaded();
         });
       }
-
-      chrome.storage.onChanged.addListener(function(changes, namespace) {
-        if(namespace == 'sync' && changes) {
-          loading();
-          load_sync_data();
-        }
-      });
 
       load_sync_data();
     });
@@ -94,21 +95,105 @@ $(document).ready(function() {
       });
     }
 
+    var load_custom_domain = function(domain) {
+      loading();
+
+      load_template('html/settings/templates/reports/by-type.html', function(template) {
+        $('#custom-domain').html(
+          Mustache.render(template, {
+            title: chrome.i18n.getMessage('settingsMostExecutedJavaScriptCodesText'),
+            domain: domain,
+            filter_buton_text: chrome.i18n.getMessage('settingsFilterButtonText'),
+            placeholder: chrome.i18n.getMessage('settingsFilterByDomainPlaceHolderText'),
+            domain_filter: true,
+            no_records: chrome.i18n.getMessage('settingsNoRecordsText')
+          })
+        );
+
+        load_template('html/settings/templates/reports/tables/executions.html', function(template) {
+          var where = function(query) {
+            return query.where({domain: domain});
+          }
+
+          group_and_sort('code', 'calls', limit, where, function(items) {
+            $('#custom-domain .total-calls').html(
+              Mustache.render(template, {
+                group_title: 'domain',
+                count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
+                items: items,
+                no_records: chrome.i18n.getMessage('settingsNoRecordsText')
+              })
+            );
+
+            $('#domain-filter-form').submit(function() {
+              event.preventDefault();
+
+              loading(function() {
+                var domain = 'https://' + $('#filter-by-domain').val().toLowerCase().replace(
+                  /.*:\/\//, ''
+                ).replace(/\s/g, '');
+
+                var a_element = document.createElement('a');
+                a_element.href = domain;
+
+                if(a_element.hostname && a_element.hostname != window.location.hostname) {
+                  load_custom_domain(a_element.hostname);
+                } else {
+                  alert(chrome.i18n.getMessage('settingsInvalidDomainMessage'));
+                  loaded();
+                }
+              });
+            });
+
+            loaded();
+          });
+        });
+
+        var kinds = ['WebAPIs', 'handleEvent', 'addEventListener'];
+
+        var load_report_by_kind = function(kind) {
+          load_template('html/settings/templates/reports/tables/executions.html', function(template) {
+            var where = function(query) {
+              return query.where({domain: domain, kind: kind});
+            }
+
+            group_and_sort('code', 'calls', limit, where, function(items) {
+              $('#custom-domain .' + kind + '-calls').html(
+                Mustache.render(template, {
+                  group_title: 'domain',
+                  count_title: kind,
+                  items: items,
+                  no_records: chrome.i18n.getMessage('settingsNoRecordsText')
+                })
+              );
+            })
+          });
+        }
+
+        for(i in kinds) { load_report_by_kind(kinds[i]); }
+      });
+    }
+
     load_template('html/settings/templates/reports/by-type.html', function(template) {
       $('#per-code').html(
-        Mustache.render(template, { title: 'Top JavaScript Executions per code' })
+        Mustache.render(template,
+          { title: chrome.i18n.getMessage('settingsMostExecutedJavaScriptCodesText')
+        })
       );
 
       load_template('html/settings/templates/reports/tables/executions.html', function(template) {
-        group_and_sort('code', 'calls', 10, undefined, function(items) {
+        group_and_sort('code', 'calls', limit, undefined, function(items) {
           $('#per-code .total-calls').html(
             Mustache.render(template, {
               group_title: 'domain',
-              count_title: 'Everything',
-              items: items
+              count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
+              items: items,
+              no_records: chrome.i18n.getMessage('settingsNoRecordsText')
             })
           );
-        })
+
+          is_loaded();
+        });
       });
 
       var kinds = ['WebAPIs', 'handleEvent', 'addEventListener'];
@@ -119,12 +204,13 @@ $(document).ready(function() {
             return query.where('kind').equals(kind);
           }
 
-          group_and_sort('code', 'calls', 10, where, function(items) {
+          group_and_sort('code', 'calls', limit, where, function(items) {
             $('#per-code .' + kind + '-calls').html(
               Mustache.render(template, {
                 group_title: 'domain',
                 count_title: kind,
-                items: items
+                items: items,
+                no_records: chrome.i18n.getMessage('settingsNoRecordsText')
               })
             );
           })
@@ -136,18 +222,28 @@ $(document).ready(function() {
 
     load_template('html/settings/templates/reports/by-type.html', function(template) {
       $('#per-domain').html(
-        Mustache.render(template, { title: 'Top JavaScript Executions per domain' })
+        Mustache.render(template, {
+          title: chrome.i18n.getMessage('settingsDomainsMostJavaScriptCodesText')
+        })
       );
 
       load_template('html/settings/templates/reports/tables/executions.html', function(template) {
-        group_and_sort('domain', 'calls', 10, undefined, function(items) {
+        group_and_sort('domain', 'calls', limit, undefined, function(items) {
+
+          if(items[0]) {
+            load_custom_domain(items[0].name);
+          }
+
           $('#per-domain .total-calls').html(
             Mustache.render(template, {
               group_title: 'domain',
-              count_title: 'Everything',
-              items: items
+              count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
+              items: items,
+              no_records: chrome.i18n.getMessage('settingsNoRecordsText')
             })
           );
+
+          is_loaded();
         })
       });
 
@@ -159,12 +255,13 @@ $(document).ready(function() {
             return query.where('kind').equals(kind);
           }
 
-          group_and_sort('domain', 'calls', 10, where, function(items) {
+          group_and_sort('domain', 'calls', limit, where, function(items) {
             $('#per-domain .' + kind + '-calls').html(
               Mustache.render(template, {
                 group_title: 'domain',
                 count_title: kind,
-                items: items
+                items: items,
+                no_records: chrome.i18n.getMessage('settingsNoRecordsText')
               })
             );
           })
@@ -173,7 +270,5 @@ $(document).ready(function() {
 
       for(i in kinds) { load_report_by_kind(kinds[i]); }
     });
-
-    loaded();
   });
 });
