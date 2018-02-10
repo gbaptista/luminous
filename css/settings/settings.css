@@ -36,6 +36,12 @@ body {
   margin-bottom: 24px;
 }
 
+.no-records {
+  padding: 10px;
+  text-align: center;
+  color: #CCC;
+}
+
 .nothing-found {
   padding-top: 30px;
   display: none;

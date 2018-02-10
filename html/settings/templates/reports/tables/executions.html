@@ -3,6 +3,9 @@
     {{count_title}}
   </div>
   <div class="card-body executions-card-body">
+    {{^items}}
+      <div class="no-records">{{no_records}}</div>
+    {{/items}}
     <table class="table table-sm">
       <tbody>
         {{#items}}
