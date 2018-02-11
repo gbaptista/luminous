@@ -9,6 +9,7 @@ Una extensión experimental para identificar, analizar y bloquear la ejecución 
 - [Cómo instalar](#c%C3%B3mo-instalar)
 - [¡Pruébalo!](#pru%C3%A9balo)
 - [Profundizando](#profundizando)
+- [Guías](#guías)
 - [Cómo contribuir](#c%C3%B3mo-contribuir)
 - [Problemas conocidos](#problemas-conocidos)
 - [Entender el código](#comprender-el-c%C3%B3digo)
@@ -61,9 +62,14 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
 - Página web: [*Integridad de Internet*](https://www.mozilla.org/es-ES/internet-health/)
 - Página web: [*Acerca de Lightbeam*](https://www.mozilla.org/es-ES/lightbeam/about/)
 
+## Guías
+
+Las Guías son documentos sobre temas muy específicos donde podemos ir profundamente en los detalles y encontrar fácilmente la información que estamos buscando. Ver [todas las guías](./guides/).
+
 ## Cómo contribuir
 
   - [Corre la voz](#difundir-la-palabra)
+    - [Escriba alguna guía](#escriba-alguna-guía)
     - [Comparte](#compartir)
     - [Escribir y hablar sobre ello](#escribir-y-hablar-sobre-ello)
     - [Ayuda con traducciones](#ayuda-con-traducciones)
@@ -77,6 +83,10 @@ Si bien el libro no está publicado, sugiero las siguientes referencias para amp
     - [Mejorar la calidad del código](#mejora-la-calidad-del-c%C3%B3digo)
 
 ### Difundir la palabra
+
+#### Escriba alguna guía
+
+Colabora escribiendo una [guía](#guías) sobre temas relacionados con el proyecto.
 
 #### Compartir
 

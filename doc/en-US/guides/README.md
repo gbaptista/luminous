@@ -16,6 +16,7 @@ Guides are documents on many specific subjects where we can go deep into the det
 ## How it works?
 
  - [Reports](./how-it-works/reports.md)
+ - [What is detected?](./how-it-works/what-is-detected.md)
 
 ## Web APIs and JavaScript events
 

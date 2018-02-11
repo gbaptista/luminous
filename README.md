@@ -9,6 +9,7 @@ Uma extensão experimental para identificar, analisar e bloquear a execução de
 - [Como instalar](#como-instalar)
 - [Experimente!](#experimente)
 - [Se aprofunde no tema](#se-aprofunde-no-tema)
+- [Guias](#guias)
 - [Como colaborar](#como-colaborar)
 - [Problemas conhecidos](#problemas-conhecidos)
 - [Entendendo o código](#entendendo-o-c%C3%B3digo)
@@ -60,9 +61,14 @@ Enquanto o livro não é publicado, sugiro as seguintes referências para expand
 - Página na web: [*Saúde da Internet*](https://www.mozilla.org/pt-BR/internet-health/)  
 - Página na web: [*Sobre o Lightbeam*](https://www.mozilla.org/pt-BR/lightbeam/about)
 
+## Guias
+
+Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo nos detalhes e encontrar facilmente as informações que estamos procurando. Veja [aqui](./doc/pt-BR/guides/) todos os guias.
+
 ## Como colaborar
 
   - [Espalhe a ideia](#espalhe-a-ideia)
+    - [Escreva algum guia](#escreva-algum-guia)
     - [Compartilhe](#compartilhe)
     - [Escreva e fale sobre](#escreva-e-fale-sobre)
     - [Ajude na tradução para outros idiomas](#ajude-na-tradu%C3%A7%C3%A3o-para-outros-idiomas)
@@ -76,6 +82,10 @@ Enquanto o livro não é publicado, sugiro as seguintes referências para expand
     - [Melhore a qualidade do código](#melhore-a-qualidade-do-c%C3%B3digo)
 
 ### Espalhe a ideia
+
+#### Escreva algum guia
+
+Colabore escrevendo algum [guia](#guias) sobre assuntos relacionados ao projeto.
 
 #### Compartilhe
 
