@@ -174,6 +174,14 @@ var set_default_settings = function() {
       sync_data['popup']['show_code_details'] = false;
     }
 
+    if(sync_data['popup']['zoom_in'] == undefined) {
+      sync_data['popup']['zoom_in'] = false;
+    }
+
+    if(sync_data['popup']['apply_to_default'] == undefined) {
+      sync_data['popup']['apply_to_default'] = false;
+    }
+
     // default
     if(!sync_data['default_disabled_WebAPIs']) {
       sync_data['default_disabled_WebAPIs'] = {}
