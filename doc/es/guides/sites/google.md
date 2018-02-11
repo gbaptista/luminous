@@ -12,7 +12,7 @@ Em poucos minutos de navegação no [Google](https://www.google.com) os seguinte
 | ---------------- | --------- | ----------- |
 | scroll           | 936       | não         |
 | mousewheel       | 373       | não         |
-| message          | 189       | incerto     |
+| message	         | 189       | incerto     |
 | mouseout         | 60        | incerto     |
 | mouseover        | 58        | não         |
 | keydown          | 56        | incerto     |
