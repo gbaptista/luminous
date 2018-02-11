@@ -4,21 +4,10 @@
 
 Update the version on `manifest.json`:
 ```json
-"version": "0.0.14"
+"version": "0.0.15"
 ```
 
 Copy all folders and files to the `builds/current/` directory.
-
-Remove those files and directories:
-```
-├ builds/current/
-│ ├ builds/
-│ ├ _config.yml
-│ ├ .git/
-│ ├ images/inkscape-files/
-│ ├ images/krita-files/
-│ └ images/stores/
-```
 
 Install [*UglifyJS*](https://github.com/mishoo/UglifyJS):
 ```shell
@@ -65,8 +54,8 @@ injections_controller(function() {
  /*
   * Disclaimer for reviewers:
   *
-  * The unminified version for the code below is available
-  * in the file > js/content/interceptor.js
+  * The non-minified version for the code below is available at:
+  * https://github.com/gbaptista/luminous/blob/0.0.15/js/content/interceptor.js
   *
   * This version was generated with the uglifyjs project
   * from the following command:
@@ -85,6 +74,24 @@ injections_controller(function() {
 });
 ```
 
+Remove those files and directories:
+```
+├ builds/current/
+│ ├ .git/
+│ ├ builds/
+│ ├ doc/
+│ ├ html/demo-page.html
+│ ├ html/external-content.txt
+│ ├ html/interface-sample.html
+│ ├ images/doc/
+│ ├ images/inkscape-files/
+│ ├ images/krita-files/
+│ ├ images/stores/
+│ ├ js/content/interceptor.js
+│ ├ _config.yml
+│ └ README.md
+```
+
 Test the current build at least in these 4 browsers:
 
 - *Chromium*
@@ -92,4 +99,14 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-14.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0-0-15.zip` and contact the repository owner to publish in all stores.
+
+Include this note for reviewers:
+```
+The non-minified version for the code in "js/content/injections/interceptor.js" is available at: https://github.com/gbaptista/luminous/blob/0.0.15/js/content/interceptor.js
+
+This version was generated with the uglifyjs project from the following command:
+> uglifyjs -c -m -- js/content/interceptor.js
+
+This was done for performance reasons.
+```
