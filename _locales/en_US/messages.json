@@ -79,5 +79,14 @@
   "settingsNotRecommendedText": { "message": "not recommended" },
   "settingsDefinitelyNotRecommendedText": { "message": "definitely not recommended" },
 
-  "settingsReportsTitle": { "message": "reports" }
+  "settingsReportsTitle": { "message": "reports" },
+  "settingsIndexedDbMdnHref": { "message": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" },
+  "settingsRecordsText": { "message": "records" },
+  "settingsEnableReportsGenerationText": { "message": "enable reports generation" },
+  "settingsMostExecutedJavaScriptCodesText": { "message": "most executed JavaScript codes:" },
+  "settingsDomainsMostJavaScriptCodesText": { "message": "domains that most runs JavaScript codes:" },
+  "settingsFilterButtonText": { "message": "filter" },
+  "settingsFilterByDomainPlaceHolderText": { "message": "filter by domain" },
+  "settingsNoRecordsText": { "message": "no records found" },
+  "settingsReportClearAllButtonText": { "message": "clear all records" }
 }

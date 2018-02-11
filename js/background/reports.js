@@ -1,7 +1,7 @@
 var db = new Dexie('luminous');
 
 db.version(1).stores({
-	reports: 'id,key,domain,kind,code,allowed,blocked,calls'
+	reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls'
 });
 
 db.open().then(function() {

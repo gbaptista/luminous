@@ -77,5 +77,16 @@
   "settingsAddEventToWebsiteTitle": { "message": "adicionar em [regras por site]:" },
 
   "settingsNotRecommendedText": { "message": "não recomendado" },
-  "settingsDefinitelyNotRecommendedText": { "message": "definitivamente não recomendado" }
+  "settingsDefinitelyNotRecommendedText": { "message": "definitivamente não recomendado" },
+
+  "settingsReportsTitle": { "message": "relatórios" },
+  "settingsIndexedDbMdnHref": { "message": "https://developer.mozilla.org/pt-BR/docs/Web/API/IndexedDB_API" },
+  "settingsRecordsText": { "message": "registros" },
+  "settingsEnableReportsGenerationText": { "message": "habilitar geração de relatórios" },
+  "settingsMostExecutedJavaScriptCodesText": { "message": "códigos JavaScript mais executados:" },
+  "settingsDomainsMostJavaScriptCodesText": { "message": "domínios que mais executam códigos JavaScript:" },
+  "settingsFilterButtonText": { "message": "filtrar" },
+  "settingsFilterByDomainPlaceHolderText": { "message": "filtrar por domínio" },
+  "settingsNoRecordsText": { "message": "nenhum registro encontrado" },
+  "settingsReportClearAllButtonText": { "message": "limpar todos os registros" }
 }

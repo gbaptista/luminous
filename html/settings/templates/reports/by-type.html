@@ -1,6 +1,21 @@
 <div class="card">
   <div class="card-header">
-    {{title}}
+    {{^domain_filter}}
+      {{title}}
+    {{/domain_filter}}
+    {{#domain_filter}}
+      <form id="domain-filter-form">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="">{{title}}</span>
+          </div>
+          <input id="filter-by-domain" type="text" class="form-control" placeholder="{{placeholder}}" aria-label="{{placeholder}}" aria-describedby="basic-addon2" value="{{domain}}">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">{{filter_buton_text}}</button>
+          </div>
+        </div>
+      </form>
+    {{/domain_filter}}
   </div>
   <div class="card-body">
     <div class="row">
