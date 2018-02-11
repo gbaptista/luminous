@@ -16,6 +16,7 @@ Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo n
 ## Como funciona?
 
  - [Relatórios](./how-it-works/reports.md)
+ - [O que é detectado?](./how-it-works/what-is_detected.md)
 
 ## Web APIs e eventos JavaScript
 
