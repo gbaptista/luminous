@@ -11,6 +11,7 @@ An experimental extension to identify, analyze and block code execution and even
 - [How to install](#how-to-install)
 - [Try it!](#try-it)
 - [Going deeper](#going-deeper)
+- [Guides](#guides)
 - [How to contribute](#how-to-contribute)
 - [Known issues](#known-issues)
 - [Understanding the code](#understanding-the-code)
@@ -63,9 +64,14 @@ While the book is not published, I suggest the following references to expand yo
 - Web page: [*Internet Health*](https://www.mozilla.org/en-US/internet-health/)
 - Web page: [*About Lightbeam*](https://www.mozilla.org/en-US/lightbeam/about)
 
+## Guides
+
+Guides are documents on many specific subjects where we can go deep into the details and easily find the information we are looking for. See [all guides](./guides/).
+
 ## How to contribute
 
   - [Spread the word](#spread-the-word)
+    - [Write some guide](#write-some-guide)
     - [Share](#share)
     - [Write and talk about it](#write-and-talk-about-it)
     - [Help with translations](#help-with-translations)
@@ -79,6 +85,10 @@ While the book is not published, I suggest the following references to expand yo
     - [Improve code quality](#improve-code-quality)
 
 ### Spread the word
+
+#### Write some guide
+
+Collaborate by writing some [guide](#guides) on subjects related to the project.
 
 #### Share
 
