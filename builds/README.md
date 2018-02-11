@@ -4,7 +4,7 @@
 
 Update the version on `manifest.json`:
 ```json
-"version": "0.0.13"
+"version": "0.0.14"
 ```
 
 Copy all folders and files to the `builds/current/` directory.
@@ -62,6 +62,18 @@ To:
 ```javascript
 injections_controller(function() {
 
+ /*
+  * Disclaimer for reviewers:
+  *
+  * The unminified version for the code below is available
+  * in the file > js/content/interceptor.js
+  *
+  * This version was generated with the uglifyjs project
+  * from the following command:
+  * > uglifyjs -c -m -- js/content/interceptor.js
+  *
+  * This was done for performance reasons.
+  */
   var content = 'UGLIFYJS_RESULT';
 
   var javascript_injection = document.createElement('script');
@@ -80,4 +92,4 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-13.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0-0-14.zip` and contact the repository owner to publish in all stores.
