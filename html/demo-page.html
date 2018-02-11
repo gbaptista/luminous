@@ -98,13 +98,15 @@
 
       (function() { setTimeout(function() {
 
-        navigator.geolocation.getCurrentPosition(function(pos) {
-          document.getElementById('getCurrentPosition').innerHTML = 'geolocation.getCurrentPosition' + '<br>' + pos.coords.latitude.toFixed(7) + ' | ' + pos.coords.longitude.toFixed(7);
-        }, undefined, { enableHighAccuracy: true });
+        if(navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(pos) {
+            document.getElementById('getCurrentPosition').innerHTML = 'geolocation.getCurrentPosition' + '<br>' + pos.coords.latitude.toFixed(7) + ' | ' + pos.coords.longitude.toFixed(7);
+          }, undefined, { enableHighAccuracy: true });
 
-        navigator.geolocation.watchPosition(function(pos) {
-          document.getElementById('watchPosition').innerHTML = 'geolocation.watchPosition' + '<br>' + pos.coords.latitude.toFixed(7) + ' | ' + pos.coords.longitude.toFixed(7);
-        }, undefined, { enableHighAccuracy: true });
+          navigator.geolocation.watchPosition(function(pos) {
+            document.getElementById('watchPosition').innerHTML = 'geolocation.watchPosition' + '<br>' + pos.coords.latitude.toFixed(7) + ' | ' + pos.coords.longitude.toFixed(7);
+          }, undefined, { enableHighAccuracy: true });
+        }
 
         var timeout_id = setTimeout(function() {
           alert('clearTimeout failed!');

@@ -157,50 +157,51 @@ WebSocket.prototype.send = function(data) {
 
 // Geolocation ---------------------------------------------
 
-var original_navigator_geolocation_getCurrentPosition = navigator.geolocation.getCurrentPosition;
+if(navigator.geolocation) {
+  var original_navigator_geolocation_getCurrentPosition = navigator.geolocation.getCurrentPosition;
 
-navigator.geolocation.getCurrentPosition = function(success, error, options) {
-  var super_this = this;
+  navigator.geolocation.getCurrentPosition = function(success, error, options) {
+    var super_this = this;
 
-  var details = { target: super_this, code: JSON.stringify(options) };
+    var details = { target: super_this, code: JSON.stringify(options) };
 
-  var wraped_success = function(pos) {
-    if(!is_allowed('WebAPIs', 'geo.getCurrentPosition')) {
-      increment_counter('WebAPIs', 'geo.getCurrentPosition', 'blocked', details);
-    } else {
-      increment_counter('WebAPIs', 'geo.getCurrentPosition', 'allowed', details);
+    var wraped_success = function(pos) {
+      if(!is_allowed('WebAPIs', 'geo.getCurrentPosition')) {
+        increment_counter('WebAPIs', 'geo.getCurrentPosition', 'blocked', details);
+      } else {
+        increment_counter('WebAPIs', 'geo.getCurrentPosition', 'allowed', details);
 
-      success(pos);
+        success(pos);
+      }
     }
+
+    return original_navigator_geolocation_getCurrentPosition.call(
+      super_this, wraped_success, error, options
+    );
   }
 
-  return original_navigator_geolocation_getCurrentPosition.call(
-    super_this, wraped_success, error, options
-  );
-}
+  var original_navigator_geolocation_watchPosition = navigator.geolocation.watchPosition;
 
-var original_navigator_geolocation_watchPosition = navigator.geolocation.watchPosition;
+  navigator.geolocation.watchPosition = function(success, error, options) {
+    var super_this = this;
 
-navigator.geolocation.watchPosition = function(success, error, options) {
-  var super_this = this;
+    var details = { target: super_this, code: JSON.stringify(options) };
 
-  var details = { target: super_this, code: JSON.stringify(options) };
+    var wraped_success = function(pos) {
+      if(!is_allowed('WebAPIs', 'geo.watchPosition')) {
+        increment_counter('WebAPIs', 'geo.watchPosition', 'blocked', details);
+      } else {
+        increment_counter('WebAPIs', 'geo.watchPosition', 'allowed', details);
 
-  var wraped_success = function(pos) {
-    if(!is_allowed('WebAPIs', 'geo.watchPosition')) {
-      increment_counter('WebAPIs', 'geo.watchPosition', 'blocked', details);
-    } else {
-      increment_counter('WebAPIs', 'geo.watchPosition', 'allowed', details);
-
-      success(pos);
+        success(pos);
+      }
     }
+
+    return original_navigator_geolocation_watchPosition.call(
+      super_this, wraped_success, error, options
+    );
   }
-
-  return original_navigator_geolocation_watchPosition.call(
-    super_this, wraped_success, error, options
-  );
 }
-
 // XMLHttpRequest ---------------------------------------------
 
 var original_XMLHttpRequest_open = XMLHttpRequest.prototype.open;
