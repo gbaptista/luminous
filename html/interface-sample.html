@@ -3,376 +3,587 @@
     <title>Luminous: JavaScript events blocker</title>
     <link rel="stylesheet" type="text/css" href="../css/popup/popup.css">
   </head>
-  <body>
+  <body class="zoom-in">
     <div>
-      <a href="https://github.com/gbaptista/luminous/releases/tag/0.0.15" id="version" target="_blank">0.0.15</a><a href="https://gbaptista.github.io/luminous/doc/en-US" id="help-link" target="_blank">help</a>
-      <div id="options-container"><form>
-  <label>
-    <input type="checkbox" name="general" value="true" checked=""> all websites
-  </label>
-      <br>
+      <div id="loading">loading...</div>
+      <div id="options-container"><form class="options-form">
+  <div class="col-2">
+    <a href="https://github.com/gbaptista/luminous/releases/tag/0.0.15" id="version" target="_blank">0.0.15</a>
+    <a href="https://gbaptista.github.io/luminous/doc/en-US" id="help-link" class="top-link" target="_blank">help</a>
+    <a href="../settings/injection/enabled.html" id="settings-link" class="top-link" target="_blank">settings</a>
+  </div>
+
+  <div class="col-1">
+    <label class="general-injection-label">
+      <input type="checkbox" name="general" value="true" checked="">
+      all websites
+    </label>
+  </div>
+  <br class="clear-floats">
+
+
+  <div class="col-1">
       <label>
-        <input type="checkbox" name="www.facebook.com" value="true" checked=""> www.facebook.com
+        <input type="checkbox" name="github.com" value="true" checked="">
+        github.com
       </label>
-  <br>
-  <label>
-    <input type="checkbox" name="show_code_details" value="true"> show intercepted code details
-  </label>
+    <br class="clear-floats">
+    <label>
+      <input type="checkbox" name="apply_to_default" value="true">
+      apply actions to default rules
+    </label>
+  </div>
+
+  <div class="col-2">
+    <label>
+      zoom in
+      <input type="checkbox" name="zoom_in" value="true">
+    </label>
+    <br>
+    <label>
+      show intercepted code details
+      <input type="checkbox" name="show_code_details" value="true" checked="">
+    </label>
+</div>
+<br class="clear-floats">
 </form>
 </div>
       <div id="counters-container">  <div class="interceptions">
+    <h2>Web APIs:</h2>
+
+      <div class="calls " data-kind="WebAPIs" data-type="fetch" data-tippy="" data-original-title="<strong>fetch</strong> -> <strong>Window</strong><br><pre><code>https:&amp;#x2F;&amp;#x2F;api.github.com&amp;#x2F;_private&amp;#x2F;browser&amp;#x2F;errors</code></pre>">
+        <span class="name">fetch</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setInterval" data-tippy="" data-original-title="<strong>setInterval</strong> -> <strong>Window</strong><br><pre><code>function i(){var e&amp;#x3D;void 0,t&amp;#x3D;void 0,n&amp;#x3D;void 0;for(t&amp;#x3D;0,n&amp;#x3D;y.length;t&amp;lt;n;t++)(e&amp;#x3D;y[t]).textContent&amp;#x3D;e.getFormattedDate()}</code></pre>">
+        <span class="name">setInterval</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setTimeout" data-tippy="" data-original-title="<strong>setTimeout</strong> -> <strong>Window</strong><br><pre><code>function (){a(l),l.length&amp;#x3D;0}</code></pre><pre><code>function (){t()}</code></pre><pre><code>function (){c&amp;#x3D;null,i(),m.dispatchEvent(Object.assign(new CustomEvent(&amp;quot;timeout&amp;quot;),{attempts:v,reconnects:g}))}</code></pre>">
+        <span class="name">setTimeout</span>
+        <span class="allowed" style="background-color:#e6b800;">389</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setTimeout.call" data-tippy="" data-original-title="<strong>setTimeout.call</strong> -> <strong>Window</strong><br><pre><code>function (){(0,a[n].reject)(new Error(&amp;quot;timeout loading module: &amp;quot;+n))}</code></pre><pre><code>function (){(0,a[n].reject)(new Error(&amp;quot;timeout loading module: &amp;quot;+n))}</code></pre><pre><code>function (){(0,a[n].reject)(new Error(&amp;quot;timeout loading module: &amp;quot;+n))}</code></pre>">
+        <span class="name">setTimeout.call</span>
+        <span class="allowed" style="background-color:#e6b800;">389</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="WebSocket.send" data-tippy="" data-original-title="<strong>WebSocket.send</strong> -> <strong>WebSocket</strong><br><pre><code>subscribe:notification-changed:29520</code></pre>">
+        <span class="name">WebSocket.send</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="XMLHttpRequest.open" data-tippy="" data-original-title="<strong>XMLHttpRequest.open</strong> -> <strong>POST</strong><br><pre><code>https:&amp;#x2F;&amp;#x2F;api.github.com&amp;#x2F;_private&amp;#x2F;browser&amp;#x2F;stats</code></pre>">
+        <span class="name">XMLHttpRequest.open</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="XMLHttpRequest.send" data-tippy="" data-original-title="<strong>XMLHttpRequest.send</strong> -> <strong>XMLHttpRequest</strong><br><pre><code>{&amp;quot;stats&amp;quot;:[{&amp;quot;features&amp;quot;:{&amp;quot;beacon&amp;quot;:true,&amp;quot;classlist&amp;quot;:true,&amp;quot;classlistMultiArg&amp;quot;:true,&amp;quot;closest&amp;quot;:true,&amp;quot;customElements&amp;quot;:true,&amp;quot;customEvent&amp;quot;:true,&amp;quot;emojiUnicodeVersion&amp;quot;:0,&amp;quot;fetch&amp;quot;:false,&amp;quot;highResolutionTime&amp;quot;:true,&amp;quot;matchesSelector&amp;quot;:true,&amp;quot;promises&amp;quot;:true,&amp;quot;stringEndsWith&amp;quot;:true,&amp;quot;stringStartsWith&amp;quot;:true,&amp;quot;timezone&amp;quot;:true,&amp;quot;url&amp;quot;:true,&amp;quot;urlSearchParams&amp;quot;:true,&amp;quot;userTimingEntries&amp;quot;:true,&amp;quot;userTimingMark&amp;quot;:true,&amp;quot;weakmap&amp;quot;:true}},{&amp;quot;</code></pre>">
+        <span class="name">XMLHttpRequest.send</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+
     <h2>triggered events (handleEvent):</h2>
 
-      <div class="calls " data-kind="handleEvent" data-type="blur" data-tippy="" data-original-title="<strong>blur</strong> -> <strong>Window</strong>">
-        <span class="name">blur</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="canplay" data-tippy="" data-original-title="<strong>canplay</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">canplay</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong>">
+      <div class="calls " data-kind="handleEvent" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong><br><pre><code>undefined</code></pre><pre><code>function (){e()}</code></pre><pre><code>function N(){H.removeEventListener(&amp;quot;DOMContentLoaded&amp;quot;,N),e.removeEventListener(&amp;quot;load&amp;quot;,N),G.ready()}</code></pre>">
         <span class="name">DOMContentLoaded</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="handleEvent" data-type="error" data-tippy="" data-original-title="<strong>error</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="handleEvent" data-type="error" data-tippy="" data-original-title="<strong>error</strong> -> <strong>Window</strong><br><pre><code>function a(e){l()&amp;amp;&amp;amp;u(function(e){var t&amp;#x3D;e.message,n&amp;#x3D;e.filename,r&amp;#x3D;e.lineno,o&amp;#x3D;e.colno;return c(e.error,{message:t,filename:n,lineno:r,colno:o})}(e))}</code></pre>">
         <span class="name">error</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="handleEvent" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>HTMLImageElement</strong>">
+      <div class="calls " data-kind="handleEvent" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>Window</strong><br><pre><code>function () { [native code] }</code></pre>">
         <span class="name">load</span>
-        <span class="allowed" style="background-color:#8D8E87;">32</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="loadedmetadata" data-tippy="" data-original-title="<strong>loadedmetadata</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">loadedmetadata</span>
-        <span class="allowed" style="background-color:#8D8E87;">2</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong>">
-        <span class="name">message</span>
-        <span class="allowed" style="background-color:#e6b800;">481</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="mousemove" data-tippy="" data-original-title="<strong>mousemove</strong> -> <strong>HTMLHtmlElement</strong>">
-        <span class="name">mousemove</span>
-        <span class="allowed" style="background-color:#8D8E87;">36</span>
-        <span class="blocked" style="background-color:#8D8E87;">30</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="mouseout" data-tippy="" data-original-title="<strong>mouseout</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">mouseout</span>
-        <span class="allowed" style="background-color:#8D8E87;">2</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="mouseover" data-tippy="" data-original-title="<strong>mouseover</strong> -> <strong>HTMLHtmlElement</strong>">
-        <span class="name">mouseover</span>
-        <span class="allowed" style="background-color:#8D8E87;">8</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="progress" data-tippy="" data-original-title="<strong>progress</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">progress</span>
-        <span class="allowed" style="background-color:#8D8E87;">5</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="handleEvent" data-type="sourceopen" data-tippy="" data-original-title="<strong>sourceopen</strong> -> <strong>MediaSource</strong>">
-        <span class="name">sourceopen</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="handleEvent" data-type="updateend" data-tippy="" data-original-title="<strong>updateend</strong> -> <strong>SourceBuffer</strong>">
-        <span class="name">updateend</span>
-        <span class="allowed" style="background-color:#8D8E87;">15</span>
+      <div class="calls " data-kind="handleEvent" data-type="loadend" data-tippy="" data-original-title="<strong>loadend</strong> -> <strong>XMLHttpRequest</strong><br><pre><code>function (){o({requestID:r,statusCode:u.status})}</code></pre>">
+        <span class="name">loadend</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong><br><pre><code>function (n){n.source&amp;#x3D;&amp;#x3D;&amp;#x3D;e&amp;amp;&amp;amp;&amp;quot;string&amp;quot;&amp;#x3D;&amp;#x3D;typeof n.data&amp;amp;&amp;amp;0&amp;#x3D;&amp;#x3D;&amp;#x3D;n.data.indexOf(t)&amp;amp;&amp;amp;o(+n.data.slice(t.length))}</code></pre>">
+        <span class="name">message</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="open" data-tippy="" data-original-title="<strong>open</strong> -> <strong>WebSocket</strong><br><pre><code>function (t){m.dispatchEvent(t);var n&amp;#x3D;m[&amp;quot;on&amp;quot;+e];if(&amp;quot;function&amp;quot;&amp;#x3D;&amp;#x3D;typeof n)return n.apply(m,arguments)}</code></pre>">
+        <span class="name">open</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="pageshow" data-tippy="" data-original-title="<strong>pageshow</strong> -> <strong>Window</strong><br><pre><code>function (){s(a())}</code></pre><pre><code>function (){v&amp;#x3D;!1}</code></pre>">
+        <span class="name">pageshow</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
 
     <h2>attached events (addEventListener):</h2>
 
-      <div class="calls " data-kind="addEventListener" data-type="blur" data-tippy="" data-original-title="<strong>blur</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;#</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="ajaxComplete" data-tippy="" data-original-title="<strong>ajaxComplete</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre>">
+        <span class="name">ajaxComplete</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="ajaxError" data-tippy="" data-original-title="<strong>ajaxError</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre>">
+        <span class="name">ajaxError</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="ajaxSend" data-tippy="" data-original-title="<strong>ajaxSend</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre>">
+        <span class="name">ajaxSend</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="ajaxSuccess" data-tippy="" data-original-title="<strong>ajaxSuccess</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre>">
+        <span class="name">ajaxSuccess</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="autocheck:complete" data-tippy="" data-original-title="<strong>autocheck:complete</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">autocheck:complete</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="autocheck:send" data-tippy="" data-original-title="<strong>autocheck:send</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">autocheck:send</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="autocheck:success" data-tippy="" data-original-title="<strong>autocheck:success</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">autocheck:success</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="autocomplete:autocompleted:changed" data-tippy="" data-original-title="<strong>autocomplete:autocompleted:changed</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">autocomplete:autocompleted:changed</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="autocomplete:result" data-tippy="" data-original-title="<strong>autocomplete:result</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">autocomplete:result</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="beforeunload" data-tippy="" data-original-title="<strong>beforeunload</strong> -> <strong>Window</strong><br><pre><code>function (e){setTimeout(function(){e.defaultPrevented||(m&amp;#x3D;!0,p&amp;amp;&amp;amp;clearTimeout(p),l.length&amp;gt;0&amp;amp;&amp;amp;u(l))})}</code></pre>">
+        <span class="name">beforeunload</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="blur" data-tippy="" data-original-title="<strong>blur</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (n){setTimeout(function(){var r&amp;#x3D;n.target;r!&amp;#x3D;&amp;#x3D;document.activeElement&amp;amp;&amp;amp;((0,e.fire)(r,&amp;quot;focusout:delay&amp;quot;),t.delete(n.target))},200)}</code></pre>">
         <span class="name">blur</span>
-        <span class="allowed" style="background-color:#8D8E87;">21</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="canplay" data-tippy="" data-original-title="<strong>canplay</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">canplay</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="change" data-tippy="" data-original-title="<strong>change</strong> -> <strong>HTMLInputElement</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="bulk-actions:update" data-tippy="" data-original-title="<strong>bulk-actions:update</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">bulk-actions:update</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="change" data-tippy="" data-original-title="<strong>change</strong> -> <strong>HTMLHtmlElement</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function () { [native code] }</code></pre>">
         <span class="name">change</span>
-        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="click" data-tippy="" data-original-title="<strong>click</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;#</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="click" data-tippy="" data-original-title="<strong>click</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function t(){}</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
         <span class="name">click</span>
-        <span class="allowed" style="background-color:#e6b800;">129</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="contextmenu" data-tippy="" data-original-title="<strong>contextmenu</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">contextmenu</span>
         <span class="allowed" style="background-color:#8D8E87;">4</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="dblclick" data-tippy="" data-original-title="<strong>dblclick</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">dblclick</span>
+      <div class="calls " data-kind="addEventListener" data-type="close" data-tippy="" data-original-title="<strong>close</strong> -> <strong>WebSocket</strong><br><pre><code>function (t){m.dispatchEvent(t);var n&amp;#x3D;m[&amp;quot;on&amp;quot;+e];if(&amp;quot;function&amp;quot;&amp;#x3D;&amp;#x3D;typeof n)return n.apply(m,arguments)}</code></pre>">
+        <span class="name">close</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="details:toggled" data-tippy="" data-original-title="<strong>details:toggled</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">details:toggled</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong><br><pre><code>undefined</code></pre><pre><code>function (){e()}</code></pre><pre><code>function N(){H.removeEventListener(&amp;quot;DOMContentLoaded&amp;quot;,N),e.removeEventListener(&amp;quot;load&amp;quot;,N),G.ready()}</code></pre>">
         <span class="name">DOMContentLoaded</span>
         <span class="allowed" style="background-color:#8D8E87;">3</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="DOMMouseScroll" data-tippy="" data-original-title="<strong>DOMMouseScroll</strong> -> <strong>HTMLHtmlElement</strong>">
-        <span class="name">DOMMouseScroll</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="dragstart" data-tippy="" data-original-title="<strong>dragstart</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">dragstart</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="ended" data-tippy="" data-original-title="<strong>ended</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">ended</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="error" data-tippy="" data-original-title="<strong>error</strong> -> <strong>HTMLImageElement</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="error" data-tippy="" data-original-title="<strong>error</strong> -> <strong>Window</strong><br><pre><code>function (t){m.dispatchEvent(t);var n&amp;#x3D;m[&amp;quot;on&amp;quot;+e];if(&amp;quot;function&amp;quot;&amp;#x3D;&amp;#x3D;typeof n)return n.apply(m,arguments)}</code></pre><pre><code>function a(e){l()&amp;amp;&amp;amp;u(function(e){var t&amp;#x3D;e.message,n&amp;#x3D;e.filename,r&amp;#x3D;e.lineno,o&amp;#x3D;e.colno;return c(e.error,{message:t,filename:n,lineno:r,colno:o})}(e))}</code></pre>">
         <span class="name">error</span>
-        <span class="allowed" style="background-color:#8D8E87;">40</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="focus" data-tippy="" data-original-title="<strong>focus</strong> -> <strong>Window</strong>">
-        <span class="name">focus</span>
-        <span class="allowed" style="background-color:#8D8E87;">26</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="focusin" data-tippy="" data-original-title="<strong>focusin</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">focusin</span>
-        <span class="allowed" style="background-color:#8D8E87;">5</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="focusout" data-tippy="" data-original-title="<strong>focusout</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">focusout</span>
-        <span class="allowed" style="background-color:#8D8E87;">4</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="fullscreenchange" data-tippy="" data-original-title="<strong>fullscreenchange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">fullscreenchange</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="input" data-tippy="" data-original-title="<strong>input</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">input</span>
-        <span class="allowed" style="background-color:#8D8E87;">3</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="invalid" data-tippy="" data-original-title="<strong>invalid</strong> -> <strong>HTMLInputElement</strong>">
-        <span class="name">invalid</span>
-        <span class="allowed" style="background-color:#8D8E87;">5</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="keydown" data-tippy="" data-original-title="<strong>keydown</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;#</strong>">
-        <span class="name">keydown</span>
-        <span class="allowed" style="background-color:#8D8E87;">27</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="keypress" data-tippy="" data-original-title="<strong>keypress</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">keypress</span>
-        <span class="allowed" style="background-color:#8D8E87;">3</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="keyup" data-tippy="" data-original-title="<strong>keyup</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">keyup</span>
-        <span class="allowed" style="background-color:#8D8E87;">10</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>HTMLImageElement</strong>">
-        <span class="name">load</span>
-        <span class="allowed" style="background-color:#8D8E87;">32</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="loadedmetadata" data-tippy="" data-original-title="<strong>loadedmetadata</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">loadedmetadata</span>
         <span class="allowed" style="background-color:#8D8E87;">2</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong>">
-        <span class="name">message</span>
-        <span class="allowed" style="background-color:#8D8E87;">5</span>
+      <div class="calls " data-kind="addEventListener" data-type="facebox:afterClose" data-tippy="" data-original-title="<strong>facebox:afterClose</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (){(0,l.default)(&amp;quot;#facebox&amp;quot;).off(&amp;quot;keydown&amp;quot;,d.default),(0,l.default)(&amp;quot;#facebox :focus&amp;quot;).blur()}</code></pre>">
+        <span class="name">facebox:afterClose</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="mousedown" data-tippy="" data-original-title="<strong>mousedown</strong> -> <strong>HTMLFormElement</strong>">
-        <span class="name">mousedown</span>
-        <span class="allowed" style="background-color:#8D8E87;">29</span>
+      <div class="calls " data-kind="addEventListener" data-type="facebox:close" data-tippy="" data-original-title="<strong>facebox:close</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (){if(document.querySelector(&amp;quot;#facebox .js-disable-saml-confirmation&amp;quot;)){var e&amp;#x3D;document.querySelector(&amp;quot;.js-org-enable-saml&amp;quot;);e&amp;amp;&amp;amp;e instanceof HTMLInputElement&amp;amp;&amp;amp;(e.checked&amp;#x3D;!0,c(u()))}}</code></pre><pre><code>function (){var e&amp;#x3D;document.querySelector(&amp;quot;.js-add-members-container&amp;quot;);e&amp;amp;&amp;amp;(e.innerHTML&amp;#x3D;b)}</code></pre><pre><code>function u(){(0,l.default)(document).unbind(&amp;quot;keydown.facebox&amp;quot;),(0,l.default)(&amp;quot;.facebox&amp;quot;).hide(),(0,l.default)(&amp;quot;.facebox-content&amp;quot;).removeClass().addClass(&amp;quot;facebox-content&amp;quot;),(0,l.default)(&amp;quot;.facebox-loading&amp;quot;).remove(),c(document,&amp;quot;facebox:afterClose&amp;quot;),function(){if(!s()){var e&amp;#x3D;document.querySelector(&amp;quot;.facebox-overlay&amp;quot;);e&amp;amp;&amp;amp;e.remove()}}()}</code></pre>">
+        <span class="name">facebox:close</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="mousemove" data-tippy="" data-original-title="<strong>mousemove</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">mousemove</span>
+      <div class="calls " data-kind="addEventListener" data-type="facebox:reveal" data-tippy="" data-original-title="<strong>facebox:reveal</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (){var e&amp;#x3D;document.querySelector(&amp;quot;.facebox&amp;quot;);requestIdleCallback(function(){return(0,a.scanForProblems)(e,o,u)})}</code></pre><pre><code>function (){var n&amp;#x3D;document.querySelector(&amp;quot;#facebox .js-new-label-name-input&amp;quot;);if(n){n&amp;#x3D;(0,D.default)(n,HTMLInputElement),function(){var e&amp;#x3D;(0,t.query)(document,&amp;quot;.js-issue-sidebar-form .js-label-filter-field&amp;quot;,HTMLInputElement);e.value&amp;#x3D;e.defaultValue}(),function(){var t&amp;#x3D;R();t&amp;amp;&amp;amp;(0,e.deactivate)(t)}();var r&amp;#x3D;(0,t.query)(document,&amp;quot;.js-issue-sidebar-form .js-new-label-name&amp;quot;).textContent;n.value&amp;#x3D;r,x(n);var </code></pre><pre><code>function (){var e&amp;#x3D;document.querySelector(&amp;quot;#facebox .js-pinned-repos-settings-fragment&amp;quot;);if(e){var t&amp;#x3D;e.getAttribute(&amp;quot;data-url&amp;quot;);(0,f.default)(t,&amp;quot;&amp;#x60;data-url&amp;#x60; must exist -- github&amp;#x2F;legacy&amp;#x2F;pages&amp;#x2F;users&amp;#x2F;pinned-repositories.js:149&amp;quot;),e.setAttribute(&amp;quot;src&amp;quot;,t)}}</code></pre>">
+        <span class="name">facebox:reveal</span>
         <span class="allowed" style="background-color:#8D8E87;">6</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="mouseout" data-tippy="" data-original-title="<strong>mouseout</strong> -> <strong>HTMLLIElement</strong>">
-        <span class="name">mouseout</span>
-        <span class="allowed" style="background-color:#8D8E87;">16</span>
+      <div class="calls " data-kind="addEventListener" data-type="filterable:change" data-tippy="" data-original-title="<strong>filterable:change</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">filterable:change</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="mouseover" data-tippy="" data-original-title="<strong>mouseover</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">mouseover</span>
-        <span class="allowed" style="background-color:#8D8E87;">32</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="mouseup" data-tippy="" data-original-title="<strong>mouseup</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;#</strong>">
-        <span class="name">mouseup</span>
-        <span class="allowed" style="background-color:#8D8E87;">22</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="mousewheel" data-tippy="" data-original-title="<strong>mousewheel</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">mousewheel</span>
+      <div class="calls " data-kind="addEventListener" data-type="focus" data-tippy="" data-original-title="<strong>focus</strong> -> <strong>HTMLDocument</strong><br><pre><code>function a(e){var t&amp;#x3D;e.currentTarget;(0,f.default)(function(){(0,n.fire)(t,&amp;quot;filterable:change&amp;quot;)})}</code></pre><pre><code>function a(e){var t&amp;#x3D;e.currentTarget;(0,f.default)(function(){(0,n.fire)(t,&amp;quot;filterable:change&amp;quot;)})}</code></pre><pre><code>function (e){G.event.simulate(t,e.target,G.event.fix(e))}</code></pre>">
+        <span class="name">focus</span>
         <span class="allowed" style="background-color:#8D8E87;">5</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="mozfullscreenchange" data-tippy="" data-original-title="<strong>mozfullscreenchange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">mozfullscreenchange</span>
+      <div class="calls " data-kind="addEventListener" data-type="focusin" data-tippy="" data-original-title="<strong>focusin</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function e(){r&amp;#x3D;document.activeElement,document.body&amp;amp;&amp;amp;document.body.classList.toggle(&amp;quot;intent-mouse&amp;quot;,a)}</code></pre>">
+        <span class="name">focusin</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="focusin:delay" data-tippy="" data-original-title="<strong>focusin:delay</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">focusin:delay</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="MSFullscreenChange" data-tippy="" data-original-title="<strong>MSFullscreenChange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">MSFullscreenChange</span>
+      <div class="calls " data-kind="addEventListener" data-type="focusout" data-tippy="" data-original-title="<strong>focusout</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">focusout</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="offline" data-tippy="" data-original-title="<strong>offline</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="gist:filedrop" data-tippy="" data-original-title="<strong>gist:filedrop</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre>">
+        <span class="name">gist:filedrop</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="hashchange" data-tippy="" data-original-title="<strong>hashchange</strong> -> <strong>Window</strong><br><pre><code>function (e){var t&amp;#x3D;e.newURL||window.location.href,n&amp;#x3D;t.slice(t.indexOf(&amp;quot;#&amp;quot;)+1,t.length),r&amp;#x3D;document.getElementById(n);r&amp;amp;&amp;amp;(e.stopPropagation(),k(r))}</code></pre><pre><code>function r(){if(!document.querySelector(&amp;quot;:target&amp;quot;)){var t&amp;#x3D;(0,e.decodeFragmentValue)(location.hash),n&amp;#x3D;(0,e.findElementByFragmentName)(document,&amp;quot;user-content-&amp;quot;+t);n&amp;amp;&amp;amp;n.scrollIntoView()}}</code></pre><pre><code>function (e){var t&amp;#x3D;window.location.href;try{o(i,e.oldURL||s,t)}finally{s&amp;#x3D;t}}</code></pre>">
+        <span class="name">hashchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="inlinecomment:collapse" data-tippy="" data-original-title="<strong>inlinecomment:collapse</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (){c()}</code></pre>">
+        <span class="name">inlinecomment:collapse</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="input" data-tippy="" data-original-title="<strong>input</strong> -> <strong>HTMLInputElement</strong><br><pre><code>function i(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:55&amp;quot;),(0,a.default)(e.currentTarget instanceof HTMLInputElement||e.currentTarget instanceof HTMLTextAreaElement,&amp;quot;github&amp;#x2F;throttled-input.js:56&amp;quot;),t.inputed&amp;#x3D;!0,t.keypressed||n(e.currentTarget)}</code></pre><pre><code>function i(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:55&amp;quot;),(0,a.default)(e.currentTarget instanceof HTMLInputElement||e.currentTarget instanceof HTMLTextAreaElement,&amp;quot;github&amp;#x2F;throttled-input.js:56&amp;quot;),t.inputed&amp;#x3D;!0,t.keypressed||n(e.currentTarget)}</code></pre>">
+        <span class="name">input</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keydown" data-tippy="" data-original-title="<strong>keydown</strong> -> <strong>HTMLDocument</strong><br><pre><code>function r(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:36&amp;quot;),t.keypressed&amp;#x3D;!0,null!&amp;#x3D;t.timer&amp;amp;&amp;amp;clearTimeout(t.timer)}</code></pre><pre><code>function r(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:36&amp;quot;),t.keypressed&amp;#x3D;!0,null!&amp;#x3D;t.timer&amp;amp;&amp;amp;clearTimeout(t.timer)}</code></pre><pre><code>function (e){&amp;quot;Escape&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;e.key&amp;amp;&amp;amp;t&amp;amp;&amp;amp;(t.open&amp;#x3D;!1)}</code></pre>">
+        <span class="name">keydown</span>
+        <span class="allowed" style="background-color:#8D8E87;">6</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keypress" data-tippy="" data-original-title="<strong>keypress</strong> -> <strong>HTMLBodyElement</strong><br><pre><code>function (e){if(e.target instanceof HTMLElement){var t&amp;#x3D;e.target&amp;#x3D;&amp;#x3D;&amp;#x3D;document.body,r&amp;#x3D;e.target.classList.contains(&amp;quot;facebox-header&amp;quot;);(t||r)&amp;amp;&amp;amp;&amp;quot;?&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;e.key&amp;amp;&amp;amp;(Array.from(document.querySelectorAll(&amp;quot;.facebox&amp;quot;)).some(u.default)?(0,n.close)():i(),e.preventDefault())}}</code></pre>">
+        <span class="name">keypress</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keyup" data-tippy="" data-original-title="<strong>keyup</strong> -> <strong>HTMLInputElement</strong><br><pre><code>function o(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:45&amp;quot;),(0,a.default)(e.currentTarget instanceof HTMLInputElement||e.currentTarget instanceof HTMLTextAreaElement,&amp;quot;github&amp;#x2F;throttled-input.js:46&amp;quot;),t.keypressed&amp;#x3D;!1,t.inputed&amp;amp;&amp;amp;n(e.currentTarget)}</code></pre><pre><code>function o(e){var t&amp;#x3D;s.get(e.currentTarget);(0,a.default)(t,&amp;quot;github&amp;#x2F;throttled-input.js:45&amp;quot;),(0,a.default)(e.currentTarget instanceof HTMLInputElement||e.currentTarget instanceof HTMLTextAreaElement,&amp;quot;github&amp;#x2F;throttled-input.js:46&amp;quot;),t.keypressed&amp;#x3D;!1,t.inputed&amp;amp;&amp;amp;n(e.currentTarget)}</code></pre>">
+        <span class="name">keyup</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>Window</strong><br><pre><code>function () { [native code] }</code></pre><pre><code>function N(){H.removeEventListener(&amp;quot;DOMContentLoaded&amp;quot;,N),e.removeEventListener(&amp;quot;load&amp;quot;,N),G.ready()}</code></pre>">
+        <span class="name">load</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="loadend" data-tippy="" data-original-title="<strong>loadend</strong> -> <strong>XMLHttpRequest</strong><br><pre><code>function (){o({requestID:r,statusCode:u.status})}</code></pre>">
+        <span class="name">loadend</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="menu:activate" data-tippy="" data-original-title="<strong>menu:activate</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">menu:activate</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="menu:activated" data-tippy="" data-original-title="<strong>menu:activated</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">menu:activated</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="menu:deactivate" data-tippy="" data-original-title="<strong>menu:deactivate</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">menu:deactivate</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong><br><pre><code>function (t){m.dispatchEvent(t);var n&amp;#x3D;m[&amp;quot;on&amp;quot;+e];if(&amp;quot;function&amp;quot;&amp;#x3D;&amp;#x3D;typeof n)return n.apply(m,arguments)}</code></pre><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre><pre><code>function (n){n.source&amp;#x3D;&amp;#x3D;&amp;#x3D;e&amp;amp;&amp;amp;&amp;quot;string&amp;quot;&amp;#x3D;&amp;#x3D;typeof n.data&amp;amp;&amp;amp;0&amp;#x3D;&amp;#x3D;&amp;#x3D;n.data.indexOf(t)&amp;amp;&amp;amp;o(+n.data.slice(t.length))}</code></pre>">
+        <span class="name">message</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mousedown" data-tippy="" data-original-title="<strong>mousedown</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function (){a&amp;#x3D;!0,r&amp;#x3D;&amp;#x3D;&amp;#x3D;document.activeElement&amp;amp;&amp;amp;e()}</code></pre>">
+        <span class="name">mousedown</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mousemove" data-tippy="" data-original-title="<strong>mousemove</strong> -> <strong>HTMLDivElement</strong><br><pre><code>function u(e){M.x&amp;#x3D;&amp;#x3D;&amp;#x3D;e.clientX&amp;amp;&amp;amp;M.y&amp;#x3D;&amp;#x3D;&amp;#x3D;e.clientY||(A&amp;#x3D;!1),M&amp;#x3D;{x:e.clientX,y:e.clientY}}</code></pre>">
+        <span class="name">mousemove</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mouseover" data-tippy="" data-original-title="<strong>mouseover</strong> -> <strong>HTMLDivElement</strong><br><pre><code>function c(e){if(!A){var t&amp;#x3D;e.currentTarget;if(t.closest(&amp;quot;.js-active-navigation-container&amp;quot;)){var n&amp;#x3D;e.target.closest(&amp;quot;.js-navigation-item&amp;quot;);n&amp;amp;&amp;amp;b(n,t)}}}</code></pre>">
+        <span class="name">mouseover</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="navigation:focus" data-tippy="" data-original-title="<strong>navigation:focus</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">navigation:focus</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="navigation:keydown" data-tippy="" data-original-title="<strong>navigation:keydown</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">navigation:keydown</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="navigation:keyopen" data-tippy="" data-original-title="<strong>navigation:keyopen</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">navigation:keyopen</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="navigation:open" data-tippy="" data-original-title="<strong>navigation:open</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">navigation:open</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="offline" data-tippy="" data-original-title="<strong>offline</strong> -> <strong>Window</strong><br><pre><code>function (){p&amp;#x3D;!0,f.close(1e3)}</code></pre>">
         <span class="name">offline</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="online" data-tippy="" data-original-title="<strong>online</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="online" data-tippy="" data-original-title="<strong>online</strong> -> <strong>Window</strong><br><pre><code>function (e){p&amp;amp;&amp;amp;(s(),u(e))}</code></pre>">
         <span class="name">online</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="pagehide" data-tippy="" data-original-title="<strong>pagehide</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="open" data-tippy="" data-original-title="<strong>open</strong> -> <strong>WebSocket</strong><br><pre><code>function (t){m.dispatchEvent(t);var n&amp;#x3D;m[&amp;quot;on&amp;quot;+e];if(&amp;quot;function&amp;quot;&amp;#x3D;&amp;#x3D;typeof n)return n.apply(m,arguments)}</code></pre>">
+        <span class="name">open</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="page:loaded" data-tippy="" data-original-title="<strong>page:loaded</strong> -> <strong>HTMLFormElement</strong><br><pre><code>function (){m(n)}</code></pre><pre><code>function (){m(n)}</code></pre>">
+        <span class="name">page:loaded</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pagehide" data-tippy="" data-original-title="<strong>pagehide</strong> -> <strong>Window</strong><br><pre><code>function (){o(a())}</code></pre><pre><code>function (){v&amp;#x3D;!0}</code></pre>">
         <span class="name">pagehide</span>
         <span class="allowed" style="background-color:#8D8E87;">2</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="paste" data-tippy="" data-original-title="<strong>paste</strong> -> <strong>HTMLHtmlElement</strong>">
-        <span class="name">paste</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="pause" data-tippy="" data-original-title="<strong>pause</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">pause</span>
-        <span class="allowed" style="background-color:#8D8E87;">4</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="play" data-tippy="" data-original-title="<strong>play</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">play</span>
+      <div class="calls " data-kind="addEventListener" data-type="pageshow" data-tippy="" data-original-title="<strong>pageshow</strong> -> <strong>Window</strong><br><pre><code>function (){s(a())}</code></pre><pre><code>function (){v&amp;#x3D;!1}</code></pre>">
+        <span class="name">pageshow</span>
         <span class="allowed" style="background-color:#8D8E87;">2</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="playing" data-tippy="" data-original-title="<strong>playing</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">playing</span>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:beforeReplace" data-tippy="" data-original-title="<strong>pjax:beforeReplace</strong> -> <strong>Window</strong><br><pre><code>function (e){(0,o.default)(e instanceof CustomEvent,&amp;quot;github&amp;#x2F;legacy&amp;#x2F;behaviors&amp;#x2F;pjax&amp;#x2F;head.js:19&amp;quot;);var t&amp;#x3D;void 0,n&amp;#x3D;void 0,r&amp;#x3D;void 0,i&amp;#x3D;e.detail.contents;for(t&amp;#x3D;n&amp;#x3D;0,r&amp;#x3D;i.length;n&amp;lt;r;t&amp;#x3D;++n){var u&amp;#x3D;i[t];u&amp;amp;&amp;amp;(&amp;quot;pjax-head&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;u.id?(s[document.location.pathname]&amp;#x3D;(0,a.default)(u).children(),i[t]&amp;#x3D;null):&amp;quot;js-flash-container&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;u.id&amp;amp;&amp;amp;((0,a.default)(&amp;quot;#js-flash-container&amp;quot;).replaceWith(u),i[t]&amp;#x3D;null))}}</code></pre><pre><code>function (e){var t&amp;#x3D;e.detail.previousState,n&amp;#x3D;t?t.url:null;if(n)o(a(new URL(n)));else{var r&amp;#x3D;new Error(&amp;quot;pjax:beforeReplace event.detail.previousState.url is undefined&amp;quot;);setTimeout(function(){throw r})}}</code></pre>">
+        <span class="name">pjax:beforeReplace</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:click" data-tippy="" data-original-title="<strong>pjax:click</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function (e){if(window.onbeforeunload)return e.preventDefault()}</code></pre>">
+        <span class="name">pjax:click</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:complete" data-tippy="" data-original-title="<strong>pjax:complete</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (){setTimeout(function(){(0,e.updateGlobalFields)(),(0,e.trackPageviews)()},20)}</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function (){window._octo.push([&amp;quot;recordPageView&amp;quot;])}</code></pre>">
+        <span class="name">pjax:complete</span>
         <span class="allowed" style="background-color:#8D8E87;">3</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="popstate" data-tippy="" data-original-title="<strong>popstate</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="pjax:end" data-tippy="" data-original-title="<strong>pjax:end</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (e){requestIdleCallback(function(){return(0,a.scanForProblems)(e.target,o,u)})}</code></pre><pre><code>function r(){(0,a.default)(function(){if(window.performance.getEntriesByName(u).length){window.performance.mark(l),window.performance.measure(i,u,l);var e&amp;#x3D;window.performance.getEntriesByName(i).pop(),t&amp;#x3D;e?e.duration:null;t&amp;amp;&amp;amp;(s&amp;amp;&amp;amp;(0,o.default)({requestUrl:s,pjaxDuration:Math.round(t)}),window.performance.clearMarks(u),window.performance.clearMarks(l),window.performance.clearMeasures(i))}})}</code></pre><pre><code>function (){var t&amp;#x3D;!0,n&amp;#x3D;!1,r&amp;#x3D;void 0;try{for(var a,o&amp;#x3D;document.querySelectorAll(&amp;quot;.js-pull-refresh-on-pjax&amp;quot;)[Symbol.iterator]();!(t&amp;#x3D;(a&amp;#x3D;o.next()).done);t&amp;#x3D;!0){var s&amp;#x3D;a.value;(0,e.fire)(s,&amp;quot;socket:message&amp;quot;,{})}}catch(e){n&amp;#x3D;!0,r&amp;#x3D;e}finally{try{!t&amp;amp;&amp;amp;o.return&amp;amp;&amp;amp;o.return()}finally{if(n)throw r}}}</code></pre>">
+        <span class="name">pjax:end</span>
+        <span class="allowed" style="background-color:#8D8E87;">9</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:send" data-tippy="" data-original-title="<strong>pjax:send</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">pjax:send</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:start" data-tippy="" data-original-title="<strong>pjax:start</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (e){e instanceof CustomEvent&amp;amp;&amp;amp;e.detail&amp;amp;&amp;amp;e.detail.url&amp;amp;&amp;amp;(window.performance.mark(u),s&amp;#x3D;e.detail.url)}</code></pre><pre><code>function (){e(0),n.classList.add(&amp;quot;is-loading&amp;quot;),o&amp;#x3D;setTimeout(t,0)}</code></pre><pre><code>function (){u&amp;#x3D;window.location.href}</code></pre>">
+        <span class="name">pjax:start</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:success" data-tippy="" data-original-title="<strong>pjax:success</strong> -> <strong>HTMLDocument</strong><br><pre><code>function r(){if(!document.querySelector(&amp;quot;:target&amp;quot;)){var t&amp;#x3D;(0,e.decodeFragmentValue)(location.hash),n&amp;#x3D;(0,e.findElementByFragmentName)(document,&amp;quot;user-content-&amp;quot;+t);n&amp;amp;&amp;amp;n.scrollIntoView()}}</code></pre>">
+        <span class="name">pjax:success</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pjax:timeout" data-tippy="" data-original-title="<strong>pjax:timeout</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (e){e.preventDefault()}</code></pre>">
+        <span class="name">pjax:timeout</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="popstate" data-tippy="" data-original-title="<strong>popstate</strong> -> <strong>Window</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre><pre><code>function (){s&amp;#x3D;window.location.href}</code></pre><pre><code>function (e){if(e.state&amp;amp;&amp;amp;e.state._id){e.state._id&amp;lt;t()._id?s--:s++,r(e.state)}}</code></pre>">
         <span class="name">popstate</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="progress" data-tippy="" data-original-title="<strong>progress</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">progress</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="resize" data-tippy="" data-original-title="<strong>resize</strong> -> <strong>Window</strong>">
-        <span class="name">resize</span>
         <span class="allowed" style="background-color:#8D8E87;">3</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="scroll" data-tippy="" data-original-title="<strong>scroll</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="preview:render" data-tippy="" data-original-title="<strong>preview:render</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">preview:render</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="quote:selection" data-tippy="" data-original-title="<strong>quote:selection</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">quote:selection</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="release:saved" data-tippy="" data-original-title="<strong>release:saved</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">release:saved</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="reset" data-tippy="" data-original-title="<strong>reset</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (e){if(e.target instanceof HTMLFormElement){var t&amp;#x3D;e.target;setTimeout(function(){return a(t)})}}</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">reset</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="scroll" data-tippy="" data-original-title="<strong>scroll</strong> -> <strong>Window</strong><br><pre><code>function (e){s&amp;#x3D;(0,t.normalizedTimestamp)(e.timeStamp)}</code></pre>">
         <span class="name">scroll</span>
-        <span class="allowed" style="background-color:#8D8E87;">3</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="seeked" data-tippy="" data-original-title="<strong>seeked</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">seeked</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="seeking" data-tippy="" data-original-title="<strong>seeking</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">seeking</span>
-        <span class="allowed" style="background-color:#8D8E87;">3</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="selectionchange" data-tippy="" data-original-title="<strong>selectionchange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">selectionchange</span>
+      <div class="calls " data-kind="addEventListener" data-type="search" data-tippy="" data-original-title="<strong>search</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">search</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="sourceopen" data-tippy="" data-original-title="<strong>sourceopen</strong> -> <strong>MediaSource</strong>">
-        <span class="name">sourceopen</span>
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:change" data-tippy="" data-original-title="<strong>selectmenu:change</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">selectmenu:change</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="storage" data-tippy="" data-original-title="<strong>storage</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:data" data-tippy="" data-original-title="<strong>selectmenu:data</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (e){var t&amp;#x3D;e.target.querySelector(&amp;#39;[data-filterable-type&amp;#x3D;&amp;quot;substring-memory&amp;quot;]&amp;#39;);if(t){(0,s.storeData)(t,e.detail.data);var r&amp;#x3D;e.target.querySelector(&amp;quot;.js-filterable-field&amp;quot;);r&amp;amp;&amp;amp;r&amp;#x3D;&amp;#x3D;&amp;#x3D;document.activeElement&amp;amp;&amp;amp;(0,n.fire)(r,&amp;quot;filterable:change&amp;quot;)}}</code></pre>">
+        <span class="name">selectmenu:data</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:load" data-tippy="" data-original-title="<strong>selectmenu:load</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">selectmenu:load</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:select" data-tippy="" data-original-title="<strong>selectmenu:select</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">selectmenu:select</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:selected" data-tippy="" data-original-title="<strong>selectmenu:selected</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">selectmenu:selected</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="selectmenu:tabchange" data-tippy="" data-original-title="<strong>selectmenu:tabchange</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">selectmenu:tabchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="session:resume" data-tippy="" data-original-title="<strong>session:resume</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){(0,m.default)(t instanceof CustomEvent,&amp;quot;github&amp;#x2F;legacy&amp;#x2F;pages&amp;#x2F;diffs&amp;#x2F;line-comments.js:171&amp;quot;),function(t){var n&amp;#x3D;t.match(&amp;#x2F;^new_inline_comment_(?:discussion|diff)_(?:[\w-]+)_(\d+)_(\d+)$&amp;#x2F;)||[],r&amp;#x3D;v(n,2),a&amp;#x3D;r[0],o&amp;#x3D;r[1];if(a){var s&amp;#x3D;document.querySelector(&amp;quot;.js-inline-comment-form input[name&amp;#x3D;&amp;#39;in_reply_to&amp;#39;][value&amp;#x3D;&amp;#39;&amp;quot;+o+&amp;quot;&amp;#39;]&amp;quot;);if(s){var i&amp;#x3D;s.closest(&amp;quot;.js-line-comments&amp;quot;);i&amp;amp;&amp;amp;(0,e.focusForm)(i)}}}(t.detai</code></pre><pre><code>function (e){(0,u.default)(e instanceof CustomEvent,&amp;quot;github&amp;#x2F;legacy&amp;#x2F;pages&amp;#x2F;pull_requests&amp;#x2F;merge.js:45&amp;quot;);var t&amp;#x3D;document.getElementById(e.detail.targetId);if(t){(0,i.default)(t).closest(&amp;quot;.js-merge-pull-request&amp;quot;).closest(&amp;quot;.js-details-container&amp;quot;).addClass(&amp;quot;open&amp;quot;)}}</code></pre>">
+        <span class="name">session:resume</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="socket:message" data-tippy="" data-original-title="<strong>socket:message</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">socket:message</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="storage" data-tippy="" data-original-title="<strong>storage</strong> -> <strong>Window</strong><br><pre><code>function (n){if(n.storageArea&amp;#x3D;&amp;#x3D;&amp;#x3D;localStorage&amp;amp;&amp;amp;&amp;quot;logged-in&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;n.key&amp;amp;&amp;amp;n.newValue!&amp;#x3D;&amp;#x3D;a){a&amp;#x3D;n.newValue;var r&amp;#x3D;(0,t.query)(document,&amp;quot;.js-stale-session-flash&amp;quot;);r.classList.toggle(&amp;quot;is-signed-in&amp;quot;,&amp;quot;true&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;a),r.classList.toggle(&amp;quot;is-signed-out&amp;quot;,&amp;quot;false&amp;quot;&amp;#x3D;&amp;#x3D;&amp;#x3D;a),r.classList.remove(&amp;quot;d-none&amp;quot;),window.addEventListener(&amp;quot;popstate&amp;quot;,function(e){null!&amp;#x3D;e.state.container&amp;amp;&amp;amp;location.reload()}),(0,e.on)(&amp;quot;submit&amp;quot;,&amp;quot;form&amp;quot;,function(e</code></pre>">
         <span class="name">storage</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="submit" data-tippy="" data-original-title="<strong>submit</strong> -> <strong>HTMLHtmlElement</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="submit" data-tippy="" data-original-title="<strong>submit</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){return void 0!&amp;#x3D;&amp;#x3D;G&amp;amp;&amp;amp;G.event.triggered!&amp;#x3D;&amp;#x3D;t.type?G.event.dispatch.apply(e,arguments):void 0}</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
         <span class="name">submit</span>
-        <span class="allowed" style="background-color:#8D8E87;">9</span>
+        <span class="allowed" style="background-color:#8D8E87;">5</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="success" data-tippy="" data-original-title="<strong>success</strong> -> <strong>HTMLDivElement</strong>">
-        <span class="name">success</span>
-        <span class="allowed" style="background-color:#8D8E87;">7</span>
+      <div class="calls " data-kind="addEventListener" data-type="tags:changed" data-tippy="" data-original-title="<strong>tags:changed</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">tags:changed</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="test" data-tippy="" data-original-title="<strong>test</strong> -> <strong>Window</strong>">
+      <div class="calls " data-kind="addEventListener" data-type="test" data-tippy="" data-original-title="<strong>test</strong> -> <strong>Window</strong><br><pre><code>function r(){}</code></pre><pre><code>null</code></pre>">
         <span class="name">test</span>
-        <span class="allowed" style="background-color:#8D8E87;">1</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="timeupdate" data-tippy="" data-original-title="<strong>timeupdate</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">timeupdate</span>
         <span class="allowed" style="background-color:#8D8E87;">2</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="touchstart" data-tippy="" data-original-title="<strong>touchstart</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">touchstart</span>
+      <div class="calls " data-kind="addEventListener" data-type="toggle" data-tippy="" data-original-title="<strong>toggle</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">toggle</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="updateend" data-tippy="" data-original-title="<strong>updateend</strong> -> <strong>SourceBuffer</strong>">
-        <span class="name">updateend</span>
-        <span class="allowed" style="background-color:#8D8E87;">2</span>
-        <span class="blocked" style="background-color:#8D8E87;">0</span>
-      </div>
-      <div class="calls " data-kind="addEventListener" data-type="visibilitychange" data-tippy="" data-original-title="<strong>visibilitychange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">visibilitychange</span>
+      <div class="calls " data-kind="addEventListener" data-type="touchmove" data-tippy="" data-original-title="<strong>touchmove</strong> -> <strong>HTMLDocument</strong><br><pre><code>function (t){e.active&amp;amp;&amp;amp;t.preventDefault()}</code></pre>">
+        <span class="name">touchmove</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="volumechange" data-tippy="" data-original-title="<strong>volumechange</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">volumechange</span>
+      <div class="calls " data-kind="addEventListener" data-type="unhandledrejection" data-tippy="" data-original-title="<strong>unhandledrejection</strong> -> <strong>Window</strong><br><pre><code>function (e){l()&amp;amp;&amp;amp;e.promise&amp;amp;&amp;amp;e.promise.catch(s)}</code></pre>">
+        <span class="name">unhandledrejection</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="waiting" data-tippy="" data-original-title="<strong>waiting</strong> -> <strong>HTMLVideoElement</strong>">
-        <span class="name">waiting</span>
+      <div class="calls " data-kind="addEventListener" data-type="upload:complete" data-tippy="" data-original-title="<strong>upload:complete</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:complete</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
-      <div class="calls " data-kind="addEventListener" data-type="webkitfullscreenchange" data-tippy="" data-original-title="<strong>webkitfullscreenchange</strong> -> <strong>HTMLDocument</strong>">
-        <span class="name">webkitfullscreenchange</span>
+      <div class="calls " data-kind="addEventListener" data-type="upload:drop:links" data-tippy="" data-original-title="<strong>upload:drop:links</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:drop:links</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:drop:setup" data-tippy="" data-original-title="<strong>upload:drop:setup</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:drop:setup</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:drop:table" data-tippy="" data-original-title="<strong>upload:drop:table</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:drop:table</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:drop:text" data-tippy="" data-original-title="<strong>upload:drop:text</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:drop:text</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:error" data-tippy="" data-original-title="<strong>upload:error</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:error</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:invalid" data-tippy="" data-original-title="<strong>upload:invalid</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:invalid</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:progress" data-tippy="" data-original-title="<strong>upload:progress</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:progress</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:setup" data-tippy="" data-original-title="<strong>upload:setup</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:setup</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="upload:start" data-tippy="" data-original-title="<strong>upload:start</strong> -> <strong>HTMLDocument</strong><br><pre><code>function s(e){var t&amp;#x3D;function(e,t,n){var r&amp;#x3D;[],o&amp;#x3D;t;do{if(1!&amp;#x3D;&amp;#x3D;o.nodeType)break;var i&amp;#x3D;e.matches(o);if(i.length){var a&amp;#x3D;{node:o,observers:i};n?r.unshift(a):r.push(a)}}while(o&amp;#x3D;o.parentElement);return r}((1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase?c:u)[e.type],e.target,1&amp;#x3D;&amp;#x3D;&amp;#x3D;e.eventPhase);if(t.length){n(e,&amp;quot;stopPropagation&amp;quot;,r),n(e,&amp;quot;stopImmediatePropagation&amp;quot;,o),a(e,i);for(var s&amp;#x3D;0,h&amp;#x3D;t.length;s&amp;lt;h&amp;amp;&amp;amp;!l.get(e);s++){var p&amp;#x3D;t[s];d.set(e,p.nod</code></pre>">
+        <span class="name">upload:start</span>
         <span class="allowed" style="background-color:#8D8E87;">1</span>
         <span class="blocked" style="background-color:#8D8E87;">0</span>
       </div>
@@ -381,4 +592,5 @@
     </div>
 
 
-</body></html>
+</body>
+</html>

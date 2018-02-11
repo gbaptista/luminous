@@ -6,10 +6,6 @@ html, body {
   overflow-x: hidden;
 }
 
-h2 {
-  font-size: 11px;
-}
-
 #loading {
   position: fixed;
   top:0;
@@ -47,11 +43,8 @@ h2 {
 }
 
 .interceptions .calls {
-  font-size: 9px;
   position: relative;
   margin: 0 2px 12px;
-  width: 120px;
-  padding: 6px 4px 14px 4px;
   background-color:#e0e0e0;
   color: #333;
   display: inline-block;
@@ -113,7 +106,6 @@ h2 {
    background-color: #FFF;
    color:#666;
    border: 1px solid #CCC;
-   font-size: 11px;
    text-align: left;
 }
 
@@ -128,6 +120,99 @@ h2 {
 }
 
 .tippy-tooltip.js-sample-theme pre code {
-  font-size: 10px;
   white-space: normal;
+}
+
+.options-form {
+  padding:4px 4px 0 8px;
+}
+
+.options-form label {
+  padding-bottom: 2px;
+}
+
+.col-1 {
+  float: left;
+}
+
+.col-2 {
+  text-align: right;
+  float: right;
+  width: 256px;
+}
+
+.col-2-header {
+  width: 300px;
+}
+
+.col-1 label, .col-1 label input {
+  float: left;
+}
+
+.col-2 label, .col-2 label input {
+  float: right;
+}
+.col-2 label {
+  margin-right: 7px;
+}
+
+label.invalid-domain {
+  color: #CCC;
+}
+
+label.valid-domain {
+  max-width: 270px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.general-injection-label {
+  margin-top: 12px;
+  margin-bottom: 2px;
+}
+
+.zoom-in .general-injection-label {
+  margin-bottom: 3px;
+}
+
+.clear-floats {
+  clear: both;
+}
+
+h2 {
+  font-size: 11px;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 2px;
+}
+
+.interceptions .calls {
+  font-size: 9px;
+  width: 120px;
+  padding: 6px 4px 14px 4px;
+}
+
+.tippy-tooltip.js-sample-theme { font-size: 11px; }
+
+.tippy-tooltip.js-sample-theme pre code { font-size: 10px; }
+
+body { font-size: 16px; min-width: 540px; }
+
+body.zoom-in { font-size: 17px; }
+
+.zoom-in h2 {
+  font-size: 14px;
+  border-bottom: 2px solid #CCC;
+  padding-bottom: 3px;
+}
+
+.zoom-in .tippy-tooltip.js-sample-theme {
+  font-size: 14px;
+}
+
+.zoom-in .tippy-tooltip.js-sample-theme pre code { font-size: 13px; }
+
+.zoom-in .interceptions .calls {
+  font-size: 13px;
+  width: 164px;
+  padding: 8px 4px 16px 4px;
 }

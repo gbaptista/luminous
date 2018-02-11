@@ -2,10 +2,24 @@
   <div class="card-header locale" id="{{id}}" data-locale="settingsPopupTooltipTitle">
   </div>
   <div class="card-body">
-    <div class="form-check">
-      <label class="form-check-label">
+    <div class="form-check form-check-inline">
+      <label class="form-check-label"><div class="form-check form-check-inline">
         <input class="form-check-input" type="checkbox" data-namespace="popup" name="show_code_details" value="true" {{#show_code_details}} checked {{/show_code_details}}>
         {{show_code_details_title}}
+      </label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <label class="form-check-label"><div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" data-namespace="popup" name="zoom_in" value="true" {{#zoom_in}} checked {{/zoom_in}}>
+        {{zoom_in_title}}
+      </label>
+    </div>
+
+    <div class="form-check form-check-inline">
+      <label class="form-check-label"><div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" data-namespace="popup" name="apply_to_default" value="true" {{#apply_to_default}} checked {{/apply_to_default}}>
+        {{apply_to_default_title}}
       </label>
     </div>
   </div>

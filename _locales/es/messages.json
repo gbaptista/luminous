@@ -7,7 +7,7 @@
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/es" },
 
   "checkboxInjectionEnabledGeneral": { "message": "todas las webs" },
-  "checkboxShowCodeDetails": { "message": "mostrar detalles de código interceptado" },
+  "checkboxShowCodeDetails": { "message": "mostrar detalles de código" },
 
   "titleHandleEvent": { "message": "eventos activados (handleEvent)" },
   "titleAddEventListener": { "message": "eventos ligados (addEventListener)" },
@@ -88,5 +88,7 @@
   "settingsFilterButtonText": { "message": "filtrar" },
   "settingsFilterByDomainPlaceHolderText": { "message": "filtrar por dominio" },
   "settingsNoRecordsText": { "message": "ningún registro encontrado" },
-  "settingsReportClearAllButtonText": { "message": "limpiar todos los registros" }
+  "settingsReportClearAllButtonText": { "message": "limpiar todos los registros" },
+  "checkboxZoomIn": { "message": "acercarse" },
+  "checkboxApplyToDefault": { "message": "aplicar a las reglas estándar" }
 }
