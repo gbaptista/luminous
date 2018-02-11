@@ -28,7 +28,7 @@
 
 All codes intercepted are divided into 3 groups:
 - [Web APIs](#web-apis)
-- [EventTarget.addEventListener](#eventtarget.addeventlistener)
+- [*EventTarget.addEventListener*](#eventtargetaddeventlistener)
   - [handleEvent](#handleevent)
   - [addEventListener](#addeventlistener)
 
@@ -66,8 +66,8 @@ Some JavaScript's are reported with a different nomenclature to get closer to th
 What about the `handleEvent` group? Consider this code:
 
 ```javascript
-some_image.addEventListener('mousemove', function() {
-  send_report('the user is moving the mouse over the image')
+some_image.addEventListener('mousemove', function(_event) {
+  send_report('the user is moving the mouse over the image');
 });
 ```
 
