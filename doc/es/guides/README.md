@@ -16,6 +16,7 @@ Las Guías son documentos sobre temas muy específicos donde podemos ir profunda
 ## ¿Como funciona?
 
  - [Informes](./how-it-works/reports.md)
+ - [¿Qué se detecta?](./how-it-works/what-is-detected.md)
 
 ## Web API y eventos JavaScript
 

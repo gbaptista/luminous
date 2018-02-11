@@ -1,6 +1,6 @@
 var common_webapis = [
   // WebAPIs
-  'fetch',
+  'fetch', 'WebSocket.send',
   'setInterval', 'setInterval.call',
   'setTimeout', 'setTimeout.call',
   'XMLHttpRequest.open', 'XMLHttpRequest.send',
