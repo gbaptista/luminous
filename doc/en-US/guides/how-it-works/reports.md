@@ -1,18 +1,18 @@
-> *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
+> *If you find some missing information or errors in any of the translations, help us by opening a [pull request](https://github.com/gbaptista/luminous/pulls) with the necessary modifications in the texts.*
 
-# Guias
-> [volta ao índice](../)
+# Guides
+> [back to index](../)
 
-## Relatórios
-> [en-US](../../../en-US/guides/how-it-works/reports.md) | [es](../../../es/guides/how-it-works/reports.md) | pt-BR
+## Reports
+> en-US | [es](../../../es/guides/how-it-works/reports.md) | [pt-BR](../../../pt-BR/guides/how-it-works/reports.md)
 
-Os relatórios oferecem uma visão sobre todas as execuções de JavaScript detectadas no seu navegador.
+Reports provide insights into all JavaScript executions detected in your browser.
 
-### Como os dados são coletados e armazenados?
+### How is the data collected and stored?
 
-O arquivo [`js/background/reports.js`](https://github.com/gbaptista/luminous/blob/master/js/background/reports.js) busca informações sobre as abas abertas no [*storage.local*](https://developer.mozilla.org/pt-BR/Add-ons/WebExtensions/API/storage/local) e a partir da biblioteca [*Dexie.js*](http://dexie.org/) gera os dados que são armazenados no [*IndexedDB*](https://developer.mozilla.org/pt-BR/docs/Web/API/IndexedDB_API).
+The [`js/background/reports.js`](https://github.com/gbaptista/luminous/blob/master/js/background/reports.js) file looks for information about the open tabs in [*storage.local*](https://developer.mozilla.org/pt-BR/Add-ons/WebExtensions/API/storage/local) and the with the [*Dexie.js*](http://dexie.org/) library generates the data that is stored in [*IndexedDB*](https://developer.mozilla.org/pt-BR/docs/Web/API/IndexedDB_API).
 
-A estrutura de dados utilizados é a seguinte:
+The data structure used:
 
 ```json
 {
@@ -26,7 +26,7 @@ A estrutura de dados utilizados é a seguinte:
 }
 ```
 
-Você pode ver os dados armazendos no seu navegador:
+You can see the data stored in your browser:
 
 > ![IndexedDB](../../../../images/doc/global/guides/how-it-works/IndexedDB-1.jpg)
 
@@ -34,16 +34,16 @@ Você pode ver os dados armazendos no seu navegador:
 
 > ![IndexedDB](../../../../images/doc/global/guides/how-it-works/IndexedDB-3.jpg)
 
-### Visualizações disponíveis
+### Available views
 
-#### Domínios que mais executam códigos JavaScript:
+#### Domains that most runs JavaScript codes:
 
 ![Report View](../../../../images/doc/global/guides/how-it-works/report-view-1.jpg)
 
-#### Códigos JavaScript mais executados:
+#### Most executed JavaScript codes:
 
 ![Report View](../../../../images/doc/global/guides/how-it-works/report-view-2.jpg)
 
-#### Filtro por site
+#### Filter by domain
 
 ![Report View](../../../../images/doc/global/guides/how-it-works/report-view-3.jpg)

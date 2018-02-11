@@ -1,22 +1,22 @@
-> *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
+> *If you find some missing information or errors in any of the translations, help us by opening a [pull request](https://github.com/gbaptista/luminous/pulls) with the necessary modifications in the texts.*
 
-# Guias
-> [volta ao índice](../)
+# Guides
+> [back to index](../)
 
 ## Google
-> [en-US](../../../en-US/guides/sites/google.md) | [es](../../../es/guides/sites/google.md) | pt-BR
+> en-US | [es](../../../es/guides/sites/google.md) | [pt-BR](../../../pt-BR/guides/sites/google.md)
 
-Em poucos minutos de navegação no [Google](https://www.google.com) os seguintes códigos foram detectados:
+With a few minutes of browsing the [Google](https://www.google.com) website the following codes were detected:
 
-| *JavaScript*     | execuções | necessário? |
-| ---------------- | --------- | ----------- |
-| scroll           | 936       | não         |
-| mousewheel       | 373       | não         |
-| message	         | 189       | incerto     |
-| mouseout         | 60        | incerto     |
-| mouseover        | 58        | não         |
-| keydown          | 56        | incerto     |
-| keyup            | 26        | incerto     |
-| load             | 16        | incerto     |
-| visibilitychange | 14        | incerto     |
-| loadend          | 14        | incerto     |
+| *JavaScript*     | executions | required? |
+| ---------------- | ---------- | --------- |
+| scroll           | 936        | no        |
+| mousewheel       | 373        | no        |
+| message	         | 189        | not sure  |
+| mouseout         | 60         | not sure  |
+| mouseover        | 58         | no        |
+| keydown          | 56         | not sure  |
+| keyup            | 26         | not sure  |
+| load             | 16         | not sure  |
+| visibilitychange | 14         | not sure  |
+| loadend          | 14         | not sure  |

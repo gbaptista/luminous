@@ -1,22 +1,9 @@
-> *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
+> *Si encuentra información que falta o errores en alguna de las traducciones, nos ayude abriendo un [pull request](https://github.com/gbaptista/luminous/pulls) con las modificaciones necesarias en los textos para que todos tengan acceso a las guías en su idioma.*
 
-# Guias
-> [volta ao índice](../)
+# Guías
+> [volver al índice](../)
 
 ## Google
-> [en-US](../../../en-US/guides/sites/google.md) | [es](../../../es/guides/sites/google.md) | pt-BR
+> [en-US](../../../en-US/guides/sites/google.md) | es | [pt-BR](../../../pt-BR/guides/sites/google.md)
 
-Em poucos minutos de navegação no [Google](https://www.google.com) os seguintes códigos foram detectados:
-
-| *JavaScript*     | execuções | necessário? |
-| ---------------- | --------- | ----------- |
-| scroll           | 936       | não         |
-| mousewheel       | 373       | não         |
-| message	         | 189       | incerto     |
-| mouseout         | 60        | incerto     |
-| mouseover        | 58        | não         |
-| keydown          | 56        | incerto     |
-| keyup            | 26        | incerto     |
-| load             | 16        | incerto     |
-| visibilitychange | 14        | incerto     |
-| loadend          | 14        | incerto     |
+Traducción pendiente.

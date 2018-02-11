@@ -1,10 +1,10 @@
-> *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
+> *Si encuentra información que falta o errores en alguna de las traducciones, nos ayude abriendo un [pull request](https://github.com/gbaptista/luminous/pulls) con las modificaciones necesarias en los textos para que todos tengan acceso a las guías en su idioma.*
 
-## Guias
-> [volta ao índice](../)
+# Guías
+> [volver al índice](../)
 
-### Discussões interessantes
-> [en-US](../../../en-US/guides/context/interesting-discussions.md) | [es](../../../es/guides/context/interesting-discussions.md) | pt-BR
+### Discusiones interesantes
+> [en-US](../../../en-US/guides/context/interesting-discussions.md) | es | [pt-BR](../../../pt-BR/guides/context/interesting-discussions.md)
 
 - [*heads up: Luminous: JavaScript events blocker*](https://github.com/ghacksuserjs/ghacks-user.js/issues/348)
 - [*is this meant to be a blocker?*](https://github.com/gbaptista/luminous/issues/18)

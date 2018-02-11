@@ -1,27 +1,27 @@
-> *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
+> *Si encuentra información que falta o errores en alguna de las traducciones, nos ayude abriendo un [pull request](https://github.com/gbaptista/luminous/pulls) con las modificaciones necesarias en los textos para que todos tengan acceso a las guías en su idioma.*
 
-# Guias
-> [en-US](../../en-US/guides) | [es](../../es/guides) | pt-BR
+# Guías
+> [en-US](../../en-US/guides) | es | [pt-BR](../../pt-BR/guides)
 
-Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo nos detalhes e encontrar facilmente as informações que estamos procurando.
+Las Guías son documentos sobre temas muy específicos donde podemos ir profundamente en los detalles y encontrar fácilmente la información que estamos buscando.
 
-- [Contexto, História e Discussões](#)
-- [Como funciona?](#)
-- [Web APIs e Eventos JavaScript](#)
-- [Análise de sites](#)
+- [Contexto, Historia y Discusiones](#contexto-historia-y-discusiones)
+- [¿Como funciona?](#como-funciona)
+- [Web API y eventos JavaScript](#web-api-y-eventos-javascript)
+- [Análisis de sitios web](#análisis-de-sitios-web)
 
-## Contexto, História e Discussões
- - [Discussões interessantes](./context/interesting-discussions.md)
+## Contexto, Historia y Discusiones
+ - [Discusiones interesantes](./context/interesting-discussions.md)
 
-## Como funciona?
+## ¿Como funciona?
 
- - [Relatórios](./how-it-works/reports.md)
+ - [Informes](./how-it-works/reports.md)
 
-## Web APIs e Eventos JavaScript
+## Web API y eventos JavaScript
 
 - *addEventListener* - *handleEvent*
   - [mousemove](./javascript/mousemove.md)
 
-## Análise de sites
+## Análisis de sitios web
 
  - [Google](./sites/google.md)

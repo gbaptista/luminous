@@ -1,7 +1,7 @@
 > *Se você encontrar informações faltando ou erros em alguma das traduções, nos ajude abrindo um [pull request](https://github.com/gbaptista/luminous/pulls) com as modificações necessárias nos textos para que todos tenham acesso aos guias em seu idioma.*
 
 # Guias
-> [volta ao índice](../)
+> [voltar ao índice](../)
 
 ## mousemove
 > [en-US](../../../en-US/guides/javascript/mousemove.md) | [es](../../../es/guides/javascript/mousemove.md) | pt-BR
