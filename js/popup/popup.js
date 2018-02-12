@@ -9,7 +9,15 @@ var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, va
         sync_data['disabled_' + domain][kind] = {};
       }
 
-      sync_data['disabled_' + domain][kind][type] = value;
+      if(sync_data['popup']['apply_to_default']) {
+        if(sync_data['disabled_' + domain][kind][type] != value) {
+          delete sync_data['disabled_' + domain][kind][type];
+        }
+
+        sync_data['default_disabled_' + kind][type] = value;
+      } else {
+        sync_data['disabled_' + domain][kind][type] = value;
+      }
 
       chrome.storage.sync.set(sync_data);
     });
@@ -49,6 +57,12 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
         sync_data['disabled_' + domain] = {};
       }
 
+      if(sync_data['popup']['zoom_in']) {
+        $('body').addClass('zoom-in');
+      } else {
+        $('body').removeClass('zoom-in');
+      }
+
       var kinds = [];
 
       for(possible_kind in sync_data) {
@@ -84,9 +98,18 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
             general_injection_enabled: !sync_data['injection_disabled']['general'],
             domain_injection_enabled: !sync_data['injection_disabled'][domain],
-            show_code_details: sync_data['popup']['show_code_details']
+            show_code_details: sync_data['popup']['show_code_details'],
+            zoom_in_title: chrome.i18n.getMessage('checkboxZoomIn'),
+            zoom_in: sync_data['popup']['zoom_in'],
+            apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
+            apply_to_default: sync_data['popup']['apply_to_default'],
+            no_domain: chrome.i18n.getMessage('settingsInvalidDomainMessage')
           })
         );
+
+        $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
+        $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
+        $('#settings-link').html(chrome.i18n.getMessage('linkSettingsText'));
 
         $('#options-container input').change(function() {
           $('#loading').fadeIn(200);
@@ -94,7 +117,13 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           var value = $(this).is(':checked');
           var name = $(this).attr('name');
 
-          if(name == 'show_code_details') {
+          if(
+            name == 'show_code_details'
+            ||
+            name == 'zoom_in'
+            ||
+            name == 'apply_to_default'
+          ) {
             set_sync_popup_option(name, value);
           } else {
             set_sync_option_injection_disabled_for_name(name, !value);
@@ -292,7 +321,4 @@ setInterval(function() {
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));
   $('#loading').html(chrome.i18n.getMessage('messageLoading'));
-  $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
-  $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
-  $('#settings-link').html(chrome.i18n.getMessage('linkSettingsText'));
 });

@@ -5,7 +5,13 @@ $(document).ready(function() {
         $('#form').html(
           Mustache.render(template, {
             show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
-            show_code_details: sync_data['popup']['show_code_details']
+            show_code_details: sync_data['popup']['show_code_details'],
+
+            zoom_in_title: chrome.i18n.getMessage('checkboxZoomIn'),
+            zoom_in: sync_data['popup']['zoom_in'],
+
+            apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
+            apply_to_default: sync_data['popup']['apply_to_default']
           })
         );
 
