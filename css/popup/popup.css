@@ -212,7 +212,7 @@ body.zoom-in { font-size: 17px; }
 .zoom-in .tippy-tooltip.js-sample-theme pre code { font-size: 13px; }
 
 .zoom-in .interceptions .calls {
-  font-size: 13px;
+  font-size: 12px;
   width: 164px;
   padding: 8px 4px 16px 4px;
 }
