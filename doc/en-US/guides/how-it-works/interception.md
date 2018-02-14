@@ -98,6 +98,30 @@ The `manifest.js`:
 }
 ```
 
+The [test page](https://gbaptista.github.io/luminous/html/demo-page-interceptor.html):
+```html
+
+<script>
+  var a = document.createElement('a');
+  a.addEventListener('click', function(_) { return 'first script'; });
+  var c = document.createEvent('MouseEvents');
+  c.initMouseEvent('click');
+  a.dispatchEvent(c);
+
+  setInterval(function() { return 'first script'; } , 1000);
+
+  setTimeout(function() {
+    var a = document.createElement('a');
+    a.addEventListener('click', function(_) { return 'second script'; });
+    var c = document.createEvent('MouseEvents');
+    c.initMouseEvent('click');
+    a.dispatchEvent(c);
+  }, 15);
+</script>
+
+demo page
+```
+
 The strategies:
 
 - [Cookies](#cookies)
@@ -310,3 +334,5 @@ storage.sync.get: 177 milliseconds
 storage.sync.get: 41 milliseconds
      sendMessage: 59 milliseconds
 ```
+
+Do you know another solution? Have you tried any of these? Join the discussion! > [https://github.com/gbaptista/luminous/issues/55](https://github.com/gbaptista/luminous/issues/55)
