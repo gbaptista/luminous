@@ -287,7 +287,7 @@ Async solution, it is necessary to wait for the empty stack to inject the code.
 
 Using a cookie is the only synchronous solution with guarantees that no code execution will be lost. That said, let's see which of the other solutions can be faster:
 
-#### Chromium-based based browsers
+#### Chromium-based browsers
 ```
          cookies:  5 milliseconds
      onCommitted: 37 milliseconds
