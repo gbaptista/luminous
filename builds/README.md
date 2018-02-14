@@ -4,7 +4,7 @@
 
 Update the version on `manifest.json`:
 ```json
-"version": "0.0.16"
+"version": "0.0.17"
 ```
 
 Copy all folders and files to the `builds/current/` directory.
@@ -55,7 +55,7 @@ injections_controller(function() {
   * Disclaimer for reviewers:
   *
   * The non-minified version for the code below is available at:
-  * https://github.com/gbaptista/luminous/blob/0.0.16/js/content/interceptor.js
+  * https://github.com/gbaptista/luminous/blob/0.0.17/js/content/interceptor.js
   *
   * This version was generated with the uglifyjs project
   * from the following command:
@@ -99,11 +99,11 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-16.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0-0-17.zip` and contact the repository owner to publish in all stores.
 
 Include this note for reviewers:
 ```
-The non-minified version for the code in "js/content/injections/interceptor.js" is available at: https://github.com/gbaptista/luminous/blob/0.0.16/js/content/interceptor.js
+The non-minified version for the code in "js/content/injections/interceptor.js" is available at: https://github.com/gbaptista/luminous/blob/0.0.17/js/content/interceptor.js
 
 This version was generated with the uglifyjs project from the following command:
 > uglifyjs -c -m -- js/content/interceptor.js
