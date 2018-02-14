@@ -1,5 +1,4 @@
 injections_controller(function() {
-
   var json_data_injection = document.createElement('script');
   json_data_injection.type = 'application/json';
   json_data_injection.id = 'luminous-data';
@@ -21,5 +20,5 @@ injections_controller(function() {
       clearInterval(tab_definer);
     }
   }, 300);
-  
+
 });

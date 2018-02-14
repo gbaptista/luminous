@@ -122,5 +122,5 @@ chrome.tabs.onActivated.addListener(set_tab_settings);
 
 chrome.webRequest.onCompleted.addListener(
   set_request_settings,
-  { urls: ['<all_urls>'], types: ['main_frame'] }
+  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }
 );

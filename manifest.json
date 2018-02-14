@@ -45,21 +45,29 @@
     {
       "matches": ["<all_urls>"],
       "js": [
+        "js/helpers/debug.js",
+        "js/helpers/code_names.js",
+        "js/helpers/compressor.js",
+        "js/helpers/domain_settings.js",
+        "vendor/js-cookie/js.cookie.min.js",
         "js/content/injections_controller.js",
-        "js/content/injections/interceptor.js",
+        "js/content/readers/data.js",
         "js/content/injections/options.js",
+        "js/content/injections/interceptor.js",
         "js/utils/numbers.js",
         "js/content/injections/data.js",
-        "js/content/readers/data.js"
+        "js/content/clear_cookies.js"
       ],
       "run_at" : "document_start"
     }
   ],
   "background": {
     "scripts": [
-      "js/background/set_response_headers.js",
+      "js/helpers/code_names.js",
+      "js/helpers/compressor.js",
+      "js/helpers/domain_settings.js",
+      "js/background/headers_and_options_listeners.js",
       "js/background/set_current_tab.js",
-      "js/background/common_names.js",
       "js/background/default_settings.js",
       "vendor/dexiejs/dexie.js",
       "js/background/reports.js",
@@ -70,7 +78,7 @@
   },
   "permissions" : [
     "storage", "unlimitedStorage", "tabs",
-    "webRequest", "webRequestBlocking",
+    "webRequest", "webRequestBlocking", "webNavigation",
     "<all_urls>"
   ],
   "web_accessible_resources": [

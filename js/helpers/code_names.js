@@ -7,10 +7,6 @@ var common_webapis = [
   'geo.getCurrentPosition', 'geo.watchPosition'
 ];
 
-for(i in common_webapis) {
-  common_webapis[i] = common_webapis[i].toLowerCase();
-}
-
 var common_events = [
   // Resource Events
   'abort', 'beforeunload', 'unload',
@@ -47,10 +43,6 @@ var common_events = [
   'localized', 'message', 'open', 'show'
 ];
 
-for(i in common_events) {
-  common_events[i] = common_events[i].toLowerCase();
-}
-
 var validates_code = function(code, validation) {
   code = code.toLowerCase();
 
@@ -58,7 +50,7 @@ var validates_code = function(code, validation) {
     return true;
   } else if(validation == 'almost_all') {
     for(i in common_webapis) {
-      if(code.toLowerCase() == common_webapis[i]) {
+      if(code.toLowerCase() == common_webapis[i].toLowerCase()) {
         return true;
       }
     }
@@ -66,13 +58,13 @@ var validates_code = function(code, validation) {
     return !/\W|_/.test(code);
   } else if(validation == 'common') {
     for(i in common_webapis) {
-      if(code.toLowerCase() == common_webapis[i]) {
+      if(code.toLowerCase() == common_webapis[i].toLowerCase()) {
         return true;
       }
     }
 
     for(i in common_events) {
-      if(code.toLowerCase() == common_events[i]) {
+      if(code.toLowerCase() == common_events[i].toLowerCase()) {
         return true;
       }
     }

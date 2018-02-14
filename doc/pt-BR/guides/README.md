@@ -5,18 +5,16 @@
 
 Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo nos detalhes e encontrar facilmente as informações que estamos procurando.
 
-- [Contexto, História e Discussões](#contexto-hist%C3%B3ria-e-discuss%C3%B5es)
 - [Como funciona?](#como-funciona)
 - [Web APIs e eventos JavaScript](#web-apis-e-eventos-javascript)
 - [Análise de sites](#an%C3%A1lise-de-sites)
-
-## Contexto, História e Discussões
- - [Discussões interessantes](./context/interesting-discussions.md)
+- [Contexto, História e Discussões](#contexto-hist%C3%B3ria-e-discuss%C3%B5es)
 
 ## Como funciona?
 
- - [Relatórios](./how-it-works/reports.md)
- - [O que é detectado?](./how-it-works/what-is-detected.md)
+- [Relatórios](./how-it-works/reports.md)
+- [O que é detectado?](./how-it-works/what-is-detected.md)
+- [Interceptação](./how-it-works/interception.md)
 
 ## Web APIs e eventos JavaScript
 
@@ -25,4 +23,8 @@ Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo n
 
 ## Análise de sites
 
- - [Google](./sites/google.md)
+- [Google](./sites/google.md)
+
+## Contexto, História e Discussões
+
+- [Discussões interessantes](./context/interesting-discussions.md)

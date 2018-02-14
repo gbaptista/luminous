@@ -1,11 +1,7 @@
 var injections_controller = function(injection_function) {
-  chrome.storage.sync.get(null, function(sync_data) {
+  var injection_enabled = Cookies.get('le');
 
-    injection_disabled = sync_data['injection_disabled'];
-
-    if(!injection_disabled['general'] && !injection_disabled[window.location.hostname]) {
-      injection_function();
-    }
-
-  });
+  if(injection_enabled != 'f') {
+    injection_function();
+  }
 }

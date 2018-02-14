@@ -77,6 +77,14 @@ injections_controller(function() {
       });
     }
 
+    document.getElementById('luminous-data').addEventListener(
+      'luminous-message', function(e) {
+        var data = JSON.parse(e.data);
+        // TODO implement some kind of log
+        // console.log(data);
+      }
+    );
+
     setInterval(function() {
       var data_element = document.getElementById('luminous-data');
 
