@@ -21,5 +21,5 @@ injections_controller(function() {
       clearInterval(tab_definer);
     }
   }, 300);
-  
+
 });

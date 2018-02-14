@@ -1,6 +1,6 @@
 var original_window_setInterval = window.setInterval;
 
-var cached_options = {};
+var cached_options = { injection_disabled: false };
 var collect_details = undefined;
 
 var get_options = function() {
@@ -75,270 +75,271 @@ var is_allowed = function(kind, type) {
   return !options['disabled'][kind][type];
 }
 
-// EventTarget ---------------------------------------------
+if(!get_options()['injection_disabled']) {
+  // EventTarget ---------------------------------------------
+  var removeEventListener_alias = {};
 
-var removeEventListener_alias = {};
+  var original_EventTarget_removeEventListener = EventTarget.prototype.removeEventListener;
 
-var original_EventTarget_removeEventListener = EventTarget.prototype.removeEventListener;
+  EventTarget.prototype.removeEventListener = function(type, listener, options) {
+    var super_this = this;
 
-EventTarget.prototype.removeEventListener = function(type, listener, options) {
-  var super_this = this;
-
-  var value_to_return_a = original_EventTarget_removeEventListener.call(
-    super_this, type, listener, options
-  );
-
-  if(removeEventListener_alias[type] && removeEventListener_alias[type][listener]) {
-    var value_to_return_b = original_EventTarget_removeEventListener.call(
-      super_this, type, removeEventListener_alias[type][listener], options
+    var value_to_return_a = original_EventTarget_removeEventListener.call(
+      super_this, type, listener, options
     );
 
-    return value_to_return_a || value_to_return_b;
-  } else {
-    return value_to_return_a;
-  }
-};
+    if(removeEventListener_alias[type] && removeEventListener_alias[type][listener]) {
+      var value_to_return_b = original_EventTarget_removeEventListener.call(
+        super_this, type, removeEventListener_alias[type][listener], options
+      );
 
-var original_EventTarget_addEventListener = EventTarget.prototype.addEventListener;
+      return value_to_return_a || value_to_return_b;
+    } else {
+      return value_to_return_a;
+    }
+  };
 
-EventTarget.prototype.addEventListener = function(type, listener, options) {
-  var super_this = this;
+  var original_EventTarget_addEventListener = EventTarget.prototype.addEventListener;
 
-  var details = { target: super_this, code: listener };
+  EventTarget.prototype.addEventListener = function(type, listener, options) {
+    var super_this = this;
 
-  if(!is_allowed('addEventListener', type)) {
-    increment_counter('addEventListener', type, 'blocked', details);
-  } else {
-    increment_counter('addEventListener', type, 'allowed', details);
+    var details = { target: super_this, code: listener };
 
-    var wraped_listener = {
-      handleEvent: function (event) {
-        if(!is_allowed('handleEvent', type)) {
-          increment_counter('handleEvent', type, 'blocked', details);
-        } else {
-          increment_counter('handleEvent', type, 'allowed', details);
+    if(!is_allowed('addEventListener', type)) {
+      increment_counter('addEventListener', type, 'blocked', details);
+    } else {
+      increment_counter('addEventListener', type, 'allowed', details);
 
-          if (typeof(listener) === 'function') {
-            return listener(event);
+      var wraped_listener = {
+        handleEvent: function (event) {
+          if(!is_allowed('handleEvent', type)) {
+            increment_counter('handleEvent', type, 'blocked', details);
           } else {
-            return listener.handleEvent(event);
+            increment_counter('handleEvent', type, 'allowed', details);
+
+            if (typeof(listener) === 'function') {
+              return listener(event);
+            } else {
+              return listener.handleEvent(event);
+            }
+          }
+        }
+      };
+
+      if(!removeEventListener_alias[type]) removeEventListener_alias[type] = {};
+
+      removeEventListener_alias[type][listener] = wraped_listener;
+
+      return original_EventTarget_addEventListener.call(
+        super_this, type, wraped_listener, options
+      );
+    }
+  }
+
+  // WebSocket ---------------------------------------------
+
+  var original_WebSocket_send = WebSocket.prototype.send;
+
+  WebSocket.prototype.send = function(data) {
+    var super_this = this;
+
+    var details = { target: super_this, code: data };
+
+    if(!is_allowed('WebAPIs', 'WebSocket.send')) {
+      increment_counter('WebAPIs', 'WebSocket.send', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'WebSocket.send', 'allowed', details);
+
+      return original_WebSocket_send.call(super_this, data);
+    }
+  }
+
+  // Geolocation ---------------------------------------------
+
+  if(navigator.geolocation) {
+    var original_navigator_geolocation_getCurrentPosition = navigator.geolocation.getCurrentPosition;
+
+    navigator.geolocation.getCurrentPosition = function(success, error, options) {
+      var super_this = this;
+
+      var details = { target: super_this, code: JSON.stringify(options) };
+
+      var wraped_success = function(pos) {
+        if(!is_allowed('WebAPIs', 'geo.getCurrentPosition')) {
+          increment_counter('WebAPIs', 'geo.getCurrentPosition', 'blocked', details);
+        } else {
+          increment_counter('WebAPIs', 'geo.getCurrentPosition', 'allowed', details);
+
+          success(pos);
+        }
+      }
+
+      return original_navigator_geolocation_getCurrentPosition.call(
+        super_this, wraped_success, error, options
+      );
+    }
+
+    var original_navigator_geolocation_watchPosition = navigator.geolocation.watchPosition;
+
+    navigator.geolocation.watchPosition = function(success, error, options) {
+      var super_this = this;
+
+      var details = { target: super_this, code: JSON.stringify(options) };
+
+      var wraped_success = function(pos) {
+        if(!is_allowed('WebAPIs', 'geo.watchPosition')) {
+          increment_counter('WebAPIs', 'geo.watchPosition', 'blocked', details);
+        } else {
+          increment_counter('WebAPIs', 'geo.watchPosition', 'allowed', details);
+
+          success(pos);
+        }
+      }
+
+      return original_navigator_geolocation_watchPosition.call(
+        super_this, wraped_success, error, options
+      );
+    }
+  }
+  // XMLHttpRequest ---------------------------------------------
+
+  var original_XMLHttpRequest_open = XMLHttpRequest.prototype.open;
+
+  XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
+    var super_this = this;
+
+    if(async === undefined) async = true;
+    if(user === undefined) user = null;
+    if(password === undefined) password = null;
+
+    var details = { target: method, code: url };
+
+    if(!is_allowed('WebAPIs', 'XMLHttpRequest.open')) {
+      increment_counter('WebAPIs', 'XMLHttpRequest.open', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'XMLHttpRequest.open', 'allowed', details);
+
+      return original_XMLHttpRequest_open.call(
+        super_this, method, url, async, user, password
+      );
+    }
+  }
+
+  var original_XMLHttpRequest_send = XMLHttpRequest.prototype.send;
+
+  XMLHttpRequest.prototype.send = function(body) {
+    var super_this = this;
+
+    var details = { target: super_this, code: body };
+
+    if(!is_allowed('WebAPIs', 'XMLHttpRequest.send')) {
+      increment_counter('WebAPIs', 'XMLHttpRequest.send', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'XMLHttpRequest.send', 'allowed', details);
+
+      return original_XMLHttpRequest_send.call(super_this, body);
+    }
+  }
+
+  // setInterval ---------------------------------------------
+
+  window.setInterval = function(
+    function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+  ) {
+    var super_this = this;
+
+    var details = { target: super_this, code: function_or_code };
+
+    if(!is_allowed('WebAPIs', 'setInterval')) {
+      increment_counter('WebAPIs', 'setInterval', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'setInterval', 'allowed', details);
+
+      wraped_function_or_code = function(
+        p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+      ) {
+        if(!is_allowed('WebAPIs', 'setInterval.call')) {
+          increment_counter('WebAPIs', 'setInterval.call', 'blocked', details);
+
+          return 0;
+        } else {
+          increment_counter('WebAPIs', 'setInterval.call', 'allowed', details);
+
+          if(typeof function_or_code === 'string' || function_or_code instanceof String) {
+            return eval(function_or_code);
+          } else {
+            return function_or_code(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
           }
         }
       }
-    };
 
-    if(!removeEventListener_alias[type]) removeEventListener_alias[type] = {};
-
-    removeEventListener_alias[type][listener] = wraped_listener;
-
-    return original_EventTarget_addEventListener.call(
-      super_this, type, wraped_listener, options
-    );
+      return original_window_setInterval.call(
+        super_this,
+        wraped_function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+      );
+    }
   }
-}
 
-// WebSocket ---------------------------------------------
+  // fetch ---------------------------------------------
 
-var original_WebSocket_send = WebSocket.prototype.send;
+  var original_window_fetch = window.fetch;
 
-WebSocket.prototype.send = function(data) {
-  var super_this = this;
-
-  var details = { target: super_this, code: data };
-
-  if(!is_allowed('WebAPIs', 'WebSocket.send')) {
-    increment_counter('WebAPIs', 'WebSocket.send', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'WebSocket.send', 'allowed', details);
-
-    return original_WebSocket_send.call(super_this, data);
-  }
-}
-
-// Geolocation ---------------------------------------------
-
-if(navigator.geolocation) {
-  var original_navigator_geolocation_getCurrentPosition = navigator.geolocation.getCurrentPosition;
-
-  navigator.geolocation.getCurrentPosition = function(success, error, options) {
+  window.fetch = function(input, init) {
     var super_this = this;
 
-    var details = { target: super_this, code: JSON.stringify(options) };
+    var details = { target: super_this, code: input };
 
-    var wraped_success = function(pos) {
-      if(!is_allowed('WebAPIs', 'geo.getCurrentPosition')) {
-        increment_counter('WebAPIs', 'geo.getCurrentPosition', 'blocked', details);
-      } else {
-        increment_counter('WebAPIs', 'geo.getCurrentPosition', 'allowed', details);
+    if(!is_allowed('WebAPIs', 'fetch')) {
+      increment_counter('WebAPIs', 'fetch', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'fetch', 'allowed', details);
 
-        success(pos);
-      }
+      return original_window_fetch.call(super_this, input, init);
     }
-
-    return original_navigator_geolocation_getCurrentPosition.call(
-      super_this, wraped_success, error, options
-    );
   }
 
-  var original_navigator_geolocation_watchPosition = navigator.geolocation.watchPosition;
+  // setTimeout ---------------------------------------------
 
-  navigator.geolocation.watchPosition = function(success, error, options) {
+  window.setTimeout = function(
+    function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+  ) {
     var super_this = this;
 
-    var details = { target: super_this, code: JSON.stringify(options) };
+    var details = { target: super_this, code: function_or_code };
 
-    var wraped_success = function(pos) {
-      if(!is_allowed('WebAPIs', 'geo.watchPosition')) {
-        increment_counter('WebAPIs', 'geo.watchPosition', 'blocked', details);
-      } else {
-        increment_counter('WebAPIs', 'geo.watchPosition', 'allowed', details);
+    if(!is_allowed('WebAPIs', 'setTimeout')) {
+      increment_counter('WebAPIs', 'setTimeout', 'blocked', details);
+    } else {
+      increment_counter('WebAPIs', 'setTimeout', 'allowed', details);
 
-        success(pos);
-      }
-    }
+      wraped_function_or_code = function(
+        p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+      ) {
+        if(!is_allowed('WebAPIs', 'setTimeout.call')) {
+          increment_counter('WebAPIs', 'setTimeout.call', 'blocked', details);
 
-    return original_navigator_geolocation_watchPosition.call(
-      super_this, wraped_success, error, options
-    );
-  }
-}
-// XMLHttpRequest ---------------------------------------------
-
-var original_XMLHttpRequest_open = XMLHttpRequest.prototype.open;
-
-XMLHttpRequest.prototype.open = function(method, url, async, user, password) {
-  var super_this = this;
-
-  if(async === undefined) async = true;
-  if(user === undefined) user = null;
-  if(password === undefined) password = null;
-
-  var details = { target: method, code: url };
-
-  if(!is_allowed('WebAPIs', 'XMLHttpRequest.open')) {
-    increment_counter('WebAPIs', 'XMLHttpRequest.open', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'XMLHttpRequest.open', 'allowed', details);
-
-    return original_XMLHttpRequest_open.call(
-      super_this, method, url, async, user, password
-    );
-  }
-}
-
-var original_XMLHttpRequest_send = XMLHttpRequest.prototype.send;
-
-XMLHttpRequest.prototype.send = function(body) {
-  var super_this = this;
-
-  var details = { target: super_this, code: body };
-
-  if(!is_allowed('WebAPIs', 'XMLHttpRequest.send')) {
-    increment_counter('WebAPIs', 'XMLHttpRequest.send', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'XMLHttpRequest.send', 'allowed', details);
-
-    return original_XMLHttpRequest_send.call(super_this, body);
-  }
-}
-
-// setInterval ---------------------------------------------
-
-window.setInterval = function(
-  function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-) {
-  var super_this = this;
-
-  var details = { target: super_this, code: function_or_code };
-
-  if(!is_allowed('WebAPIs', 'setInterval')) {
-    increment_counter('WebAPIs', 'setInterval', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'setInterval', 'allowed', details);
-
-    wraped_function_or_code = function(
-      p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-    ) {
-      if(!is_allowed('WebAPIs', 'setInterval.call')) {
-        increment_counter('WebAPIs', 'setInterval.call', 'blocked', details);
-
-        return 0;
-      } else {
-        increment_counter('WebAPIs', 'setInterval.call', 'allowed', details);
-
-        if(typeof function_or_code === 'string' || function_or_code instanceof String) {
-          return eval(function_or_code);
+          return 0;
         } else {
-          return function_or_code(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+          increment_counter('WebAPIs', 'setTimeout.call', 'allowed', details);
+
+          if(typeof function_or_code === 'string' || function_or_code instanceof String) {
+            return eval(function_or_code);
+          } else {
+            return function_or_code(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
+          }
         }
       }
+
+      return original_window_setTimeout.call(
+        super_this,
+        wraped_function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
+      );
     }
-
-    return original_window_setInterval.call(
-      super_this,
-      wraped_function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-    );
   }
+
+  // -----------------------------------------------------
 }
-
-// fetch ---------------------------------------------
-
-var original_window_fetch = window.fetch;
-
-window.fetch = function(input, init) {
-  var super_this = this;
-
-  var details = { target: super_this, code: input };
-
-  if(!is_allowed('WebAPIs', 'fetch')) {
-    increment_counter('WebAPIs', 'fetch', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'fetch', 'allowed', details);
-
-    return original_window_fetch.call(super_this, input, init);
-  }
-}
-
-// setTimeout ---------------------------------------------
-
-window.setTimeout = function(
-  function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-) {
-  var super_this = this;
-
-  var details = { target: super_this, code: function_or_code };
-
-  if(!is_allowed('WebAPIs', 'setTimeout')) {
-    increment_counter('WebAPIs', 'setTimeout', 'blocked', details);
-  } else {
-    increment_counter('WebAPIs', 'setTimeout', 'allowed', details);
-
-    wraped_function_or_code = function(
-      p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-    ) {
-      if(!is_allowed('WebAPIs', 'setTimeout.call')) {
-        increment_counter('WebAPIs', 'setTimeout.call', 'blocked', details);
-
-        return 0;
-      } else {
-        increment_counter('WebAPIs', 'setTimeout.call', 'allowed', details);
-
-        if(typeof function_or_code === 'string' || function_or_code instanceof String) {
-          return eval(function_or_code);
-        } else {
-          return function_or_code(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12);
-        }
-      }
-    }
-
-    return original_window_setTimeout.call(
-      super_this,
-      wraped_function_or_code, delay, p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
-    );
-  }
-}
-
-// -----------------------------------------------------
 
 original_window_setInterval(function() {
   if(counters_changed) {

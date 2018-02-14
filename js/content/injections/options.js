@@ -1,36 +1,35 @@
 injections_controller(function() {
+  var inject_options_for_domain = function(options, from) {
+    var json_options_element = document.getElementById('luminous-options');
+
+    if(!json_options_element) {
+      var json_options_injection = document.createElement('script');
+      json_options_injection.type = 'application/json';
+      json_options_injection.id = 'luminous-options';
+      json_options_injection.innerHTML = JSON.stringify(options);
+      json_options_injection.setAttribute('data-changed', 'true');
+      if(from) {
+        json_options_injection.setAttribute('data-from', from);
+      }
+      document.documentElement.insertBefore(json_options_injection, document.documentElement.firstChild);
+    } else {
+      json_options_element.innerHTML = JSON.stringify(options);
+      json_options_element.setAttribute('data-changed', 'true');
+    }
+  }
+
+  var collect_details = (Cookies.get('ld') == 't') ? true : false;
+
+  if(Cookies.get('ls')) {
+    inject_options_for_domain({
+      disabled: uncompress_settings(Cookies.get('ls')),
+      collect_details: collect_details
+    }, 'cookies');
+  }
 
   var load_options_for_domain = function(domain) {
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data['disabled_' + domain]) {
-        sync_data['disabled_' + domain] = {};
-      }
-
-      var kinds = [];
-
-      for(possible_kind in sync_data) {
-        var regex = /^default_disabled_/;
-        if(regex.test(possible_kind)) {
-          kinds.push(possible_kind.replace(regex, ''));
-        }
-      }
-
-      // Apply default rules
-      for(i in kinds) {
-        var kind = kinds[i];
-
-        if(!sync_data['disabled_' + domain][kind]) {
-          sync_data['disabled_' + domain][kind] = {};
-        }
-
-        for(code in sync_data['default_disabled_' + kind]) {
-          if(sync_data['disabled_' + domain][kind][code] == undefined) {
-            if(sync_data['default_disabled_' + kind][code]) {
-              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled_' + kind][code];
-            }
-          }
-        }
-      }
+      sync_data  = apply_settings_for_domain(sync_data);
 
       var options = {}
 
@@ -41,19 +40,7 @@ injections_controller(function() {
 
       options['collect_details'] = sync_data['popup']['show_code_details'];
 
-      var json_options_element = document.getElementById('luminous-options');
-
-      if(!json_options_element) {
-        var json_options_injection = document.createElement('script');
-        json_options_injection.type = 'application/json';
-        json_options_injection.id = 'luminous-options';
-        json_options_injection.innerHTML = JSON.stringify(options);
-        json_options_injection.setAttribute('data-changed', 'true');
-        document.documentElement.insertBefore(json_options_injection, document.documentElement.firstChild);
-      } else {
-        json_options_element.innerHTML = JSON.stringify(options);
-        json_options_element.setAttribute('data-changed', 'true');
-      }
+      inject_options_for_domain(options);
     });
   }
 
@@ -110,5 +97,4 @@ injections_controller(function() {
   });
 
   load_options_for_domain(window.location.hostname);
-
 });
