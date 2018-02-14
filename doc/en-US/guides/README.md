@@ -5,18 +5,16 @@
 
 Guides are documents on many specific subjects where we can go deep into the details and easily find the information we are looking for.
 
-- [Context, History and Discussions](#context-history-and-discussions)
 - [How it works?](#how-it-works)
 - [Web APIs and JavaScript events](#web-apis-and-javascript-events)
 - [Site analysis](#site-analysis)
-
-## Context, History and Discussions
- - [Interesting discussions](./context/interesting-discussions.md)
+- [Context, History and Discussions](#context-history-and-discussions)
 
 ## How it works?
 
- - [Reports](./how-it-works/reports.md)
- - [What is detected?](./how-it-works/what-is-detected.md)
+- [Reports](./how-it-works/reports.md)
+- [What is detected?](./how-it-works/what-is-detected.md)
+- [Interception](./how-it-works/interception.md)
 
 ## Web APIs and JavaScript events
 
@@ -25,4 +23,8 @@ Guides are documents on many specific subjects where we can go deep into the det
 
 ## Site analysis
 
- - [Google](./sites/google.md)
+- [Google](./sites/google.md)
+
+## Context, History and Discussions
+
+- [Interesting discussions](./context/interesting-discussions.md)
