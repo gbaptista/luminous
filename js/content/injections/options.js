@@ -1,4 +1,6 @@
 injections_controller(function() {
+  debug_log('injections_controller: ' + (performance.now() - start_time));
+
   var inject_options_for_domain = function(options, from) {
     var json_options_element = document.getElementById('luminous-options');
 
@@ -18,14 +20,70 @@ injections_controller(function() {
     }
   }
 
-  var collect_details = (Cookies.get('ld') == 't') ? true : false;
+  if(Cookies.get('ld')) {
+    var collect_details = (Cookies.get('ld') == 't') ? true : false;
 
-  if(Cookies.get('ls')) {
-    inject_options_for_domain({
+    var options = {
       disabled: uncompress_settings(Cookies.get('ls')),
       collect_details: collect_details
-    }, 'cookies');
+    }
+
+    if(!options['injection_disabled']) options['injection_disabled'] = false;
+
+    debug_log('----------------------------------------------------');
+    debug_log('cookies: ' + (performance.now() - start_time));
+    debug_log(JSON.stringify(options));
+
+    inject_options_for_domain(options, 'cookies');
   }
+
+  var received_from_on_message = false;
+
+  var option_definer = setInterval(function() {
+    try {
+      chrome.runtime.sendMessage({ action: 'options_from_on_message' }, function(response) {
+        if(response && response.options) {
+          clearInterval(option_definer);
+          if(!received_from_on_message) {
+            received_from_on_message = true;
+            debug_log('----------------------------------------------------');
+            debug_log('setInterval.sendMessage: ' + (performance.now() - start_time));
+            debug_log(JSON.stringify(response.options));
+
+            inject_options_for_domain(response.options, 'setInterval.sendMessage');
+          }
+        }
+      });
+    } catch(_) {
+      clearInterval(option_definer);
+    }
+  }, 0);
+
+  chrome.runtime.sendMessage({ action: 'current_cached_settings' }, function(response) {
+    if(response) {
+      clearInterval(option_definer);
+
+      if(!received_from_on_message) {
+        received_from_on_message = true;
+
+        debug_log('----------------------------------------------------');
+        debug_log('sendMessage: ' + (performance.now() - start_time));
+        debug_log(JSON.stringify(options));
+
+        inject_options_for_domain(options, 'sendMessage');
+      }
+    }
+  });
+
+  chrome.runtime.onMessage.addListener(function(message, _sender, _sendResponse) {
+    if(message.action == 'options_from_on_committed') {
+      debug_log('----------------------------------------------------');
+      debug_log('onCommitted: ' + (performance.now() - start_time));
+      debug_log(JSON.stringify(message  .options));
+
+      inject_options_for_domain(message.options, 'onCommitted');
+    }
+  });
 
   var load_options_for_domain = function(domain) {
     chrome.storage.sync.get(null, function(sync_data) {
@@ -38,9 +96,15 @@ injections_controller(function() {
         sync_data['injection_disabled']['general'] || sync_data['injection_disabled'][domain]
       );
 
+      if(!options['injection_disabled']) options['injection_disabled'] = false;
+
       options['collect_details'] = sync_data['popup']['show_code_details'];
 
-      inject_options_for_domain(options);
+      debug_log('----------------------------------------------------');
+      debug_log('storage.sync.get: ' + (performance.now() - start_time));
+      debug_log(JSON.stringify(options));
+
+      inject_options_for_domain(options, 'sync');
     });
   }
 
@@ -50,6 +114,18 @@ injections_controller(function() {
 
       if(changes) {
         changes = changes;
+
+        var popup_changed = false;
+
+        if(changes['popup'] && changes['popup'].newValue) {
+          if(changes['popup'].oldValue) {
+            if(changes['popup'].oldValue['show_code_details'] != changes['popup'].newValue['show_code_details']) {
+              popup_changed = true;
+            }
+          } else {
+            popup_changed = true;
+          }
+        }
 
         var disabled_for_domain = false;
 
@@ -89,7 +165,7 @@ injections_controller(function() {
           }
         }
 
-        if(disabled_for_domain || injection_disabled_for_domain || injection_disabled_for_general) {
+        if(popup_changed || disabled_for_domain || injection_disabled_for_domain || injection_disabled_for_general) {
           load_options_for_domain(domain);
         }
       }

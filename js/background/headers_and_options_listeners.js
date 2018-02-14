@@ -1,12 +1,57 @@
+var settings_defined = false;
 var cached_settings = {};
 
 var update_cached_settings = function() {
   chrome.storage.sync.get(null, function(sync_data) {
-    if(sync_data) cached_settings = sync_data;
+    if(sync_data) {
+      settings_defined = true;
+      cached_settings = sync_data;
+    }
   });
 }
 
 update_cached_settings();
+
+var full_options_for_url = function(url) {
+  return {
+    disabled: settings_for_url(url),
+    collect_details: cached_settings['popup']['show_code_details'],
+    injection_disabled: !should_intercept_header(url)
+  };
+};
+
+var settings_for_url = function(url, compressed) {
+  var a_element = document.createElement('a');
+  a_element.href = url;
+  var domain = a_element.hostname;
+
+  if(compressed) {
+    return compress_settings(
+      apply_settings_for_domain(cached_settings, domain)['disabled_' + domain]
+    );
+  } else {
+    return apply_settings_for_domain(cached_settings, domain)['disabled_' + domain];
+  }
+}
+
+chrome.webNavigation.onCommitted.addListener(function(details) {
+  if(settings_defined) {
+    chrome.tabs.sendMessage(
+      details.tabId, {
+        action: 'options_from_on_committed',
+        options: full_options_for_url(details.url)
+      }
+    );
+  }
+});
+
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if(message.action == 'options_from_on_message') {
+    if(settings_defined) {
+      sendResponse({ options: full_options_for_url(sender.url) });
+    }
+  }
+});
 
 chrome.storage.onChanged.addListener(function(changes, namespace) {
   if(namespace == 'sync') {
@@ -30,16 +75,6 @@ var should_intercept_header = function(url) {
   }
 }
 
-var settings_for_url = function(url) {
-  var a_element = document.createElement('a');
-  a_element.href = url;
-  var domain = a_element.hostname;
-
-  return compress_settings(
-    apply_settings_for_domain(cached_settings, domain)['disabled_' + domain]
-  );
-}
-
 var update_security_policies_and_set_cookies = function(request_details) {
   if(should_intercept_header(request_details.url)) {
     for(let header of request_details.responseHeaders) {
@@ -60,8 +95,8 @@ var update_security_policies_and_set_cookies = function(request_details) {
     }
   }
 
-  if(cached_settings && false) {
-    // Todo: check existing cookies
+  if(cached_settings) {
+    // TODO check if cookie names exist.
     var le_cookie_value = 'f';
 
     if(should_intercept_header(request_details.url)) {
@@ -70,12 +105,12 @@ var update_security_policies_and_set_cookies = function(request_details) {
 
     request_details.responseHeaders.push({
       name: 'Set-Cookie',
-      value: 'le=' + le_cookie_value + '; Path=/'
+      value: 'le=' + le_cookie_value + '; Path=/; Max-Age=1'
     });
 
     request_details.responseHeaders.push({
       name: 'Set-Cookie',
-      value: 'ls=' + settings_for_url(request_details.url) + '; Path=/'
+      value: 'ls=' + settings_for_url(request_details.url, true) + '; Path=/; Max-Age=1'
     });
 
     var ld_value = 'f';
@@ -86,12 +121,22 @@ var update_security_policies_and_set_cookies = function(request_details) {
 
     request_details.responseHeaders.push({
       name: 'Set-Cookie',
-      value: 'ld=' + ld_value + '; Path=/'
+      value: 'ld=' + ld_value + '; Path=/; Max-Age=1'
     });
   }
 
   return { responseHeaders: request_details.responseHeaders };
 }
+
+chrome.webRequest.onBeforeSendHeaders.addListener(
+  function(request_details) {
+    // TODO Remove cookies from haders.
+
+    return { responseHeaders: request_details.responseHeaders };
+  },
+  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] },
+  ['requestHeaders', 'blocking']
+)
 
 chrome.webRequest.onHeadersReceived.addListener(
   update_security_policies_and_set_cookies,

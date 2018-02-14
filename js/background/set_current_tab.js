@@ -31,5 +31,5 @@ chrome.tabs.onRemoved.addListener(function(tab_id) { remove_data_for_tab(tab_id)
 
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) { remove_data_for_tab(details.tabId) },
-  { urls: ['<all_urls>'], types: ['main_frame'] }
+  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }
 );
