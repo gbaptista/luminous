@@ -76,10 +76,14 @@ injections_controller(function() {
   });
 
   chrome.runtime.onMessage.addListener(function(message, _sender, _sendResponse) {
-    if(message.action == 'options_from_on_committed') {
+    if(
+      message.action == 'options_from_on_committed'
+      &&
+      window.location.host == message.domain
+    ) {
       debug_log('----------------------------------------------------');
       debug_log('onCommitted: ' + (performance.now() - start_time));
-      debug_log(JSON.stringify(message  .options));
+      debug_log(JSON.stringify(message.options));
 
       inject_options_for_domain(message.options, 'onCommitted');
     }

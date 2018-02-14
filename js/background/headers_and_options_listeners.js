@@ -36,9 +36,14 @@ var settings_for_url = function(url, compressed) {
 
 chrome.webNavigation.onCommitted.addListener(function(details) {
   if(settings_defined) {
+    var a_element = document.createElement('a');
+    a_element.href = details.url;
+    var domain = a_element.hostname;
+
     chrome.tabs.sendMessage(
       details.tabId, {
         action: 'options_from_on_committed',
+        domain: domain,
         options: full_options_for_url(details.url)
       }
     );
