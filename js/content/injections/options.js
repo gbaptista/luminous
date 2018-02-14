@@ -91,9 +91,9 @@ injections_controller(function() {
 
   var load_options_for_domain = function(domain) {
     chrome.storage.sync.get(null, function(sync_data) {
-      sync_data  = apply_settings_for_domain(sync_data);
+      sync_data = apply_settings_for_domain(sync_data, domain);
 
-      var options = {}
+      var options = {};
 
       options['disabled'] = sync_data['disabled_' + domain];
       options['injection_disabled'] = (
