@@ -29,7 +29,7 @@ With that we can prevent something from happening:
 ```javascript
 // interceptor.js
 EventTarget.prototype.addEventListener = function(_type, _listener, _options) {
-  // do nothing
+  /* do nothing */
 };
 
 // document page
@@ -46,7 +46,7 @@ However, if the interception code needs to perform some asynchronous operation, 
 browser.storage.sync.get('options', function(options) {
   if(options.enabled) {
     EventTarget.prototype.addEventListener = function(_type, _listener, _options) {
-      // do nothing
+      /* do nothing */
     };
   }
 });
@@ -64,7 +64,7 @@ This has nothing to do with how long the operation takes, it's just how JavaScri
 // interceptor.js
 setTimeout(function() {
   EventTarget.prototype.addEventListener = function(_type, _listener, _options) {
-    // do nothing
+    /* do nothing */
   };
 }, 0);
 
@@ -158,7 +158,7 @@ browser.webRequest.onHeadersReceived.addListener(
 if(Cookies.get('enabled')) {
   var script = document.createElement('script');
   script.type = 'text/javascript';
-  script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { // do nothing };';
+  script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { /* do nothing */ };';
   document.documentElement.insertBefore(script, document.documentElement.firstChild);
 }
 
@@ -249,7 +249,7 @@ browser.runtime.onMessage.addListener(function(message, _sender, _sendResponse) 
     if(message.enabled) {
       var script = document.createElement('script');
       script.type = 'text/javascript';
-      script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { // do nothing };';
+      script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { /* do nothing */ };';
       document.documentElement.insertBefore(script, document.documentElement.firstChild);
     }
   }
@@ -279,7 +279,7 @@ browser.runtime.sendMessage({ action: 'request_enabled_option' }, function(respo
   if(response.enabled) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { // do nothing };';
+    script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { /* do nothing */ };';
     document.documentElement.insertBefore(script, document.documentElement.firstChild);
   }
 });
@@ -298,7 +298,7 @@ browser.storage.sync.get('options', function(stored_options) {
   if(stored_options.enabled) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
-    script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { // do nothing };';
+    script.innerHTML = 'EventTarget.prototype.addEventListener = function(_, _, _) { /* do nothing */ };';
     document.documentElement.insertBefore(script, document.documentElement.firstChild);
   }
 });
