@@ -100,7 +100,6 @@ The `manifest.js`:
 
 The [test page](https://gbaptista.github.io/luminous/html/demo-page-interceptor.html):
 ```html
-
 <script>
   var a = document.createElement('a');
   a.addEventListener('click', function(_) { return 'first script'; });
