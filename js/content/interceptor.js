@@ -75,7 +75,7 @@ var increment_counter = function(kind, type, result, details) {
     );
 
     counters_changed = true;
-  }, 0);
+  }, 0, '__INTERNAL_LUMINOUS_CODE__');
 }
 
 var is_allowed = function(kind, type) {
@@ -137,7 +137,7 @@ if(!get_options()['injection_disabled']) {
 
               if (typeof(listener) === 'function') {
                 return listener(event);
-              } else {
+              } else if (listener && typeof(listener.handleEvent) === 'function') {
                 return listener.handleEvent(event);
               }
             }
@@ -291,7 +291,7 @@ if(!get_options()['injection_disabled']) {
   ) {
     var super_this = this;
 
-    if(get_options()['injection_disabled']) {
+    if(get_options()['injection_disabled'] || p1 == '__INTERNAL_LUMINOUS_CODE__') {
       return original_window_setInterval.call(
         super_this, function_or_code, delay,
         p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
@@ -359,7 +359,7 @@ if(!get_options()['injection_disabled']) {
   ) {
     var super_this = this;
 
-    if(get_options()['injection_disabled']) {
+    if(get_options()['injection_disabled'] || p1 == '__INTERNAL_LUMINOUS_CODE__') {
       return original_window_setTimeout.call(
         super_this, function_or_code, delay,
         p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
@@ -411,4 +411,4 @@ original_window_setInterval(function() {
 
     element.setAttribute('data-changed', 'true');
   }
-}, 300);
+}, 300, '__INTERNAL_LUMINOUS_CODE__');
