@@ -103,48 +103,55 @@ var update_security_policies_and_set_cookies = function(request_details) {
   if(cached_settings) {
     // TODO check if cookie names exist.
     var le_cookie_value = 'f';
+    var ld_cookie_value = 'f';
 
     if(should_intercept_header(request_details.url)) {
       le_cookie_value = 't';
     }
 
-    request_details.responseHeaders.push({
-      name: 'Set-Cookie',
-      value: 'le=' + le_cookie_value + '; Path=/; Max-Age=1'
-    });
-
-    request_details.responseHeaders.push({
-      name: 'Set-Cookie',
-      value: 'ls=' + settings_for_url(request_details.url, true) + '; Path=/; Max-Age=1'
-    });
-
-    var ld_value = 'f';
-
     if(cached_settings['popup']['show_code_details']) {
-      ld_value = 't';
+      ld_cookie_value = 't';
     }
 
-    request_details.responseHeaders.push({
-      name: 'Set-Cookie',
-      value: 'ld=' + ld_value + '; Path=/; Max-Age=1'
-    });
+    var luminous_cookies = [];
+
+    luminous_cookies.push('le=' + le_cookie_value + '; Path=/; Max-Age=1;');
+    luminous_cookies.push(
+      'ls=' + settings_for_url(request_details.url, true) + '; Path=/; Max-Age=1;'
+    );
+    luminous_cookies.push('ld=' + ld_cookie_value + '; Path=/; Max-Age=1;');
+
+    var cookies_injected = false;
+
+    if(typeof browser !== 'undefined') {
+      // Probably a Gecko-based browser
+      for(let header of request_details.responseHeaders) {
+        if(!cookies_injected && header.name.toLowerCase() == 'set-cookie') {
+          cookies_injected = true;
+          header.value += "\n" + luminous_cookies.join("\n");
+        }
+      }
+
+      if(!cookies_injected) {
+        request_details.responseHeaders.push({
+          name: 'Set-Cookie', value: luminous_cookies.join("\n")
+        });
+      }
+    } else {
+      // Probably a Chromium-based browser
+      for(i in luminous_cookies) {
+        request_details.responseHeaders.push({
+          name: 'Set-Cookie', value: luminous_cookies[i]
+        });
+      }
+    }
   }
 
   return { responseHeaders: request_details.responseHeaders };
 }
 
-chrome.webRequest.onBeforeSendHeaders.addListener(
-  function(request_details) {
-    // TODO Remove cookies from haders.
-
-    return { responseHeaders: request_details.responseHeaders };
-  },
-  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] },
-  ['requestHeaders', 'blocking']
-)
-
 chrome.webRequest.onHeadersReceived.addListener(
   update_security_policies_and_set_cookies,
-  { 'urls': ['<all_urls>'] },
+  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] },
   ['responseHeaders', 'blocking']
 );
