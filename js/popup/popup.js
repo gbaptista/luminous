@@ -168,7 +168,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: parseInt(value['execution_time']) + ' ms'
             });
           });
 
@@ -181,7 +182,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: parseInt(value['execution_time']) + ' ms'
             });
           });
 
@@ -194,7 +196,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: parseInt(value['execution_time']) + ' ms'
             });
           });
 

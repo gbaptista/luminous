@@ -11,6 +11,7 @@
       <div class="calls {{#disabled_class}}WebAPIs,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="WebAPIs" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="execution_time">{{execution_time}}</span>
         <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
       </div>
     {{/web_apis_calls}}
@@ -26,6 +27,7 @@
       <div class="calls {{#disabled_class}}handleEvent,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="handleEvent" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="execution_time">{{execution_time}}</span>
         <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
       </div>
     {{/handle_event_calls}}
@@ -41,6 +43,7 @@
       <div class="calls {{#disabled_class}}addEventListener,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="addEventListener" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
+        <span class="execution_time">{{execution_time}}</span>
         <span class="blocked" style="background-color:{{blocked_color}};">{{blocked}}</span>
       </div>
     {{/add_event_listener_calls}}
