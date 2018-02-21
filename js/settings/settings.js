@@ -50,9 +50,7 @@ var set_sync_option = function(name, value, namespace, value_as_namespace) {
 };
 
 var observe_form = function() {
-  $('.locale').each(function() {
-    $(this).html(chrome.i18n.getMessage($(this).data('locale')));
-  });
+  apply_locales();
 
   $('#form form').submit(function(event) {
     event.preventDefault();
@@ -81,10 +79,7 @@ var observe_form = function() {
   });
 }
 
-$(document).ready(function() {
-  $('#loading').html(chrome.i18n.getMessage('messageLoading'));
-  $('title').html(chrome.i18n.getMessage('manifestName'));
-
+var apply_locales = function() {
   $('.locale').each(function() {
     $(this).html(chrome.i18n.getMessage($(this).data('locale')));
   });
@@ -92,6 +87,13 @@ $(document).ready(function() {
   $('.locale-url').each(function() {
     $(this).attr('href', chrome.i18n.getMessage($(this).data('locale-url')));
   });
+}
+
+$(document).ready(function() {
+  $('#loading').html(chrome.i18n.getMessage('messageLoading'));
+  $('title').html(chrome.i18n.getMessage('manifestName'));
+
+  apply_locales();
 
   load_template('html/settings/templates/nav.html', function(template) {
     $('.navbar').html(

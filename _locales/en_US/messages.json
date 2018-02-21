@@ -7,7 +7,7 @@
   "linkHelpHref": { "message": "https://gbaptista.github.io/luminous/doc/en-US" },
 
   "checkboxInjectionEnabledGeneral": { "message": "all websites" },
-  "checkboxShowCodeDetails": { "message": "show code details" },
+  "checkboxShowCodeDetails": { "message": "code details" },
 
   "titleHandleEvent": { "message": "triggered events (handleEvent)" },
   "titleAddEventListener": { "message": "attached events (addEventListener)" },
@@ -90,5 +90,10 @@
   "settingsNoRecordsText": { "message": "no records found" },
   "settingsReportClearAllButtonText": { "message": "clear all records" },
   "checkboxZoomIn": { "message": "zoom in" },
-  "checkboxApplyToDefault": { "message": "apply actions to default rules" }
+  "checkboxApplyToDefault": { "message": "apply actions to default rules" },
+
+  "checkboxShowPerformanceMetrics": { "message": "performance metrics" },
+  "sortByText": { "message": "sort by" },
+  "sortByCallsText": { "message": "executions" },
+  "sortByTimeText": { "message": "time spent" }
 }

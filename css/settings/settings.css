@@ -3,8 +3,16 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
+.clear {
+  clear: both;
+}
+
 body {
   padding-top: 20px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .alert {

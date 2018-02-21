@@ -86,13 +86,18 @@ html, body {
   position: absolute;
   bottom:-5px;
   left: 50%;
-  margin-left: -28px;
-  width: 56px;
+  margin-left: -20px;
+  width: 40px;
   padding: 2px 0;
   text-align: center;
   background-color: #8D8E87;
   color: #FFF;
   font-style: italic;
+}
+
+.zoom-in .interceptions .calls .execution_time {
+  margin-left: -29px;
+  width: 58px;
 }
 
 .interceptions .calls .allowed {

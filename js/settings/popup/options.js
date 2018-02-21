@@ -11,7 +11,10 @@ $(document).ready(function() {
             zoom_in: sync_data['popup']['zoom_in'],
 
             apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
-            apply_to_default: sync_data['popup']['apply_to_default']
+            apply_to_default: sync_data['popup']['apply_to_default'],
+
+            show_performance_metrics_title: chrome.i18n.getMessage('checkboxShowPerformanceMetrics'),
+            show_performance_metrics: sync_data['popup']['show_performance_metrics']
           })
         );
 

@@ -90,9 +90,7 @@ $(document).ready(function() {
           })
         );
 
-        $('.locale').each(function() {
-          $(this).html(chrome.i18n.getMessage($(this).data('locale')));
-        });
+        apply_locales();
 
         $('.add-code').submit(function(event) {
           event.preventDefault();

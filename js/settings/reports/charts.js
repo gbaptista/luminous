@@ -19,7 +19,7 @@ $(document).ready(function() {
     }
 
     db.reports.count(function(count) {
-      $('#used').html(count + ' ' + chrome.i18n.getMessage('settingsRecordsText') + ' | ');
+      $('#used').html(short_number(count) + ' ' + chrome.i18n.getMessage('settingsRecordsText') + ' | ');
     });
 
     $('#clear').click(function() {
@@ -31,6 +31,20 @@ $(document).ready(function() {
         })
       }
     });
+
+    if(/sort_by=execution_time/.test(document.location.toString().split('?')[1])) {
+      $('.sort_by_execution_time').addClass('bold');
+    } else {
+      $('.sort_by_calls').addClass('bold');
+    }
+
+    var sort_by_parameter = function() {
+      if(/sort_by=execution_time/.test(document.location.toString().split('?')[1])) {
+          return 'execution_time';
+      } else {
+        return 'calls';
+      }
+    }
 
     load_template('html/settings/templates/reports/form.html', function(template) {
       var load_sync_data = function() {
@@ -74,10 +88,16 @@ $(document).ready(function() {
                 name: list[i][group_by]
               };
 
-              grouped_list[list[i][group_by]][sort_by] = 0;
+              grouped_list[list[i][group_by]]['execution_time'] = 0;
+              grouped_list[list[i][group_by]]['calls'] = 0;
             }
 
-            grouped_list[list[i][group_by]][sort_by] += list[i][sort_by];
+            if(list[i]['execution_time'] == undefined) {
+              list[i]['execution_time'] = 0.0;
+            }
+
+            grouped_list[list[i][group_by]]['execution_time'] += list[i]['execution_time'];
+            grouped_list[list[i][group_by]]['calls'] += list[i]['calls'];
           }
 
           var list = [];
@@ -93,6 +113,14 @@ $(document).ready(function() {
           callback(list.slice(0, limit));
         });
       });
+    }
+
+    var format_items = function(items) {
+      for(i in items) {
+        items[i]['calls'] = short_number(items[i]['calls'], '0', ' ');
+        items[i]['execution_time'] = short_time(items[i]['execution_time'], ' ');
+      }
+      return items;
     }
 
     var load_custom_domain = function(domain) {
@@ -115,12 +143,12 @@ $(document).ready(function() {
             return query.where({domain: domain});
           }
 
-          group_and_sort('code', 'calls', limit, where, function(items) {
+          group_and_sort('code', sort_by_parameter(), limit, where, function(items) {
             $('#custom-domain .total-calls').html(
               Mustache.render(template, {
                 group_title: 'domain',
                 count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
-                items: items,
+                items: format_items(items),
                 no_records: chrome.i18n.getMessage('settingsNoRecordsText')
               })
             );
@@ -157,12 +185,12 @@ $(document).ready(function() {
               return query.where({domain: domain, kind: kind});
             }
 
-            group_and_sort('code', 'calls', limit, where, function(items) {
+            group_and_sort('code', sort_by_parameter(), limit, where, function(items) {
               $('#custom-domain .' + kind + '-calls').html(
                 Mustache.render(template, {
                   group_title: 'domain',
                   count_title: kind,
-                  items: items,
+                  items: format_items(items),
                   no_records: chrome.i18n.getMessage('settingsNoRecordsText')
                 })
               );
@@ -182,12 +210,12 @@ $(document).ready(function() {
       );
 
       load_template('html/settings/templates/reports/tables/executions.html', function(template) {
-        group_and_sort('code', 'calls', limit, undefined, function(items) {
+        group_and_sort('code', sort_by_parameter(), limit, undefined, function(items) {
           $('#per-code .total-calls').html(
             Mustache.render(template, {
               group_title: 'domain',
               count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
-              items: items,
+              items: format_items(items),
               no_records: chrome.i18n.getMessage('settingsNoRecordsText')
             })
           );
@@ -204,12 +232,12 @@ $(document).ready(function() {
             return query.where('kind').equals(kind);
           }
 
-          group_and_sort('code', 'calls', limit, where, function(items) {
+          group_and_sort('code', sort_by_parameter(), limit, where, function(items) {
             $('#per-code .' + kind + '-calls').html(
               Mustache.render(template, {
                 group_title: 'domain',
                 count_title: kind,
-                items: items,
+                items: format_items(items),
                 no_records: chrome.i18n.getMessage('settingsNoRecordsText')
               })
             );
@@ -228,7 +256,7 @@ $(document).ready(function() {
       );
 
       load_template('html/settings/templates/reports/tables/executions.html', function(template) {
-        group_and_sort('domain', 'calls', limit, undefined, function(items) {
+        group_and_sort('domain', sort_by_parameter(), limit, undefined, function(items) {
 
           if(items[0]) {
             load_custom_domain(items[0].name);
@@ -238,7 +266,7 @@ $(document).ready(function() {
             Mustache.render(template, {
               group_title: 'domain',
               count_title: chrome.i18n.getMessage('settingsAddEventAllLabel'),
-              items: items,
+              items: format_items(items),
               no_records: chrome.i18n.getMessage('settingsNoRecordsText')
             })
           );
@@ -255,12 +283,12 @@ $(document).ready(function() {
             return query.where('kind').equals(kind);
           }
 
-          group_and_sort('domain', 'calls', limit, where, function(items) {
+          group_and_sort('domain', sort_by_parameter(), limit, where, function(items) {
             $('#per-domain .' + kind + '-calls').html(
               Mustache.render(template, {
                 group_title: 'domain',
                 count_title: kind,
-                items: items,
+                items: format_items(items),
                 no_records: chrome.i18n.getMessage('settingsNoRecordsText')
               })
             );

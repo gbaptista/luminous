@@ -67,6 +67,8 @@ $(document).ready(function() {
           })
         );
 
+        apply_locales();
+
         observe_form();
 
         loaded();
