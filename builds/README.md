@@ -9,9 +9,14 @@ Update the version on `manifest.json`:
 
 Copy all folders and files to the `builds/current/` directory.
 
+Install [*npm*](https://www.npmjs.com/):
+```
+sudo apt-get install npm
+```
+
 Install [*UglifyJS*](https://github.com/mishoo/UglifyJS):
 ```shell
-npm install uglify-js -g
+sudo npm install uglify-js -g
 ```
 
 Compress the `builds/current/js/content/interceptor.js` code:
@@ -99,7 +104,7 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-18.zip` and contact the repository owner to publish in all stores.
+Compress the `builds/current/` content to a *.zip* file with the version: `0.0.18.zip` and contact the repository owner to publish in all stores.
 
 Include this note for reviewers:
 ```
