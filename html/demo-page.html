@@ -254,6 +254,13 @@
 
         my_request();
 
+        setTimeout(function(param) {
+          var time = performance.now();
+          while((performance.now() - time) < 1500) {
+            'lor123em'.replace(/\d.*/, '');
+          }
+        }, 0);
+
       }, 500); })();
     </script>
   </body>

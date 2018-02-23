@@ -101,6 +101,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             show_code_details: sync_data['popup']['show_code_details'],
             zoom_in_title: chrome.i18n.getMessage('checkboxZoomIn'),
             zoom_in: sync_data['popup']['zoom_in'],
+            show_performance_metrics_title: chrome.i18n.getMessage('checkboxShowPerformanceMetrics'),
+            show_performance_metrics: sync_data['popup']['show_performance_metrics'],
             apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
             apply_to_default: sync_data['popup']['apply_to_default'],
             no_domain: chrome.i18n.getMessage('settingsInvalidDomainMessage')
@@ -123,6 +125,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             name == 'zoom_in'
             ||
             name == 'apply_to_default'
+            ||
+            name == 'show_performance_metrics'
           ) {
             set_sync_popup_option(name, value);
           } else {
@@ -168,7 +172,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -181,7 +186,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -194,7 +200,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -219,6 +226,7 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               handle_event_title: chrome.i18n.getMessage('titleHandleEvent'),
               web_apis_title: chrome.i18n.getMessage('titleWebAPIs'),
               add_event_listener_title: chrome.i18n.getMessage('titleAddEventListener'),
+              show_performance_metrics: sync_data['popup']['show_performance_metrics'],
               disabled_class: function() {
                 return function (text, render) {
                   var keys = render(text).split(',');

@@ -1,7 +1,7 @@
 var db = new Dexie('luminous');
 
 db.version(1).stores({
-  reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls'
+  reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls,execution_time'
 });
 
 db.open().then(function() {
@@ -10,10 +10,14 @@ db.open().then(function() {
       var put = false;
 
       if(report) {
-        if(data.allowed > report.allowed || data.blocked > report.blocked || data.calls > report.calls) {
+        if(
+          data.allowed > report.allowed || data.blocked > report.blocked || data.calls > report.calls
+          || data.execution_time > report.execution_time
+        ) {
           if(data.allowed < report.allowed) data['allowed'] = report.allowed;
           if(data.blocked < report.blocked) data['blocked'] = report.blocked;
           if(data.calls < report.calls) data['calls'] = report.calls;
+          if(data.execution_time < report.execution_time) data['execution_time'] = report.execution_time;
 
           put = true;
         }
@@ -49,9 +53,12 @@ db.open().then(function() {
                         var blocked = local_data[tab.id]['counters'][kind][code]['blocked'];
                         var calls = allowed + blocked;
 
+                        var execution_time = local_data[tab.id]['counters'][kind][code]['execution_time'];
+
                         update_report({
                           id: key, domain: domain, kind: kind, code: code,
-                          allowed: allowed, blocked: blocked, calls: calls
+                          allowed: allowed, blocked: blocked, calls: calls,
+                          execution_time: execution_time
                         });
                       }
                     }
@@ -73,7 +80,7 @@ db.open().then(function() {
 
       set_reports_for_tab(tab_ids);
     });
-  }, 2000);
+  }, 500);
 
   var set_tab_reports = function(activeInfo) {
     chrome.tabs.get(parseInt(activeInfo.tabId), function(tab) {

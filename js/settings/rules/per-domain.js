@@ -122,9 +122,7 @@ $(document).ready(function() {
           }
         }
 
-        $('.locale').each(function() {
-          $(this).html(chrome.i18n.getMessage($(this).data('locale')));
-        });
+        apply_locales();
 
         $('.remove-domain-rules').click(function() {
           var domain = $(this).data('domain');
