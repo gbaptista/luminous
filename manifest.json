@@ -70,6 +70,7 @@
       "js/background/set_current_tab.js",
       "js/background/default_settings.js",
       "vendor/dexiejs/dexie.js",
+      "js/helpers/indexed_db.js",
       "js/background/reports.js",
       "js/background/automatic_settings.js",
       "js/utils/colors.js",

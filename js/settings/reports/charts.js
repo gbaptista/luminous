@@ -1,15 +1,11 @@
 $(document).ready(function() {
   var limit = 10;
 
-  var db = new Dexie('luminous');
-
-  db.version(1).stores({
-  	reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls'
-  });
-
-  var complete_loads = 0;
+  var db = create_luminous_db();
 
   db.open().then(function() {
+    var complete_loads = 0;
+
     var is_loaded = function() {
       complete_loads += 1;
 
@@ -153,7 +149,7 @@ $(document).ready(function() {
               })
             );
 
-            $('#domain-filter-form').submit(function() {
+            $('#domain-filter-form').submit(function(event) {
               event.preventDefault();
 
               loading(function() {
@@ -298,5 +294,8 @@ $(document).ready(function() {
 
       for(i in kinds) { load_report_by_kind(kinds[i]); }
     });
+  }).catch(function(err) {
+    alert('Failed to open Luminous db: ' + (err.stack || err));
+    loaded();
   });
 });
