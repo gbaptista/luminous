@@ -2,99 +2,64 @@
 
 ## Build Instructions
 
-Update the version on `manifest.json`:
-```json
-"version": "0.0.18"
-```
+### Requirements
 
-Copy all folders and files to the `builds/current/` directory.
+Basic *Unix* tools:
 
-Install [*npm*](https://www.npmjs.com/):
+- `bash`
+- `grep` `sed` `xargs`
+- `cp` `mkdir` `mv` `rm`
+- `cat` `find` `ls`
+- `echo` `printf`
+
+[*npm*](https://www.npmjs.com/):
 ```
 sudo apt-get install npm
 ```
 
-Install [*UglifyJS*](https://github.com/mishoo/UglifyJS):
+[*UglifyJS*](https://github.com/mishoo/UglifyJS):
 ```shell
 sudo npm install uglify-js -g
 ```
 
-Compress the `builds/current/js/content/interceptor.js` code:
-```shell
-uglifyjs -c -m -- builds/current/js/content/interceptor.js
+### Generating a new build
+
+Generate current build:
+```bash
+bash builds/generate.sh
 ```
 
-Change the `builds/current/js/content/injections/interceptor.js` content from:
-
-```javascript
-injections_controller(function() {
-
-  var load_interceptor = function(callback_function) {
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-      if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-        callback_function(request.responseText);
-      }
-    }
-    request.open('GET', chrome.extension.getURL('js/content/interceptor.js'), true);
-    request.send(null);
-  }
-
-  load_interceptor(function(content) {
-    var javascript_injection = document.createElement('script');
-    javascript_injection.type = 'text/javascript';
-    javascript_injection.setAttribute('nonce', '3b34aae43a');
-    javascript_injection.innerHTML = content;
-    document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
-  });
-
-});
+Generate current build with a new version:
+```bash
+bash builds/generate.sh 0.0.2
 ```
 
-To:
-```javascript
-injections_controller(function() {
-
- /*
-  * Disclaimer for reviewers:
-  *
-  * The non-minified version for the code below is available at:
-  * https://github.com/gbaptista/luminous/blob/0.0.18/js/content/interceptor.js
-  *
-  * This version was generated with the uglifyjs project
-  * from the following command:
-  * > uglifyjs -c -m -- js/content/interceptor.js
-  *
-  * This was done for performance reasons.
-  */
-  var content = 'UGLIFYJS_RESULT';
-
-  var javascript_injection = document.createElement('script');
-  javascript_injection.type = 'text/javascript';
-  javascript_injection.setAttribute('nonce', '3b34aae43a');
-  javascript_injection.innerHTML = content;
-  document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
-
-});
+Generate current build with a new version from some specific version:
+```bash
+bash builds/generate.sh 0.0.2 0.0.1
 ```
 
-Remove those files and directories:
+Expected output:
 ```
-├ builds/current/
-│ ├ .git/
-│ ├ builds/
-│ ├ doc/
-│ ├ html/demo-page.html
-│ ├ html/external-content.txt
-│ ├ html/interface-sample.html
-│ ├ images/doc/
-│ ├ images/inkscape-files/
-│ ├ images/krita-files/
-│ ├ images/stores/
-│ ├ js/content/interceptor.js
-│ ├ _config.yml
-│ └ README.md
+-------------------------------------------
+
+ Bulding Luminous 0.0.2 (from 0.0.1):
+
+  - Removing old build folder... 🗸
+  - Creating an new empty build folder... 🗸
+  - Copying all files... 🗸
+  - Updating version... 🗸
+  - Generating js/content/interceptor.js... 🗸
+  - Minifying js/content/interceptor.js with uglifyjs... 🗸
+  - Generating content variable with minified JavaScript... 🗸
+  - Rearranging js/content/injections/interceptor.js file... 🗸
+  - Removing unused files... 🗸
+  - Removing web_accessible_resources from manifest.json... 🗸
+  - Creating 0-0-2.zip... 🗸
+
+ Finished!
+
+-------------------------------------------
 ```
 
 Test the current build at least in these 4 browsers:
@@ -104,14 +69,25 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0.0.18.zip` and contact the repository owner to publish in all stores.
+Run the cleanup tool:
 
-Include this note for reviewers:
+```shell
+bash builds/cleanup.sh
 ```
-The non-minified version for the code in "js/content/injections/interceptor.js" is available at: https://github.com/gbaptista/luminous/blob/0.0.18/js/content/interceptor.js
 
-This version was generated with the uglifyjs project from the following command:
-> uglifyjs -c -m -- js/content/interceptor.js
+Expected output:
 
-This was done for performance reasons.
 ```
+-------------------------------------------
+
+Note for reviewers:
+
+The non-minified version for the code in "js/content/injections/interceptor.js" is available at:
+
+ - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptor.js
+ - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptors/
+
+-------------------------------------------
+```
+
+Contact some repository owner to publish in all stores.
