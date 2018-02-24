@@ -32,7 +32,7 @@ $(document).ready(function() {
       })
     );
 
-    $('#new-domain-form').submit(function() {
+    $('#new-domain-form').submit(function(event) {
       event.preventDefault();
 
       loading(function() {

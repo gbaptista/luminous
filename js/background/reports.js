@@ -1,10 +1,6 @@
-var db = new Dexie('luminous');
+var db = create_luminous_db();
 
-db.version(1).stores({
-  reports: 'id,key,domain,kind,[domain+kind],code,allowed,blocked,calls,execution_time'
-});
-
-db.open().then(function() {
+var on_db_open = function() {
   var update_report = function(data) {
     db.reports.where({id: data.id }).first(function(report) {
       var put = false;
@@ -91,4 +87,30 @@ db.open().then(function() {
   }
 
   chrome.tabs.onActivated.addListener(set_tab_reports);
+}
+
+db.open().then(function() {
+  on_db_open();
+}).catch(function(_) {
+  // The base is probably corrupted:
+  Dexie.delete('luminous');
+
+  // Try again [first time]:
+  db = create_luminous_db();
+
+  db.open().then(function() {
+    on_db_open();
+  }).catch(function(_) {
+    // The base is probably corrupted yet:
+    Dexie.delete('luminous');
+
+    // Try again [second time]:
+    db = create_luminous_db();
+
+    db.open().then(function() {
+      on_db_open();
+    }).catch(function(_) {
+      // Giving up...
+    });
+  });
 });
