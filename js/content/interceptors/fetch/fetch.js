@@ -10,6 +10,10 @@ window.fetch = function(input, init) {
 
     if(!is_allowed('WebAPIs', 'fetch')) {
       increment_counter('WebAPIs', 'fetch', 'blocked', details);
+
+      return new Promise(function(_resolve, reject) {
+        reject(new PermissionDeniedError());
+      });
     } else {
       var timer = performance.now();
 

@@ -21,6 +21,7 @@ var get_options = function() {
 var reload_requested = false;
 
 var counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
+
 var last_url = window.location.href.replace(/#.*/, '');
 var counters_changed = false;
 
@@ -95,6 +96,14 @@ var is_allowed = function(kind, type) {
 }
 
 if(!get_options()['injection_disabled']) {
+  var PermissionDeniedError = function(message) {
+    this.name = 'PermissionDeniedError';
+    if(message === undefined) { message = 'Permission denied.'; }
+    this.message = message;
+  }
+
+  PermissionDeniedError.prototype = new Error;
+
   // #load_injectors
 
     // interceptors/event_target/remove_event_listener.js
@@ -102,8 +111,14 @@ if(!get_options()['injection_disabled']) {
 
     // interceptors/fetch/fetch.js
 
+    // interceptors/gamepad/get_gamepads.js
+
     // interceptors/geolocation/get_current_position.js
     // interceptors/geolocation/watch_position.js
+
+    // interceptors/battery_status/get_battery.js
+
+    // interceptors/navigator_id/user_agent.js
 
     // interceptors/schedulers/set_interval.js
     // interceptors/schedulers/set_timeout.js

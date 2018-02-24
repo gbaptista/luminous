@@ -9,7 +9,7 @@ $(document).ready(function() {
     if(complete_loads < 2) {
       alert('Reports loading failed! db.isOpen(): ' + db.isOpen());
     }
-  }, 1000);
+  }, 5000);
 
   db.open().then(function() {
     var is_loaded = function() {
