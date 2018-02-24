@@ -40,7 +40,7 @@ Es sobre este número (**7,6 mil**) que estamos perdidos y con las manos atadas,
 
 - Chromium y Google Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/es/firefox/addon/luminous/)
-- Opera: *revisión pendiente (Opera add-ons)*
+- Opera: [Complementos de Opera](https://addons.opera.com/es/extensions/details/luminous-javascript-events-blocker/)
 
 ## ¡Pruébalo!
 

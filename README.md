@@ -39,7 +39,7 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/pt-BR/firefox/addon/luminous/)
-- Opera: *aguardando revisão (Opera add-ons)*
+- Opera: [Complementos do Opera](https://addons.opera.com/pt-br/extensions/details/luminous-javascript-events-blocker/)
 
 ## Experimente!
 
