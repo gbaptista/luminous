@@ -46,12 +46,12 @@ printf "  - Updating version..."
 
 find . -type f \
   | grep -v vendor \
-  | grep '.js\|.css\|.md\|.html' \
+  | grep '.js\|.css\|.md\|.html\|.version' \
   | xargs sed -i "s/$FROM/$TO/g"
 
 find . -type f \
   | grep -v vendor \
-  | grep '.js\|.css\|.md\|.html' \
+  | grep '.js\|.css\|.md\|.html\|.version' \
   | xargs sed -i "s/$FROM_T/$TO_T/g"
 
 printf " 🗸\n"
@@ -124,6 +124,7 @@ rm -rf builds/current/images/stores
 rm -rf builds/current/js/content/interceptors
 rm builds/current/js/content/interceptor.js
 
+rm builds/current/.version
 rm builds/current/_config.yml
 rm builds/current/README.md
 
