@@ -3,9 +3,15 @@ $(document).ready(function() {
 
   var db = create_luminous_db();
 
-  db.open().then(function() {
-    var complete_loads = 0;
+  var complete_loads = 0;
 
+  setTimeout(function() {
+    if(complete_loads < 2) {
+      alert('Reports loading failed! db.isOpen(): ' + db.isOpen());
+    }
+  }, 1000);
+
+  db.open().then(function() {
     var is_loaded = function() {
       complete_loads += 1;
 
