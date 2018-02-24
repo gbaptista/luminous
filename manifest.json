@@ -58,7 +58,7 @@
         "js/content/injections/data.js",
         "js/content/clear_cookies.js"
       ],
-      "run_at" : "document_start"
+      "run_at": "document_start"
     }
   ],
   "background": {
@@ -76,12 +76,22 @@
       "js/background/update_badge.js"
     ]
   },
-  "permissions" : [
+  "permissions": [
     "storage", "unlimitedStorage", "tabs",
     "webRequest", "webRequestBlocking", "webNavigation",
     "<all_urls>"
   ],
   "web_accessible_resources": [
-    "js/content/interceptor.js"
+    "js/content/interceptor.js",
+    "js/content/interceptors/event_target/remove_event_listener.js",
+    "js/content/interceptors/event_target/add_event_listener.js",
+    "js/content/interceptors/fetch/fetch.js",
+    "js/content/interceptors/geolocation/get_current_position.js",
+    "js/content/interceptors/geolocation/watch_position.js",
+    "js/content/interceptors/schedulers/set_interval.js",
+    "js/content/interceptors/schedulers/set_timeout.js",
+    "js/content/interceptors/web_socket/send.js",
+    "js/content/interceptors/xml_http_request/open.js",
+    "js/content/interceptors/xml_http_request/send.js"
   ]
 }
