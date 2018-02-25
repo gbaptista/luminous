@@ -12,9 +12,7 @@ if(Navigator.prototype.getBattery) {
       if(!is_allowed('WebAPIs', 'getBattery')) {
         increment_counter('WebAPIs', 'getBattery', 'blocked', details);
 
-        return new Promise(function(_resolve, reject) {
-          reject(new PermissionDeniedError());
-        });
+        return new Promise(function(_resolve, _reject) {});
       } else {
         var timer = performance.now();
 

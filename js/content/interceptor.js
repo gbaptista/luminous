@@ -96,14 +96,6 @@ var is_allowed = function(kind, type) {
 }
 
 if(!get_options()['injection_disabled']) {
-  var PermissionDeniedError = function(message) {
-    this.name = 'PermissionDeniedError';
-    if(message === undefined) { message = 'Permission denied.'; }
-    this.message = message;
-  }
-
-  PermissionDeniedError.prototype = new Error;
-
   // #load_injectors
 
     // interceptors/event_target/remove_event_listener.js
