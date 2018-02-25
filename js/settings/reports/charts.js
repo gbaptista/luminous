@@ -8,6 +8,7 @@ $(document).ready(function() {
   setTimeout(function() {
     if(complete_loads < 2) {
       alert('Reports loading failed! db.isOpen(): ' + db.isOpen());
+      loaded();
     }
   }, 5000);
 

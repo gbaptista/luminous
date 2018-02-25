@@ -71,6 +71,10 @@ injections_controller(function() {
           'text': short_number_for_badge(calls), 'calls': calls
         };
 
+        if(document_data && document_data['domain']) {
+          data_to_write[tab_id]['domain'] = document_data['domain'];
+        }
+
         data_to_write[tab_id]['counters'] = document_data['counters'];
 
         chrome.storage.local.set(data_to_write);
