@@ -18,6 +18,8 @@
         height: 100%;
         overflow: auto;
         padding-bottom: 20px;
+        white-space: nowrap;
+        padding-right: 20px;
       }
 
       .demo-box, .small-demo-box {
@@ -85,6 +87,13 @@
 
       <div id="getCurrentPosition" class="small-demo-box">getCurrentPosition()</div>
       <div id="watchPosition" class="small-demo-box">watchPosition()</div>
+
+      <div id="getBattery" class="small-demo-box">getBattery()</div>
+      <div id="getGamepads" class="small-demo-box">getGamepads()</div>
+
+      <br><br>
+
+      <div id="userAgent" class="small-demo-box">navigator.userAgent</div>
     </div>
 
     <script type="text/javascript">
@@ -97,6 +106,24 @@
       );
 
       (function() { setTimeout(function() {
+
+        document.getElementById('userAgent').innerHTML = 'navigator.userAgent:<br>' + window.navigator.userAgent.slice(0, 24);
+        document.getElementById('userAgent').setAttribute('title', window.navigator.userAgent);
+
+        if(navigator.getGamepads) {
+          var gamepads = navigator.getGamepads();
+
+          document.getElementById('getGamepads').innerHTML = 'getGamepads():<br>' + JSON.stringify(gamepads);
+        }
+
+        if(navigator.getBattery) {
+          navigator.getBattery().then(function(battery) {
+            document.getElementById('getBattery').innerHTML = 'getBattery():<br>' + parseInt(battery.level * 100) + '%';
+          }).catch(function(error) {
+            console.error(error);
+            document.getElementById('getBattery').innerHTML = 'getBattery():<br>' + error.message;
+          });
+        }
 
         if(navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(pos) {
@@ -149,8 +176,12 @@
             document.getElementById('ajaxContent').innerHTML = current_time() + '<br>XMLHttp: ' + request.responseText;
           }
         }
-        request.open('GET', 'external-content.txt', true);
-        request.send();
+        try {
+          request.open('GET', 'external-content.txt', true);
+          request.send();
+        } catch(error) {
+          console.error(error);
+        }
 
         setInterval(function(param) {
           document.getElementById(
@@ -159,7 +190,7 @@
         }, 1000, 'i');
 
         setInterval(
-          "document.getElementById('setIntervalString').innerHTML = 'interval: eval -> string ' + Math.random();",
+          "document.getElementById('setIntervalString').innerHTML = 'interval: eval -> string<br>' + Math.random();",
           1500
         );
 
@@ -170,7 +201,7 @@
         }, 1500, 't');
 
         setTimeout(
-          "document.getElementById('setTimeoutString').innerHTML = 'timeout: eval -> string ' + Math.random();",
+          "document.getElementById('setTimeoutString').innerHTML = 'timeout: eval -> string<br>' + Math.random();",
           2000
         );
 
@@ -244,12 +275,20 @@
           return response.text();
         }).then(function(text) {
           document.getElementById('fetchContent').innerHTML = current_time() + '<br>fetch: ' + text;
+        }).catch(function(error) {
+          console.error(error);
+          document.getElementById('fetchContent').innerHTML = current_time() + '<br>fetch: ' + error.message;
         });
 
         const my_request = async () => {
-          const response = await fetch('external-content.txt');
-          const text = await response.text();
-          document.getElementById('fetchContentAwait').innerHTML = current_time() + '<br>await fetch: ' + text;
+          try {
+            const response = await fetch('external-content.txt');
+            const text = await response.text();
+            document.getElementById('fetchContentAwait').innerHTML = current_time() + '<br>await fetch: ' + text;
+          } catch (error) {
+            console.error(error);
+            document.getElementById('fetchContentAwait').innerHTML = 'await fetch:<br>' + error.message;
+          }
         };
 
         my_request();

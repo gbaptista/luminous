@@ -36,6 +36,8 @@ var short_time = function(number, separator) {
 }
 
 var short_number = function(number, zero_text, separator) {
+  if(number == undefined) { number = 0; }
+  
   if(zero_text == undefined) zero_text = '0';
   if(separator == undefined) separator = '';
 

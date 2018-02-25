@@ -1,10 +1,14 @@
 var common_webapis = [
   // WebAPIs
-  'fetch', 'WebSocket.send',
+  'getBattery',
+  'fetch',
+  'getGamepads',
+  'geo.getCurrentPosition', 'geo.watchPosition',
+  'headers.User-Agent', 'NavigatorID.userAgent',
   'setInterval', 'setInterval.call',
   'setTimeout', 'setTimeout.call',
-  'XMLHttpRequest.open', 'XMLHttpRequest.send',
-  'geo.getCurrentPosition', 'geo.watchPosition'
+  'WebSocket.send',
+  'XMLHttpRequest.open', 'XMLHttpRequest.send'
 ];
 
 var common_events = [
@@ -39,6 +43,8 @@ var common_events = [
   // Value change events
   'broadcast', 'CheckboxStateChange', 'hashchange', 'input',
   'RadioStateChange', 'readystatechange', 'ValueChange',
+  // Gamepad API events
+  'gamepadconnected', 'gamepaddisconnected',
   // Uncategorized events
   'localized', 'message', 'open', 'show'
 ];
