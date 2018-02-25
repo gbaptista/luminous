@@ -3,12 +3,15 @@
 # Guides
 > en-US | [es](../../es/guides) | [pt-BR](../../pt-BR/guides)
 
+* [back to home](../)
+
 Guides are documents on many specific subjects where we can go deep into the details and easily find the information we are looking for.
 
 - [How it works?](#how-it-works)
 - [Web APIs and JavaScript events](#web-apis-and-javascript-events)
 - [Site analysis](#site-analysis)
 - [Context, History and Discussions](#context-history-and-discussions)
+- [Screenshots](./screenshots.md)
 
 ## How it works?
 

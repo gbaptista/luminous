@@ -1,6 +1,6 @@
 # Luminous: JavaScript events blocker ![Icon](../../images/icons/48.png)
 
-> en-US | [es](../es) | [pt-BR](https://gbaptista.github.io/luminous)
+> en-US | [es](../es) | [pt-BR](../../  )
 
 An experimental extension to identify, analyze and block code execution and event collection through *JavaScript* in your browser.
 
@@ -10,6 +10,7 @@ An experimental extension to identify, analyze and block code execution and even
 - [Understanding the UI](#understanding-the-ui)
 - [How to install](#how-to-install)
 - [Try it!](#try-it)
+- [Screenshots](#screenshots)
 - [Going deeper](#going-deeper)
 - [Guides](#guides)
 - [How to contribute](#how-to-contribute)
@@ -49,6 +50,10 @@ It's about this number (**7,6 thousand**) that we are lost and with hands tied, 
 [Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demo-page.html) to experience and better understand how it works:
 
 ![Demo Page](../../images/doc/en-US/demo-page.png)
+
+## Screenshots
+
+See some screenshots [here](./guides/screenshots.md).
 
 ## Going deeper
 

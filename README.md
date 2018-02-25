@@ -8,6 +8,7 @@ Uma extensão experimental para identificar, analisar e bloquear a execução de
 - [Entendendo a interface do usuário](#entendendo-a-interface-do-usu%C3%A1rio)
 - [Como instalar](#como-instalar)
 - [Experimente!](#experimente)
+- [Capturas de tela](#capturas-de-tela)
 - [Se aprofunde no tema](#se-aprofunde-no-tema)
 - [Guias](#guias)
 - [Como colaborar](#como-colaborar)
@@ -45,6 +46,10 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 
 [Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar e entender melhor o seu funcionamento:
 ![Demo Page](images/doc/pt-BR/demo-page.png)
+
+## Capturas de tela
+
+Veja algumas capturas de tela [aqui](./doc/pt-BR/guides/screenshots.md).
 
 ## Se aprofunde no tema
 

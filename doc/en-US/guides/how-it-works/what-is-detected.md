@@ -40,7 +40,7 @@ All codes intercepted are divided into 3 groups:
 
 Some JavaScript's are reported with a different nomenclature to get closer to the actual written code or to facilitate understanding:
 
-| JavaScript                     | reported as            | example code*                                        |
+| JavaScript                     | reported as            | example code                                         |
 | ------------------------------ | ---------------------- | ---------------------------------------------------- |
 | (Battery Status).getBattery    | getBattery             | `navigator.getBattery().then(fn)`                    |
 | (Fetch API).fetch              | fetch                  | `fetch('f.txt').then(fn)`                            |
@@ -53,12 +53,11 @@ Some JavaScript's are reported with a different nomenclature to get closer to th
 | Window.setInterval (execution) | setInterval.call       | `setInterval(function() { /*call*/ }, 1000)`         |
 | Window.setTimeout              | setTimeout             | `setTimeout(function() { }, 1000)`                   |
 | Window.setTimeout (execution)  | setTimeout.call        | `setTimeout(function() { /*call*/ }, 1000)`          |
-| WebSocket.send                 | WebSocket.send         | `(new WebSocket('ws://host:80')).send('hello')       |
+| WebSocket.send                 | WebSocket.send         | `(new WebSocket('ws://host:80')).send('hello')`      |
 | XMLHttpRequest.open            | XMLHttpRequest.open    | `(new XMLHttpRequest()).open('GET', 'f.txt')`        |
 | XMLHttpRequest.send            | XMLHttpRequest.send    | `(new XMLHttpRequest()).open('GET', 'f.txt').send()` |
 
-> *
-> **`fn` = some callback function, example: `var fn = function(response) { console.log(response); }`**
+> *`fn` = some callback function, example: `var fn = function(response) { console.log(response); }`*
 
 `EventTarget.addEventListener` is not reported in this group because we give a differentiated attention to this `EventTarget` method.
 

@@ -3,12 +3,15 @@
 # Guías
 > [en-US](../../en-US/guides) | es | [pt-BR](../../pt-BR/guides)
 
+* [volver al inicio](../)
+
 Las Guías son documentos sobre temas muy específicos donde podemos ir profundamente en los detalles y encontrar fácilmente la información que estamos buscando.
 
 - [¿Como funciona?](#como-funciona)
 - [Web API y eventos JavaScript](#web-api-y-eventos-javascript)
 - [Análisis de sitios web](#análisis-de-sitios-web)
 - [Contexto, Historia y Discusiones](#contexto-historia-y-discusiones)
+- [Capturas de pantalla](./screenshots.md)
 
 ## ¿Como funciona?
 
