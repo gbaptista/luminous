@@ -60,6 +60,9 @@ injections_controller(function() {
           document_data['counters'] = {};
         }
 
+        if(document_data && document_data['domain']) {
+        }
+
         tab_id = tab_id.toString();
 
         var data_to_write = current_storage_data;
@@ -70,6 +73,10 @@ injections_controller(function() {
         data_to_write[tab_id]['badge'] = {
           'text': short_number_for_badge(calls), 'calls': calls
         };
+
+        if(document_data && document_data['domain']) {
+          data_to_write[tab_id]['domain'] = document_data['domain'];
+        }
 
         data_to_write[tab_id]['counters'] = document_data['counters'];
 

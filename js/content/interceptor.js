@@ -129,7 +129,9 @@ original_window_setInterval(function() {
 
     var element = document.getElementById('luminous-data');
 
-    element.innerHTML = JSON.stringify({ counters: counters });
+    element.innerHTML = JSON.stringify(
+      { domain: document.location.host, counters: counters }
+    );
 
     element.setAttribute('data-changed', 'true');
   }

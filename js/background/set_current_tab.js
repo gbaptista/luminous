@@ -4,32 +4,29 @@ chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   }
 });
 
-var reset_counters_for_tab = function(tab_id) {
+var remove_data_for_tab = function(tab_id) {
   var tab_id = tab_id.toString();
 
-  chrome.storage.local.get(tab_id, function(current_storage_data) {
-    var data_to_write = current_storage_data;
-
-    if(data_to_write && data_to_write[tab_id] && data_to_write[tab_id]) {
-      data_to_write[tab_id]['counters'] = {};
-      data_to_write[tab_id]['badge'] = { 'text': '', 'calls': 0 };
-      chrome.storage.local.set(data_to_write);
+  chrome.storage.local.get(tab_id, function(data) {
+    if(data && data[tab_id]) {
+      update_reports_for_tab_id(tab_id, function() {
+        chrome.storage.local.remove(tab_id);
+      });
     }
   });
 }
 
-var remove_data_for_tab = function(tab_id) {
-  chrome.storage.local.remove(tab_id.toString());
-}
-
 chrome.tabs.onCreated.addListener(function(tab) {
-  reset_counters_for_tab(tab.id);
   remove_data_for_tab(tab.id);
 });
-chrome.tabs.onUpdated.addListener(function(tab_id) { reset_counters_for_tab(tab_id); });
-chrome.tabs.onRemoved.addListener(function(tab_id) { remove_data_for_tab(tab_id); });
+
+chrome.tabs.onRemoved.addListener(function(tab_id) {
+  remove_data_for_tab(tab_id);
+});
 
 chrome.webRequest.onBeforeRequest.addListener(
-  function(details) { remove_data_for_tab(details.tabId) },
+  function(details) {
+    remove_data_for_tab(details.tabId);
+  },
   { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }
 );
