@@ -71,6 +71,8 @@ var on_db_open = function() {
             }, 0, tab_id, callback);
           }
         });
+      } else {
+        if(callback) { setTimeout(function() { callback(); }, 0); }
       }
     });
   }
