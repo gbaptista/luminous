@@ -60,9 +60,6 @@ injections_controller(function() {
           document_data['counters'] = {};
         }
 
-        if(document_data && document_data['domain']) {
-        }
-
         tab_id = tab_id.toString();
 
         var data_to_write = current_storage_data;
