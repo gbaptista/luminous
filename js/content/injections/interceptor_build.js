@@ -5,8 +5,8 @@ injections_controller(function() {
   *
   * The non-minified version for the code below is available at:
   *
-  * - https://github.com/gbaptista/luminous/blob/0.0.21/js/content/interceptor.js
-  * - https://github.com/gbaptista/luminous/blob/0.0.21/js/content/interceptors/
+  * - https://github.com/gbaptista/luminous/blob/0.0.22/js/content/interceptor.js
+  * - https://github.com/gbaptista/luminous/blob/0.0.22/js/content/interceptors/
   *
   */
   var content = 'UGLIFYJS_RESULT';
