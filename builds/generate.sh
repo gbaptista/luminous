@@ -124,7 +124,6 @@ rm -rf builds/current/images/stores
 rm -rf builds/current/js/content/interceptors
 rm builds/current/js/content/interceptor.js
 
-rm builds/current/.version
 rm builds/current/_config.yml
 rm builds/current/README.md
 

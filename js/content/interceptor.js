@@ -33,7 +33,7 @@ original_window_setInterval(function() {
     counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
     counters_changed = true;
   }
-}, 100);
+}, 100, '__INTERNAL_LUMINOUS_CODE__');
 
 var increment_counter = function(kind, type, result, details, execution_time) {
   original_window_setTimeout(function() {

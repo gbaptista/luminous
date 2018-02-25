@@ -167,7 +167,7 @@ var apply_user_agent_rules = function(request_details) {
   if(should_remove_user_agent(request_details.url)) {
     for (let header of request_details.requestHeaders) {
       if (header.name.toLowerCase() == 'user-agent') {
-        header.value = '';
+        header.value = 'Mozilla/5.0';
       }
     }
   }
