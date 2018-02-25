@@ -1,13 +1,11 @@
 var original_window_navigator_userAgent = window.navigator.userAgent;
 
-if(original_window_navigator_userAgent && original_window_navigator_userAgent != '') {
-  var details = { target: 'HTTP headers', code: {} };
+var details = { target: 'HTTP headers', code: {} };
 
-  if(is_allowed('WebAPIs', 'headers.User-Agent')) {
-    increment_counter('WebAPIs', 'headers.User-Agent', 'allowed', details);
-  } else {
-    increment_counter('WebAPIs', 'headers.User-Agent', 'blocked', details);
-  }
+if(is_allowed('WebAPIs', 'headers.User-Agent')) {
+  increment_counter('WebAPIs', 'headers.User-Agent', 'allowed', details);
+} else {
+  increment_counter('WebAPIs', 'headers.User-Agent', 'blocked', details);
 }
 
 Object.defineProperty(
@@ -23,7 +21,7 @@ Object.defineProperty(
         if(!is_allowed('WebAPIs', 'NavigatorID.userAgent')) {
           increment_counter('WebAPIs', 'NavigatorID.userAgent', 'blocked', details);
 
-          return '';
+          return 'Mozilla/5.0';
         } else {
           var timer = performance.now();
 
