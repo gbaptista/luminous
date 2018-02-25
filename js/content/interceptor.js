@@ -101,14 +101,14 @@ if(!get_options()['injection_disabled']) {
     // interceptors/event_target/remove_event_listener.js
     // interceptors/event_target/add_event_listener.js
 
+    // interceptors/battery_status/get_battery.js
+
     // interceptors/fetch/fetch.js
 
     // interceptors/gamepad/get_gamepads.js
 
     // interceptors/geolocation/get_current_position.js
     // interceptors/geolocation/watch_position.js
-
-    // interceptors/battery_status/get_battery.js
 
     // interceptors/navigator_id/user_agent.js
 

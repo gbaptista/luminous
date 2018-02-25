@@ -9,18 +9,22 @@
 - [How is it organized?](#how-is-it-organized)
 - [Automatic settings](#automatic-settings)
 
-| WebAPI         | method              | intercepted?       | reported?          | can be bocked?     |
-| -------------- | ------------------- | ------------------ | ------------------ | ------------------ |
-| EventTarget    | removeEventListener | :white_check_mark: | :x:                | :x:                |
-| EventTarget    | addEventListener    | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Window         | setTimeout          | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Window         | setInterval         | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| WebSocket      | send                | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Fetch API      | fetch               | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| XMLHttpRequest | open                | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| XMLHttpRequest | send                | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Geolocation    | getCurrentPosition  | :white_check_mark: | :white_check_mark: | :white_check_mark: |
-| Geolocation    | watchPosition       | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| WebAPI         | method              | intercepted?                                                                   | reported?                                                                      | can be bocked?                                                                 |
+| -------------- | ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| EventTarget    | removeEventListener | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![x](../../../../images/doc/global/guides/x.png)                               | ![x](../../../../images/doc/global/guides/x.png)                               |
+| EventTarget    | addEventListener    | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Battery Status | getBattery          | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Fetch API      | fetch               | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Gamepad API    | getGamepads         | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Geolocation    | getCurrentPosition  | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Geolocation    | watchPosition       | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| HTTP headers   | User-Agent          | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| NavigatorID    | userAgent           | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Window         | setInterval         | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| Window         | setTimeout          | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| WebSocket      | send                | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| XMLHttpRequest | open                | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
+| XMLHttpRequest | send                | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
 
 `EventTarget.removeEventListener` is not reported because it is only an interception to not break websites because of `EventTarget.addEventListener` interception.
 
@@ -36,24 +40,38 @@ All codes intercepted are divided into 3 groups:
 
 Some JavaScript's are reported with a different nomenclature to get closer to the actual written code or to facilitate understanding:
 
-| JavaScript                     | reported as            |
-| -------------------------------| ---------------------- |
-| Window.setTimeout              | setTimeout             |
-| Window.setTimeout (execution)  | setTimeout.call        |
-| Window.setInterval             | setInterval            |
-| Window.setInterval (execution) | setInterval.call       |
-| WebSocket.send                 | WebSocket.send         |
-| (Fetch API).fetch              | fetch                  |
-| XMLHttpRequest.open            | XMLHttpRequest.open    |
-| XMLHttpRequest.send            | XMLHttpRequest.send    |
-| Geolocation.getCurrentPosition | geo.getCurrentPosition |
-| Geolocation.watchPosition      | geo.watchPosition      |
+| JavaScript                     | reported as            | example code*                                        |
+| ------------------------------ | ---------------------- | ---------------------------------------------------- |
+| (Battery Status).getBattery    | getBattery             | `navigator.getBattery().then(fn)`                    |
+| (Fetch API).fetch              | fetch                  | `fetch('f.txt').then(fn)`                            |
+| (Gamepad API).getGamepads      | getGamepads            | `navigator.getGamepads()`                            |
+| Geolocation.getCurrentPosition | geo.getCurrentPosition | `navigator.geolocation.getCurrentPosition(fn)`       |
+| Geolocation.watchPosition      | geo.watchPosition      | `navigator.geolocation.watchPosition(fn)`            |
+| (HTTP headers).User-Agent      | headers.User-Agent     | *`accessed by code on server side`*                  |
+| NavigatorID.userAgent          | NavigatorID.userAgent  | `window.navigator.userAgent`                         |
+| Window.setInterval             | setInterval            | `setInterval(function() { }, 1000)`                  |
+| Window.setInterval (execution) | setInterval.call       | `setInterval(function() { /*call*/ }, 1000)`         |
+| Window.setTimeout              | setTimeout             | `setTimeout(function() { }, 1000)`                   |
+| Window.setTimeout (execution)  | setTimeout.call        | `setTimeout(function() { /*call*/ }, 1000)`          |
+| WebSocket.send                 | WebSocket.send         | `(new WebSocket('ws://host:80')).send('hello')       |
+| XMLHttpRequest.open            | XMLHttpRequest.open    | `(new XMLHttpRequest()).open('GET', 'f.txt')`        |
+| XMLHttpRequest.send            | XMLHttpRequest.send    | `(new XMLHttpRequest()).open('GET', 'f.txt').send()` |
+
+> *
+> **`fn` = some callback function, example: `var fn = function(response) { console.log(response); }`**
 
 `EventTarget.addEventListener` is not reported in this group because we give a differentiated attention to this `EventTarget` method.
 
 ### EventTarget.addEventListener
 
-`addEventListener` is used to report to the website when an event occurs. An event can be literally anything, so we've created a special session to look at the events that each site is trying to look at. Some common examples of events:
+`addEventListener` is used to report to the website when an event occurs. An event can be literally anything, so we've created a special session to look at the events that each site is trying to look at. Example:
+```javascript
+document.getElementById('some-form-textarea-element').addEventListener(
+  'keypress', function(event) { console.log('key pressed: ' + event.key); }
+);
+```
+
+Some common examples of events:
 
 | event name   | fired when                        |
 | ------------ | --------------------------------- |
@@ -134,6 +152,8 @@ A predefined list of common events:
   // Value change events
   'broadcast', 'CheckboxStateChange', 'hashchange', 'input',
   'RadioStateChange', 'readystatechange', 'ValueChange',
+  // Gamepad API events
+  'gamepadconnected', 'gamepaddisconnected',
   // Uncategorized events
   'localized', 'message', 'open', 'show'
 ]
