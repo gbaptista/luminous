@@ -61,7 +61,7 @@ var load_stored_data = function(update_badge = false, update_icon = false, chang
           update_badge = true;
         }
 
-        if(changes && changes && changes && changes.newValue && changes.newValue['injection_disabled']) {
+        if(changes && changes['injection_disabled']) {
           update_icon = true;
         }
 
