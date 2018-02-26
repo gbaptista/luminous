@@ -1,5 +1,24 @@
 injections_controller(function() {
 
+  var log_stack_fifo = [];
+
+  var tab_id = undefined;
+
+  setInterval(function() {
+    if(tab_id) {
+      var data = log_stack_fifo.shift();
+
+      if(data) {
+        chrome.runtime.sendMessage({
+          action: 'log_input',
+          tab_id: tab_id,
+          domain: document.location.host,
+          data: data
+        });
+      }
+    }
+  }, 0);
+
   chrome.storage.sync.get(null, function(sync_options) {
     var badge_counter = sync_options['badge_counter'];
 
@@ -84,18 +103,20 @@ injections_controller(function() {
     document.getElementById('luminous-data').addEventListener(
       'luminous-message', function(e) {
         var data = JSON.parse(e.data);
-        // TODO implement some kind of log
-        // console.log(data);
+
+        log_stack_fifo.push(data);
       }
     );
 
     setInterval(function() {
       var data_element = document.getElementById('luminous-data');
 
-      if(data_element && data_element.getAttribute('data-changed') == 'true') {
-        var tab_id = data_element.getAttribute('data-tab');
+      if(data_element) {
+        if(!tab_id) {
+          tab_id = data_element.getAttribute('data-tab');
+        }
 
-        if(tab_id) {
+        if(tab_id && data_element.getAttribute('data-changed') == 'true') {
           data_element.setAttribute('data-changed', 'false');
 
           render_data(JSON.parse(data_element.innerHTML), tab_id);

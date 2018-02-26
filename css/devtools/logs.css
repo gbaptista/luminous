@@ -1,0 +1,10 @@
+* {
+  font-size: 10px;
+}
+
+tr.allowed {
+  color:green;
+}
+tr.blocked {
+  color:red;
+}

@@ -76,7 +76,8 @@ var increment_counter = function(kind, type, result, details, execution_time) {
         { data: JSON.stringify(
           {
             url: document.location.href,
-            kind: kind, type: type, result: result, details: details
+            kind: kind, type: type, time: execution_time,
+            details: details, result: result
           }
         ) }
       )
