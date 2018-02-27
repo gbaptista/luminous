@@ -2,6 +2,10 @@
   font-size: 10px;
 }
 
+table {
+  width: 100%;
+}
+
 tr.allowed {
   color:green;
 }
