@@ -1,3 +1,12 @@
 <form>
-  <button>start recording</button>
+  <input id="filter_in" type="text" placeholder="include filter (regex allowed)" {{#started}}disabled{{/started}} value="{{filter_in}}"></input>
+  <input id="filter_out" type="text" placeholder="exclude filter (regex allowed)" {{#started}}disabled{{/started}} value="{{filter_out}}"></input>
+  <br>
+  <button id="start" {{#started}}disabled{{/started}}>start</button>
+  <button id="stop" {{^started}}disabled{{/started}}>stop</button>
+  <button id="clear">clear</button>
+
+  <select>
+    <option>current tab</option>
+  </select>
 </form>
