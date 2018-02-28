@@ -11,8 +11,10 @@ button, select {
   margin: 6px 0 0 1%;
 }
 
-select{
-  padding: 3px;
+select {
+  width: 98%;
+  margin:6px 1% 0 1%;
+  padding:0 1%;
 }
 
 .filters { display: inline-block; }
@@ -32,8 +34,23 @@ select{
 }
 
 #form {
+  height: 91px;
+}
+
+.table-area {
+  padding-top: 91px;
+}
+
+#form.multitab {
+  height: 119px;
+}
+
+.table-area.multitab {
+  padding-top: 119px;
+}
+
+#form {
   position: fixed;
-  height: 92px;
   z-index: 2;
   top: 0;
   width: 100%;
@@ -41,7 +58,6 @@ select{
 }
 
 .table-area {
-  padding-top: 92px;
   position: fixed;
   bottom:0;
   height: 100%;

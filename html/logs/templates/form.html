@@ -2,17 +2,17 @@
   <input id="filter_in" type="text" placeholder="include filter (regex allowed)" {{#started}}disabled{{/started}} value="{{filter_in}}"></input>
   <input id="filter_out" type="text" placeholder="exclude filter (regex allowed)" {{#started}}disabled{{/started}} value="{{filter_out}}"></input>
   <br>
-  <button id="start" {{#started}}disabled{{/started}}>start</button>
-  <button id="stop" {{^started}}disabled{{/started}}>stop</button>
-  <button id="clear">clear</button>
-
   {{#multitab_support}}
     <select id="tab_filter" {{#started}}disabled{{/started}}>
       <option {{#option_selected}}all{{/option_selected}} value="all">all</option>
-      <option {{#option_selected}}auto{{/option_selected}} value="auto">auto detect: {{current_tab.id}}</option>
+      <option {{#option_selected}}auto{{/option_selected}} value="auto">auto detect: {{current_tab.id}} - {{current_tab.domain}}</option>
       {{#tabs}}
         <option {{#option_selected}}{{id}}{{/option_selected}} value="{{id}}">{{id}}: {{domain}}</option>
       {{/tabs}}
     </select>
+    <br>
   {{/multitab_support}}
+  <button id="start" {{#started}}disabled{{/started}}>start</button>
+  <button id="stop" {{^started}}disabled{{/started}}>stop</button>
+  <button id="clear">clear</button>
 </form>

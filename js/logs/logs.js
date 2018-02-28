@@ -5,6 +5,11 @@ $(document).ready(function() {
     multitab_support = false;
   }
 
+  if(multitab_support) {
+    $('#form').addClass('multitab');
+    $('.table-area').addClass('multitab');
+  }
+
   load_template('html/logs/templates/form.html', function(form_template) {
     load_template('html/logs/templates/row.html', function(row_template) {
 
