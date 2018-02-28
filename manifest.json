@@ -90,7 +90,8 @@
       "js/background/reports.js",
       "js/background/automatic_settings.js",
       "js/utils/colors.js",
-      "js/background/update_badge.js"
+      "js/background/update_badge.js",
+      "js/background/devtools_tunnel.js"
     ]
   },
   "permissions": [

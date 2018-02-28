@@ -6,7 +6,13 @@
   <button id="stop" {{^started}}disabled{{/started}}>stop</button>
   <button id="clear">clear</button>
 
-  <select>
-    <option>current tab</option>
-  </select>
+  {{#multitab_support}}
+    <select id="tab_filter" {{#started}}disabled{{/started}}>
+      <option {{#option_selected}}all{{/option_selected}} value="all">all</option>
+      <option {{#option_selected}}auto{{/option_selected}} value="auto">auto detect: {{current_tab.id}}</option>
+      {{#tabs}}
+        <option {{#option_selected}}{{id}}{{/option_selected}} value="{{id}}">{{id}}: {{domain}}</option>
+      {{/tabs}}
+    </select>
+  {{/multitab_support}}
 </form>

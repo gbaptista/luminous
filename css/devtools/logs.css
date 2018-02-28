@@ -7,8 +7,12 @@ html, body {
   font-size: 11px;
 }
 
-button {
+button, select {
   margin: 6px 0 0 1%;
+}
+
+select{
+  padding: 3px;
 }
 
 .filters { display: inline-block; }
