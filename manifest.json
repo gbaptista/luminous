@@ -67,11 +67,11 @@
         "js/helpers/domain_settings.js",
         "vendor/js-cookie/js.cookie.min.js",
         "js/content/injections_controller.js",
+        "js/utils/numbers.js",
+        "js/content/injections/data.js",
         "js/content/readers/data.js",
         "js/content/injections/options.js",
         "js/content/injections/interceptor.js",
-        "js/utils/numbers.js",
-        "js/content/injections/data.js",
         "js/content/clear_cookies.js"
       ],
       "run_at": "document_start"
@@ -85,13 +85,14 @@
       "js/background/headers_and_options_listeners.js",
       "js/background/set_current_tab.js",
       "js/background/default_settings.js",
+      "js/background/tunnels/popup.js",
       "vendor/dexiejs/dexie.js",
       "js/helpers/indexed_db.js",
       "js/background/reports.js",
       "js/background/automatic_settings.js",
       "js/utils/colors.js",
       "js/background/update_badge.js",
-      "js/background/devtools_tunnel.js"
+      "js/background/tunnels/devtools.js"
     ]
   },
   "permissions": [

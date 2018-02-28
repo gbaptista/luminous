@@ -2,7 +2,7 @@ var original_window_setTimeout = window.setTimeout;
 var original_window_setInterval = window.setInterval;
 
 var cached_options = { injection_disabled: false };
-var collect_details = undefined;
+var collect_details = false;
 
 var get_options = function() {
   var json_options_element = document.getElementById('luminous-options');
@@ -18,22 +18,7 @@ var get_options = function() {
   return cached_options;
 }
 
-var reload_requested = false;
-
-var counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
-
-var last_url = window.location.href.replace(/#.*/, '');
-var counters_changed = false;
-
-original_window_setInterval(function() {
-  var current_url = window.location.href.replace(/#.*/, '');
-
-  if(last_url != current_url) {
-    last_url = current_url;
-    counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
-    counters_changed = true;
-  }
-}, 100, '__INTERNAL_LUMINOUS_CODE__');
+var luminous_data_element = document.getElementById('luminous-data');
 
 var increment_counter = function(kind, type, result, details, execution_time) {
   original_window_setTimeout(function() {
@@ -42,48 +27,20 @@ var increment_counter = function(kind, type, result, details, execution_time) {
       code: (collect_details ? ('' + details['code']).slice(0, 400) : undefined)
     };
 
-    if(counters[kind][type] == undefined) {
-      counters[kind][type] = { allowed: 0, blocked: 0 };
-    }
-
-    counters[kind][type][result] += 1;
-
-    if(execution_time != undefined) {
-      if(!counters[kind][type]['execution_time']) {
-        counters[kind][type]['execution_time'] = 0;
-      }
-
-      counters[kind][type]['execution_time'] += execution_time;
-    }
-
-    if(!collect_details) {
-      counters[kind][type]['samples'] = [details];
-    } else {
-      if(!counters[kind][type]['samples']) {
-        counters[kind][type]['samples'] = [];
-      }
-
-      counters[kind][type]['samples'].push(details);
-
-      if(counters[kind][type]['samples'].length > 3) {
-        counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
-      }
-    }
-
-    document.getElementById('luminous-data').dispatchEvent(
+    luminous_data_element.dispatchEvent(
       new MessageEvent(
         'luminous-message',
-        { data: JSON.stringify(
-          {
-            url: document.location.href,
-            kind: kind, type: type, time: execution_time,
-            details: details, result: result
+        {
+          data: {
+            kind: kind,
+            type: type,
+            time: execution_time,
+            details: details,
+            result: result
           }
-        ) }
+        }
       )
     );
-
-    counters_changed = true;
   }, 0, '__INTERNAL_LUMINOUS_CODE__');
 }
 
@@ -123,17 +80,3 @@ if(!get_options()['injection_disabled']) {
 
   // /load_injectors
 }
-
-original_window_setInterval(function() {
-  if(counters_changed) {
-    counters_changed = false;
-
-    var element = document.getElementById('luminous-data');
-
-    element.innerHTML = JSON.stringify(
-      { domain: document.location.host, counters: counters }
-    );
-
-    element.setAttribute('data-changed', 'true');
-  }
-}, 300, '__INTERNAL_LUMINOUS_CODE__');

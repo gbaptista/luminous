@@ -49,7 +49,9 @@ $(document).ready(function() {
         update_tabs(query_results);
 
         if(multitab_support) {
-          settings['tab_filter'] = current_tab['id'];
+          // TODO
+          // settings['tab_filter'] = current_tab['id'];
+          settings['tab_filter'] = 'auto';
         }
 
         var render_form = function() {
@@ -180,6 +182,7 @@ $(document).ready(function() {
                   $('tbody').prepend(Mustache.render(row_template, {
                     tab: message.tab_id,
                     domain: message.domain,
+                    url: message.url,
                     time: formated_time,
                     kind: message.data.kind,
                     type: message.data.type,
