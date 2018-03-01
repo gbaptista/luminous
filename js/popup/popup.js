@@ -50,6 +50,16 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
     if(!local_data) { local_data = {}; }
 
+    if(!local_data[tab_id]) {
+      var a_element = document.createElement('a');
+      a_element.href = current_tab_url;
+      var domain = a_element.hostname;
+
+      local_data[tab_id] = {
+        domain: domain
+      };
+    }
+
     var domain = local_data[tab_id]['domain'];
 
     chrome.storage.sync.get(null, function(sync_data) {
