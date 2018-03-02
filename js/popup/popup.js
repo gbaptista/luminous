@@ -45,22 +45,12 @@ var set_sync_option_injection_disabled_for_name = function(name, value) {
 }
 
 var load_store_data_from_tab = function(tab_id, current_tab_url) {
-  chrome.runtime.sendMessage({ action: 'counters_for_tab_id', tab_id: tab_id }, function(response) {
-    var local_data = response.data;
-
+  chrome.storage.local.get(tab_id, function(local_data) {
     if(!local_data) { local_data = {}; }
 
-    if(!local_data[tab_id]) {
-      var a_element = document.createElement('a');
-      a_element.href = current_tab_url;
-      var domain = a_element.hostname;
-
-      local_data[tab_id] = {
-        domain: domain
-      };
-    }
-
-    var domain = local_data[tab_id]['domain'];
+    var a_element = document.createElement('a');
+    a_element.href = current_tab_url;
+    var domain = a_element.hostname;
 
     chrome.storage.sync.get(null, function(sync_data) {
       if(!sync_data['disabled_' + domain]) {
@@ -320,17 +310,13 @@ chrome.tabs.query({ currentWindow:true, active: true, lastFocusedWindow: true },
 var should_reload = false;
 var should_hidde_loading = false;
 
-chrome.runtime.onMessage.addListener(function (message, _sender) {
-  if(message.action == 'reload_popup' && message.tab_id == current_tab_id) {
+chrome.storage.onChanged.addListener(function(changes, _namespace) {
+  if(changes[current_tab_id] || changes) {
+    if(changes) {
+      should_hidde_loading = true;
+    }
     should_reload = true;
   }
-});
-
-chrome.storage.onChanged.addListener(function(changes, _namespace) {
-  if(changes) {
-    should_hidde_loading = true;
-  }
-  should_reload = true;
 });
 
 setInterval(function() {
@@ -338,7 +324,7 @@ setInterval(function() {
     should_reload = false;
     load_stored_data();
   }
-}, 650);
+}, 450);
 
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));

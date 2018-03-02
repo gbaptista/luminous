@@ -37,6 +37,9 @@ injections_controller(function() {
     document.getElementById('luminous-data').addEventListener(
       'luminous-message',
       function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+
         log_stack_fifo.push(e.data);
         process_stack();
       }

@@ -31,7 +31,9 @@ chrome.storage.sync.get(null, function(sync_options) {
   badge_counter = sync_options['badge_counter'];
 });
 
-var calculate_badge_for_tab_id = function(tab_id) {
+var calculate_badge_for_tab_id = function() {
+  var tab_id = current_tab_id;
+
   var calls = 0;
 
   if(counters[tab_id] && counters[tab_id]['counters']) {
@@ -96,13 +98,15 @@ var update_badge_text = function(number) {
   }
 }
 
-var update_badge_for_tab_id = function(tab_id, now) {
+var update_badge_for_tab_id = function(now) {
   if(now) {
-    update_badge_text(badges[tab_id]);
+    calculate_badge_for_tab_id();
+    update_badge_text(badges[current_tab_id]);
   } else if (!update_badge_text_timer) {
     update_badge_text_timer = setTimeout(function() {
-      update_badge_text(badges[tab_id])
-    }, 500);
+      calculate_badge_for_tab_id();
+      update_badge_text(badges[current_tab_id])
+    }, 1000);
   }
 }
 
@@ -110,21 +114,19 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
   current_tab_id = activeInfo.tabId.toString();
 
   if(activeInfo.tabId) {
-    setTimeout(function() {
-      calculate_badge_for_tab_id(activeInfo.tabId.toString());
-      update_badge_for_tab_id(activeInfo.tabId.toString(), true);
-    }, 0);
+    setTimeout(function() { update_badge_for_tab_id(true); }, 0);
   }
 });
 
 chrome.runtime.onMessage.addListener(function (message, _sender) {
-  if(message.action == 'log_input' && message.tab_id == current_tab_id) {
-    if(message.tab_id) {
-      setTimeout(function() {
-        calculate_badge_for_tab_id(message.tab_id);
-        update_badge_for_tab_id(message.tab_id);
-      }, 0);
-    }
+  if(
+    message.action == 'log_input'
+    &&
+    message.tab_id == current_tab_id
+    &&
+    !update_badge_text_timer
+  ) {
+    update_badge_for_tab_id();
   }
 });
 
@@ -133,8 +135,7 @@ chrome.webRequest.onBeforeRequest.addListener(
     setTimeout(function() {
       var tab_id = details.tabId.toString();
       delete badges[tab_id];
-      calculate_badge_for_tab_id(tab_id);
-      update_badge_for_tab_id(tab_id, true);
+      update_badge_for_tab_id(true);
     }, 0);
   },
   { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }

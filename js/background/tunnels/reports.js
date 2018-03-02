@@ -97,12 +97,12 @@ var process_reports_stack = function() {
 
 chrome.runtime.onMessage.addListener(function (message, _sender) {
   if(collect_data && message.action == 'log_input' && validates_code(message.data.type, 'almost_all')) {
-    var key = message.tab_id +
-              '^' + message.domain +
-              '^' + message.data.kind +
-              '^' + message.data.type;
-
-    reports_stack_fifo[key] = {
+    reports_stack_fifo[
+      message.tab_id +
+      '^' + message.domain +
+      '^' + message.data.kind +
+      '^' + message.data.type
+    ] = {
       tab_id: message.tab_id,
       domain: message.domain,
       kind: message.data.kind,
@@ -112,7 +112,7 @@ chrome.runtime.onMessage.addListener(function (message, _sender) {
     if(!process_reports_stack_timer) {
       process_reports_stack_timer = setTimeout(function() {
         process_reports_stack();
-      }, 500);
+      }, 2000);
     }
   }
 });
