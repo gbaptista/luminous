@@ -13,12 +13,32 @@ $(document).ready(function() {
   load_template('html/logs/templates/form.html', function(form_template) {
     load_template('html/logs/templates/row.html', function(row_template) {
 
+      var log_lines_stack_fifo = [];
+
+      var process_log_lines_stack_timer = undefined;
+
+      var process_log_lines_stack = function() {
+        clearTimeout(process_log_lines_stack_timer);
+        process_log_lines_stack_timer = undefined;
+
+        var html = '';
+        while(log_lines_stack_fifo.length > 0) {
+          html = Mustache.render(
+            row_template, log_lines_stack_fifo.shift()
+          ) + html;
+        }
+        $('tbody').prepend(html);
+      };
+
       var current_tab = {};
 
       var settings = {
         state: 'started',
         filter_in: '',
-        filter_out: '',
+      filter_out: 'setInterval|setTimeout|handleEvent.message',
+        filter_out_regex: new RegExp(
+        'setInterval|setTimeout|handleEvent.message', 'i'
+        ),
         tabs: [],
         current_tab: undefined,
         tab_filter: 'all'
@@ -49,9 +69,7 @@ $(document).ready(function() {
         update_tabs(query_results);
 
         if(multitab_support) {
-          // TODO
-          // settings['tab_filter'] = current_tab['id'];
-          settings['tab_filter'] = 'auto';
+          settings['tab_filter'] = current_tab['id'];
         }
 
         var render_form = function() {
@@ -179,7 +197,7 @@ $(document).ready(function() {
                 }
 
                 if(display_input) {
-                  $('tbody').prepend(Mustache.render(row_template, {
+                  var data = {
                     tab: message.tab_id,
                     domain: message.domain,
                     url: message.url,
@@ -189,7 +207,15 @@ $(document).ready(function() {
                     target: message.data.details.target,
                     code: message.data.details.code,
                     class: (message.data.result == 'blocked' ? 'table-danger' : '')
-                  }));
+                  };
+
+                  log_lines_stack_fifo.push(data);
+
+                  if(!process_log_lines_stack_timer) {
+                    process_log_lines_stack_timer = setTimeout(function() {
+                      process_log_lines_stack();
+                    }, 300);
+                  }
                 }
               }
             }
