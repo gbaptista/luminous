@@ -65,5 +65,5 @@ chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
     delete counters[details.tabId.toString()];
   },
-  { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }
+  { urls: ['<all_urls>'], types: ['main_frame'] }
 );

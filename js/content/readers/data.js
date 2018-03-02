@@ -2,13 +2,15 @@ injections_controller(function() {
   var tab_id = undefined;
 
   var dispatch_data = function(data) {
-    chrome.runtime.sendMessage({
-      action: 'log_input',
-      tab_id: tab_id,
-      url: document.location.href,
-      domain: document.location.host,
-      data: data
-    });
+    setTimeout(function() {
+      chrome.runtime.sendMessage({
+        action: 'log_input',
+        tab_id: tab_id,
+        url: document.location.href,
+        domain: document.location.host,
+        data: data
+      });
+    }, 0);
   }
 
   var log_stack_fifo = [];

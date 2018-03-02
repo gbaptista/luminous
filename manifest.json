@@ -90,11 +90,11 @@
       "js/background/tunnels/counters.js",
       "js/background/tunnels/badge.js",
       "js/background/tunnels/icon.js",
-      "js/background/tunnels/automatic_settings.js",
+      "js/background/tunnels/auto_settings/domains.js",
+      "js/background/tunnels/auto_settings/events.js",
       "vendor/dexiejs/dexie.js",
       "js/helpers/indexed_db.js",
-      "js/background/reports.js",
-      "js/background/automatic_settings.js",
+      "js/background/tunnels/reports.js",
       "js/background/tunnels/devtools.js"
     ]
   },

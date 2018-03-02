@@ -77,32 +77,49 @@ var calculate_badge_for_tab_id = function(tab_id) {
   badges[tab_id] = calls;
 }
 
-var update_badge_for_tab_id = function(tab_id) {
-  if(badges[tab_id] > 0) {
+var update_badge_text_timer = undefined;
+
+var update_badge_text = function(number) {
+  clearTimeout(update_badge_text_timer);
+  update_badge_text_timer = undefined;
+
+  if(number > 0) {
     chrome.browserAction.setBadgeText(
-      { text: short_number_for_badge(badges[tab_id]) }
+      { text: short_number_for_badge(number) }
     );
 
     chrome.browserAction.setBadgeBackgroundColor(
-      { color: background_color_for_badge(badges[tab_id]) }
+      { color: background_color_for_badge(number) }
     );
   } else {
     chrome.browserAction.setBadgeText({ text: '' });
   }
 }
 
+var update_badge_for_tab_id = function(tab_id, now) {
+  if(now) {
+    update_badge_text(badges[tab_id]);
+  } else if (!update_badge_text_timer) {
+    update_badge_text_timer = setTimeout(function() {
+      update_badge_text(badges[tab_id])
+    }, 500);
+  }
+}
+
 chrome.tabs.onActivated.addListener(function (activeInfo) {
   current_tab_id = activeInfo.tabId.toString();
-  
-  setTimeout(function() {
-    calculate_badge_for_tab_id(activeInfo.tabId.toString());
-    update_badge_for_tab_id(activeInfo.tabId.toString());
-  }, 0);
+
+  if(activeInfo.tabId) {
+    setTimeout(function() {
+      calculate_badge_for_tab_id(activeInfo.tabId.toString());
+      update_badge_for_tab_id(activeInfo.tabId.toString(), true);
+    }, 0);
+  }
 });
 
 chrome.runtime.onMessage.addListener(function (message, _sender) {
-  if(message.action == 'log_input') {
-    if(message.tab_id == current_tab_id) {
+  if(message.action == 'log_input' && message.tab_id == current_tab_id) {
+    if(message.tab_id) {
       setTimeout(function() {
         calculate_badge_for_tab_id(message.tab_id);
         update_badge_for_tab_id(message.tab_id);
@@ -117,7 +134,7 @@ chrome.webRequest.onBeforeRequest.addListener(
       var tab_id = details.tabId.toString();
       delete badges[tab_id];
       calculate_badge_for_tab_id(tab_id);
-      update_badge_for_tab_id(tab_id);
+      update_badge_for_tab_id(tab_id, true);
     }, 0);
   },
   { urls: ['<all_urls>'], types: ['main_frame', 'sub_frame'] }
