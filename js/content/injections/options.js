@@ -1,6 +1,4 @@
 injections_controller(function() {
-  debug_log('injections_controller: ' + (performance.now() - start_time));
-
   var inject_options_for_domain = function(options, from) {
     var json_options_element = document.getElementById('luminous-options');
 
@@ -30,10 +28,6 @@ injections_controller(function() {
 
     if(!options['injection_disabled']) options['injection_disabled'] = false;
 
-    debug_log('----------------------------------------------------');
-    debug_log('cookies: ' + (performance.now() - start_time));
-    debug_log(JSON.stringify(options));
-
     inject_options_for_domain(options, 'cookies');
   }
 
@@ -46,9 +40,6 @@ injections_controller(function() {
           clearInterval(option_definer);
           if(!received_from_on_message) {
             received_from_on_message = true;
-            debug_log('----------------------------------------------------');
-            debug_log('setInterval.sendMessage: ' + (performance.now() - start_time));
-            debug_log(JSON.stringify(response.options));
 
             inject_options_for_domain(response.options, 'setInterval.sendMessage');
           }
@@ -66,10 +57,6 @@ injections_controller(function() {
       if(!received_from_on_message) {
         received_from_on_message = true;
 
-        debug_log('----------------------------------------------------');
-        debug_log('sendMessage: ' + (performance.now() - start_time));
-        debug_log(JSON.stringify(options));
-
         inject_options_for_domain(options, 'sendMessage');
       }
     }
@@ -81,10 +68,6 @@ injections_controller(function() {
       &&
       window.location.host == message.domain
     ) {
-      debug_log('----------------------------------------------------');
-      debug_log('onCommitted: ' + (performance.now() - start_time));
-      debug_log(JSON.stringify(message.options));
-
       inject_options_for_domain(message.options, 'onCommitted');
     }
   });
@@ -103,10 +86,6 @@ injections_controller(function() {
       if(!options['injection_disabled']) options['injection_disabled'] = false;
 
       options['collect_details'] = sync_data['popup']['show_code_details'];
-
-      debug_log('----------------------------------------------------');
-      debug_log('storage.sync.get: ' + (performance.now() - start_time));
-      debug_log(JSON.stringify(options));
 
       inject_options_for_domain(options, 'sync');
     });

@@ -36,8 +36,16 @@ var set_sync_option = function(name, value, namespace, value_as_namespace) {
 
         if(value_as_namespace) {
           if(!sync_data[namespace][name]) sync_data[namespace][name] = {};
+
+          console.log(
+            '[' + namespace + '][' + name + ']['+value_as_namespace+'] = ' + value
+          )
+
           sync_data[namespace][name][value_as_namespace] = value;
         } else {
+          console.log(
+            '[' + namespace + '][' + name + '] = ' + value
+          )
           sync_data[namespace][name] = value;
         }
       }
@@ -70,9 +78,21 @@ var observe_form = function() {
 
       if($(this).attr('type') == 'checkbox') {
         value = $(this).is(':checked');
+
+        if($(this).data('reverse')) {
+          value = !value;
+        }
       }
 
       namespace = $(this).data('namespace');
+
+      if(value && $(this).data('true-value')) {
+        value = $(this).data('true-value');
+      }
+
+      if(!value && $(this).data('false-value')) {
+        value = $(this).data('false-value');
+      }
 
       set_sync_option(name, value, namespace, value_as_namespace);
     }
@@ -130,9 +150,14 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/badge/counter.html')
           },
           {
-            title: chrome.i18n.getMessage('settingsBackgroundOptionsTitle'),
+            title: chrome.i18n.getMessage('settingsAutomaticSettingsOptionsTitle'),
             url: chrome.extension.getURL('html/settings/background/options.html'),
             active: (document.location.pathname == '/html/settings/background/options.html')
+          },
+          {
+            title: chrome.i18n.getMessage('settingsBackgroundPerformanceTitle'),
+            url: chrome.extension.getURL('html/settings/performance/options.html'),
+            active: (document.location.pathname == '/html/settings/performance/options.html')
           },
           {
             title: chrome.i18n.getMessage('settingsStoredDataSyncTitle'),

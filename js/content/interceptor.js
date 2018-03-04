@@ -2,10 +2,14 @@ var original_window_setTimeout = window.setTimeout;
 var original_window_setInterval = window.setInterval;
 
 var cached_options = { injection_disabled: false };
-var collect_details = undefined;
+var collect_details = false;
+
+var json_options_element = undefined;
 
 var get_options = function() {
-  var json_options_element = document.getElementById('luminous-options');
+  if(!json_options_element) {
+    json_options_element = document.getElementById('luminous-options');
+  }
 
   if(json_options_element && json_options_element.getAttribute('data-changed') == 'true') {
     cached_options = JSON.parse(json_options_element.innerHTML);
@@ -18,74 +22,7 @@ var get_options = function() {
   return cached_options;
 }
 
-var reload_requested = false;
-
-var counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
-
-var last_url = window.location.href.replace(/#.*/, '');
-var counters_changed = false;
-
-original_window_setInterval(function() {
-  var current_url = window.location.href.replace(/#.*/, '');
-
-  if(last_url != current_url) {
-    last_url = current_url;
-    counters = { addEventListener: {}, handleEvent: {}, WebAPIs: {} };
-    counters_changed = true;
-  }
-}, 100, '__INTERNAL_LUMINOUS_CODE__');
-
-var increment_counter = function(kind, type, result, details, execution_time) {
-  original_window_setTimeout(function() {
-    details = {
-      target: '' + details['target'],
-      code: (collect_details ? ('' + details['code']).slice(0, 400) : undefined)
-    };
-
-    if(counters[kind][type] == undefined) {
-      counters[kind][type] = { allowed: 0, blocked: 0 };
-    }
-
-    counters[kind][type][result] += 1;
-
-    if(execution_time != undefined) {
-      if(!counters[kind][type]['execution_time']) {
-        counters[kind][type]['execution_time'] = 0;
-      }
-
-      counters[kind][type]['execution_time'] += execution_time;
-    }
-
-    if(!collect_details) {
-      counters[kind][type]['samples'] = [details];
-    } else {
-      if(!counters[kind][type]['samples']) {
-        counters[kind][type]['samples'] = [];
-      }
-
-      counters[kind][type]['samples'].push(details);
-
-      if(counters[kind][type]['samples'].length > 3) {
-        counters[kind][type]['samples'] = counters[kind][type]['samples'].slice(-3);
-      }
-    }
-
-    document.getElementById('luminous-data').dispatchEvent(
-      new MessageEvent(
-        'luminous-message',
-        { data: JSON.stringify(
-          {
-            url: document.location.href,
-            kind: kind, type: type, time: execution_time,
-            details: details, result: result
-          }
-        ) }
-      )
-    );
-
-    counters_changed = true;
-  }, 0, '__INTERNAL_LUMINOUS_CODE__');
-}
+var luminous_data_element = document.getElementById('luminous-data');
 
 var is_allowed = function(kind, type) {
   var options = get_options();
@@ -94,6 +31,49 @@ var is_allowed = function(kind, type) {
   if(!options['disabled'][kind]) options['disabled'][kind] = {};
 
   return !options['disabled'][kind][type];
+}
+
+// -------------------------------------------------
+var dispatch_stack_fifo = [];
+
+var dispatch_stack_timer = undefined;
+
+var process_dispatch_stack = function() {
+  clearTimeout(dispatch_stack_timer);
+  dispatch_stack_timer = undefined;
+
+  luminous_data_element.dispatchEvent(
+    new MessageEvent('luminous-message', { data: dispatch_stack_fifo })
+  );
+
+  dispatch_stack_fifo = [];
+}
+
+// -------------------------------------------------
+var increment_counter = function(kind, type, allowed, target, code, time) {
+  original_window_setTimeout(function(
+    _, kind, type, allowed, target, code, time
+  ) {
+    if(collect_details && code) { var code = ('' + code).slice(0, 400); } else { var code = undefined; }
+
+    dispatch_stack_fifo.push({
+      kind: kind,
+      type: type,
+      time: time,
+      target: target.toString(),
+      code: code,
+      allowed: allowed,
+      domain: document.location.host,
+      url: document.location.href
+    });
+
+
+    if(!dispatch_stack_timer) {
+      dispatch_stack_timer = original_window_setTimeout(function() {
+        process_dispatch_stack()
+      }, 100, '__INTERNAL_LUMINOUS_CODE__'); // STACK_TIMER_01
+    }
+  }, 0, '__INTERNAL_LUMINOUS_CODE__', kind, type, allowed, target, code, time);
 }
 
 if(!get_options()['injection_disabled']) {
@@ -123,17 +103,3 @@ if(!get_options()['injection_disabled']) {
 
   // /load_injectors
 }
-
-original_window_setInterval(function() {
-  if(counters_changed) {
-    counters_changed = false;
-
-    var element = document.getElementById('luminous-data');
-
-    element.innerHTML = JSON.stringify(
-      { domain: document.location.host, counters: counters }
-    );
-
-    element.setAttribute('data-changed', 'true');
-  }
-}, 300, '__INTERNAL_LUMINOUS_CODE__');

@@ -10,10 +10,10 @@ XMLHttpRequest.prototype.open = function(method, url, is_async, user, password) 
       super_this, method, url, is_async, user, password
     );
   } else {
-    var details = { target: method, code: url };
-
     if(!is_allowed('WebAPIs', 'XMLHttpRequest.open')) {
-      increment_counter('WebAPIs', 'XMLHttpRequest.open', 'blocked', details);
+      increment_counter(
+        'WebAPIs', 'XMLHttpRequest.open', false, method, url, 0
+      );
     } else {
       var timer = performance.now();
 
@@ -22,7 +22,7 @@ XMLHttpRequest.prototype.open = function(method, url, is_async, user, password) 
       );
 
       increment_counter(
-        'WebAPIs', 'XMLHttpRequest.open', 'allowed', details,
+        'WebAPIs', 'XMLHttpRequest.open', true, method, url,
         performance.now() - timer
       );
 

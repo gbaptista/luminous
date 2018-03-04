@@ -8,23 +8,21 @@
     <link rel="stylesheet" type="text/css" href="../../../vendor/bootstrap/bootstrap.min.css">
 
     <link rel="stylesheet" type="text/css" href="../../css/devtools/logs.css">
-    <script src="../../vendor/jquery/jquery-3.3.1.min.js" type="text/javascript"></script>
     <script src="../../vendor/mustachejs/mustache.min.js" type="text/javascript"></script>
     <script src="../../js/utils/numbers.js" type="text/javascript"></script>
     <script src="../../js/utils/load_template.js" type="text/javascript"></script>
-    <script src="../../js/logs/logs.js" type="text/javascript"></script>
   </head>
   <body>
     <div id="form">
     </div>
 
-    <div class="table-area">
+    <div id="table-area">
       <div class="table-container">
-        <table class="table table-bordered table-striped table-sm">
-          <tbody>
-          </tbody>
+        <table id="log-table" class="table table-bordered table-striped table-sm">
         </table>
       </div>
     </div>
+
+    <script src="../../js/logs/logs.js" type="text/javascript"></script>
   </body>
 </html>

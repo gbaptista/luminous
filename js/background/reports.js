@@ -1,9 +1,36 @@
+// Depends on [counters] at js/background/counters.js
 var db = create_luminous_db();
 
-var update_reports_for_tab_id = function() {};
+var update_report = function() {
+  console.error('Luminous db not opened.');
+};
+
+var collect_data = true;
+
+setTimeout(function() {
+  chrome.storage.sync.get(null, function(sync_options) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(
+        namespace == 'sync' && changes
+        &&
+        changes['reports'] && changes['reports'].newValue
+      ) {
+        collect_data = changes['reports'].newValue['collect_data'];
+      }
+    });
+
+    if(sync_options['reports']) {
+      collect_data = sync_options['reports']['collect_data'];
+    }
+  });
+}, 100);
+
+var reports_stack_fifo = {};
+
+var process_reports_stack_timer = undefined;
 
 var on_db_open = function() {
-  var update_report = function(data, callback) {
+  update_report = function(data) {
     db.reports.where({id: data.id }).first(function(report) {
       var put = false;
 
@@ -28,79 +55,85 @@ var on_db_open = function() {
       }
     });
   }
-
-  var set_reports_for_tab = function(tab_ids, callback) {
-    chrome.storage.sync.get('reports', function(sync_data) {
-      if(sync_data['reports']['collect_data']) {
-        chrome.storage.local.get(null, function(local_data) {
-          for(i in tab_ids) {
-            var tab_id = tab_ids[i];
-
-            setTimeout(function(tab_id, callback) {
-              if(local_data[tab_id]) {
-                var domain = local_data[tab_id]['domain'];
-
-                if(/\./.test(domain)) {
-                  for(kind in local_data[tab_id]['counters']) {
-                    for(code in local_data[tab_id]['counters'][kind]) {
-                      if(validates_code(code, 'almost_all')) {
-                        var key = domain + '^' + kind + '^' + code;
-
-                        var allowed = local_data[tab_id]['counters'][kind][code]['allowed'];
-                        var blocked = local_data[tab_id]['counters'][kind][code]['blocked'];
-                        var calls = allowed + blocked;
-
-                        var execution_time = local_data[tab_id]['counters'][kind][code]['execution_time'];
-
-                        var report_params = {
-                          id: key, domain: domain, kind: kind, code: code,
-                          allowed: allowed, blocked: blocked, calls: calls,
-                          execution_time: execution_time
-                        }
-
-                        setTimeout(function(report_params) {
-                          update_report(report_params,);
-                        }, 0, report_params);
-                      }
-                    }
-                  }
-                }
-              }
-
-              if(callback) { setTimeout(function() { callback(); }, 0); }
-            }, 0, tab_id, callback);
-          }
-        });
-      } else {
-        if(callback) { setTimeout(function() { callback(); }, 0); }
-      }
-    });
-  }
-
-  setInterval(function() {
-    chrome.storage.local.get(null, function(local_data) {
-      var tab_ids = [];
-
-      for(tab_id in local_data) { tab_ids.push(tab_id) }
-
-      set_reports_for_tab(tab_ids);
-    });
-  }, 2000);
-
-  var set_tab_reports = function(activeInfo) {
-    chrome.tabs.get(parseInt(activeInfo.tabId), function(tab) {
-      if(tab) {
-        set_reports_for_tab([tab.id]);
-      }
-    });
-  }
-
-  chrome.tabs.onActivated.addListener(set_tab_reports);
-
-  update_reports_for_tab_id = function(tab_id, callback) {
-    set_reports_for_tab([tab_id], callback);
-  };
 }
+
+var process_reports_stack = function() {
+  if(process_reports_stack_timer) {
+    clearTimeout(process_reports_stack_timer);
+
+    process_reports_stack_timer = undefined;
+  }
+
+  for(key in reports_stack_fifo) {
+    var data = reports_stack_fifo[key];
+
+    delete reports_stack_fifo[key];
+
+    if(
+      collect_data
+      &&
+      counters[data['tab_id']]
+      &&
+      counters[data['tab_id']]['domain'] == data['domain']
+    ) {
+      if(
+        counters[data['tab_id']]['counters'][data['kind']]
+        &&
+        counters[data['tab_id']]['counters'][data['kind']][data['code']]
+      ) {
+        var key = data['domain'] + '^' + data['kind'] + '^' + data['code'];
+
+        var current_data = counters[data['tab_id']]['counters'][data['kind']][data['code']];
+
+        var execution_time = current_data['execution_time'];
+        if(!execution_time) execution_time = 0;
+
+        var report_params = {
+          id: key, domain: data['domain'], kind: data['kind'], code: data['code'],
+          allowed: current_data['allowed'], blocked: current_data['blocked'],
+          calls: current_data['allowed'] + current_data['blocked'],
+          execution_time: execution_time
+        };
+
+        update_report(report_params);
+      }
+    }
+  }
+}
+
+chrome.runtime.onMessage.addListener(function (message, _sender) {
+  if(collect_data && message.action == 'log_input') {
+    // Don't mutate original message...
+    var message_stack = [].concat(message.stack);
+
+    var stack_size = message_stack.length + 1;
+
+    while(--stack_size) {
+      var data = message_stack.shift();
+
+      if(validates_code(data.type, 'almost_all')) {
+        reports_stack_fifo[
+          data.tab_id +
+          '^' + data.domain +
+          '^' + data.kind +
+          '^' + data.type
+        ] = {
+          tab_id: data.tab_id,
+          domain: data.domain,
+          kind: data.kind,
+          code: data.type
+        };
+      }
+    }
+
+    if(!process_reports_stack_timer) {
+      process_reports_stack_timer = setTimeout(function() {
+        process_reports_stack();
+      }, 5000); // STACK_TIMER_X
+    }
+  }
+});
+
 
 db.open().then(function() {
   on_db_open();

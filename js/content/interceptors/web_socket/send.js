@@ -6,17 +6,17 @@ WebSocket.prototype.send = function(data) {
   if(get_options()['injection_disabled']) {
     return original_WebSocket_send.call(super_this, data);
   } else {
-    var details = { target: super_this, code: data };
-
     if(!is_allowed('WebAPIs', 'WebSocket.send')) {
-      increment_counter('WebAPIs', 'WebSocket.send', 'blocked', details);
+      increment_counter(
+        'WebAPIs', 'WebSocket.send', false, super_this, data, 0
+      );
     } else {
       var timer = performance.now();
 
       var execution_return = original_WebSocket_send.call(super_this, data);
 
       increment_counter(
-        'WebAPIs', 'WebSocket.send', 'allowed', details,
+        'WebAPIs', 'WebSocket.send', true, super_this, data,
         performance.now() - timer
       );
 

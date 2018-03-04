@@ -63,18 +63,18 @@
 
   "settingsNoRulesFoundText": { "message": "no rules found" },
   "settingsRemoveDomainButtonText": { "message": "remove domain" },
-  "settingsBackgroundOptionsTitle": { "message": "automatic settings" },
+  "settingsAutomaticSettingsOptionsTitle": { "message": "automatic settings" },
 
   "settingsDomainDetectedTitle": { "message": "when a new website is accessed:" },
   "settingsAddDomainToCodeInjectionLabel": { "message": "add to [code injection]" },
   "settingsAddDomainToWebsiteRulesLabel": { "message": "add to [website rules]" },
   "settingsEventDetectedTitle": { "message": "when a new JavaScript event is detected:" },
-  "settingsAddEventToDefaultTitle": { "message": "add to [default rules]:" },
+  "settingsAddEventToDefaultTitle": { "message": "add to [default rules]" },
   "settingsAddEventNoneLabel": { "message": "none" },
   "settingsAddEventCommonLabel": { "message": "common" },
   "settingsAddEventAllLabel": { "message": "all" },
   "settingsAddEventAlmostAllLabel": { "message": "almost all" },
-  "settingsAddEventToWebsiteTitle": { "message": "add to [website rules]:" },
+  "settingsAddEventToWebsiteTitle": { "message": "add to [website rules]" },
 
   "settingsNotRecommendedText": { "message": "not recommended" },
   "settingsDefinitelyNotRecommendedText": { "message": "definitely not recommended" },
@@ -82,7 +82,7 @@
   "settingsReportsTitle": { "message": "reports" },
   "settingsIndexedDbMdnHref": { "message": "https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API" },
   "settingsRecordsText": { "message": "records" },
-  "settingsEnableReportsGenerationText": { "message": "enable reports generation" },
+  "settingsEnableReportsGenerationText": { "message": "reports generation" },
   "settingsMostExecutedJavaScriptCodesText": { "message": "most executed JavaScript codes:" },
   "settingsDomainsMostJavaScriptCodesText": { "message": "domains that most runs JavaScript codes:" },
   "settingsFilterButtonText": { "message": "filter" },
@@ -95,5 +95,17 @@
   "checkboxShowPerformanceMetrics": { "message": "performance metrics" },
   "sortByText": { "message": "sort by" },
   "sortByCallsText": { "message": "executions" },
-  "sortByTimeText": { "message": "time spent" }
+  "sortByTimeText": { "message": "time spent" },
+
+  "settingsBackgroundPerformanceTitle": { "message": "performance" },
+
+  "disableText": { "message": "disable" },
+
+  "logsFilterInPlaceholder": { "message": "include (regular expression works!)" },
+  "logsFilterOutPlaceholder": { "message": "exclude (regular expression works!)" },
+  "logsFilterAllText": { "message": "all tabs" },
+  "logsFilterAutoDetectText": { "message": "detect" },
+  "logsStartButtonText": { "message": "start" },
+  "logsStopButtonText": { "message": "stop" },
+  "logsClearButtonText": { "message": "clear" }
 }

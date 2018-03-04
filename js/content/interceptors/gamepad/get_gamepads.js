@@ -7,10 +7,10 @@ if (navigator.getGamepads) {
     if(get_options()['injection_disabled']) {
       return original_navigator_getGamepads.call(super_this);
     } else {
-      var details = { target: super_this, code: {} };
-
       if(!is_allowed('WebAPIs', 'getGamepads')) {
-        increment_counter('WebAPIs', 'getGamepads', 'blocked', details);
+        increment_counter(
+          'WebAPIs', 'getGamepads', false, super_this, undefined, 0
+        );
 
         return [];
       } else {
@@ -19,7 +19,7 @@ if (navigator.getGamepads) {
         var execution_return = original_navigator_getGamepads.call(super_this);
 
         increment_counter(
-          'WebAPIs', 'getGamepads', 'allowed', details,
+          'WebAPIs', 'getGamepads', true, super_this, undefined,
           performance.now() - timer
         );
 
