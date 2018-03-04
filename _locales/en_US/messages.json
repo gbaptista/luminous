@@ -95,5 +95,7 @@
   "checkboxShowPerformanceMetrics": { "message": "performance metrics" },
   "sortByText": { "message": "sort by" },
   "sortByCallsText": { "message": "executions" },
-  "sortByTimeText": { "message": "time spent" }
+  "sortByTimeText": { "message": "time spent" },
+
+  "settingsBackgroundPerformanceTitle": { "message": "performance" }
 }
