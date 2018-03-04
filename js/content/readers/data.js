@@ -1,58 +1,61 @@
 injections_controller(function() {
   var tab_id = undefined;
 
-  var dispatch_data = function(data) {
-    setTimeout(function() {
-      chrome.runtime.sendMessage({
-        action: 'log_input',
-        tab_id: tab_id,
-        url: document.location.href,
-        domain: document.location.host,
-        data: data
-      });
-    }, 0);
+  var dispatch_stack = function(stack_fifo) {
+    var stack_size = stack_fifo.length;
+
+    for (i = 0; i < stack_size; i++) {
+      stack_fifo[i]['tab_id'] = tab_id;
+      stack_fifo[i]['url'] = document.location.href;
+
+      // TODO should domain be defined in interceptor? (iframe cases)
+      stack_fifo[i]['domain'] = document.location.host;
+    }
+
+    chrome.runtime.sendMessage({
+      action: 'log_input', tab_id: tab_id, stack: stack_fifo
+    });
   }
 
   var log_stack_fifo = [];
 
+  var process_stack_timer = undefined;
+
   var process_stack = function() {
-    if(tab_id) {
-      while(log_stack_fifo.length > 0) {
-        var data = log_stack_fifo.shift();
-
-        if(data) { dispatch_data(data); }
-      }
-    }
-  };
-
-  // Maybe just one event?
-  var wait_for_tab_id = setInterval(function() {
-    if(tab_id) {
-      clearInterval(wait_for_tab_id);
-      process_stack();
-    }
-  }, 1000);
+    setTimeout(function() { process_stack(); }, 100);
+  }
 
   chrome.storage.sync.get(null, function(sync_options) {
     document.getElementById('luminous-data').addEventListener(
       'luminous-message',
       function(e) {
-        e.stopPropagation();
-        e.preventDefault();
+        e.preventDefault(); e.stopPropagation();
 
-        log_stack_fifo.push(e.data);
-        process_stack();
+        log_stack_fifo = log_stack_fifo.concat(e.data);
+
+        if(!process_stack_timer) {
+          process_stack_timer = setTimeout(function() {
+            process_stack();
+          }, 150); // STACK_TIMER_02
+        }
       }
     );
 
     var get_tab_id = setInterval(function() {
       var data_element = document.getElementById('luminous-data');
 
-      if(data_element) {
+      if(data_element && data_element.getAttribute('data-tab')) {
+        clearInterval(get_tab_id);
+        process_stack = function() {
+          clearTimeout(process_stack_timer);
+          process_stack_timer = undefined;
+
+          dispatch_stack(log_stack_fifo);
+
+          log_stack_fifo = [];
+        };
         tab_id = data_element.getAttribute('data-tab');
       }
-
-      clearInterval(get_tab_id);
-    }, 500);
+    }, 50);
   });
 });

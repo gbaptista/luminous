@@ -1,3 +1,5 @@
+var last_icon = undefined;
+
 var update_icon_for_tab = function(tab_id, url) {
   chrome.storage.sync.get(null, function(sync_data) {
     if(!sync_data) sync_data = {};
@@ -10,21 +12,27 @@ var update_icon_for_tab = function(tab_id, url) {
     var domain = a_element.hostname;
 
     if(injection_disabled['general'] || injection_disabled[domain]) {
-      chrome.browserAction.setIcon({
-        path: {
-          16: 'images/icons/16-gray.png',
-          32: 'images/icons/32-gray.png',
-          64: 'images/icons/64-gray.png'
-        }
-      });
+      if(last_icon != 'gray') {
+        chrome.browserAction.setIcon({
+          path: {
+            16: 'images/icons/16-gray.png',
+            32: 'images/icons/32-gray.png',
+            64: 'images/icons/64-gray.png'
+          }
+        });
+        last_icon = 'gray';
+      }
     } else {
-      chrome.browserAction.setIcon({
-        path: {
-          16: 'images/icons/16.png',
-          32: 'images/icons/32.png',
-          64: 'images/icons/64.png'
-        }
-      });
+      if(last_icon != 'color') {
+        chrome.browserAction.setIcon({
+          path: {
+            16: 'images/icons/16.png',
+            32: 'images/icons/32.png',
+            64: 'images/icons/64.png'
+          }
+        });
+        last_icon = 'color';
+      }
     }
   });
 }

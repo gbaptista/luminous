@@ -1,0 +1,22 @@
+{{#sidebar}}
+  {{#rows}}
+    <tr class="{{class}}" title="tab {{tab}}: {{url}}">
+      <td>{{time}}</td>
+      <td>{{kind}}.{{type}}</td>
+    </tr>
+  {{/rows}}
+{{/sidebar}}
+
+{{^sidebar}}
+  {{#rows}}
+    <tr class="{{class}}" title="tab {{tab}}: {{url}}">
+      <td>{{time}}</td>
+      <td>{{kind}}.{{type}}</td>
+      <td>
+        {{target}}{{#code}}:
+          <em>{{code}}</em>
+        {{/code}}
+      </td>
+    </tr>
+  {{/rows}}
+{{/sidebar}}

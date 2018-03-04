@@ -1,4 +1,10 @@
 $(document).ready(function() {
+  var sidebar = true;
+
+  if(/container=devtools/.test(document.location.search)) {
+    sidebar = false;
+  }
+
   var multitab_support = true;
 
   if(chrome.tabs == undefined) {
@@ -11,7 +17,7 @@ $(document).ready(function() {
   }
 
   load_template('html/logs/templates/form.html', function(form_template) {
-    load_template('html/logs/templates/row.html', function(row_template) {
+    load_template('html/logs/templates/rows.html', function(rows_template) {
 
       var log_lines_stack_fifo = [];
 
@@ -21,12 +27,12 @@ $(document).ready(function() {
         clearTimeout(process_log_lines_stack_timer);
         process_log_lines_stack_timer = undefined;
 
-        var html = '';
-        while(log_lines_stack_fifo.length > 0) {
-          html = Mustache.render(
-            row_template, log_lines_stack_fifo.shift()
-          ) + html;
-        }
+        var html = Mustache.render(
+          rows_template, { sidebar: sidebar, rows: log_lines_stack_fifo.reverse() }
+        );
+
+        log_lines_stack_fifo = [];
+
         $('tbody').prepend(html);
       };
 
@@ -69,11 +75,14 @@ $(document).ready(function() {
         update_tabs(query_results);
 
         if(multitab_support) {
-          settings['tab_filter'] = current_tab['id'];
+          // TODO use current_tab filter
+          // settings['tab_filter'] = current_tab['id'];
+          settings['tab_filter'] = 'auto';
         }
 
         var render_form = function() {
           $('#form').html(Mustache.render(form_template, {
+            sidebar: sidebar,
             started: (settings['state'] == 'started'),
             filter_in: settings['filter_in'],
             filter_out: settings['filter_out'],
@@ -125,6 +134,7 @@ $(document).ready(function() {
             settings['filter_in'] = $('#filter_in').val();
             settings['filter_out'] = $('#filter_out').val();
             if(settings['filter_in'] != '') {
+              // TODO regex for multiline codes
               settings['filter_in_regex'] = new RegExp(settings['filter_in'], 'i');
             } else {
               settings['filter_in_regex'] = undefined;
@@ -153,35 +163,42 @@ $(document).ready(function() {
 
         render_form();
 
-        var port = chrome.runtime.connect({ name: 'devtools tunnel' });
+        var port = chrome.runtime.connect({ name: 'devtools_tunnel' });
 
         port.onMessage.addListener(function (message) {
-          if(message.action == 'log_input') {
-            if(settings['state'] == 'started') {
-              if(
-                settings['tab_filter'] == 'all'
-                ||
-                (
-                  settings['tab_filter'] == 'auto'
-                  &&
-                  message.tab_id == settings['current_tab']['id']
-                )
-                ||
-                settings['tab_filter'] == message.tab_id
-              ) {
-                var formated_time = short_time(message.data.time);
+          if(settings['state'] == 'started') {
+            if(
+              settings['tab_filter'] == 'all'
+              ||
+              (
+                settings['tab_filter'] == 'auto'
+                &&
+                message.tab_id == settings['current_tab']['id']
+              )
+              ||
+              settings['tab_filter'] == message.tab_id
+            ) {
+              var stack = message.stack;
+              var stack_size = stack.length;
+
+              for (i = 0; i < stack_size; i++) {
+                var data = stack[i];
+
+                var formated_time = short_time(data.time);
 
                 var display_input = true;
+                var result = (data.allowed ? 'allowed' :  'blocked');
 
                 if(settings['filter_in_regex'] || settings['filter_out_regex']) {
-                  var check_string = message.tab_id + ' ' +
-                                     message.domain + ' ' +
+                  var check_string = result + ' ' +
+                                     data.tab_id + ' ' +
+                                     data.domain + ' ' +
+                                     data.url + ' ' +
                                      formated_time + ' ' +
-                                     message.data.kind + ' ' +
-                                     message.data.type + ' ' +
-                                     message.data.details.target + ' ' +
-                                     message.data.details.code + ' ' +
-                                     message.data.result;
+                                     data.kind + ' ' +
+                                     data.type + ' ' +
+                                     data.target + ' ' +
+                                     data.code + ' ';
 
                   if(settings['filter_out_regex']) {
                     if(settings['filter_out_regex'].test(check_string)) {
@@ -197,24 +214,24 @@ $(document).ready(function() {
                 }
 
                 if(display_input) {
-                  var data = {
-                    tab: message.tab_id,
-                    domain: message.domain,
-                    url: message.url,
+                  var row = {
+                    tab: data.tab_id,
+                    domain: data.domain,
+                    url: data.url,
                     time: formated_time,
-                    kind: message.data.kind,
-                    type: message.data.type,
-                    target: message.data.details.target,
-                    code: message.data.details.code,
-                    class: (message.data.result == 'blocked' ? 'table-danger' : '')
+                    kind: data.kind,
+                    type: data.type,
+                    target: data.target,
+                    code: data.code,
+                    class: (data.allowed ? '' : 'table-danger')
                   };
 
-                  log_lines_stack_fifo.push(data);
+                  log_lines_stack_fifo.push(row);
 
                   if(!process_log_lines_stack_timer) {
                     process_log_lines_stack_timer = setTimeout(function() {
                       process_log_lines_stack();
-                    }, 300);
+                    }, 300); // STACK_TIMER_05
                   }
                 }
               }

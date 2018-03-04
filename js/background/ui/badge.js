@@ -1,4 +1,4 @@
-// Depends on [counters] at js/background/tunnels/counters.js
+// Depends on [counters] at js/background/counters.js
 var badges = {};
 
 var current_tab_id = undefined;
@@ -81,20 +81,39 @@ var calculate_badge_for_tab_id = function() {
 
 var update_badge_text_timer = undefined;
 
+var last_number = undefined;
+var last_color = undefined;
+var last_text = undefined;
+
 var update_badge_text = function(number) {
   clearTimeout(update_badge_text_timer);
   update_badge_text_timer = undefined;
 
-  if(number > 0) {
-    chrome.browserAction.setBadgeText(
-      { text: short_number_for_badge(number) }
-    );
+  if(last_number != number) {
 
-    chrome.browserAction.setBadgeBackgroundColor(
-      { color: background_color_for_badge(number) }
-    );
-  } else {
-    chrome.browserAction.setBadgeText({ text: '' });
+    last_number = number;
+
+    var text = short_number_for_badge(number);
+    var color = background_color_for_badge(number);
+
+    if(last_text != text) {
+      last_text = text;
+
+      if(number > 0) {
+        chrome.browserAction.setBadgeText(
+          { text: text }
+        );
+
+        if(last_color != color) {
+          last_color = color;
+          chrome.browserAction.setBadgeBackgroundColor(
+            { color: color }
+          );
+        }
+      } else {
+        chrome.browserAction.setBadgeText({ text: '' });
+      }
+    }
   }
 }
 
@@ -106,7 +125,7 @@ var update_badge_for_tab_id = function(now) {
     update_badge_text_timer = setTimeout(function() {
       calculate_badge_for_tab_id();
       update_badge_text(badges[current_tab_id])
-    }, 1000);
+    }, 500); // STACK_TIMER_X
   }
 }
 

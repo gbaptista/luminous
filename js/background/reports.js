@@ -1,3 +1,4 @@
+// Depends on [counters] at js/background/counters.js
 var db = create_luminous_db();
 
 var update_report = function() {
@@ -6,18 +7,23 @@ var update_report = function() {
 
 var collect_data = true;
 
-chrome.storage.sync.get(null, function(sync_options) {
-  chrome.storage.onChanged.addListener(function(changes, namespace) {
-    if(
-      namespace == 'sync' && changes
-      &&
-      changes['reports'] && changes['reports'].newValue
-    ) {
-      collect_data = changes['reports'].newValue['collect_data'];
+setTimeout(function() {
+  chrome.storage.sync.get(null, function(sync_options) {
+    chrome.storage.onChanged.addListener(function(changes, namespace) {
+      if(
+        namespace == 'sync' && changes
+        &&
+        changes['reports'] && changes['reports'].newValue
+      ) {
+        collect_data = changes['reports'].newValue['collect_data'];
+      }
+    });
+
+    if(sync_options['reports']) {
+      collect_data = sync_options['reports']['collect_data'];
     }
   });
-  collect_data = sync_options['reports']['collect_data'];
-});
+}, 100);
 
 var reports_stack_fifo = {};
 
@@ -96,23 +102,34 @@ var process_reports_stack = function() {
 }
 
 chrome.runtime.onMessage.addListener(function (message, _sender) {
-  if(collect_data && message.action == 'log_input' && validates_code(message.data.type, 'almost_all')) {
-    reports_stack_fifo[
-      message.tab_id +
-      '^' + message.domain +
-      '^' + message.data.kind +
-      '^' + message.data.type
-    ] = {
-      tab_id: message.tab_id,
-      domain: message.domain,
-      kind: message.data.kind,
-      code: message.data.type
-    };
+  if(collect_data && message.action == 'log_input') {
+    // Don't mutate original message...
+    var message_stack = [].concat(message.stack);
+
+    var stack_size = message_stack.length + 1;
+
+    while(--stack_size) {
+      var data = message_stack.shift();
+
+      if(validates_code(data.type, 'almost_all')) {
+        reports_stack_fifo[
+          data.tab_id +
+          '^' + data.domain +
+          '^' + data.kind +
+          '^' + data.type
+        ] = {
+          tab_id: data.tab_id,
+          domain: data.domain,
+          kind: data.kind,
+          code: data.type
+        };
+      }
+    }
 
     if(!process_reports_stack_timer) {
       process_reports_stack_timer = setTimeout(function() {
         process_reports_stack();
-      }, 2000);
+      }, 5000); // STACK_TIMER_X
     }
   }
 });

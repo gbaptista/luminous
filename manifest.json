@@ -49,7 +49,7 @@
       "512": "images/icons/512.png"
     },
     "default_title": "Luminous",
-    "default_panel": "html/logs/logs.html"
+    "default_panel": "html/logs/logs.html?container=sidebar"
   },
   "devtools_page": "html/devtools/devtools.html",
   "options_ui": {
@@ -61,7 +61,6 @@
     {
       "matches": ["<all_urls>"],
       "js": [
-        "js/helpers/debug.js",
         "js/helpers/code_names.js",
         "js/helpers/compressor.js",
         "js/helpers/domain_settings.js",
@@ -82,20 +81,21 @@
       "js/helpers/code_names.js",
       "js/helpers/compressor.js",
       "js/helpers/domain_settings.js",
-      "js/background/headers_and_options_listeners.js",
-      "js/background/set_current_tab.js",
       "js/background/setup/default_settings.js",
+      "js/background/headers/cookies_security_polices_user_agent.js",
+      "js/background/tabs/set_current_tab.js",
+      "js/background/tabs/reset_data_for_tab.js",
       "js/utils/numbers.js",
       "js/utils/colors.js",
-      "js/background/tunnels/counters.js",
-      "js/background/tunnels/badge.js",
-      "js/background/tunnels/icon.js",
-      "js/background/tunnels/auto_settings/domains.js",
-      "js/background/tunnels/auto_settings/events.js",
+      "js/background/counters.js",
+      "js/background/ui/icon.js",
+      "js/background/ui/badge.js",
+      "js/background/devtools.js",
+      "js/background/auto_settings/domains.js",
+      "js/background/auto_settings/events.js",
       "vendor/dexiejs/dexie.js",
       "js/helpers/indexed_db.js",
-      "js/background/tunnels/reports.js",
-      "js/background/tunnels/devtools.js"
+      "js/background/reports.js"
     ]
   },
   "permissions": [

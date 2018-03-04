@@ -3,21 +3,23 @@ var auto_settings_stack_fifo = [];
 var process_auto_settings_stack_timer = undefined;
 
 var process_auto_settings_stack = function() {
-  if(process_auto_settings_stack_timer) {
-    clearTimeout(process_auto_settings_stack_timer);
-
-    process_auto_settings_stack_timer = undefined;
-  }
-
   chrome.storage.sync.get(null, function(sync_data) {
+    if(process_auto_settings_stack_timer) {
+      clearTimeout(process_auto_settings_stack_timer);
+
+      process_auto_settings_stack_timer = undefined;
+    }
+
     var changed = false;
 
-    while(auto_settings_stack_fifo.length > 0) {
+    var stack_size = auto_settings_stack_fifo.length + 1;
+
+    while(--stack_size) {
       var data = auto_settings_stack_fifo.shift();
 
       var domain = data['domain'];
       var kind = data['kind'];
-      var code = data['code'];
+      var code = data['type'];
 
       if(validates_code(code, sync_data['auto_settings']['website_events'])) {
         if(sync_data['disabled_' + domain] == undefined) {
@@ -44,7 +46,6 @@ var process_auto_settings_stack = function() {
           sync_data['default_disabled_' + kind][code] = false;
         }
       }
-
     }
 
     if(changed) { chrome.storage.sync.set(sync_data); }
@@ -55,16 +56,12 @@ var process_auto_settings_stack = function() {
 
 chrome.runtime.onMessage.addListener(function (message, _sender) {
   if(message.action == 'log_input') {
-    auto_settings_stack_fifo.push({
-      domain: message.domain,
-      kind: message.data.kind,
-      code: message.data.type
-    });
+    auto_settings_stack_fifo = auto_settings_stack_fifo.concat(message.stack);
 
     if(!process_auto_settings_stack_timer) {
       process_auto_settings_stack_timer = setTimeout(function() {
         process_auto_settings_stack();
-      }, 2000);
+      }, 1000); // STACK_TIMER_X
     }
   }
 });

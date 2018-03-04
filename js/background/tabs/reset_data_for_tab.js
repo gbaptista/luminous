@@ -1,9 +1,3 @@
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-  if(message.action == 'current_tab_id') {
-    sendResponse({ current_tab_id: sender.tab.id });
-  }
-});
-
 var remove_data_for_tab = function(tab_id) {
   var tab_id = tab_id.toString();
 

@@ -1,17 +1,5 @@
 var counters = {};
 
-chrome.runtime.onMessage.addListener(function(message, _sender, sendResponse) {
-  if(message.action == 'counters_for_tab_id') {
-    var response = {};
-
-    var tab_id = message.tab_id;
-
-    response[tab_id] = counters[tab_id];
-
-    sendResponse({data: response});
-  }
-});
-
 var update_local_storage_data_timer = {};
 
 var update_local_storage_data = function(tab_id) {
@@ -29,22 +17,24 @@ var process_message = function(message) {
   var domain = message.domain;
   var tab_id = message.tab_id;
 
-  var data = message.data;
-
-  var kind = data.kind;
-  var type = data.type;
-  var time = data.time;
-  var result = data.result;
-  var details = data.details;
-
-  if(!counters[tab_id]) {
-    counters[tab_id] = {};
+  var kind = message.kind;
+  var type = message.type;
+  var time = message.time;
+  var allowed = message.allowed;
+  if(message.target || message.code) {
+    var details = {
+      target: message.target,
+      code: message.code
+    };
+  } else {
+    var details = undefined;
   }
 
-  counters[tab_id]['domain'] = domain;
-
-  if(!counters[tab_id]['counters']) {
-    counters[tab_id]['counters'] = {};
+  if(!counters[tab_id]) {
+    counters[tab_id] = {
+      domain: domain,
+      counters: {}
+    };
   }
 
   if(!counters[tab_id]['counters'][kind]) {
@@ -52,34 +42,23 @@ var process_message = function(message) {
   }
 
   if(!counters[tab_id]['counters'][kind][type]) {
-    counters[tab_id]['counters'][kind][type] = {};
+    counters[tab_id]['counters'][kind][type] = {
+      allowed: 0,
+      blocked: 0,
+      execution_time: 0,
+      samples: []
+    };
   }
 
-  if(result == 'allowed') {
-    if(counters[tab_id]['counters'][kind][type]['allowed']) {
-      counters[tab_id]['counters'][kind][type]['allowed'] += 1;
-    } else {
-      counters[tab_id]['counters'][kind][type]['allowed'] = 1;
-    }
+  if(allowed) {
+    counters[tab_id]['counters'][kind][type]['allowed'] += 1;
   } else {
-    if(counters[tab_id]['counters'][kind][type]['blocked']) {
-      counters[tab_id]['counters'][kind][type]['blocked'] += 1;
-    } else {
-      counters[tab_id]['counters'][kind][type]['blocked'] = 1;
-    }
+    counters[tab_id]['counters'][kind][type]['blocked'] += 1;
   }
 
-  if(counters[tab_id]['counters'][kind][type]['execution_time']) {
-    counters[tab_id]['counters'][kind][type]['execution_time'] += time;
-  } else {
-    counters[tab_id]['counters'][kind][type]['execution_time'] = time;
-  }
+  counters[tab_id]['counters'][kind][type]['execution_time'] += time;
 
   if(details) {
-    if(!counters[tab_id]['counters'][kind][type]['samples']) {
-      counters[tab_id]['counters'][kind][type]['samples'] = [];
-    }
-
     counters[tab_id]['counters'][kind][type]['samples'].push(
       details
     );
@@ -95,7 +74,7 @@ var process_message = function(message) {
     update_local_storage_data_timer[tab_id] = setTimeout(
       function() {
         update_local_storage_data(tab_id);
-      }, 500
+      }, 250 // STACK_TIMER_04
     );
   }
 }
@@ -108,19 +87,21 @@ var process_counter_stack = function() {
   clearTimeout(process_counter_stack_timer);
   process_counter_stack_timer = undefined;
 
-  while(counter_stack_fifo.length > 0) {
+  var stack_size = counter_stack_fifo.length + 1;
+
+  while(--stack_size) {
     process_message(counter_stack_fifo.shift());
   }
 }
 
-chrome.runtime.onMessage.addListener(function (message, _sender) {
+chrome.runtime.onMessage.addListener(function(message, _sender) {
   if(message.action == 'log_input') {
-    counter_stack_fifo.push(message);
+    counter_stack_fifo = counter_stack_fifo.concat(message.stack);
 
     if(!process_counter_stack_timer) {
       process_counter_stack_timer = setTimeout(function() {
         process_counter_stack();
-      }, 400);
+      }, 200); // STACK_TIMER_03
     }
   }
 });
