@@ -1,6 +1,6 @@
 var last_icon = undefined;
 
-var update_icon_for_tab = function(tab_id, url) {
+var update_icon_for_tab = function(url) {
   chrome.storage.sync.get(null, function(sync_data) {
     if(!sync_data) sync_data = {};
     if(!sync_data['injection_disabled']) sync_data['injection_disabled'] = {};
@@ -8,7 +8,7 @@ var update_icon_for_tab = function(tab_id, url) {
     injection_disabled = sync_data['injection_disabled'];
 
     var a_element = document.createElement('a');
-    a_element.href = current_tab_url;
+    a_element.href = url;
     var domain = a_element.hostname;
 
     if(injection_disabled['general'] || injection_disabled[domain]) {
@@ -39,16 +39,7 @@ var update_icon_for_tab = function(tab_id, url) {
 
 var update_icon = function() {
   chrome.tabs.query({ currentWindow:true, active: true, lastFocusedWindow: true }, function(tabs) {
-      var current_tab_id = 'x';
-
-      if(tabs[0]) {
-        current_tab_id = tabs[0].id.toString();
-        current_tab_url = tabs[0].url;
-
-        update_icon_for_tab(
-          current_tab_id, current_tab_url
-        );
-      }
+      if(tabs[0]) { update_icon_for_tab(tabs[0].url); }
     }
   )
 };
@@ -64,3 +55,8 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 });
 
 update_icon();
+
+chrome.webRequest.onBeforeRequest.addListener(
+  function(details) { update_icon_for_tab(details.url); },
+  { urls: ['<all_urls>'], types: ['main_frame'] }
+);
