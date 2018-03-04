@@ -1,6 +1,6 @@
 {{#sidebar}}
   {{#rows}}
-    <tr class="{{class}}" title="tab {{tab}}: {{url}}">
+    <tr class="{{class}}" title="{{tab_text}} {{tab}}: {{url}}">
       <td>{{time}}</td>
       <td>{{kind}}.{{type}}</td>
     </tr>
@@ -9,7 +9,7 @@
 
 {{^sidebar}}
   {{#rows}}
-    <tr class="{{class}}" title="tab {{tab}}: {{url}}">
+    <tr class="{{class}}" title="{{tab_text}} {{tab}}: {{url}}">
       <td>{{time}}</td>
       <td>{{kind}}.{{type}}</td>
       <td>

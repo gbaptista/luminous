@@ -18,7 +18,7 @@ $(document).ready(function() {
               }
             ],
             event_detected_title: chrome.i18n.getMessage('settingsEventDetectedTitle'),
-            add_event_to_default_rules_title: chrome.i18n.getMessage('settingsAddEventToDefaultTitle'),
+            add_event_to_default_rules_title: chrome.i18n.getMessage('settingsAddEventToDefaultTitle') + ':',
             add_event_to_default_rules_items: [
               {
                 label: chrome.i18n.getMessage('settingsAddEventNoneLabel'),
@@ -41,7 +41,7 @@ $(document).ready(function() {
                 checked: 'all' == sync_data['auto_settings']['default_events']
               }
             ],
-            add_event_to_website_rules_title: chrome.i18n.getMessage('settingsAddEventToWebsiteTitle'),
+            add_event_to_website_rules_title: chrome.i18n.getMessage('settingsAddEventToWebsiteTitle') + ':',
             add_event_to_website_rules_items: [
               {
                 label: chrome.i18n.getMessage('settingsAddEventNoneLabel'),

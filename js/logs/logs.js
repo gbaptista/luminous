@@ -1,6 +1,15 @@
 $(document).ready(function() {
   var sidebar = true;
 
+  var filter_in_placeholder = chrome.i18n.getMessage('logsFilterInPlaceholder');
+  var filter_out_placeholder = chrome.i18n.getMessage('logsFilterOutPlaceholder');
+  var filter_all_text = chrome.i18n.getMessage('logsFilterAllText');
+  var filter_auto_detect_text = chrome.i18n.getMessage('logsFilterAutoDetectText');
+  var start_button_text = chrome.i18n.getMessage('logsStartButtonText');
+  var stop_button_text = chrome.i18n.getMessage('logsStopButtonText');
+  var clear_button_text = chrome.i18n.getMessage('logsClearButtonText');
+  var tab_text = chrome.i18n.getMessage('settingsTabText');
+
   if(/container=devtools/.test(document.location.search)) {
     sidebar = false;
   }
@@ -28,7 +37,10 @@ $(document).ready(function() {
         process_log_lines_stack_timer = undefined;
 
         var html = Mustache.render(
-          rows_template, { sidebar: sidebar, rows: log_lines_stack_fifo.reverse() }
+          rows_template, {
+            tab_text: tab_text,
+            sidebar: sidebar, rows: log_lines_stack_fifo.reverse()
+          }
         );
 
         log_lines_stack_fifo = [];
@@ -75,14 +87,24 @@ $(document).ready(function() {
         update_tabs(query_results);
 
         if(multitab_support) {
-          // TODO use current_tab filter
-          // settings['tab_filter'] = current_tab['id'];
-          settings['tab_filter'] = 'auto';
+          if(sidebar) {
+            settings['tab_filter'] = 'auto';
+          } else {
+            settings['tab_filter'] = current_tab['id'];
+          }
         }
 
         var render_form = function() {
           $('#form').html(Mustache.render(form_template, {
             sidebar: sidebar,
+            filter_in_placeholder: filter_in_placeholder,
+            filter_out_placeholder: filter_out_placeholder,
+            filter_all_text: filter_all_text,
+            filter_auto_detect_text: filter_auto_detect_text,
+            start_button_text: start_button_text,
+            stop_button_text: stop_button_text,
+            clear_button_text: clear_button_text,
+            tab_text: tab_text,
             started: (settings['state'] == 'started'),
             filter_in: settings['filter_in'],
             filter_out: settings['filter_out'],

@@ -4,52 +4,50 @@ $(document).ready(function() {
       chrome.storage.sync.get(null, function(sync_data) {
         $('#form').html(
           Mustache.render(template, {
-            general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
-            show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
-
+            disable_text: chrome.i18n.getMessage('disableText'),
             performance_options: {
               popup: {
-                title: 'popup',
+                title: chrome.i18n.getMessage('settingsPopupTitle'),
                 code_details: {
-                  label: 'disable code details',
+                  label: chrome.i18n.getMessage('checkboxShowCodeDetails'),
                   value: !sync_data['popup']['show_code_details'],
                   checked: !sync_data['popup']['show_code_details']
                 }
               },
               reports: {
-                title: 'reports',
+                title: chrome.i18n.getMessage('settingsReportsTitle'),
                 generation: {
-                  label: 'disable reports generation',
+                  label: chrome.i18n.getMessage('settingsEnableReportsGenerationText'),
                   value: !sync_data['reports']['collect_data'],
                   checked: !sync_data['reports']['collect_data']
                 }
               },
               auto_settings: {
-                title: 'automatic settings',
+                title: chrome.i18n.getMessage('settingsAutomaticSettingsOptionsTitle'),
                 domains: {
-                  title: 'new website is accessed',
+                  title: chrome.i18n.getMessage('settingsDomainDetectedTitle'),
                   code_injection: {
-                    label: 'disable add to [code injection]',
+                    label: chrome.i18n.getMessage('settingsAddDomainToCodeInjectionLabel'),
                     value: 'code_injection',
                     checked: !sync_data['auto_settings']['domains']['code_injection']
                   },
                   website_rules: {
-                    label: 'disable add to [website rules]',
+                    label: chrome.i18n.getMessage('settingsAddDomainToWebsiteRulesLabel'),
                     value: 'website_rules',
                     checked: !sync_data['auto_settings']['domains']['website_rules']
                   }
                 },
                 events: {
-                  title: 'when javascript detected',
-                  website_rules: {
-                    label: 'disable website_rules',
-                    value: 'none',
-                    checked: (sync_data['auto_settings']['website_events'] == 'none')
-                  },
+                  title: chrome.i18n.getMessage('settingsEventDetectedTitle'),
                   default_rules: {
-                    label: 'disable default_rules',
+                    label: chrome.i18n.getMessage('settingsAddEventToDefaultTitle'),
                     value: 'none',
                     checked: (sync_data['auto_settings']['default_events'] == 'none')
+                  },
+                  website_rules: {
+                    label: chrome.i18n.getMessage('settingsAddEventToWebsiteTitle'),
+                    value: 'none',
+                    checked: (sync_data['auto_settings']['website_events'] == 'none')
                   }
                 }
               }

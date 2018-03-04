@@ -63,7 +63,7 @@
 
   "settingsNoRulesFoundText": { "message": "ninguna regla encontrada" },
   "settingsRemoveDomainButtonText": { "message": "eliminar dominio" },
-  "settingsBackgroundOptionsTitle": { "message": "configuraciones automáticas" },
+  "settingsAutomaticSettingsOptionsTitle": { "message": "configuraciones automáticas" },
 
   "settingsDomainDetectedTitle": { "message": "cuando se accede a un nuevo sitio:" },
   "settingsAddDomainToCodeInjectionLabel": { "message": "añadir en [inyecciones de código]" },
@@ -95,5 +95,17 @@
   "checkboxShowPerformanceMetrics": { "message": "métricas de rendimiento" },
   "sortByText": { "message": "ordenar por" },
   "sortByCallsText": { "message": "ejecuciones" },
-  "sortByTimeText": { "message": "tiempo" }
+  "sortByTimeText": { "message": "tiempo" },
+
+  "settingsBackgroundPerformanceTitle": { "message": "desempeño" },
+
+  "disableText": { "message": "desactivar" },
+
+  "logsFilterInPlaceholder": { "message": "incluir (¡expresión regular funciona!)" },
+  "logsFilterOutPlaceholder": { "message": "borrar (¡expresión regular funciona!)" },
+  "logsFilterAllText": { "message": "todas las lengüetas" },
+  "logsFilterAutoDetectText": { "message": "detectar" },
+  "logsStartButtonText": { "message": "comenzar" },
+  "logsStopButtonText": { "message": "detener" },
+  "logsClearButtonText": { "message": "limpiar" }
 }

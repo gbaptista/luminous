@@ -63,7 +63,7 @@
 
   "settingsNoRulesFoundText": { "message": "no rules found" },
   "settingsRemoveDomainButtonText": { "message": "remove domain" },
-  "settingsBackgroundOptionsTitle": { "message": "automatic settings" },
+  "settingsAutomaticSettingsOptionsTitle": { "message": "automatic settings" },
 
   "settingsDomainDetectedTitle": { "message": "when a new website is accessed:" },
   "settingsAddDomainToCodeInjectionLabel": { "message": "add to [code injection]" },
@@ -97,5 +97,15 @@
   "sortByCallsText": { "message": "executions" },
   "sortByTimeText": { "message": "time spent" },
 
-  "settingsBackgroundPerformanceTitle": { "message": "performance" }
+  "settingsBackgroundPerformanceTitle": { "message": "performance" },
+
+  "disableText": { "message": "disable" },
+
+  "logsFilterInPlaceholder": { "message": "include (regular expression works!)" },
+  "logsFilterOutPlaceholder": { "message": "exclude (regular expression works!)" },
+  "logsFilterAllText": { "message": "all tabs" },
+  "logsFilterAutoDetectText": { "message": "detect" },
+  "logsStartButtonText": { "message": "start" },
+  "logsStopButtonText": { "message": "stop" },
+  "logsClearButtonText": { "message": "clear" }
 }

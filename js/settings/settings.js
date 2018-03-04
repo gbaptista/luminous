@@ -150,7 +150,7 @@ $(document).ready(function() {
             active: (document.location.pathname == '/html/settings/badge/counter.html')
           },
           {
-            title: chrome.i18n.getMessage('settingsBackgroundOptionsTitle'),
+            title: chrome.i18n.getMessage('settingsAutomaticSettingsOptionsTitle'),
             url: chrome.extension.getURL('html/settings/background/options.html'),
             active: (document.location.pathname == '/html/settings/background/options.html')
           },
