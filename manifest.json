@@ -36,6 +36,22 @@
     "default_popup": "html/popup/popup.html"
   },
   "options_page": "html/settings/injection/enabled.html",
+  "sidebar_action": {
+    "default_icon": {
+      "16": "images/icons/16.png",
+      "20": "images/icons/20.png",
+      "24": "images/icons/24.png",
+      "32": "images/icons/32.png",
+      "48": "images/icons/48.png",
+      "64": "images/icons/64.png",
+      "128": "images/icons/128.png",
+      "256": "images/icons/256.png",
+      "512": "images/icons/512.png"
+    },
+    "default_title": "Luminous",
+    "default_panel": "html/logs/logs.html"
+  },
+  "devtools_page": "html/devtools/devtools.html",
   "options_ui": {
     "page": "html/settings/injection/enabled.html",
     "open_in_tab": true,
@@ -74,7 +90,8 @@
       "js/background/reports.js",
       "js/background/automatic_settings.js",
       "js/utils/colors.js",
-      "js/background/update_badge.js"
+      "js/background/update_badge.js",
+      "js/background/devtools_tunnel.js"
     ]
   },
   "permissions": [

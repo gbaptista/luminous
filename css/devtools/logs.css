@@ -1,0 +1,77 @@
+html, body {
+  font-family: 'Open Sans', arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  font-size: 11px;
+}
+
+button, select {
+  margin: 6px 0 0 1%;
+}
+
+select {
+  width: 98%;
+  margin:6px 1% 0 1%;
+  padding:0 1%;
+}
+
+.filters { display: inline-block; }
+
+#filter_in, #filter_out {
+  width: 98%;
+  margin:6px 1% 0 1%;
+  padding:0 1%;
+}
+
+#filter_in {
+  border-left:4px solid #20b203;
+}
+
+#filter_out {
+  border-left:4px solid #ea1004;
+}
+
+#form {
+  height: 91px;
+}
+
+.table-area {
+  padding-top: 91px;
+}
+
+#form.multitab {
+  height: 119px;
+}
+
+.table-area.multitab {
+  padding-top: 119px;
+}
+
+#form {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 100%;
+  border-bottom: 6px solid #CCC;
+}
+
+.table-area {
+  position: fixed;
+  bottom:0;
+  height: 100%;
+  width: 100%;
+  margin-top: -5px;
+  z-index: 1;
+}
+
+.table-container {
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+table.table {
+  margin-bottom: 0;
+}
