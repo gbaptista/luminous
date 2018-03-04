@@ -82,7 +82,7 @@
   "settingsReportsTitle": { "message": "informes" },
   "settingsIndexedDbMdnHref": { "message": "https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API" },
   "settingsRecordsText": { "message": "registros" },
-  "settingsEnableReportsGenerationText": { "message": "habilitar la generación de informes" },
+  "settingsEnableReportsGenerationText": { "message": "generación de informes" },
   "settingsMostExecutedJavaScriptCodesText": { "message": "códigos JavaScript más ejecutados:" },
   "settingsDomainsMostJavaScriptCodesText": { "message": "los dominios que más ejecutan los códigos JavaScript:" },
   "settingsFilterButtonText": { "message": "filtrar" },
