@@ -7,10 +7,10 @@ if(Navigator.prototype.getBattery) {
     if(get_options()['injection_disabled']) {
       original_Navigator_getBattery.call(super_this);
     } else {
-      var details = { target: super_this, code: {} };
-
       if(!is_allowed('WebAPIs', 'getBattery')) {
-        increment_counter('WebAPIs', 'getBattery', 'blocked', details);
+        increment_counter(
+          'WebAPIs', 'getBattery', false, super_this, undefined, 0
+        );
 
         return new Promise(function(_resolve, _reject) {});
       } else {
@@ -19,7 +19,7 @@ if(Navigator.prototype.getBattery) {
         var execution_return = original_Navigator_getBattery.call(super_this);
 
         increment_counter(
-          'WebAPIs', 'getBattery', 'allowed', details,
+          'WebAPIs', 'getBattery', true, super_this, undefined,
           performance.now() - timer
         );
 

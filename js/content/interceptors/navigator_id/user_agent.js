@@ -1,11 +1,13 @@
 var original_window_navigator_userAgent = window.navigator.userAgent;
 
-var details = { target: 'HTTP headers', code: {} };
-
 if(is_allowed('WebAPIs', 'headers.User-Agent')) {
-  increment_counter('WebAPIs', 'headers.User-Agent', 'allowed', details);
+  increment_counter(
+    'WebAPIs', 'headers.User-Agent', true, 'HTTP headers', undefined, 0
+  );
 } else {
-  increment_counter('WebAPIs', 'headers.User-Agent', 'blocked', details);
+  increment_counter(
+    'WebAPIs', 'headers.User-Agent', false, 'HTTP headers', undefined, 0
+  );
 }
 
 Object.defineProperty(
@@ -16,10 +18,10 @@ Object.defineProperty(
       if(get_options()['injection_disabled']) {
         return original_window_navigator_userAgent;
       } else {
-        var details = { target: super_this, code: {} };
-
         if(!is_allowed('WebAPIs', 'NavigatorID.userAgent')) {
-          increment_counter('WebAPIs', 'NavigatorID.userAgent', 'blocked', details);
+          increment_counter(
+            'WebAPIs', 'NavigatorID.userAgent', false, super_this, undefined, 0
+          );
 
           return 'Mozilla/5.0';
         } else {
@@ -28,7 +30,7 @@ Object.defineProperty(
           var execution_return = original_window_navigator_userAgent;
 
           increment_counter(
-            'WebAPIs', 'NavigatorID.userAgent', 'allowed', details,
+            'WebAPIs', 'NavigatorID.userAgent', true, super_this, undefined,
             performance.now() - timer
           );
 

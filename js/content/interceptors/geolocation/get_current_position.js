@@ -9,18 +9,18 @@ if ('geolocation' in navigator) {
         super_this, success, error, options
       );
     } else {
-      var details = { target: super_this, code: JSON.stringify(options) };
-
       var wraped_success = function(pos) {
         if(!is_allowed('WebAPIs', 'geo.getCurrentPosition')) {
-          increment_counter('WebAPIs', 'geo.getCurrentPosition', 'blocked', details);
+          increment_counter(
+            'WebAPIs', 'geo.getCurrentPosition', false, super_this, success, 0
+          );
         } else {
           var timer = performance.now();
 
           var execution_return = success(pos);
 
           increment_counter(
-            'WebAPIs', 'geo.getCurrentPosition', 'allowed', details,
+            'WebAPIs', 'geo.getCurrentPosition', true, super_this, success,
             performance.now() - timer
           );
 

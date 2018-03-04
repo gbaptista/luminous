@@ -8,17 +8,17 @@ EventTarget.prototype.addEventListener = function(type, listener, options) {
       super_this, type, listener, options
     );
   } else {
-    var details = { target: super_this, code: listener };
-
     if(!is_allowed('addEventListener', type)) {
-      increment_counter('addEventListener', type, 'blocked', details);
+      increment_counter(
+        'addEventListener', type, false, super_this, listener, 0
+      );
     } else {
       var timer = performance.now();
 
       var wraped_listener = {
         handleEvent: function (event) {
           if(!is_allowed('handleEvent', type)) {
-            increment_counter('handleEvent', type, 'blocked', details);
+            increment_counter('handleEvent', type, false, super_this, listener, 0);
           } else {
             var timer = performance.now();
 
@@ -29,7 +29,7 @@ EventTarget.prototype.addEventListener = function(type, listener, options) {
             }
 
             increment_counter(
-              'handleEvent', type, 'allowed', details,
+              'handleEvent', type, true, super_this, listener,
               performance.now() - timer
             );
 
@@ -47,7 +47,7 @@ EventTarget.prototype.addEventListener = function(type, listener, options) {
       );
 
       increment_counter(
-        'addEventListener', type, 'allowed', details,
+        'addEventListener', type, true, super_this, listener,
         performance.now() - timer
       );
 

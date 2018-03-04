@@ -9,10 +9,10 @@ window.setTimeout = function(
       p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
     );
   } else {
-    var details = { target: super_this, code: function_or_code };
-
     if(!is_allowed('WebAPIs', 'setTimeout')) {
-      increment_counter('WebAPIs', 'setTimeout', 'blocked', details);
+      increment_counter(
+        'WebAPIs', 'setTimeout', false, super_this, function_or_code, 0
+      );
     } else {
       var timer = performance.now();
 
@@ -20,7 +20,9 @@ window.setTimeout = function(
         p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12
       ) {
         if(!is_allowed('WebAPIs', 'setTimeout.call')) {
-          increment_counter('WebAPIs', 'setTimeout.call', 'blocked', details);
+          increment_counter(
+            'WebAPIs', 'setTimeout.call', false, super_this, function_or_code, 0
+          );
 
           return 0;
         } else {
@@ -33,7 +35,7 @@ window.setTimeout = function(
           }
 
           increment_counter(
-            'WebAPIs', 'setTimeout.call', 'allowed', details,
+            'WebAPIs', 'setTimeout.call', true, super_this, function_or_code,
             performance.now() - timer
           );
 
@@ -47,7 +49,7 @@ window.setTimeout = function(
       );
 
       increment_counter(
-        'WebAPIs', 'setTimeout', 'allowed', details,
+        'WebAPIs', 'setTimeout', true, super_this, function_or_code,
         performance.now() - timer
       );
 

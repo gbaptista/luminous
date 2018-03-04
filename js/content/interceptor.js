@@ -4,8 +4,12 @@ var original_window_setInterval = window.setInterval;
 var cached_options = { injection_disabled: false };
 var collect_details = false;
 
+var json_options_element = undefined;
+
 var get_options = function() {
-  var json_options_element = document.getElementById('luminous-options');
+  if(!json_options_element) {
+    json_options_element = document.getElementById('luminous-options');
+  }
 
   if(json_options_element && json_options_element.getAttribute('data-changed') == 'true') {
     cached_options = JSON.parse(json_options_element.innerHTML);
@@ -20,30 +24,6 @@ var get_options = function() {
 
 var luminous_data_element = document.getElementById('luminous-data');
 
-var increment_counter = function(kind, type, result, details, execution_time) {
-  original_window_setTimeout(function() {
-    details = {
-      target: '' + details['target'],
-      code: (collect_details ? ('' + details['code']).slice(0, 400) : undefined)
-    };
-
-    luminous_data_element.dispatchEvent(
-      new MessageEvent(
-        'luminous-message',
-        {
-          data: {
-            kind: kind,
-            type: type,
-            time: execution_time,
-            details: details,
-            result: result
-          }
-        }
-      )
-    );
-  }, 0, '__INTERNAL_LUMINOUS_CODE__');
-}
-
 var is_allowed = function(kind, type) {
   var options = get_options();
 
@@ -51,6 +31,47 @@ var is_allowed = function(kind, type) {
   if(!options['disabled'][kind]) options['disabled'][kind] = {};
 
   return !options['disabled'][kind][type];
+}
+
+// -------------------------------------------------
+var dispatch_stack_fifo = [];
+
+var dispatch_stack_timer = undefined;
+
+var process_dispatch_stack = function() {
+  clearTimeout(dispatch_stack_timer);
+  dispatch_stack_timer = undefined;
+
+  luminous_data_element.dispatchEvent(
+    new MessageEvent('luminous-message', { data: dispatch_stack_fifo })
+  );
+
+  dispatch_stack_fifo = [];
+}
+
+// -------------------------------------------------
+var increment_counter = function(kind, type, allowed, target, code, time) {
+  original_window_setTimeout(function(
+    _, kind, type, allowed, target, code, time
+  ) {
+    if(collect_details && code) { var code = ('' + code).slice(0, 400); } else { var code = undefined; }
+
+    dispatch_stack_fifo.push({
+      kind: kind,
+      type: type,
+      time: time,
+      target: target.toString(),
+      code: code,
+      allowed: allowed
+    });
+
+
+    if(!dispatch_stack_timer) {
+      dispatch_stack_timer = original_window_setTimeout(function() {
+        process_dispatch_stack()
+      }, 100, '__INTERNAL_LUMINOUS_CODE__'); // STACK_TIMER_01
+    }
+  }, 0, '__INTERNAL_LUMINOUS_CODE__', kind, type, allowed, target, code, time);
 }
 
 if(!get_options()['injection_disabled']) {

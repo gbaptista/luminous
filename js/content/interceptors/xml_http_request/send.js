@@ -6,10 +6,10 @@ XMLHttpRequest.prototype.send = function(body) {
   if(get_options()['injection_disabled']) {
     return original_XMLHttpRequest_send.call(super_this, body);
   } else {
-    var details = { target: super_this, code: body };
-
     if(!is_allowed('WebAPIs', 'XMLHttpRequest.send')) {
-      increment_counter('WebAPIs', 'XMLHttpRequest.send', 'blocked', details);
+      increment_counter(
+        'WebAPIs', 'XMLHttpRequest.send', false, super_this, body, 0
+      );
     } else {
       var timer = performance.now();
 
@@ -18,7 +18,7 @@ XMLHttpRequest.prototype.send = function(body) {
       );
 
       increment_counter(
-        'WebAPIs', 'XMLHttpRequest.send', 'allowed', details,
+        'WebAPIs', 'XMLHttpRequest.send', true, super_this, body,
         performance.now() - timer
       );
 

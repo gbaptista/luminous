@@ -6,10 +6,8 @@ window.fetch = function(input, init) {
   if(get_options()['injection_disabled']) {
     return original_window_fetch.call(super_this, input, init);
   } else {
-    var details = { target: super_this, code: input };
-
     if(!is_allowed('WebAPIs', 'fetch')) {
-      increment_counter('WebAPIs', 'fetch', 'blocked', details);
+      increment_counter('WebAPIs', 'fetch', false, super_this, input, 0);
 
       return new Promise(function(_resolve, _reject) {});
     } else {
@@ -18,7 +16,7 @@ window.fetch = function(input, init) {
       var execution_return = original_window_fetch.call(super_this, input, init);
 
       increment_counter(
-        'WebAPIs', 'fetch', 'allowed', details,
+        'WebAPIs', 'fetch', true, super_this, input, 0,
         performance.now() - timer
       );
 
