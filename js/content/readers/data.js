@@ -6,10 +6,6 @@ injections_controller(function() {
 
     for (i = 0; i < stack_size; i++) {
       stack_fifo[i]['tab_id'] = tab_id;
-      stack_fifo[i]['url'] = document.location.href;
-
-      // TODO should domain be defined in interceptor? (iframe cases)
-      stack_fifo[i]['domain'] = document.location.host;
     }
 
     chrome.runtime.sendMessage({

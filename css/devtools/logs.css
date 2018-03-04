@@ -17,6 +17,16 @@ select {
   padding:0 1%;
 }
 
+td.count {
+  width: 1px;
+  text-align: right;
+}
+td.time {
+  width: 1px;
+  white-space: nowrap;
+  text-align: right;
+}
+
 .filters { display: inline-block; }
 
 #filter_in, #filter_out {
@@ -37,7 +47,7 @@ select {
   height: 91px;
 }
 
-.table-area {
+#table-area {
   padding-top: 91px;
 }
 
@@ -45,7 +55,7 @@ select {
   height: 119px;
 }
 
-.table-area.multitab {
+#table-area.multitab {
   padding-top: 119px;
 }
 
@@ -57,7 +67,7 @@ select {
   border-bottom: 6px solid #CCC;
 }
 
-.table-area {
+#table-area {
   position: fixed;
   bottom:0;
   height: 100%;

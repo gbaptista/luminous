@@ -7,12 +7,12 @@ $(document).ready(function() {
             domain_detected_title: chrome.i18n.getMessage('settingsDomainDetectedTitle'),
             add_domain_to_items: [
               {
-                label: chrome.i18n.getMessage('settingsAddDomainToCodeInjectionLabel'),
+                label: chrome.i18n.getMessage('settingsAddDomainToCodeInjectionLabel') + ':',
                 value: 'code_injection',
                 checked: sync_data['auto_settings']['domains']['code_injection']
               },
               {
-                label: chrome.i18n.getMessage('settingsAddDomainToWebsiteRulesLabel'),
+                label: chrome.i18n.getMessage('settingsAddDomainToWebsiteRulesLabel') + ':',
                 value: 'website_rules',
                 checked: sync_data['auto_settings']['domains']['website_rules']
               }

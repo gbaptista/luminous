@@ -13,7 +13,15 @@ var update_local_storage_data = function(tab_id) {
   chrome.storage.local.set(data);
 }
 
+var last_url = {};
+
 var process_message = function(message) {
+  if(last_url[message.tab_id] != message.url) {
+    delete counters[message.tab_id];
+  }
+
+  last_url[message.tab_id] = message.url;
+
   var domain = message.domain;
   var tab_id = message.tab_id;
 

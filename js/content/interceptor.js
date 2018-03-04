@@ -62,7 +62,9 @@ var increment_counter = function(kind, type, allowed, target, code, time) {
       time: time,
       target: target.toString(),
       code: code,
-      allowed: allowed
+      allowed: allowed,
+      domain: document.location.host,
+      url: document.location.href
     });
 
 
