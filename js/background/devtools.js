@@ -10,4 +10,19 @@ chrome.runtime.onConnect.addListener(function (port) {
 
     chrome.runtime.onMessage.addListener(post_message);
   }
+
+  if(port.name == 'devtools_tab_id') {
+    chrome.tabs.query(
+      { currentWindow:true, active: true, lastFocusedWindow: true },
+      function(tabs) {
+        if(tabs[0]) {
+          var a_element = document.createElement('a');
+          a_element.href = tabs[0].url;
+          var domain = a_element.hostname;
+
+          port.postMessage( { id: tabs[0].id, domain: domain });
+        }
+      }
+    );
+  }
 });
