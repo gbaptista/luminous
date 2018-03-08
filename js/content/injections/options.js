@@ -103,7 +103,7 @@ injections_controller(function() {
           domain = a_element.hostname;
         }
 
-        if(changes)
+        if(changes) {
           var popup_changed = false;
 
           if(changes['popup'] && changes['popup'].newValue) {
