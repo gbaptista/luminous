@@ -1,7 +1,19 @@
 chrome.runtime.onConnect.addListener(function (port) {
   if(port.name == 'devtools_tunnel') {
-    var post_message = function (message, _sender) {
-      if(message.action == 'log_input') { port.postMessage(message); }
+    var post_message = function (message, sender) {
+      if(message.action == 'log_input') {
+        // TODO duplicated code [main_frame]
+        var main_frame = true;
+        if(sender.frameId > 0) { main_frame = false };
+
+        var stack_size = message.stack.length;
+
+        for (i = 0; i < stack_size; i++) {
+          message.stack[i]['main_frame'] = main_frame;
+        }
+
+        port.postMessage(message);
+      }
     };
 
     port.onDisconnect.addListener(function (port) {

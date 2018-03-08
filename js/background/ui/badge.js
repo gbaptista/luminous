@@ -153,7 +153,10 @@ chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
     setTimeout(function() {
       var tab_id = details.tabId.toString();
-      delete badges[tab_id];
+
+      // main iframe?
+      if(details.parentFrameId < 0) { delete badges[tab_id]; }
+
       update_badge_for_tab_id(true);
     }, 0);
   },

@@ -1,4 +1,6 @@
 injections_controller(function() {
+  var a_element = document.createElement('a');
+
   var inject_options_for_domain = function(options, from) {
     var json_options_element = document.getElementById('luminous-options');
 
@@ -93,65 +95,70 @@ injections_controller(function() {
 
   chrome.storage.onChanged.addListener(function(changes, namespace) {
     if(namespace == 'sync') {
-      var domain = window.location.hostname;
+      chrome.runtime.sendMessage({ action: 'main_url_for_tab' }, function(response) {
+        var domain = window.location.hostname;
 
-      if(changes) {
-        changes = changes;
+        if(response && response.url) {
+          a_element.href = response.url;
+          domain = a_element.hostname;
+        }
 
-        var popup_changed = false;
+        if(changes)
+          var popup_changed = false;
 
-        if(changes['popup'] && changes['popup'].newValue) {
-          if(changes['popup'].oldValue) {
-            if(changes['popup'].oldValue['show_code_details'] != changes['popup'].newValue['show_code_details']) {
+          if(changes['popup'] && changes['popup'].newValue) {
+            if(changes['popup'].oldValue) {
+              if(changes['popup'].oldValue['show_code_details'] != changes['popup'].newValue['show_code_details']) {
+                popup_changed = true;
+              }
+            } else {
               popup_changed = true;
             }
-          } else {
-            popup_changed = true;
           }
-        }
 
-        var disabled_for_domain = false;
+          var disabled_for_domain = false;
 
-        if(changes['disabled_' + domain] && changes['disabled_' + domain].newValue) {
-          if(changes['disabled_' + domain].oldValue) {
-            disabled_for_domain = changes['disabled_' + domain].newValue != changes['disabled_' + domain].oldValue;
-          } else {
-            disabled_for_domain = true;
-          }
-        }
-
-        if(changes) {
-          var default_keys = [];
-
-          for(possible_kind in changes) {
-            var regex = /^default_disabled_/;
-            if(regex.test(possible_kind)) {
-              default_keys.push(possible_kind.replace(regex, ''));
+          if(changes['disabled_' + domain] && changes['disabled_' + domain].newValue) {
+            if(changes['disabled_' + domain].oldValue) {
+              disabled_for_domain = changes['disabled_' + domain].newValue != changes['disabled_' + domain].oldValue;
+            } else {
+              disabled_for_domain = true;
             }
           }
 
-          if(default_keys.length > 0) {
-            disabled_for_domain = true;
+          if(changes) {
+            var default_keys = [];
+
+            for(possible_kind in changes) {
+              var regex = /^default_disabled_/;
+              if(regex.test(possible_kind)) {
+                default_keys.push(possible_kind.replace(regex, ''));
+              }
+            }
+
+            if(default_keys.length > 0) {
+              disabled_for_domain = true;
+            }
+          }
+
+          var injection_disabled_for_domain = false;
+          var injection_disabled_for_general = false;
+
+          if(changes['injection_disabled'] && changes['injection_disabled'].newValue) {
+            if(changes['injection_disabled'] && changes['injection_disabled'].oldValue) {
+              injection_disabled_for_domain = changes['injection_disabled'].newValue[domain] != changes['injection_disabled'].oldValue[domain];
+              injection_disabled_for_general = changes['injection_disabled'].newValue['general'] != changes['injection_disabled'].oldValue['general'];
+            } else {
+              injection_disabled_for_domain = true;
+              injection_disabled_for_general = true;
+            }
+          }
+
+          if(popup_changed || disabled_for_domain || injection_disabled_for_domain || injection_disabled_for_general) {
+            load_options_for_domain(domain);
           }
         }
-
-        var injection_disabled_for_domain = false;
-        var injection_disabled_for_general = false;
-
-        if(changes['injection_disabled'] && changes['injection_disabled'].newValue) {
-          if(changes['injection_disabled'] && changes['injection_disabled'].oldValue) {
-            injection_disabled_for_domain = changes['injection_disabled'].newValue[domain] != changes['injection_disabled'].oldValue[domain];
-            injection_disabled_for_general = changes['injection_disabled'].newValue['general'] != changes['injection_disabled'].oldValue['general'];
-          } else {
-            injection_disabled_for_domain = true;
-            injection_disabled_for_general = true;
-          }
-        }
-
-        if(popup_changed || disabled_for_domain || injection_disabled_for_domain || injection_disabled_for_general) {
-          load_options_for_domain(domain);
-        }
-      }
+      });
     }
   });
 

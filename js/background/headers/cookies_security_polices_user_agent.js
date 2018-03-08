@@ -1,3 +1,4 @@
+var a_element = document.createElement('a');
 var settings_defined = false;
 var cached_settings = {};
 
@@ -21,7 +22,6 @@ var full_options_for_url = function(url) {
 };
 
 var settings_for_url = function(url, compressed) {
-  var a_element = document.createElement('a');
   a_element.href = url;
   var domain = a_element.hostname;
 
@@ -36,7 +36,6 @@ var settings_for_url = function(url, compressed) {
 
 chrome.webNavigation.onCommitted.addListener(function(details) {
   if(settings_defined) {
-    var a_element = document.createElement('a');
     a_element.href = details.url;
     var domain = a_element.hostname;
 
@@ -53,8 +52,14 @@ chrome.webNavigation.onCommitted.addListener(function(details) {
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
   if(message.action == 'options_from_on_message') {
     if(settings_defined) {
-      sendResponse({ options: full_options_for_url(sender.url) });
+      sendResponse({ options: full_options_for_url(sender.tab.url) });
     }
+  }
+});
+
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+  if(message.action == 'main_url_for_tab') {
+    sendResponse({ url: cached_urls[sender.tab.id] });
   }
 });
 
@@ -72,7 +77,6 @@ var should_intercept_header = function(url) {
   if(cached_settings['injection_disabled']['general']) {
     return false;
   } else {
-    var a_element = document.createElement('a');
     a_element.href = url;
     var domain = a_element.hostname;
 
@@ -80,8 +84,20 @@ var should_intercept_header = function(url) {
   }
 }
 
+var cached_urls = {};
+
 var update_security_policies_and_set_cookies = function(request_details) {
-  if(should_intercept_header(request_details.url)) {
+  var url = request_details.url;
+
+  if(request_details.parentFrameId < 0) {
+    cached_urls[request_details.tabId] = request_details.url;
+  } else {
+    if(cached_urls[request_details.tabId]) {
+      url = cached_urls[request_details.tabId];
+    }
+  }
+
+  if(should_intercept_header(url)) {
     for(let header of request_details.responseHeaders) {
       if(
         (header.name.toLowerCase() == 'content-security-policy' || header.name.toLowerCase() == 'x-content-security-policy')
@@ -105,7 +121,7 @@ var update_security_policies_and_set_cookies = function(request_details) {
     var le_cookie_value = 'f';
     var ld_cookie_value = 'f';
 
-    if(should_intercept_header(request_details.url)) {
+    if(should_intercept_header(url)) {
       le_cookie_value = 't';
     }
 
@@ -117,7 +133,7 @@ var update_security_policies_and_set_cookies = function(request_details) {
 
     luminous_cookies.push('le=' + le_cookie_value + '; Path=/; Max-Age=1;');
     luminous_cookies.push(
-      'ls=' + settings_for_url(request_details.url, true) + '; Path=/; Max-Age=1;'
+      'ls=' + settings_for_url(url, true) + '; Path=/; Max-Age=1;'
     );
     luminous_cookies.push('ld=' + ld_cookie_value + '; Path=/; Max-Age=1;');
 
@@ -164,7 +180,17 @@ var should_remove_user_agent = function(url) {
 
 
 var apply_user_agent_rules = function(request_details) {
-  if(should_remove_user_agent(request_details.url)) {
+  var url = request_details.url;
+
+  if(request_details.parentFrameId < 0) {
+    cached_urls[request_details.tabId] = request_details.url;
+  } else {
+    if(cached_urls[request_details.tabId]) {
+      url = cached_urls[request_details.tabId];
+    }
+  }
+
+  if(should_remove_user_agent(url)) {
     for (let header of request_details.requestHeaders) {
       if (header.name.toLowerCase() == 'user-agent') {
         header.value = 'Mozilla/5.0';
