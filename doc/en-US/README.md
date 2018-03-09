@@ -47,7 +47,7 @@ It's about this number (**7,6 thousand**) that we are lost and with hands tied, 
 
 ## Try it!
 
-[Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demo-page.html) to experience and better understand how it works:
+[Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demos/detections/index.html) to experience and better understand how it works:
 
 ![Demo Page](../../images/doc/en-US/demo-page.png)
 
@@ -127,7 +127,7 @@ We don't have the most beautiful and friendly interface in the world. [Discussio
 
 **Example 1**: The sooner we can inject code into websites and the less resources we use to process information, the more executions we'll be able to identify and the better our experience will be by having an extension that does not slow navigation.
 
-Look for example to our demo page (*`html/demo-page.html`*):
+Look for example to our demo page (*`html/demos/detections/index.html`*):
 
 ```javascript
 (function() { setTimeout(function() {

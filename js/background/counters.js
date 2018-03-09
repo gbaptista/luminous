@@ -16,11 +16,11 @@ var update_local_storage_data = function(tab_id) {
 var last_url = {};
 
 var process_message = function(message) {
-  if(last_url[message.tab_id] != message.url) {
+  if(message.main_frame && last_url[message.tab_id] != message.url) {
     delete counters[message.tab_id];
-  }
 
-  last_url[message.tab_id] = message.url;
+    last_url[message.tab_id] = message.url;
+  }
 
   var domain = message.domain;
   var tab_id = message.tab_id;
@@ -102,8 +102,18 @@ var process_counter_stack = function() {
   }
 }
 
-chrome.runtime.onMessage.addListener(function(message, _sender) {
+chrome.runtime.onMessage.addListener(function(message, sender) {
   if(message.action == 'log_input') {
+    // TODO duplicated code [main_frame]
+    var main_frame = true;
+    if(sender.frameId > 0) { main_frame = false };
+
+    var stack_size = message.stack.length;
+
+    for (i = 0; i < stack_size; i++) {
+      message.stack[i]['main_frame'] = main_frame;
+    }
+
     counter_stack_fifo = counter_stack_fifo.concat(message.stack);
 
     if(!process_counter_stack_timer) {

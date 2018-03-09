@@ -59,7 +59,9 @@
   },
   "content_scripts": [
     {
+      "run_at": "document_start",
       "matches": ["<all_urls>"],
+      "all_frames": true,
       "js": [
         "js/helpers/code_names.js",
         "js/helpers/compressor.js",
@@ -72,8 +74,7 @@
         "js/content/injections/options.js",
         "js/content/injections/interceptor.js",
         "js/content/clear_cookies.js"
-      ],
-      "run_at": "document_start"
+      ]
     }
   ],
   "background": {

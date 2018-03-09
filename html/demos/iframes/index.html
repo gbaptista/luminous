@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <script type="text/javascript">
+      (function() { setTimeout(function() {
+        return window.navigator.userAgent;
+      }, 300); })();
+    </script>
+  </head>
+  <body>
+    localhost:300
+    <br><br>
+    <iframe width="300" height="50" src="http://tracker:3000/html/demos/iframes/tracker.html"></iframe>
+    <br>
+    <iframe width="300" height="120" src="http://cryptominer:3000/html/demos/iframes/cryptominer.html"></iframe>
+  </body>
+  <script type="text/javascript">
+    (function() { setTimeout(function() {
+      document.getElementsByTagName('body')[0].addEventListener('click', function() {
+        return 'click';
+      });
+    }, 300); })();
+  </script>
+</html>

@@ -44,7 +44,7 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 
 ## Experimente!
 
-[Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar e entender melhor o seu funcionamento:
+[Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demos/detections/index.html) para experimentar e entender melhor o seu funcionamento:
 ![Demo Page](images/doc/pt-BR/demo-page.png)
 
 ## Capturas de tela
@@ -124,7 +124,7 @@ Não temos a interface mais bonita e amigável possível. [Discussões](https://
 
 **Exemplo 1**: Quanto mais cedo conseguirmos injetar o código nos websites e quanto menos recursos utilizarmos para processar as informações, mais execuções seremos capazes de identificar e melhor será a nossa experiência ao ter uma extensão que não deixe a navegação lenta.
 
-Olhe por exemplo para a nossa página de demonstração (*`html/demo-page.html`*):
+Olhe por exemplo para a nossa página de demonstração (*`html/demos/detections/index.html`*):
 
 ```javascript
 (function() { setTimeout(function() {

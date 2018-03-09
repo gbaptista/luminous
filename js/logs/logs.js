@@ -95,13 +95,16 @@ devtools_tab_id.onMessage.addListener(function(tab) {
         }
       }
 
+      rows.reverse();
+
       // -----------------------------
       var rows_size = rows.length + 1;
+
+      var document_fragment = document.createDocumentFragment();
 
       while(--rows_size) {
         var row = rows.shift();
 
-        var first_row = document.getElementsByTagName('tr')[0];
         var row_element = document.createElement('tr');
 
         row_element.setAttribute('class', row['class']);
@@ -113,6 +116,16 @@ devtools_tab_id.onMessage.addListener(function(tab) {
         var row_content = '';
         row_content += '<td class="count">' + row['count'] + '</td>'
         row_content += '<td class="time">' + row['short_time'] + '</td>'
+        if(!sidebar) {
+          row_content += '<td class="time">';
+          if(row['main_frame']) {
+            row_content += '<strong>' + row['domain'] + '</strong>';
+          } else {
+            row_content += '<em>' + row['domain'] + '</em>';
+          }
+          row_content += '</td>';
+        }
+
         row_content += '<td>' + row['kind'] + '.' + row['type'] + '</td>'
 
         if(!sidebar) {
@@ -124,8 +137,12 @@ devtools_tab_id.onMessage.addListener(function(tab) {
         }
         row_element.innerHTML = row_content;
 
-        log_table_element.insertBefore(row_element, first_row);
+        document_fragment.appendChild(row_element);
       }
+
+      var first_row = document.getElementsByTagName('tr')[0];
+
+      log_table_element.insertBefore(document_fragment, first_row);
     };
 
     var update_tabs = function(query_results, current_domain) {
@@ -307,9 +324,11 @@ devtools_tab_id.onMessage.addListener(function(tab) {
 
             var display_input = true;
             var result = (data.allowed ? 'allowed' :  'blocked');
+            var frame = (data.main_frame ? 'main' :  'iframe');
 
             if(settings['filter_in_regex'] || settings['filter_out_regex']) {
               var check_string = result + ' ' +
+                                 frame + ' ' +
                                  data.tab_id + ' ' +
                                  data.domain + ' ' +
                                  data.url + ' ' +
@@ -334,6 +353,7 @@ devtools_tab_id.onMessage.addListener(function(tab) {
 
             if(display_input) {
               var key = data.tab_id + '^' +
+                        data.main_frame + '^' +
                         data.url + '^' +
                         data.kind + '^' +
                         data.type + '^' +
@@ -350,6 +370,7 @@ devtools_tab_id.onMessage.addListener(function(tab) {
                 type: data.type,
                 target: data.target,
                 code: data.code,
+                main_frame: data.main_frame,
                 class: (data.allowed ? '' : 'table-danger')
               };
 
