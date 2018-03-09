@@ -43,7 +43,7 @@ injections_controller(function() {
           if(!received_from_on_message) {
             received_from_on_message = true;
 
-            inject_options_for_domain(response.options, 'setInterval.sendMessage');
+            inject_options_for_domain(response.options, 'setInterval:sendMessage');
           }
         }
       });
@@ -89,7 +89,7 @@ injections_controller(function() {
 
       options['collect_details'] = sync_data['popup']['show_code_details'];
 
-      inject_options_for_domain(options, 'sync');
+      inject_options_for_domain(options, 'storage.sync');
     });
   }
 

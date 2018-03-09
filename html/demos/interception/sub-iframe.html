@@ -27,20 +27,16 @@
     <br>
     cookie leak: <code id="cookie">no</code>
     <br>
-    <span>main_1</span> blocked: <code id="blocked1">yes</code>
+    <span>sub_iframe_1</span> blocked: <code id="blocked1">yes</code>
     <br>
-    <span>main_2</span> blocked: <code id="blocked2">yes</code>
-    <br>
-    <iframe width="360" height="490" src="iframe.html"></iframe>
-    <iframe width="360" height="490" src="iframe.html"></iframe>
-
-    <iframe id="iframe-a" width="360" height="490"></iframe>
+    <span>sub_iframe_2</span> blocked: <code id="blocked2">yes</code>
   </body>
   <script type="text/javascript">
     if(document.cookie) {
       document.getElementById('cookie').innerHTML = JSON.stringify(document.cookie);
       document.getElementById('cookie').setAttribute('style', 'color:red; font-weight:bold;');
     }
+
     var wait_from = setInterval(function() {
       var from = document.getElementById('luminous-options').getAttribute('data-from');
       if(from) {
@@ -54,8 +50,6 @@
       c.initMouseEvent('click');
       a.dispatchEvent(c);
       b.dispatchEvent(c);
-
-      document.getElementById('iframe-a').setAttribute('src', 'iframe.html');
     }, 500);
   </script>
 </html>
