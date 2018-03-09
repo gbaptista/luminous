@@ -84,6 +84,7 @@
       "js/helpers/domain_settings.js",
       "js/background/setup/default_settings.js",
       "js/background/headers/cookies_security_polices_user_agent.js",
+      "js/background/injections/filter_response_data.js",
       "js/background/tabs/set_current_tab.js",
       "js/background/tabs/reset_data_for_tab.js",
       "js/utils/numbers.js",

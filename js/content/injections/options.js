@@ -15,8 +15,8 @@ injections_controller(function() {
       }
       document.documentElement.insertBefore(json_options_injection, document.documentElement.firstChild);
     } else {
-      json_options_element.innerHTML = JSON.stringify(options);
-      json_options_element.setAttribute('data-changed', 'true');
+      // json_options_element.innerHTML = JSON.stringify(options);
+      // json_options_element.setAttribute('data-changed', 'true');
     }
   }
 

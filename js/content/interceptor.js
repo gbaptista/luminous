@@ -76,6 +76,10 @@ var increment_counter = function(kind, type, allowed, target, code, time) {
   }, 0, '__INTERNAL_LUMINOUS_CODE__', kind, type, allowed, target, code, time);
 }
 
+console.log('----------------------------');
+console.log(get_options());
+console.log('Inject! > ' + !get_options()['injection_disabled']);
+
 if(!get_options()['injection_disabled']) {
   // #load_injectors
 

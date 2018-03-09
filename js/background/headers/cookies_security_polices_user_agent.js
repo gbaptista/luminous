@@ -116,7 +116,11 @@ var update_security_policies_and_set_cookies = function(request_details) {
     }
   }
 
-  if(cached_settings) {
+  if(
+    !chrome.webRequest.filterResponseData
+    &&
+    cached_settings
+  ) {
     // TODO check if cookie names exist.
     var le_cookie_value = 'f';
     var ld_cookie_value = 'f';

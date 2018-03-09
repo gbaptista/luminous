@@ -1,0 +1,15 @@
+<script>
+  var a = document.createElement('a');
+  a.addEventListener('click', function(_) { return 'first script'; });
+  var c = document.createEvent('MouseEvents');
+  c.initMouseEvent('click');
+  a.dispatchEvent(c);
+
+  setTimeout(function() {
+    var a = document.createElement('a');
+    a.addEventListener('click', function(_) { return 'second script'; });
+    var c = document.createEvent('MouseEvents');
+    c.initMouseEvent('click');
+    a.dispatchEvent(c);
+  }, 15);
+</script>

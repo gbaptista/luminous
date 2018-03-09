@@ -42,7 +42,18 @@ injections_controller(function() {
         javascript_injection.type = 'text/javascript';
         javascript_injection.setAttribute('nonce', '3b34aae43a');
         javascript_injection.innerHTML = full_content;
-        document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
+
+        console.log('-------------------------');
+        console.log(document.getElementById('luminous-options'));
+
+        document.documentElement.insertBefore(
+          javascript_injection,
+          (
+            document.getElementById('luminous-options')
+            ||
+            document.documentElement.firstChild
+          )
+        );
       }
     }
 
