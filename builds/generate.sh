@@ -111,10 +111,7 @@ rm builds/current/js/content/minified_interceptor.js
 
 rm -rf builds/current/doc
 
-rm builds/current/html/demo-page-interceptor.html
-rm builds/current/html/demo-page.html
-rm builds/current/html/external-content.txt
-rm builds/current/html/interface-sample.html
+rm -rf builds/current/html/demos
 
 rm -rf builds/current/images/doc
 rm -rf builds/current/images/inkscape-files
