@@ -21,16 +21,13 @@ var inject_interceptor_and_settings = function(request_details) {
   var element_container = document.createElement('div');
   element_container.appendChild(json_options_injection);
 
+  // TODO append data element and injector code
+
   let filter = chrome.webRequest.filterResponseData(request_details.requestId);
-  let decoder = new TextDecoder('utf-8');
   let encoder = new TextEncoder();
 
-  filter.ondata = event => {
-    let str = decoder.decode(event.data, {stream: true});
-
-    str = element_container.innerHTML + str;
-
-    filter.write(encoder.encode(str));
+  filter.onstart = event => {
+    filter.write(encoder.encode(element_container.innerHTML));
     filter.disconnect();
   }
 
