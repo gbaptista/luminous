@@ -42,9 +42,15 @@ var process_dispatch_stack = function() {
   clearTimeout(dispatch_stack_timer);
   dispatch_stack_timer = undefined;
 
-  luminous_data_element.dispatchEvent(
-    new MessageEvent('luminous-message', { data: dispatch_stack_fifo })
-  );
+  if(luminous_data_element.getAttribute('data-ready')) {
+    luminous_data_element.dispatchEvent(
+      new MessageEvent('luminous-message', { data: dispatch_stack_fifo })
+    );
+  } else {
+    dispatch_stack_timer = original_window_setTimeout(function() {
+      process_dispatch_stack()
+    }, 100, '__INTERNAL_LUMINOUS_CODE__');
+  }
 
   dispatch_stack_fifo = [];
 }
@@ -75,10 +81,6 @@ var increment_counter = function(kind, type, allowed, target, code, time) {
     }
   }, 0, '__INTERNAL_LUMINOUS_CODE__', kind, type, allowed, target, code, time);
 }
-
-console.log('----------------------------');
-console.log(get_options());
-console.log('Inject! > ' + !get_options()['injection_disabled']);
 
 if(!get_options()['injection_disabled']) {
   // #load_injectors

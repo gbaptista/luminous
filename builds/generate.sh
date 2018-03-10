@@ -91,16 +91,16 @@ echo "" >> builds/current/js/content/minified_variable.js
 sed -i \
   -e '/UGLIFYJS_RESULT/{r builds/current/js/content/minified_variable.js' \
   -e 'd}' \
-  builds/current/js/content/injections/interceptor_build.js
+  builds/current/js/utils/injections/interceptor_build.js
 
 printf " 🗸\n"
 
-printf "  - Rearranging js/content/injections/interceptor.js file..."
+printf "  - Rearranging js/utils/injections/interceptor.js file..."
 
-rm builds/current/js/content/injections/interceptor.js
+rm builds/current/js/utils/injections/interceptor.js
 
-mv builds/current/js/content/injections/interceptor_build.js \
-   builds/current/js/content/injections/interceptor.js
+mv builds/current/js/utils/injections/interceptor_build.js \
+   builds/current/js/utils/injections/interceptor.js
 
 printf " 🗸\n"
 

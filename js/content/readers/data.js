@@ -1,4 +1,4 @@
-injections_controller(function() {
+injections_controller(function(should_inject) {
   var tab_id = undefined;
 
   var dispatch_stack = function(stack_fifo) {
@@ -21,37 +21,67 @@ injections_controller(function() {
     setTimeout(function() { process_stack(); }, 100);
   }
 
-  chrome.storage.sync.get(null, function(sync_options) {
-    document.getElementById('luminous-data').addEventListener(
-      'luminous-message',
-      function(e) {
-        e.preventDefault(); e.stopPropagation();
+  var add_listener_not_found_count = 0;
 
-        log_stack_fifo = log_stack_fifo.concat(e.data);
+  var add_listener_to_data_element = setInterval(function() {
+    var data_element = document.getElementById('luminous-data');
 
-        if(!process_stack_timer) {
-          process_stack_timer = setTimeout(function() {
-            process_stack();
-          }, 150); // STACK_TIMER_02
+    if(data_element) {
+      clearInterval(add_listener_to_data_element);
+
+      data_element.addEventListener(
+        'luminous-message',
+        function(e) {
+          e.preventDefault(); e.stopPropagation();
+
+          log_stack_fifo = log_stack_fifo.concat(e.data);
+
+          if(!process_stack_timer) {
+            process_stack_timer = setTimeout(function() {
+              process_stack();
+            }, 150); // STACK_TIMER_02
+          }
         }
+      );
+
+      data_element.setAttribute('data-ready', 'true');
+    } else {
+      add_listener_not_found_count += 1;
+
+      if(add_listener_not_found_count > 10) {
+        clearInterval(add_listener_to_data_element);
       }
-    );
 
-    var get_tab_id = setInterval(function() {
-      var data_element = document.getElementById('luminous-data');
+      console.log(
+        'add_listener_to_data_element: ' + add_listener_not_found_count
+      );
+    }
+  }, 50);
 
-      if(data_element && data_element.getAttribute('data-tab')) {
+  var get_tab_id_not_found_count = 0;
+
+  var get_tab_id = setInterval(function() {
+    var data_element = document.getElementById('luminous-data');
+
+    if(data_element && data_element.getAttribute('data-tab')) {
+      clearInterval(get_tab_id);
+      process_stack = function() {
+        clearTimeout(process_stack_timer);
+        process_stack_timer = undefined;
+
+        dispatch_stack(log_stack_fifo);
+
+        log_stack_fifo = [];
+      };
+      tab_id = data_element.getAttribute('data-tab');
+    } else if(!data_element) {
+      get_tab_id_not_found_count += 1;
+
+      if(get_tab_id_not_found_count > 10) {
         clearInterval(get_tab_id);
-        process_stack = function() {
-          clearTimeout(process_stack_timer);
-          process_stack_timer = undefined;
-
-          dispatch_stack(log_stack_fifo);
-
-          log_stack_fifo = [];
-        };
-        tab_id = data_element.getAttribute('data-tab');
       }
-    }, 50);
-  });
+
+      console.log('get_tab_id: ' + get_tab_id_not_found_count);
+    }
+  }, 50);
 });

@@ -38,10 +38,13 @@
     }
 
     var wait_from = setInterval(function() {
-      var from = document.getElementById('luminous-options').getAttribute('data-from');
-      if(from) {
-        document.getElementById('injection').innerHTML = from;
-        clearInterval(wait_from);
+      var luminous_options = document.getElementById('luminous-options');
+      if(luminous_options) {
+        var from = luminous_options.getAttribute('data-from');
+        if(from) {
+          document.getElementById('injection').innerHTML = from;
+          clearInterval(wait_from);
+        }
       }
     }, 100);
 
