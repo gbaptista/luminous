@@ -1,19 +1,17 @@
-injections_controller(function() {
+injections_controller(function(should_inject) {
   var a_element = document.createElement('a');
 
   var inject_options_for_domain = function(options, from) {
     var json_options_element = document.getElementById('luminous-options');
 
     if(!json_options_element) {
-      var json_options_injection = document.createElement('script');
-      json_options_injection.type = 'application/json';
-      json_options_injection.id = 'luminous-options';
-      json_options_injection.innerHTML = JSON.stringify(options);
-      json_options_injection.setAttribute('data-changed', 'true');
-      if(from) {
-        json_options_injection.setAttribute('data-from', from);
+      if(should_inject) {
+        load_options_element(options, from, function(element) {
+          document.documentElement.insertBefore(
+            element, document.documentElement.firstChild
+          );
+        });
       }
-      document.documentElement.insertBefore(json_options_injection, document.documentElement.firstChild);
     } else {
       json_options_element.innerHTML = JSON.stringify(options);
       json_options_element.setAttribute('data-changed', 'true');

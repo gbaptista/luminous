@@ -1,8 +1,11 @@
-injections_controller(function() {
-  var json_data_injection = document.createElement('input');
-  json_data_injection.type = 'hidden';
-  json_data_injection.id = 'luminous-data';
-  document.documentElement.insertBefore(json_data_injection, document.documentElement.firstChild);
+injections_controller(function(should_inject) {
+  if(should_inject) {
+    load_data_element('contentScript', function(element) {
+      document.documentElement.insertBefore(
+        element, document.documentElement.firstChild
+      );
+    });
+  }
 
   var tab_definer = setInterval(function() {
     try {
@@ -12,6 +15,9 @@ injections_controller(function() {
         if(element && response) {
           clearInterval(tab_definer);
           element.setAttribute('data-tab', response.current_tab_id);
+        } else if(!element) {
+          // Not inejected!
+          clearInterval(tab_definer);
         }
       });
     } catch(_) {

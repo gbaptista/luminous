@@ -1,7 +1,5 @@
-var injections_controller = function(injection_function) {
-  var injection_enabled = Cookies.get('le');
+var injections_controller_stack = [];
 
-  if(injection_enabled != 'f') {
-    injection_function();
-  }
+var injections_controller = function(injection_function) {
+  injections_controller_stack.push(injection_function);
 }

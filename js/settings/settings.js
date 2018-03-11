@@ -37,15 +37,8 @@ var set_sync_option = function(name, value, namespace, value_as_namespace) {
         if(value_as_namespace) {
           if(!sync_data[namespace][name]) sync_data[namespace][name] = {};
 
-          // console.log(
-          //   '[' + namespace + '][' + name + ']['+value_as_namespace+'] = ' + value
-          // )
-
           sync_data[namespace][name][value_as_namespace] = value;
         } else {
-          // console.log(
-          //   '[' + namespace + '][' + name + '] = ' + value
-          // )
           sync_data[namespace][name] = value;
         }
       }
