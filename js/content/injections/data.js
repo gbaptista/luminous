@@ -1,6 +1,6 @@
 injections_controller(function(should_inject) {
   if(should_inject) {
-    load_data_element(function(element) {
+    load_data_element('contentScript', function(element) {
       document.documentElement.insertBefore(
         element, document.documentElement.firstChild
       );

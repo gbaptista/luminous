@@ -51,10 +51,6 @@ injections_controller(function(should_inject) {
       if(add_listener_not_found_count > 10) {
         clearInterval(add_listener_to_data_element);
       }
-
-      console.log(
-        'add_listener_to_data_element: ' + add_listener_not_found_count
-      );
     }
   }, 50);
 
@@ -80,8 +76,6 @@ injections_controller(function(should_inject) {
       if(get_tab_id_not_found_count > 10) {
         clearInterval(get_tab_id);
       }
-
-      console.log('get_tab_id: ' + get_tab_id_not_found_count);
     }
   }, 50);
 });
