@@ -2,6 +2,7 @@ if(injection_strategy != 'cookie') {
   var interceptor_html_string = undefined;
   var data_html_string = undefined;
 
+  // TODO remove cache for development enviroment
   load_interceptor_element(function(element) {
     interceptor_html_string = element_to_html_string(element);
   });

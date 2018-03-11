@@ -52,7 +52,7 @@ Expected output:
   - Generating js/content/interceptor.js... 🗸
   - Minifying js/content/interceptor.js with uglifyjs... 🗸
   - Generating content variable with minified JavaScript... 🗸
-  - Rearranging js/content/injections/interceptor.js file... 🗸
+  - Rearranging js/utils/injections/interceptor.js file... 🗸
   - Removing unused files... 🗸
   - Removing web_accessible_resources from manifest.json... 🗸
   - Creating 0-0-2.zip... 🗸
@@ -82,7 +82,7 @@ Expected output:
 
 Note for reviewers:
 
-The non-minified version for the code in "js/content/injections/interceptor.js" is available at:
+The non-minified version for the code in "js/utils/injections/interceptor.js" is available at:
 
  - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptor.js
  - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptors/

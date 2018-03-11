@@ -63,28 +63,21 @@
       "matches": ["<all_urls>"],
       "all_frames": true,
       "js": [
+        "vendor/ua-parser-js/ua-parser.min.js",
         "js/content/strategy.js",
-
         "js/helpers/code_names.js",
         "js/helpers/compressor.js",
         "js/helpers/domain_settings.js",
         "vendor/js-cookie/js.cookie.min.js",
-
-
         "js/utils/injections/data.js",
         "js/utils/injections/options.js",
         "js/utils/injections/interceptor.js",
-
         "js/utils/numbers.js",
-
         "js/content/injections_controller.js",
-
         "js/content/injections/data.js",
         "js/content/injections/options.js",
         "js/content/injections/interceptor.js",
-
         "js/content/readers/data.js",
-
         "js/content/initializer.js"
       ]
     }
@@ -92,27 +85,19 @@
   "background": {
     "scripts": [
       "js/background/strategy.js",
-
       "js/helpers/code_names.js",
       "js/helpers/compressor.js",
       "js/helpers/domain_settings.js",
       "js/background/setup/default_settings.js",
-
       "js/utils/injections/element_to_html_string.js",
       "js/utils/injections/data.js",
       "js/utils/injections/options.js",
       "js/utils/injections/interceptor.js",
-
-      "js/background/injections/content/content_scripts_register.js",
-
       "js/background/injections/settings.js",
-
       "js/background/injections/headers/security_polices.js",
       "js/background/injections/headers/user_agent.js",
       "js/background/injections/headers/cookies.js",
-
       "js/background/injections/content/filter_response_data.js",
-
       "js/background/tabs/set_current_tab.js",
       "js/background/tabs/reset_data_for_tab.js",
       "js/utils/numbers.js",

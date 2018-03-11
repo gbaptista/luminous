@@ -7,7 +7,6 @@ var update_cached_settings = function() {
     if(sync_data) {
       settings_defined = true;
       cached_settings = sync_data;
-      update_content_script_settings(cached_settings['injection_disabled']);
     }
   });
 }
