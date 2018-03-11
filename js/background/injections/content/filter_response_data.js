@@ -3,17 +3,20 @@ if(injection_strategy != 'cookie') {
   var data_html_string = undefined;
 
   // TODO remove cache for development enviroment
-  load_interceptor_element(function(element) {
+  load_interceptor_element('filterResponseData', function(element) {
     interceptor_html_string = element_to_html_string(element);
   });
 
-  load_data_element(function(element) {
+  load_data_element('filterResponseData', function(element) {
     data_element = element;
   });
 
   var inject_interceptor_and_settings = function(request_details) {
     var url = url_for_request(request_details);
 
+    // TODO
+    // it's an html document?
+    // will it be rendered by the browser?
     if(should_intercept_request(url)) {
       var options = full_options_for_url(url);
 

@@ -1,4 +1,4 @@
-var load_interceptor_element = function(callback_function) {
+var load_interceptor_element = function(from, callback_function) {
 
   var load_content = function(path, content_callback_function) {
     var request = new XMLHttpRequest();
@@ -43,6 +43,7 @@ var load_interceptor_element = function(callback_function) {
         javascript_injection.setAttribute('class', 'luminous-interceptor');
         javascript_injection.type = 'text/javascript';
         javascript_injection.setAttribute('nonce', '3b34aae43a');
+        javascript_injection.setAttribute('data-from', from);
         javascript_injection.innerHTML = full_content;
 
         callback_function(javascript_injection);
