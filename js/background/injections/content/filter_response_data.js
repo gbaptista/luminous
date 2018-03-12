@@ -33,9 +33,9 @@ if(injection_strategy != 'cookie') {
         filter.ondata = event => {
           var content = decoder.decode(event.data, {stream: true});
 
-          var match = /html.*?>/i.exec(content);
+          var match = /DOCTYPE(.|[\r\n])*?>/i.exec(content);
 
-          if(match) {
+          if(match && match.index < 10 && match[0].length < 200) {
             var to_replace = content.slice(0, match.index + match[0].length);
 
             content = content.replace(to_replace, to_replace + content_to_write);
