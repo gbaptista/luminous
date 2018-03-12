@@ -14,17 +14,15 @@ if(injection_strategy != 'cookie') {
   var inject_interceptor_and_settings = function(request_details) {
     var url = url_for_request(request_details);
 
-    // TODO
-    // it's an html document?
-    // will it be rendered by the browser?
     if(should_intercept_request(url)) {
       var options = full_options_for_url(url);
 
       load_options_element(options, 'filterResponseData', function(element) {
         var options_html_string = element_to_html_string(element);
 
-        let filter = browser.webRequest.filterResponseData(request_details.requestId);
-        let encoder = new TextEncoder();
+        var filter = browser.webRequest.filterResponseData(request_details.requestId);
+        var encoder = new TextEncoder();
+        var decoder = new TextDecoder('utf-8');
 
         data_element.setAttribute('data-tab', request_details.tabId);
 
@@ -32,8 +30,21 @@ if(injection_strategy != 'cookie') {
 
         var content_to_write = options_html_string + data_html_string + interceptor_html_string;
 
-        filter.onstart = event => {
-          filter.write(encoder.encode(content_to_write));
+        filter.ondata = event => {
+          var content = decoder.decode(event.data, {stream: true});
+
+          var match = /html.*?>/i.exec(content);
+
+          if(match) {
+            var to_replace = content.slice(0, match.index + match[0].length);
+
+            content = content.replace(to_replace, to_replace + content_to_write);
+          } else {
+            content = content_to_write + content;
+          }
+
+          filter.write(encoder.encode(content));
+
           filter.disconnect();
         }
       });
