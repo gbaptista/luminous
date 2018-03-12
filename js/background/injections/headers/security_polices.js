@@ -4,17 +4,34 @@ var update_security_policies = function(request_details) {
   if(should_intercept_request(url)) {
     for(let header of request_details.responseHeaders) {
       if(
-        (header.name.toLowerCase() == 'content-security-policy' || header.name.toLowerCase() == 'x-content-security-policy')
+        (
+          header.name.toLowerCase() == 'content-security-policy'
+          ||
+          header.name.toLowerCase() == 'x-content-security-policy'
+          ||
+          header.name.toLowerCase() == 'content-security-policy-report-only'
+          ||
+          header.name.toLowerCase() == 'x-content-security-policy-report-only'
+        )
         &&
         /script-src\s/i.test(header.value)
       ) {
-        var script_src_rules = header.value.split(/script-src\s/i)[1].split(';')[0];
+        var script_src_rules = header.value.split(/script-src\s/i);
 
-        if(!/unsafe-inline/i.test(script_src_rules)) {
-          header.value = header.value.replace(
-            /script-src\s{1,}/i,
-            "script-src 'nonce-3b34aae43a' "
-          );
+        for(i in script_src_rules) {
+          if(i > 0) {
+            var rule = script_src_rules[i].split(';')[0];
+
+            if(
+              rule && rule != '' && !/nonce-3b34aae43a/.test(rule)
+              &&
+              (!/unsafe-inline/i.test(rule) || /nonce-/i.test(rule))
+            ) {
+              header.value = header.value.replace(
+                rule, "'nonce-3b34aae43a' " + rule
+              );
+            }
+          }
         }
       }
     }
