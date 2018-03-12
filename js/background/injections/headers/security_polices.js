@@ -16,7 +16,9 @@ var update_security_policies = function(request_details) {
         &&
         /script-src\s/i.test(header.value)
       ) {
-        var script_src_rules = header.value.split(/script-src\s/i);
+        header.value = header.value.replace(/script-src\s{1,}/ig, 'script-src ');
+
+        var script_src_rules = header.value.split(/script-src /i);
 
         for(i in script_src_rules) {
           if(i > 0) {
@@ -28,7 +30,7 @@ var update_security_policies = function(request_details) {
               (!/unsafe-inline/i.test(rule) || /nonce-/i.test(rule))
             ) {
               header.value = header.value.replace(
-                rule, "'nonce-3b34aae43a' " + rule
+                'script-src ' + rule, "script-src 'nonce-3b34aae43a' " + rule
               );
             }
           }
