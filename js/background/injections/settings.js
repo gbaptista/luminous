@@ -91,7 +91,7 @@ var cached_urls = {};
 var url_for_request = function(request_details) {
   var url = request_details.url;
 
-  if(request_details.parentFrameId < 0) {
+  if(request_details.type == 'main_frame') {
     cached_urls[request_details.tabId] = request_details.url;
   } else {
     if(cached_urls[request_details.tabId]) {

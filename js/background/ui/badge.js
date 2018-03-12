@@ -150,12 +150,11 @@ chrome.runtime.onMessage.addListener(function (message, _sender) {
 });
 
 chrome.webRequest.onBeforeRequest.addListener(
-  function(details) {
+  function(request_details) {
     setTimeout(function() {
-      var tab_id = details.tabId.toString();
+      var tab_id = request_details.tabId.toString();
 
-      // main iframe?
-      if(details.parentFrameId < 0) { delete badges[tab_id]; }
+      if(request_details.type == 'main_frame') { delete badges[tab_id]; }
 
       update_badge_for_tab_id(true);
     }, 0);
