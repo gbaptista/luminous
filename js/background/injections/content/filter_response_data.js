@@ -11,6 +11,9 @@ if(injection_strategy != 'cookie') {
     data_element = element;
   });
 
+  var encoder = new TextEncoder();
+  var decoder = new TextDecoder('utf-8');
+
   var inject_interceptor_and_settings = function(request_details) {
     var url = url_for_request(request_details);
 
@@ -21,8 +24,6 @@ if(injection_strategy != 'cookie') {
         var options_html_string = element_to_html_string(element);
 
         var filter = browser.webRequest.filterResponseData(request_details.requestId);
-        var encoder = new TextEncoder();
-        var decoder = new TextDecoder('utf-8');
 
         data_element.setAttribute('data-tab', request_details.tabId);
 
