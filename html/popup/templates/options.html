@@ -30,6 +30,8 @@
       <input type="checkbox" name="apply_to_default" value="true" {{#apply_to_default}} checked {{/apply_to_default}} />
       {{apply_to_default_title}}
     </label>
+    <br>
+    <button id="take-a-note" {{#waiting_for_note}}disabled{{/waiting_for_note}}>take a note</button>
   </div>
 
   <div class="col-2">
