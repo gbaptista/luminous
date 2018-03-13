@@ -9,7 +9,7 @@
 - [How is it organized?](#how-is-it-organized)
 - [Automatic settings](#automatic-settings)
 
-| WebAPI         | method              | intercepted?                                                                   | reported?                                                                      | can be bocked?                                                                 |
+| WebAPI         | method              | intercepted?                                                                   | reported?                                                                      | can be blocked?                                                                 |
 | -------------- | ------------------- | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | EventTarget    | removeEventListener | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![x](../../../../images/doc/global/guides/x.png)                               | ![x](../../../../images/doc/global/guides/x.png)                               |
 | EventTarget    | addEventListener    | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) | ![white_check_mark](../../../../images/doc/global/guides/white_check_mark.png) |
@@ -38,7 +38,7 @@ All codes intercepted are divided into 3 groups:
 
 ### Web APIs
 
-Some JavaScript's are reported with a different nomenclature to get closer to the actual written code or to facilitate understanding:
+Some JavaScripts are reported with a different nomenclature to get closer to the actual written code or to facilitate understanding:
 
 | JavaScript                     | reported as            | example code                                         |
 | ------------------------------ | ---------------------- | ---------------------------------------------------- |
@@ -59,7 +59,7 @@ Some JavaScript's are reported with a different nomenclature to get closer to th
 
 > *`fn` = some callback function, example: `var fn = function(response) { console.log(response); }`*
 
-`EventTarget.addEventListener` is not reported in this group because we give a differentiated attention to this `EventTarget` method.
+`EventTarget.addEventListener` is not reported in this group because we give a different attention to this `EventTarget` method.
 
 ### EventTarget.addEventListener
 
@@ -88,11 +88,11 @@ some_image.addEventListener('mousemove', function(_event) {
 });
 ```
 
-`addEventListener` will be reported once, but every time the mouse is moved over the image, `send_report` will be called, that's what we call `hanleEvent`.
+`addEventListener` will be reported once, but every time the mouse is moved over the image, `send_report` will be called, that's what we call `handleEvent`.
 
-If you block an event in `addEventListener`, you will never see it in `hanleEvent` because it will never be called, however, to unblock the event you will need to reload the page.
+If you block an event in `addEventListener`, you will never see it in `handleEvent` because it will never be called, however, to unblock the event you will need to reload the page.
 
-If the event is allowed in `addEventListener` you will see it every time it is triggered in `hanleEvent` and you can block/unblock it inside `hanleEvent` without needing to reload the page.
+If the event is allowed in `addEventListener` you will see it every time it is triggered in `handleEvent` and you can block/unblock it inside `handleEvent` without needing to reload the page.
 
 #### handleEvent
 
@@ -159,7 +159,7 @@ A predefined list of common events:
 ```
 
 ### almost all
-Some event from the list of *common events* or that follows a rule of not having special characters, example:
+Some events from the list of *common events* or an event that follows a rule of not having special characters, example:
 
 - Valid *almost all* events: `someEvent` `anotherevent` `SomeEventB`
 - Invalid *almost all* events: `yt-something` `image:uploaded` `my_event`
