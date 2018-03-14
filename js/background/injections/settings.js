@@ -76,7 +76,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 });
 
 var should_intercept_request = function(url) {
-  if(cached_settings['injection_disabled']['general']) {
+  if(!settings_defined || cached_settings['injection_disabled']['general']) {
     return false;
   } else {
     a_element.href = url;
