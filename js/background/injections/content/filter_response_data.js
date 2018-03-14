@@ -34,17 +34,24 @@ if(injection_strategy != 'cookie') {
         filter.ondata = event => {
           var content = decoder.decode(event.data, {stream: true});
 
-          var match = /DOCTYPE(.|[\r\n])*?>/i.exec(content);
+          // binary content? Image, PDF...
+          var binary = /\0/.exec(content);
 
-          if(match && match.index < 10 && match[0].length < 200) {
-            var to_replace = content.slice(0, match.index + match[0].length);
+          if(!binary) {
+            var match = /DOCTYPE(.|[\r\n])*?>/i.exec(content);
 
-            content = content.replace(to_replace, to_replace + content_to_write);
+            if(match && match.index < 10 && match[0].length < 200) {
+              var to_replace = content.slice(0, match.index + match[0].length);
+
+              content = content.replace(to_replace, to_replace + content_to_write);
+            } else {
+              content = content_to_write + content;
+            }
+
+            filter.write(encoder.encode(content));
           } else {
-            content = content_to_write + content;
+            filter.write(event.data);
           }
-
-          filter.write(encoder.encode(content));
 
           filter.disconnect();
         }
