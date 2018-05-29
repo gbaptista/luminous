@@ -67,7 +67,7 @@ While the book is not published, I suggest the following references to expand yo
 - Book: [*The Filter Bubble: How the New Personalized Web Is Changing What We Read and How We Think*](https://www.amazon.com/Filter-Bubble-Personalized-Changing-Think-ebook/dp/B004IYJE6A)
 - Web page: [*The JavaScript Trap*](https://www.gnu.org/philosophy/javascript-trap.en.html)
 - Web page: [*Internet Health*](https://www.mozilla.org/internet-health/)
-- Web page: [*About Lightbeam*](https://www.mozilla.org/lightbeam/about)
+- Web page: [*About Lightbeam*](https://www.mozilla.org/lightbeam/)
 
 ## Guides
 
@@ -192,7 +192,7 @@ This is an experimental project that grew in an uncontrolled way, we do not have
 
 #### Mozilla Firefox Service Workers
 
-In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
+In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
 
  - Access the *Service Workers* screen at: `about:debugging#workers`
  - Click on *unregister* in the *Service Worker* of the desired website:
