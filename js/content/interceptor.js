@@ -2,6 +2,16 @@ var should_luminous_run = (
   document.getElementsByClassName('luminous-interceptor').length == 1
 );
 
+// Only run on HTML and XHTML files.
+if (document instanceof HTMLDocument === false && (
+    document instanceof XMLDocument === false ||
+    document.createElement('div') instanceof HTMLDivElement === false)) {
+  
+  should_luminous_run = false;
+  
+}
+
+
 var remove_duplicated_luminous_elements = function(class_name) {
   var elements = document.getElementsByClassName(class_name);
   var i = elements.length;
