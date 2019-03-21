@@ -18,13 +18,9 @@ if(typeof browser !== 'undefined') {
     // TODO: Use sync_data['advanced']['injection_strategy']
     //       if 'TryFilterResponseData': 'filterResponseData'
     //                             else: 'cookie'
-    // Temporarily disabled because of issue #107:
-    // https://github.com/gbaptista/luminous/issues/107
 
     // Let's hope it's a Firefox 57+ or something
     // with filterResponseData support.
-    // injection_strategy = 'filterResponseData';
-
-    injection_strategy = 'cookie';
+    injection_strategy = 'filterResponseData';
   }
 }
