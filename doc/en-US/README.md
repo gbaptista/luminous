@@ -21,7 +21,7 @@ An experimental extension to identify, analyze and block code execution and even
 
 ## Why?
 
-We have amazing projects like [*Lightbeam*](https://www.mozilla.org/en-US/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) and many others. All have the proposal to identify and/ or prevent the execution of questionable codes and requests.
+We have amazing projects like [*Lightbeam*](https://www.mozilla.org/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) and many others. All have the proposal to identify and/ or prevent the execution of questionable codes and requests.
 
 
 These tools are vital, but we inevitably need to make concessions to access many websites as we have a massive use of *JavaScript* on the web. When you access for example the [*Google Translate*](https://translate.google.com) website, with a combo of 3 extensions (*HTTPS Everywhere*, *uBlock Origin* and *ScriptSafe*) and *Luminous*, we have the following result after a few moments:
@@ -41,9 +41,9 @@ It's about this number (**7,6 thousand**) that we are lost and with hands tied, 
 
 ## How to install
 
-- Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
-- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
-- Opera: [Opera add-ons](https://addons.opera.com/en/extensions/details/luminous-javascript-events-blocker/)
+- Chromium and Google Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
+- Mozilla Firefox: [Firefox Add-ons](https://addons.mozilla.org/addon/luminous/)
+- Opera: [Opera add-ons](https://addons.opera.com/extensions/details/luminous-javascript-events-blocker/)
 
 ## Try it!
 
@@ -66,8 +66,8 @@ While the book is not published, I suggest the following references to expand yo
 - Book: [*Cypherpunks: Freedom and the Future of the Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
 - Book: [*The Filter Bubble: How the New Personalized Web Is Changing What We Read and How We Think*](https://www.amazon.com/Filter-Bubble-Personalized-Changing-Think-ebook/dp/B004IYJE6A)
 - Web page: [*The JavaScript Trap*](https://www.gnu.org/philosophy/javascript-trap.en.html)
-- Web page: [*Internet Health*](https://www.mozilla.org/en-US/internet-health/)
-- Web page: [*About Lightbeam*](https://www.mozilla.org/en-US/lightbeam/about)
+- Web page: [*Internet Health*](https://www.mozilla.org/internet-health/)
+- Web page: [*About Lightbeam*](https://www.mozilla.org/lightbeam/)
 
 ## Guides
 
@@ -192,7 +192,7 @@ This is an experimental project that grew in an uncontrolled way, we do not have
 
 #### Mozilla Firefox Service Workers
 
-In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
+In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
 
  - Access the *Service Workers* screen at: `about:debugging#workers`
  - Click on *unregister* in the *Service Worker* of the desired website:
