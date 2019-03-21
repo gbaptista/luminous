@@ -14,8 +14,7 @@ if(injection_strategy != 'cookie') {
 
     // TODO: Improve content_type check to fix issue #107:
     // https://github.com/gbaptista/luminous/issues/107
-
-    if (type == 'text') {
+    if (['text', 'application'].includes(type)) {
       should_intercept = /html/.test(subtype);
     }
 
