@@ -106,6 +106,14 @@ var set_default_settings = function() {
       sync_data['auto_settings'] = {};
     }
 
+    if(!sync_data['advanced']) {
+      sync_data['advanced'] = {};
+    }
+
+    if(sync_data['advanced']['injection_strategy'] == undefined) {
+      sync_data['advanced']['injection_strategy'] = 'TryFilterResponseData';
+    }
+
     if(!sync_data['auto_settings']['domains']) {
       sync_data['auto_settings']['domains'] = {};
     }
