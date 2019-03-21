@@ -17,6 +17,8 @@ if(injection_strategy != 'cookie') {
   var inject_interceptor_and_settings = function(request_details) {
     var url = url_for_request(request_details);
 
+    // TODO: Improve should_intercept_request to fix issue #107:
+    // https://github.com/gbaptista/luminous/issues/107
     if(should_intercept_request(url)) {
       var options = full_options_for_url(url);
 
@@ -34,6 +36,9 @@ if(injection_strategy != 'cookie') {
         filter.ondata = event => {
           var content = decoder.decode(event.data, {stream: true});
 
+
+          // TODO: Improve binary check to fix issue #107:
+          // https://github.com/gbaptista/luminous/issues/107
           // binary content? Image, PDF...
           var binary = /\0/.exec(content);
 
