@@ -18,15 +18,13 @@ if(injection_strategy != 'cookie') {
       should_intercept = /html/.test(subtype);
     }
 
-    console.log('should_intercept?', type, subtype, should_intercept);
-
     return should_intercept;
   }
 
   var interceptor_html_string = undefined;
   var data_html_string = undefined;
 
-  // TODO remove cache for development enviroment
+  // TODO: remove cache for development enviroment
   load_interceptor_element('filterResponseData', function(element) {
     interceptor_html_string = element_to_html_string(element);
   });
