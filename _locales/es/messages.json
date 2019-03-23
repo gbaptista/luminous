@@ -19,6 +19,7 @@
   "settingsCodeInjectionTitle": { "message": "inyecciones de código" },
   "settingsPopupTitle": { "message": "ventana emergente" },
   "settingsBadgeCounterTitle": { "message": "contador del icono" },
+  "settingsAdvancedTitle": { "message": "avanzado" },
   "settingsStoredDataLocalTitle": { "message": "datos locales" },
   "settingsStoredDataSyncTitle": { "message": "datos sincronizados" },
   "settingsReadMoreText": { "message": "lea más sobre" },
@@ -79,6 +80,8 @@
   "settingsNotRecommendedText": { "message": "no recomendado" },
   "settingsDefinitelyNotRecommendedText": { "message": "definitivamente no recomendado" },
 
+  "settingsFilterResponseDataTitle": { "message": "use la API filterResponseData (si es compatible)" },
+  "settingsInjectionTitle": { "message": "inyección" },
   "settingsReportsTitle": { "message": "informes" },
   "settingsIndexedDbMdnHref": { "message": "https://developer.mozilla.org/es/docs/Web/API/IndexedDB_API" },
   "settingsRecordsText": { "message": "registros" },

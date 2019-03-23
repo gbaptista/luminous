@@ -1,3 +1,18 @@
+var should_inject_this_document = function() {
+  // thanks to: https://github.com/EFForg/privacybadger/pull/1954
+  if (
+    document instanceof HTMLDocument === false &&
+    (
+      document instanceof XMLDocument === false ||
+      document.createElement('div') instanceof HTMLDivElement === false
+    )
+  ) {
+    return false;
+  }
+
+  return true;
+}
+
 var intialize_luminous_injections = function(from) {
   if(from == 'cookie') {
     var injection_enabled = Cookies.get('le');
@@ -10,7 +25,7 @@ var intialize_luminous_injections = function(from) {
 
     if(from == 'cookie') {
       if(injection_enabled != 'f') {
-        fn(true);
+        fn(should_inject_this_document());
       }
     } else {
       fn(false);
@@ -33,5 +48,5 @@ if(injection_strategy == 'cookie') {
   intialize_luminous_injections('cookie');
 } else {
   // TODO Firefox 59+?
-  intialize_luminous_injections('injection_strategy');
+  intialize_luminous_injections('filterResponseData');
 }

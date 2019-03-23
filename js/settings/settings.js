@@ -162,6 +162,11 @@ $(document).ready(function() {
             url: chrome.extension.getURL('html/settings/stored-data/local.html'),
             active: (document.location.pathname == '/html/settings/stored-data/local.html')
           },
+          {
+            title: chrome.i18n.getMessage('settingsAdvancedTitle'),
+            url: chrome.extension.getURL('html/settings/advanced/options.html'),
+            active: (document.location.pathname == '/html/settings/advanced/options.html')
+          },
         ]
       })
     );

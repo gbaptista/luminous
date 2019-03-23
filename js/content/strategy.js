@@ -15,8 +15,12 @@ if(typeof browser !== 'undefined') {
     // Firefox without filterResponseData support...
     injection_strategy = 'cookie';
   } else {
-    // Let's hope it's a Firefox 57+ or
-    // something with filterResponseData support.
+    // TODO: Use sync_data['advanced']['try_filter_response_data']
+    //       if true: 'filterResponseData'
+    //          else: 'cookie'
+
+    // Let's hope it's a Firefox 57+ or something
+    // with filterResponseData support.
     injection_strategy = 'filterResponseData';
   }
 }
