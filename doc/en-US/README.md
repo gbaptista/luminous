@@ -57,10 +57,6 @@ See some screenshots [here](./guides/screenshots.md).
 
 ## Going deeper
 
-This experiment is part of a book being written about *WebExtensions API* from the perspective of themes like freedom and privacy in the digital world. If you want to receive news about the publication, please leave your email: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
-
-While the book is not published, I suggest the following references to expand your view on the topic:
-
 - Documentary: [*Do Not Track*](https://donottrack-doc.com)
 - Book: [*1984*](https://www.amazon.com/1984-George-Orwell-ebook/dp/B003JTHWKU)
 - Book: [*Cypherpunks: Freedom and the Future of the Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
@@ -273,7 +269,7 @@ This project is licensed under the [*GPLv3*](LICENSE) license.
 
 ## Donations
 
-There is no kind of organization for receiving donations at the moment. See our guide on "[how to contribute](#how-to-contribute)" to other ways of contributing and also see about the book being written in "[going deeper](#going-deeper)". If you really want to make a donation, here are some incredible foundations that's share some ideals of this project that you can help:
+There is no kind of organization for receiving donations at the moment. See our guide on "[how to contribute](#how-to-contribute)" to other ways of contributing. If you really want to make a donation, here are some incredible foundations that's share some ideals of this project that you can help:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)

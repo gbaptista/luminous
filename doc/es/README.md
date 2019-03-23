@@ -55,10 +55,6 @@ Ver algunas capturas de pantalla [aquí](./guides/screenshots.md).
 
 ## Profundizando
 
-Este experimento es parte de un libro que se está escribiendo sobre *WebExtensions API* desde la perspectiva de temas como libertad y privacidad en el mundo digital. Si desea recibir noticias sobre la publicación, deje su correo electrónico: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
-
-Si bien el libro no está publicado, sugiero las siguientes referencias para ampliar su opinión sobre el tema:
-
 - Documental: [*Do Not Track*](https://donottrack-doc.com)
 - Libro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B00BFGQYRQ)
 - Libro: [*Cypherpunks: La libertad y el futuro de Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
@@ -269,7 +265,7 @@ Este proyecto está licenciado bajo la licencia [*GPLv3*](LICENSE).
 
 ## Donaciones
 
-No hay ningún tipo de organización para recibir donaciones en este momento. Consulte nuestra guía sobre "[cómo contribuir](#c%C3%B3mo-contribuir)" a otras formas de contribuir y también vea sobre el libro escrito en "[profundizando](#yendo-m%C3%A1s-profundo)". Si realmente quieres hacer una donación, aquí hay algunos fundamentos increíbles que comparten algunos ideales de este proyecto que puedes ayudar:
+No hay ningún tipo de organización para recibir donaciones en este momento. Consulte nuestra guía sobre "[cómo contribuir](#c%C3%B3mo-contribuir)" a otras formas de contribuir. Si realmente quieres hacer una donación, aquí hay algunos fundamentos increíbles que comparten algunos ideales de este proyecto que puedes ayudar:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)
