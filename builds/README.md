@@ -11,10 +11,15 @@ Basic *Unix* tools:
 - `cp` `mkdir` `mv` `rm`
 - `cat` `find` `ls`
 - `echo` `printf`
+- `zip`
 
 [*npm*](https://www.npmjs.com/):
 ```
 sudo apt-get install npm
+```
+
+```
+sudo pacman -S npm zip
 ```
 
 [*UglifyJS*](https://github.com/mishoo/UglifyJS):
