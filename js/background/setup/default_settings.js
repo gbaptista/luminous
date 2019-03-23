@@ -110,8 +110,8 @@ var set_default_settings = function() {
       sync_data['advanced'] = {};
     }
 
-    if(sync_data['advanced']['injection_strategy'] == undefined) {
-      sync_data['advanced']['injection_strategy'] = 'TryFilterResponseData';
+    if(sync_data['advanced']['try_filter_response_data'] == undefined) {
+      sync_data['advanced']['try_filter_response_data'] = true;
     }
 
     if(!sync_data['auto_settings']['domains']) {

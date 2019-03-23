@@ -9,8 +9,8 @@ $(document).ready(function() {
                 title: chrome.i18n.getMessage('settingsInjectionTitle'),
                 strategy: {
                   label: chrome.i18n.getMessage('settingsFilterResponseDataTitle'),
-                  value: sync_data['advanced']['injection_strategy'],
-                  checked: sync_data['advanced']['injection_strategy']
+                  value: sync_data['advanced']['try_filter_response_data'],
+                  checked: sync_data['advanced']['try_filter_response_data']
                 }
               },
             }

@@ -48,5 +48,5 @@ if(injection_strategy == 'cookie') {
   intialize_luminous_injections('cookie');
 } else {
   // TODO Firefox 59+?
-  intialize_luminous_injections('injection_strategy');
+  intialize_luminous_injections('filterResponseData');
 }
