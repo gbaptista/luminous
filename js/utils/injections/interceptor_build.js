@@ -5,8 +5,8 @@ var load_interceptor_element = function(from, callback_function) {
   *
   * The non-minified version for the code below is available at:
   *
-  * - https://github.com/gbaptista/luminous/blob/0.0.26/js/content/interceptor.js
-  * - https://github.com/gbaptista/luminous/blob/0.0.26/js/content/interceptors/
+  * - https://github.com/gbaptista/luminous/blob/0.0.27/js/content/interceptor.js
+  * - https://github.com/gbaptista/luminous/blob/0.0.27/js/content/interceptors/
   *
   */
   var content = 'UGLIFYJS_RESULT';
