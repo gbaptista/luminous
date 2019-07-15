@@ -23,6 +23,7 @@ Guides are documents on many specific subjects where we can go deep into the det
 
 - *addEventListener* - *handleEvent*
   - [mousemove](./javascript/mousemove.md)
+  - [scroll](./javascript/scroll.md)
 
 ## Site analysis
 
