@@ -35,3 +35,8 @@ See the full example [here](https://gist.github.com/gbaptista/b5af05e273db9d16b2
 Another use is to know "where are you looking" with the creation of heat maps:
 
 ![Google Heatmap](../../../../images/doc/global/guides/javascript/google-heatmap.jpg)
+
+It should also be noted that mousemove is only one of many similar JavaScript events that detect mouse movement. Other similar events include but are not limited to `DOMMouseMove`, `pointermove`, and `touchmove` as well as the camelcase versions of these terms, such as `mouseMove`, `pointerMove` and `touchMove`.
+
+See also: [the `scroll` JavaScript event](./scroll.md).
+
