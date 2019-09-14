@@ -8,7 +8,8 @@ var common_webapis = [
   'setInterval', 'setInterval.call',
   'setTimeout', 'setTimeout.call',
   'WebSocket.send',
-  'XMLHttpRequest.open', 'XMLHttpRequest.send'
+  'XMLHttpRequest.open', 'XMLHttpRequest.send',
+  'requestAnimationFrame'
 ];
 
 var common_events = [

@@ -126,6 +126,8 @@ if(should_luminous_run) {
       // interceptors/xml_http_request/open.js
       // interceptors/xml_http_request/send.js
 
+      // interceptors/window/request_animation_frame.js
+
     // /load_injectors
   }
 }

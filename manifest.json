@@ -132,6 +132,7 @@
     "js/content/interceptors/schedulers/set_timeout.js",
     "js/content/interceptors/web_socket/send.js",
     "js/content/interceptors/xml_http_request/open.js",
-    "js/content/interceptors/xml_http_request/send.js"
+    "js/content/interceptors/xml_http_request/send.js",
+    "js/content/interceptors/window/request_animation_frame.js"
   ]
 }
