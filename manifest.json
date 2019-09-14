@@ -3,7 +3,7 @@
   "name": "__MSG_manifestName__",
   "short_name": "Luminous",
   "description": "__MSG_manifestDescription__",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "author": "Guilherme Baptista",
   "developer": {
     "name": "Guilherme Baptista",
@@ -63,12 +63,12 @@
       "matches": ["<all_urls>"],
       "all_frames": true,
       "js": [
-        "vendor/ua-parser-js/ua-parser.min.js",
+        "vendor/ua-parser-js-0.7.20/ua-parser.min.js",
         "js/content/strategy.js",
         "js/helpers/code_names.js",
         "js/helpers/compressor.js",
         "js/helpers/domain_settings.js",
-        "vendor/js-cookie/js.cookie.min.js",
+        "vendor/js-cookie-2.2.1/js.cookie.min.js",
         "js/utils/injections/data.js",
         "js/utils/injections/options.js",
         "js/utils/injections/interceptor.js",
@@ -108,7 +108,7 @@
       "js/background/devtools.js",
       "js/background/auto_settings/domains.js",
       "js/background/auto_settings/events.js",
-      "vendor/dexiejs/dexie.js",
+      "vendor/dexiejs-2.0.4/dexie.min.js",
       "js/helpers/indexed_db.js",
       "js/background/reports.js"
     ]
@@ -132,6 +132,7 @@
     "js/content/interceptors/schedulers/set_timeout.js",
     "js/content/interceptors/web_socket/send.js",
     "js/content/interceptors/xml_http_request/open.js",
-    "js/content/interceptors/xml_http_request/send.js"
+    "js/content/interceptors/xml_http_request/send.js",
+    "js/content/interceptors/window/request_animation_frame.js"
   ]
 }

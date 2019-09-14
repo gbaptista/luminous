@@ -37,6 +37,7 @@ devtools_tab_id.onMessage.addListener(function(tab) {
 
   var default_filter_out = [
     'setInterval', 'setTimeout',
+    'requestAnimationFrame',
     'handleEvent.message',
     'handleEvent.timeupdate',
     'handleEvent.progress',

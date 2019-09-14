@@ -53,6 +53,7 @@ Some JavaScripts are reported with a different nomenclature to get closer to the
 | Window.setInterval (execution) | setInterval.call       | `setInterval(function() { /*call*/ }, 1000)`         |
 | Window.setTimeout              | setTimeout             | `setTimeout(function() { }, 1000)`                   |
 | Window.setTimeout (execution)  | setTimeout.call        | `setTimeout(function() { /*call*/ }, 1000)`          |
+| Window.requestAnimationFrame   | requestAnimationFrame  | `requestAnimationFrame(function() { /*call*/ })`     |
 | WebSocket.send                 | WebSocket.send         | `(new WebSocket('ws://host:80')).send('hello')`      |
 | XMLHttpRequest.open            | XMLHttpRequest.open    | `(new XMLHttpRequest()).open('GET', 'f.txt')`        |
 | XMLHttpRequest.send            | XMLHttpRequest.send    | `(new XMLHttpRequest()).open('GET', 'f.txt').send()` |

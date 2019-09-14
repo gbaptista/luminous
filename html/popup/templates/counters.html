@@ -8,7 +8,7 @@
     <h2>{{web_apis_title}}:</h2>
 
     {{#web_apis_calls}}
-      <div class="calls {{#disabled_class}}WebAPIs,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="WebAPIs" data-type="{{name}}">
+      <div class="calls {{#disabled_class}}WebAPIs,{{name}}{{/disabled_class}}" data-tippy-content="{{title_for_tooltip}}" data-kind="WebAPIs" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
         {{#show_performance_metrics}}
@@ -26,7 +26,7 @@
     <h2>{{handle_event_title}}:</h2>
 
     {{#handle_event_calls}}
-      <div class="calls {{#disabled_class}}handleEvent,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="handleEvent" data-type="{{name}}">
+      <div class="calls {{#disabled_class}}handleEvent,{{name}}{{/disabled_class}}" data-tippy-content="{{title_for_tooltip}}" data-kind="handleEvent" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
         {{#show_performance_metrics}}
@@ -44,7 +44,7 @@
     <h2>{{add_event_listener_title}}:</h2>
 
     {{#add_event_listener_calls}}
-      <div class="calls {{#disabled_class}}addEventListener,{{name}}{{/disabled_class}}" title="{{title_for_tooltip}}" data-kind="addEventListener" data-type="{{name}}">
+      <div class="calls {{#disabled_class}}addEventListener,{{name}}{{/disabled_class}}" data-tippy-content="{{title_for_tooltip}}" data-kind="addEventListener" data-type="{{name}}">
         <span class="name">{{name}}</span>
         <span class="allowed" style="background-color:{{allowed_color}};">{{allowed}}</span>
         {{#show_performance_metrics}}

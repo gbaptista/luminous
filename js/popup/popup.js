@@ -262,12 +262,12 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           tippy('.interceptions .calls', {
             theme: 'js-sample', animateFill: false, size: 'small',
-            performance: true, interactive: sync_data['popup']['show_code_details'],
-            duration: [0, 0],
+            interactive: sync_data['popup']['show_code_details'],
+            lazy: false, duration: [0, 0],
             onShown: function() {
               $('.tippy-popper:not(:last-child)').remove();
             },
-            onHidde: function() {
+            onHide: function() {
               $('.tippy-popper').remove();
             }
           });

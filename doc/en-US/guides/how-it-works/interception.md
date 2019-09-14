@@ -184,6 +184,7 @@ Original settings:
 ```json
 {
   "WebAPIs": {
+    "requestAnimationFrame": true,
     "XMLHttpRequest.open": true,
     "XMLHttpRequest.send": true,
     "geo.getCurrentPosition": true,
