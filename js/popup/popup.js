@@ -1,3 +1,5 @@
+var waiting_for_note = false;
+
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
@@ -105,13 +107,24 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
             show_performance_metrics: sync_data['popup']['show_performance_metrics'],
             apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
             apply_to_default: sync_data['popup']['apply_to_default'],
-            no_domain: chrome.i18n.getMessage('settingsInvalidDomainMessage')
+            no_domain: chrome.i18n.getMessage('settingsInvalidDomainMessage'),
+            waiting_for_note: waiting_for_note
           })
         );
 
         $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
         $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
         $('#settings-link').html(chrome.i18n.getMessage('linkSettingsText'));
+
+        $('#take-a-note').click(function(event) {
+          event.preventDefault();
+
+          waiting_for_note = true;
+
+          $('body').addClass('waiting-for-note');
+
+          $(this).attr('disabled', 'disabled');
+        });
 
         $('#options-container input').change(function() {
           $('#loading').fadeIn(200);
@@ -243,20 +256,34 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           );
 
           $('.interceptions .calls').click(function() {
-            $('#loading').fadeIn(200);
-
             var kind = $(this).data('kind');
             var type = $(this).data('type');
             var value = !$(this).hasClass('disabled');
 
-            set_sync_option_disabled_for_kind_and_type(
-              domain, kind, type, value
-            );
+            $('#loading').fadeIn(200);
 
-            if($(this).hasClass('disabled')) {
-              $(this).removeClass('disabled');
+            if(waiting_for_note) {
+              load_template('html/popup/templates/take-a-note.html', function(template) {
+                $('body').append(
+                  Mustache.render(template, {
+                    domain: domain, kind: kind, type: type, value: value
+                  })
+                );
+
+                $('body').removeClass('waiting-for-note');
+
+                $('#loading').fadeOut(200);
+              });
             } else {
-              $(this).addClass('disabled');
+              set_sync_option_disabled_for_kind_and_type(
+                domain, kind, type, value
+              );
+
+              if($(this).hasClass('disabled')) {
+                $(this).removeClass('disabled');
+              } else {
+                $(this).addClass('disabled');
+              }
             }
           });
 
