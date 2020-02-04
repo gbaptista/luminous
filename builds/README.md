@@ -11,15 +11,25 @@ Basic *Unix* tools:
 - `cp` `mkdir` `mv` `rm`
 - `cat` `find` `ls`
 - `echo` `printf`
+- `zip`
 
-[*npm*](https://www.npmjs.com/):
+[*yarn*](https://yarnpkg.com):
 ```
-sudo apt-get install npm
+sudo apt-get install yarn
+```
+
+```
+sudo pacman -S yarn zip
 ```
 
 [*UglifyJS*](https://github.com/mishoo/UglifyJS):
 ```shell
-sudo npm install uglify-js -g
+yarn global add uglify-js
+```
+
+Add ti your `~/.bash_profile`:
+```
+export PATH="$PATH:$(yarn global bin)"
 ```
 
 ### Generating a new build

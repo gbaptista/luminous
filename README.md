@@ -53,11 +53,6 @@ Veja algumas capturas de tela [aqui](./doc/pt-BR/guides/screenshots.md).
 
 ## Se aprofunde no tema
 
-Este experimento faz parte de um livro que está sendo escrito de *WebExtensions API* sob a ótica de temas como liberdade e privacidade nos meios digitais. Se deseja saber novidades sobre a publicação do mesmo, deixe aqui o seu email: [https://gbaptistas.typeform.com/to/jCzkkm](
-https://gbaptistas.typeform.com/to/jCzkkm)
-
-Enquanto o livro não é publicado, sugiro as seguintes referências para expandir a sua visão sobre o tema:
-
 - Documentário: [*Do Not Track*](https://donottrack-doc.com)
 - Livro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B009XE662U)
 - Livro: [*Cypherpunks. Liberdade e o Futuro da Internet*](https://www.amazon.com.br/Cypherpunks-Liberdade-internet-Julian-Assange-ebook/dp/B018SLCLPO)
@@ -270,7 +265,7 @@ Este projeto está licenciado sob a [*GPLv3*](LICENSE).
 
 ## Doações
 
-Não há nenhum tipo de organização para o recebimento de doações no momento. Veja nosso guia sobre *"[como colaborar](#como-colaborar)"* para outras maneiras de contribuição e também sobre o livro que está sendo escrito em *"[se aprofunde no tema](#se-aprofunde-no-tema)"*. Se deseja realmente realizar uma doação, eis algumas fundações incríveis que vão de encontro com os temas abordados neste projeto que você pode ajudar:
+Não há nenhum tipo de organização para o recebimento de doações no momento. Veja nosso guia sobre *"[como colaborar](#como-colaborar)"* para outras maneiras de contribuição. Se deseja realmente realizar uma doação, eis algumas fundações incríveis que vão de encontro com os temas abordados neste projeto que você pode ajudar:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)

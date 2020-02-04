@@ -94,6 +94,8 @@
       <br><br>
 
       <div id="userAgent" class="small-demo-box">navigator.userAgent</div>
+
+      <div id="requestAnimationFrame" class="small-demo-box">requestAnimationFrame()</div>
     </div>
 
     <script type="text/javascript">
@@ -106,6 +108,10 @@
       );
 
       (function() { setTimeout(function() {
+
+        window.requestAnimationFrame(function() {
+          document.getElementById('requestAnimationFrame').innerHTML = 'requestAnimationFrame():<br>animation executed!'
+        });
 
         document.getElementById('userAgent').innerHTML = 'navigator.userAgent:<br>' + window.navigator.userAgent.slice(0, 24);
         document.getElementById('userAgent').setAttribute('title', window.navigator.userAgent);
