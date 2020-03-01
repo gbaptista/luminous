@@ -1,0 +1,104 @@
+<form>
+  {{#performance_options}}
+    {{#reports}}
+      <div class="card">
+        <div class="card-header">
+          {{title}}
+        </div>
+        <div class="card-body">
+          {{#generation}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" data-reverse="true" data-namespace="reports" name="collect_data" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{disable_text}} <code>{{label}}</code>
+              </label>
+            </div>
+          {{/generation}}
+        </div>
+      </div>
+    {{/reports}}
+    <br>
+    {{#popup}}
+      <div class="card">
+        <div class="card-header">
+          {{title}}
+        </div>
+        <div class="card-body">
+          {{#code_details}}
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox" data-reverse="true" data-namespace="popup" name="show_code_details" value="{{value}}" {{#checked}}checked{{/checked}}>
+                {{disable_text}} <code>{{label}}</code>
+              </label>
+            </div>
+          {{/code_details}}
+        </div>
+      </div>
+    {{/popup}}
+    <br>
+    {{#auto_settings}}
+      <div class="card">
+        <div class="card-header">
+          {{title}}
+        </div>
+        <div class="card-body">
+          {{#domains}}
+            <div class="card">
+              <div class="card-header">
+                {{title}}
+              </div>
+              <div class="card-body">
+                {{#code_injection}}
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox"
+                      data-reverse="true" data-value-as-namespace="true" data-namespace="auto_settings" name="domains" value="{{value}}" {{#checked}}checked{{/checked}}>
+                      {{disable_text}} <code>{{label}}</code>
+                    </label>
+                  </div>
+                {{/code_injection}}
+
+                {{#website_rules}}
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox"
+                      data-reverse="true" data-value-as-namespace="true" data-namespace="auto_settings" name="domains" value="{{value}}" {{#checked}}checked{{/checked}}>
+                      {{disable_text}} <code>{{label}}</code>
+                    </label>
+                  </div>
+                {{/website_rules}}
+              </div>
+            </div>
+          {{/domains}}
+          <br>
+          {{#events}}
+            <div class="card">
+              <div class="card-header">
+                {{title}}
+              </div>
+              <div class="card-body">
+                {{#default_rules}}
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" data-false-value="common" data-true-value="none" data-namespace="auto_settings" name="default_events" data-no-boolean="true" value="{{value}}" {{#checked}}checked{{/checked}}>
+                      {{disable_text}} <code>{{label}}</code>
+                    </label>
+                  </div>
+                {{/default_rules}}
+                {{#website_rules}}
+                  <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="checkbox" data-false-value="common" data-true-value="none" data-namespace="auto_settings" name="website_events" value="{{value}}" {{#checked}}checked{{/checked}}>
+                      {{disable_text}} <code>{{label}}</code>
+                    </label>
+                  </div>
+                {{/website_rules}}
+              </div>
+            </div>
+          {{/events}}
+        </div>
+      </div>
+    {{/auto_settings}}
+  {{/performance_options}}
+  <br>
+</form>

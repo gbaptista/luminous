@@ -10,7 +10,9 @@ An experimental extension to identify, analyze and block code execution and even
 - [Understanding the UI](#understanding-the-ui)
 - [How to install](#how-to-install)
 - [Try it!](#try-it)
+- [Screenshots](#screenshots)
 - [Going deeper](#going-deeper)
+- [Guides](#guides)
 - [How to contribute](#how-to-contribute)
 - [Known issues](#known-issues)
 - [Understanding the code](#understanding-the-code)
@@ -19,7 +21,7 @@ An experimental extension to identify, analyze and block code execution and even
 
 ## Why?
 
-We have amazing projects like [*Lightbeam*](https://www.mozilla.org/en-US/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) and many others. All have the proposal to identify and/ or prevent the execution of questionable codes and requests.
+We have amazing projects like [*Lightbeam*](https://www.mozilla.org/lightbeam/), [*NoScript*](https://noscript.net/), [*ScriptSafe*](https://github.com/andryou/scriptsafe), [*uBlock Origin*](https://github.com/gorhill/uBlock), [*HTTPS Everywhere*](https://github.com/EFForg/https-everywhere) and many others. All have the proposal to identify and/ or prevent the execution of questionable codes and requests.
 
 
 These tools are vital, but we inevitably need to make concessions to access many websites as we have a massive use of *JavaScript* on the web. When you access for example the [*Google Translate*](https://translate.google.com) website, with a combo of 3 extensions (*HTTPS Everywhere*, *uBlock Origin* and *ScriptSafe*) and *Luminous*, we have the following result after a few moments:
@@ -39,33 +41,38 @@ It's about this number (**7,6 thousand**) that we are lost and with hands tied, 
 
 ## How to install
 
-- Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
-- Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/en-US/firefox/addon/luminous/)
-- Opera: *pending review (Opera add-ons)*
+- Chromium and Google Chrome: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
+- Mozilla Firefox: [Firefox Add-ons](https://addons.mozilla.org/addon/luminous/)
+- Opera: [Opera add-ons](https://addons.opera.com/extensions/details/luminous-javascript-events-blocker/)
 
 ## Try it!
 
-[Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demo-page.html) to experience and better understand how it works:
+[Install](#how-to-install) the extension and go to our [demo page](https://gbaptista.github.io/luminous/html/demos/detections/index.html) to experience and better understand how it works:
 
 ![Demo Page](../../images/doc/en-US/demo-page.png)
 
+## Screenshots
+
+See some screenshots [here](./guides/screenshots.md).
+
 ## Going deeper
-
-This experiment is part of a book being written about *WebExtensions API* from the perspective of themes like freedom and privacy in the digital world. If you want to receive news about the publication, please leave your email: [https://gbaptistas.typeform.com/to/VRklaw](https://gbaptistas.typeform.com/to/VRklaw)
-
-While the book is not published, I suggest the following references to expand your view on the topic:
 
 - Documentary: [*Do Not Track*](https://donottrack-doc.com)
 - Book: [*1984*](https://www.amazon.com/1984-George-Orwell-ebook/dp/B003JTHWKU)
 - Book: [*Cypherpunks: Freedom and the Future of the Internet*](https://www.amazon.com/Cypherpunks-Freedom-Internet-Julian-Assange-ebook/dp/B00AZBI4IO)
 - Book: [*The Filter Bubble: How the New Personalized Web Is Changing What We Read and How We Think*](https://www.amazon.com/Filter-Bubble-Personalized-Changing-Think-ebook/dp/B004IYJE6A)
 - Web page: [*The JavaScript Trap*](https://www.gnu.org/philosophy/javascript-trap.en.html)
-- Web page: [*Internet Health*](https://www.mozilla.org/en-US/internet-health/)
-- Web page: [*About Lightbeam*](https://www.mozilla.org/en-US/lightbeam/about)
+- Web page: [*Internet Health*](https://www.mozilla.org/internet-health/)
+- Web page: [*About Lightbeam*](https://www.mozilla.org/lightbeam/)
+
+## Guides
+
+Guides are documents on many specific subjects where we can go deep into the details and easily find the information we are looking for. See [all guides](./guides/).
 
 ## How to contribute
 
   - [Spread the word](#spread-the-word)
+    - [Write some guide](#write-some-guide)
     - [Share](#share)
     - [Write and talk about it](#write-and-talk-about-it)
     - [Help with translations](#help-with-translations)
@@ -79,6 +86,10 @@ While the book is not published, I suggest the following references to expand yo
     - [Improve code quality](#improve-code-quality)
 
 ### Spread the word
+
+#### Write some guide
+
+Collaborate by writing some [guide](#guides) on subjects related to the project.
 
 #### Share
 
@@ -112,7 +123,7 @@ We don't have the most beautiful and friendly interface in the world. [Discussio
 
 **Example 1**: The sooner we can inject code into websites and the less resources we use to process information, the more executions we'll be able to identify and the better our experience will be by having an extension that does not slow navigation.
 
-Look for example to our demo page (*`html/demo-page.html`*):
+Look for example to our demo page (*`html/demos/detections/index.html`*):
 
 ```javascript
 (function() { setTimeout(function() {
@@ -177,7 +188,7 @@ This is an experimental project that grew in an uncontrolled way, we do not have
 
 #### Mozilla Firefox Service Workers
 
-In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
+In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) (like [*WhatsApp Web*](https://web.whatsapp.com/)) can block the code interception because of a bug in the interception of headers with the [*Content-Security-Policy*](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy) guidelines. The current workaround is to reload the *Service Worker*:
 
  - Access the *Service Workers* screen at: `about:debugging#workers`
  - Click on *unregister* in the *Service Worker* of the desired website:
@@ -189,6 +200,7 @@ In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*]
 - [Background](#background)
 - [Content](#content)
 - [Pop-up](#pop-up)
+- [Settings](#settings)
 - [Utils](#utils)
 - [Third party libraries](#third-party-libraries)
 
@@ -223,13 +235,21 @@ In *Mozilla Firefox* and derivatives, some websites that use [*Service Workers*]
 
 ### Pop-up
 
-Responsible for rendering and taking care of the interactions made in the pop-up that is opened by clicking the extension icon:
+Responsible for rendering and handle interactions on the pop-up that is opened by clicking the extension icon:
 
 - `html/popup/popup.html`
 - `html/popup/templates/counters.html`
 - `html/popup/templates/options.html`
 - `js/popup/popup.js`
 - `css/popup/popup.css`
+
+### Settings
+
+Responsible for rendering and handle interactions on the settings pages:
+
+- `html/settings/*.html`
+- `js/settings/*.js`
+- `css/settings/*.css`
 
 ### Utils
 
@@ -238,9 +258,10 @@ Responsible for rendering and taking care of the interactions made in the pop-up
 
 ### Third party libraries
 
-- `js/vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
-- `js/vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
-- `js/vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
+- `vendor/bootstrap`: [*Bootstrap front-end component library*](https://github.com/twbs/bootstrap)
+- `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
+- `vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
+- `vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
 
 ## License
 
@@ -248,7 +269,7 @@ This project is licensed under the [*GPLv3*](LICENSE) license.
 
 ## Donations
 
-There is no kind of organization for receiving donations at the moment. See our guide on "[how to contribute](#how-to-contribute)" to other ways of contributing and also see about the book being written in "[going deeper](#going-deeper)". If you really want to make a donation, here are some incredible foundations that's share some ideals of this project that you can help:
+There is no kind of organization for receiving donations at the moment. See our guide on "[how to contribute](#how-to-contribute)" to other ways of contributing. If you really want to make a donation, here are some incredible foundations that's share some ideals of this project that you can help:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)

@@ -1,17 +1,52 @@
-<form>
-  <label>
-    <input type="checkbox" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}} /> {{general_injection_enabled_title}}
-  </label>
-  {{#general_injection_enabled}}
-    {{#domain}}
-      <br>
-      <label>
-        <input type="checkbox" name="{{domain}}" value="true" {{#domain_injection_enabled}} checked {{/domain_injection_enabled}} /> {{domain}}
+<form class="options-form">
+  <div class="col-2 col-2-header">
+    <a href="https://github.com/gbaptista/luminous/releases/tag/0.0.28" id="version" target="_blank">0.0.28</a>
+    <a href=" " id="help-link" class="top-link" target="_blank"></a>
+    <a href="../settings/injection/enabled.html" id="settings-link" class="top-link" target="_blank"></a>
+  </div>
+
+  <div class="col-1">
+    <label class="general-injection-label">
+      <input type="checkbox" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}} />
+      {{general_injection_enabled_title}}
+    </label>
+  </div>
+  <br class="clear-floats">
+  <div class="col-1">
+    {{^domain}}
+      <label class="invalid-domain">
+        <input type="checkbox" disabled />
+        {{no_domain}}
       </label>
     {{/domain}}
-  {{/general_injection_enabled}}
-  <br>
-  <label>
-    <input type="checkbox" name="show_listener_functions" value="true" {{#show_listener_functions}} checked {{/show_listener_functions}} /> {{show_listener_functions_title}}
-  </label>
+    {{#domain}}
+      <label class="valid-domain">
+        <input type="checkbox" name="{{domain}}" value="true" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} {{#domain_injection_enabled}} checked {{/domain_injection_enabled}} />
+        {{domain}}
+      </label>
+    {{/domain}}
+    <br class="clear-floats">
+    <label>
+      <input type="checkbox" name="apply_to_default" value="true" {{#apply_to_default}} checked {{/apply_to_default}} />
+      {{apply_to_default_title}}
+    </label>
+  </div>
+
+  <div class="col-2">
+    <label>
+      {{zoom_in_title}}
+      <input type="checkbox" name="zoom_in" value="true" {{#zoom_in}} checked {{/zoom_in}} />
+    </label>
+    <br class="clear-floats">
+    <label>
+      {{show_performance_metrics_title}}
+      <input type="checkbox" name="show_performance_metrics" value="true" {{#show_performance_metrics}} checked {{/show_performance_metrics}} />
+    </label>
+    <br class="clear-floats">
+    <label>
+      {{show_code_details_title}}
+      <input type="checkbox" name="show_code_details" value="true" {{#show_code_details}} checked {{/show_code_details}} />
+    </label>
+</div>
+<br class="clear-floats">
 </form>

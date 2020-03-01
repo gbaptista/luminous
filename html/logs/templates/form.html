@@ -1,0 +1,18 @@
+<form title="{{tab_text}}: {{current_tab.id}}">
+  <input id="filter_in" type="text" placeholder="{{filter_in_placeholder}}" {{#started}}disabled{{/started}} value="{{filter_in}}"></input>
+  <input id="filter_out" type="text" placeholder="{{filter_out_placeholder}}" {{#started}}disabled{{/started}} value="{{filter_out}}"></input>
+  <br>
+  {{#multitab_support}}
+    <select id="tab_filter" {{#started}}disabled{{/started}}>
+      <option {{#option_selected}}all{{/option_selected}} value="all">{{filter_all_text}}</option>
+      <option {{#option_selected}}auto{{/option_selected}} value="auto">{{filter_auto_detect_text}}: {{tab_text}} {{current_tab.id}} - {{current_tab.domain}}</option>
+      {{#tabs}}
+        <option {{#option_selected}}{{id}}{{/option_selected}} value="{{id}}">{{tab_text}} {{id}}: {{domain}}</option>
+      {{/tabs}}
+    </select>
+    <br>
+  {{/multitab_support}}
+  <button id="start" {{#started}}disabled{{/started}}>{{start_button_text}}</button>
+  <button id="stop" {{^started}}disabled{{/started}}>{{stop_button_text}}</button>
+  <button id="clear">{{clear_button_text}}</button>
+</form>

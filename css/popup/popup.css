@@ -4,10 +4,7 @@ html, body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-}
-
-h2 {
-  font-size: 11px;
+  background-color: #FFF;
 }
 
 #loading {
@@ -17,7 +14,6 @@ h2 {
   width: 100%;
   height: 100%;
   background-color:#FFF;
-  vertical-align: center;
   padding-top: 76px;
   display:none;
   color: #CCC;
@@ -27,19 +23,19 @@ h2 {
   font-style: italic;
 }
 
-#help-link {
+.top-link {
   display: inline-block;
   float: right;
-  padding: 10px;
+  padding: 5px 10px;
+  margin: 5px 0;
+  border-right: 1px solid #DDD;
 }
 
 #version {
   float: right;
   display: inline-block;
-  padding: 5px 10px;
-  margin: 5px;
+  padding: 10px;
   color: #CCC;
-  border-left: 1px solid #DDD;
 }
 
 .interceptions {
@@ -48,11 +44,8 @@ h2 {
 }
 
 .interceptions .calls {
-  font-size: 9px;
   position: relative;
   margin: 0 2px 12px;
-  width: 120px;
-  padding: 6px 4px 14px 4px;
   background-color:#e0e0e0;
   color: #333;
   display: inline-block;
@@ -90,6 +83,24 @@ h2 {
   color: #FFF;
 }
 
+.interceptions .calls .execution_time {
+  position: absolute;
+  bottom:-5px;
+  left: 50%;
+  margin-left: -20px;
+  width: 40px;
+  padding: 2px 0;
+  text-align: center;
+  background-color: #8D8E87;
+  color: #FFF;
+  font-style: italic;
+}
+
+.zoom-in .interceptions .calls .execution_time {
+  margin-left: -29px;
+  width: 58px;
+}
+
 .interceptions .calls .allowed {
   border-left:4px solid #20b203;
   left: 10px;
@@ -114,7 +125,6 @@ h2 {
    background-color: #FFF;
    color:#666;
    border: 1px solid #CCC;
-   font-size: 11px;
    text-align: left;
 }
 
@@ -129,6 +139,99 @@ h2 {
 }
 
 .tippy-tooltip.js-sample-theme pre code {
-  font-size: 10px;
   white-space: normal;
+}
+
+.options-form {
+  padding:4px 4px 0 8px;
+}
+
+.options-form label {
+  padding-bottom: 2px;
+}
+
+.col-1 {
+  float: left;
+}
+
+.col-2 {
+  text-align: right;
+  float: right;
+  width: 256px;
+}
+
+.col-2-header {
+  width: 300px;
+}
+
+.col-1 label, .col-1 label input {
+  float: left;
+}
+
+.col-2 label, .col-2 label input {
+  float: right;
+}
+.col-2 label {
+  margin-right: 7px;
+}
+
+label.invalid-domain {
+  color: #CCC;
+}
+
+label.valid-domain {
+  max-width: 270px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.general-injection-label {
+  margin-top: 12px;
+  margin-bottom: 2px;
+}
+
+.zoom-in .general-injection-label {
+  margin-bottom: 3px;
+}
+
+.clear-floats {
+  clear: both;
+}
+
+h2 {
+  font-size: 11px;
+  border-bottom: 1px solid #CCC;
+  padding-bottom: 2px;
+}
+
+.interceptions .calls {
+  font-size: 9px;
+  width: 120px;
+  padding: 6px 4px 14px 4px;
+}
+
+.tippy-tooltip.js-sample-theme { font-size: 11px; }
+
+.tippy-tooltip.js-sample-theme pre code { font-size: 10px; }
+
+body { font-size: 16px; min-width: 540px; }
+
+body.zoom-in { font-size: 17px; }
+
+.zoom-in h2 {
+  font-size: 14px;
+  border-bottom: 2px solid #CCC;
+  padding-bottom: 3px;
+}
+
+.zoom-in .tippy-tooltip.js-sample-theme {
+  font-size: 14px;
+}
+
+.zoom-in .tippy-tooltip.js-sample-theme pre code { font-size: 13px; }
+
+.zoom-in .interceptions .calls {
+  font-size: 12px;
+  width: 164px;
+  padding: 8px 4px 16px 4px;
 }

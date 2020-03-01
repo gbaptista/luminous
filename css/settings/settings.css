@@ -1,0 +1,133 @@
+html, body {
+  font-family: 'Open Sans', arial, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.clear {
+  clear: both;
+}
+
+body {
+  padding-top: 20px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.alert {
+  font-style: italic;
+}
+
+.executions-card-body {
+  padding-bottom: 0;
+}
+
+.form-data-collection {
+  display: inline-block;
+}
+
+.rules-info {
+  margin-bottom: 22px;
+}
+
+.remove-domain-rules {
+  margin-left: 10px;
+}
+
+.add-rule-button {
+  border-top-right-radius: .25rem!important;
+  border-bottom-right-radius: .25rem!important;
+}
+
+.nothing-found-injection {
+  margin-bottom: 24px;
+}
+
+.no-records {
+  padding: 10px;
+  text-align: center;
+  color: #CCC;
+}
+
+.nothing-found {
+  padding-top: 30px;
+  display: none;
+  text-align: center;
+  color: #CCC;
+}
+
+.storage-empty {
+  text-align: center;
+  color: #CCC;
+  padding: 30px;
+}
+
+.no-rules-search {
+  display: none;
+}
+
+.no-rules {
+  text-align: center;
+  color:#CCC;
+  padding: 10px;
+}
+
+.domain-card {
+  margin-bottom: 22px;
+}
+
+.general-injection {
+  padding-top: 0.5em;
+}
+
+.remove-code {
+  padding: 0 4px;
+  font-size: 11px
+}
+
+.remove-code, .toggle-code {
+  margin-left: 10px;
+}
+
+.remove-domain {
+  margin-right: 20px;
+  margin-bottom: 5px;
+  padding: 0 4px;
+  font-size: 11px;
+}
+
+.settings-content {
+  padding-top: 30px;
+}
+.tabs pre {
+  max-height: 300px;
+}
+pre, code {
+  margin-bottom: 0;
+}
+pre {
+  padding: 10px;
+  overflow: auto;
+  color: #586e75;
+  background: #eee8d5;
+}
+
+pre code {
+  white-space:pre-wrap;
+}
+
+#loading {
+  position: fixed;
+  padding-top: 100px;
+  top:0;
+  left:0;
+  width: 100%;
+  height: 100%;
+  background-color:#FFF;
+  color: #CCC;
+  text-align: center;
+  z-index: 999;
+  opacity: 0.95;
+  font-style: italic;
+}

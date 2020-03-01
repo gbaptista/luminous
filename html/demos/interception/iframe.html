@@ -1,0 +1,67 @@
+<script>
+  var a = document.createElement('a');
+
+  a.addEventListener('click', function(_) {
+    document.getElementById('blocked1').innerHTML = 'no';
+    document.getElementById('blocked1').setAttribute('style', 'color:red; font-weight:bold;');
+  });
+
+  var b = undefined;
+  setTimeout(function() {
+    b = document.createElement('a');
+
+    b.addEventListener('click', function(_) {
+      document.getElementById('blocked2').innerHTML = 'no';
+      document.getElementById('blocked2').setAttribute('style', 'color:red; font-weight:bold;');
+    });
+  }, 0);
+</script>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+  </head>
+  <body>
+    injection from: <code id="injection"></code>
+    <br>
+    cookie leak: <code id="cookie">no</code>
+    <br>
+    <span>iframe_1</span> blocked: <code id="blocked1">yes</code>
+    <br>
+    <span>iframe_2</span> blocked: <code id="blocked2">yes</code>
+    <br>
+    <iframe width="330" height="94" src="sub-iframe.html"></iframe>
+    <iframe width="330" height="94" src="sub-iframe.html"></iframe>
+
+    <iframe id="iframe-a" src="null.html" width="330" height="94"></iframe>
+    <iframe id="iframe-b" src="null.html" width="330" height="94"></iframe>
+  </body>
+  <script type="text/javascript">
+    if(document.cookie) {
+      document.getElementById('cookie').innerHTML = JSON.stringify(document.cookie);
+      document.getElementById('cookie').setAttribute('style', 'color:red; font-weight:bold;');
+    }
+
+    var wait_from = setInterval(function() {
+      var luminous_options = document.getElementById('luminous-options');
+      if(luminous_options) {
+        var from = luminous_options.getAttribute('data-from');
+        if(from) {
+          document.getElementById('injection').innerHTML = from;
+          clearInterval(wait_from);
+        }
+      }
+    }, 100);
+
+    setTimeout(function() {
+      var c = document.createEvent('MouseEvents');
+      c.initMouseEvent('click');
+      a.dispatchEvent(c);
+      b.dispatchEvent(c);
+
+      document.getElementById('iframe-a').setAttribute('src', 'sub-iframe.html');
+      document.getElementById('iframe-b').setAttribute('src', 'sub-iframe.html');
+    }, 500);
+  </script>
+</html>

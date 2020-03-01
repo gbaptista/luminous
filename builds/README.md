@@ -2,75 +2,74 @@
 
 ## Build Instructions
 
-Update the version on `manifest.json`:
-```json
-"version": "0.0.4"
+### Requirements
+
+Basic *Unix* tools:
+
+- `bash`
+- `grep` `sed` `xargs`
+- `cp` `mkdir` `mv` `rm`
+- `cat` `find` `ls`
+- `echo` `printf`
+- `zip`
+
+[*yarn*](https://yarnpkg.com):
+```
+sudo apt-get install yarn
 ```
 
-Copy all folders and files to the `builds/current/` directory.
-
-Remove those files and directories:
 ```
-├ builds/current/
-│ ├ builds/
-│ ├ _config.yml
-│ ├ .git/
-│ ├ images/inkscape-files/
-│ ├ images/krita-files/
-│ └ images/stores/
+sudo pacman -S yarn zip
 ```
 
-Install [*UglifyJS*](https://github.com/mishoo/UglifyJS):
+[*UglifyJS*](https://github.com/mishoo/UglifyJS):
 ```shell
-npm install uglify-js -g
+yarn global add uglify-js
 ```
 
-Compress the `builds/current/js/content/interceptor.js` code:
-```shell
-uglifyjs -c -m -- builds/current/js/content/interceptor.js
+Add ti your `~/.bash_profile`:
+```
+export PATH="$PATH:$(yarn global bin)"
 ```
 
-Change the `builds/current/js/content/injections/interceptor.js` content from:
+### Generating a new build
 
-```javascript
-injections_controller(function() {
-
-  var load_interceptor = function(callback_function) {
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-      if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-        callback_function(request.responseText);
-      }
-    }
-    request.open('GET', chrome.extension.getURL('js/content/interceptor.js'), true);
-    request.send(null);
-  }
-
-  load_interceptor(function(content) {
-    var javascript_injection = document.createElement('script');
-    javascript_injection.type = 'text/javascript';
-    javascript_injection.setAttribute('nonce', '3b34aae43a');
-    javascript_injection.innerHTML = content;
-    document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
-  });
-
-});
+Generate current build:
+```bash
+bash builds/generate.sh
 ```
 
-To:
-```javascript
-injections_controller(function() {
+Generate current build with a new version:
+```bash
+bash builds/generate.sh 0.0.2
+```
 
-  var content = 'UGLIFYJS_RESULT';
+Generate current build with a new version from some specific version:
+```bash
+bash builds/generate.sh 0.0.2 0.0.1
+```
 
-  var javascript_injection = document.createElement('script');
-  javascript_injection.type = 'text/javascript';
-  javascript_injection.setAttribute('nonce', '3b34aae43a');
-  javascript_injection.innerHTML = content;
-  document.documentElement.insertBefore(javascript_injection, document.documentElement.firstChild);
+Expected output:
+```
+-------------------------------------------
 
-});
+ Bulding Luminous 0.0.2 (from 0.0.1):
+
+  - Removing old build folder... 🗸
+  - Creating an new empty build folder... 🗸
+  - Copying all files... 🗸
+  - Updating version... 🗸
+  - Generating js/content/interceptor.js... 🗸
+  - Minifying js/content/interceptor.js with uglifyjs... 🗸
+  - Generating content variable with minified JavaScript... 🗸
+  - Rearranging js/utils/injections/interceptor.js file... 🗸
+  - Removing unused files... 🗸
+  - Removing web_accessible_resources from manifest.json... 🗸
+  - Creating 0-0-2.zip... 🗸
+
+ Finished!
+
+-------------------------------------------
 ```
 
 Test the current build at least in these 4 browsers:
@@ -80,4 +79,25 @@ Test the current build at least in these 4 browsers:
 - *Mozilla Firefox*
 - *Opera*
 
-Compress the `builds/current/` content to a *.zip* file with the version: `0-0-4.zip` and contact the repository owner to publish in all stores.
+Run the cleanup tool:
+
+```shell
+bash builds/cleanup.sh
+```
+
+Expected output:
+
+```
+-------------------------------------------
+
+Note for reviewers:
+
+The non-minified version for the code in "js/utils/injections/interceptor.js" is available at:
+
+ - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptor.js
+ - https://github.com/gbaptista/luminous/blob/0.0.2/js/content/interceptors/
+
+-------------------------------------------
+```
+
+Contact some repository owner to publish in all stores.

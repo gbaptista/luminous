@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    {{count_title}}
+  </div>
+  <div class="card-body executions-card-body">
+    {{^items}}
+      <div class="no-records">{{no_records}}</div>
+    {{/items}}
+    <table class="table table-sm">
+      <tbody>
+        {{#items}}
+          <tr>
+            <td>{{name}}</td>
+            <td>{{calls}}</td>
+            <td>{{execution_time}}</td>
+          </tr>
+        {{/items}}
+      </tbody>
+    </table>
+
+  </div>
+</div>

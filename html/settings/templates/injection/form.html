@@ -1,0 +1,34 @@
+<form>
+  <div class="card">
+    <div class="card-header">
+      <div class="input-group">
+        <input id="new-domain" type="text" class="form-control" placeholder="{{placeholder}}" aria-label="{{placeholder}}" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn btn-primary locale" data-locale="settingsAddDomainButtonText" type="submit"></button>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="alert alert-warning locale" data-locale="settingsInjectionWarningText" role="alert">
+      </div>
+
+      <div class="form-check general-injection">
+        <label class="form-check-label">
+          <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="general" value="true" {{#general_injection_enabled}} checked {{/general_injection_enabled}}>
+          {{general_injection_enabled_title}}
+        </label>
+      </div>
+      <br>
+      {{#domains}}
+        <div class="form-check domain-check" data-domain="{{domain}}">
+          <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" data-namespace="injection_disabled" name="{{domain}}" {{^general_injection_enabled}} disabled {{/general_injection_enabled}} value="true" {{#enabled}} checked {{/enabled}}>
+            {{domain}}
+          </label>
+          <button type="button" data-domain="{{domain}}" class="btn btn-outline-secondary btn-sm remove-domain locale" data-locale="settingsRemoveButtonText"></button>
+        </div>
+      {{/domains}}
+      <div class="nothing-found nothing-found-injection locale" data-locale="settingsNothingFoundText"></div>
+    </div>
+  </div>
+</form>

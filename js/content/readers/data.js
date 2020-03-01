@@ -1,53 +1,81 @@
-injections_controller(function() {
+injections_controller(function(should_inject) {
+  var tab_id = undefined;
 
-  var render_data = function(document_data, tab_id) {
-    chrome.storage.local.get(tab_id, function(current_storage_data) {
-      var calls = 0;
+  var dispatch_stack = function(stack_fifo) {
+    var stack_size = stack_fifo.length;
 
-      if(document_data && document_data['counters']) {
-        for(key in document_data['counters']) {
-          for(sub_key in document_data['counters'][key]) {
-            var allowed = document_data['counters'][key][sub_key]['allowed'];
-            var blocked = document_data['counters'][key][sub_key]['blocked'];
+    for (i = 0; i < stack_size; i++) {
+      stack_fifo[i]['tab_id'] = tab_id;
+    }
 
-            // calls += allowed + blocked;
-            if(key != 'WebAPIs') calls += allowed;
-          }
-        }
-      } else {
-        if(!document_data) document_data = {};
-        document_data['counters'] = {};
-      }
-
-      tab_id = tab_id.toString();
-
-      var data_to_write = current_storage_data;
-
-      if(!data_to_write) { data_to_write = {}; }
-      if(!data_to_write[tab_id]) { data_to_write[tab_id] = {}; }
-
-      data_to_write[tab_id]['badge'] = {
-        'text': short_number_for_badge(calls), 'calls': calls
-      };
-
-      data_to_write[tab_id]['counters'] = document_data['counters'];
-
-      chrome.storage.local.set(data_to_write);
+    chrome.runtime.sendMessage({
+      action: 'log_input', tab_id: tab_id, stack: stack_fifo
     });
   }
 
-  setInterval(function() {
+  var log_stack_fifo = [];
+
+  var process_stack_timer = undefined;
+
+  var process_stack = function() {
+    setTimeout(function() { process_stack(); }, 100);
+  }
+
+  var add_listener_not_found_count = 0;
+
+  var add_listener_to_data_element = setInterval(function() {
     var data_element = document.getElementById('luminous-data');
 
-    if(data_element && data_element.getAttribute('data-changed') == 'true') {
-      var tab_id = data_element.getAttribute('data-tab');
+    if(data_element) {
+      clearInterval(add_listener_to_data_element);
 
-      if(tab_id) {
-        data_element.setAttribute('data-changed', 'false');
+      data_element.addEventListener(
+        'luminous-message',
+        function(e) {
+          e.preventDefault(); e.stopPropagation();
 
-        render_data(JSON.parse(data_element.innerHTML), tab_id);
+          log_stack_fifo = log_stack_fifo.concat(e.data);
+
+          if(!process_stack_timer) {
+            process_stack_timer = setTimeout(function() {
+              process_stack();
+            }, 150); // STACK_TIMER_02
+          }
+        }
+      );
+
+      data_element.setAttribute('data-ready', 'true');
+    } else {
+      add_listener_not_found_count += 1;
+
+      if(add_listener_not_found_count > 10) {
+        clearInterval(add_listener_to_data_element);
       }
     }
-  }, 200);
+  }, 50);
 
+  var get_tab_id_not_found_count = 0;
+
+  var get_tab_id = setInterval(function() {
+    var data_element = document.getElementById('luminous-data');
+
+    if(data_element && data_element.getAttribute('data-tab')) {
+      clearInterval(get_tab_id);
+      process_stack = function() {
+        clearTimeout(process_stack_timer);
+        process_stack_timer = undefined;
+
+        dispatch_stack(log_stack_fifo);
+
+        log_stack_fifo = [];
+      };
+      tab_id = data_element.getAttribute('data-tab');
+    } else if(!data_element) {
+      get_tab_id_not_found_count += 1;
+
+      if(get_tab_id_not_found_count > 10) {
+        clearInterval(get_tab_id);
+      }
+    }
+  }, 50);
 });

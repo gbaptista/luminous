@@ -1,0 +1,68 @@
+<div class="card domain-card" data-domain={{domain}}>
+  <div class="card-header">
+    <form class="add-code" data-domain="{{domain}}">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="">{{domain}}</span>
+        </div>
+        <input type="text" class="form-control input-kind" placeholder="{{placeholder_kind}}" aria-label="{{placeholder_kind}}" aria-describedby="basic-addon2">
+        <input type="text" class="form-control input-code" placeholder="{{placeholder_code}}" aria-label="{{placeholder_code}}" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <button class="btn add-rule-button btn-primary locale" data-locale="settingsAddRuleButtonText" type="submit"></button>
+        </div>
+        {{^default}}
+          <button type="button" data-domain="{{domain}}" class="btn remove-domain-rules btn-outline-secondary locale" data-locale="settingsRemoveDomainButtonText"></button>
+        {{/default}}
+      </div>
+    </form>
+  </div>
+  <div class="card-body">
+    {{^rules}}
+      <div class="no-rules">{{no_rules_found}}</div>
+    {{/rules}}
+    {{#rules}}
+      <div class="card">
+        <div class="card-header">
+          {{kind}}
+        </div>
+        <div class="card-body card-codes">
+          <div class="no-rules no-rules-search">{{no_rules_found}}</div>
+          {{^codes_a}}
+            {{^codes_b}}
+              <div class="no-rules no-rules-empty">{{no_rules_found}}</div>
+            {{/codes_b}}
+          {{/codes_a}}
+          <div class="row">
+            <div class="col-6">
+              <ul class="list-group">
+                {{#codes_a}}
+                  <li data-code="{{code}}" class="list-group-item item-code list-group-item-action d-flex justify-content-between align-items-center">
+                    {{code}}
+                    <div class="code-actions">
+                      <a href="#" data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" class="badge toggle-code {{#disabled}}badge-danger{{/disabled}} {{^disabled}}badge-success{{/disabled}} badge-pill">{{badge}}</a>
+                      <button data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" type="button" class="btn btn-outline-secondary btn-sm remove-code locale" data-locale="settingsRemoveButtonText"></button>
+                    </div>
+                  </li>
+                {{/codes_a}}
+              </ul>
+            </div>
+            <div class="col-6">
+              <ul class="list-group">
+                {{#codes_b}}
+                  <li data-code="{{code}}" class="list-group-item item-code list-group-item-action d-flex justify-content-between align-items-center">
+                    {{code}}
+                    <div class="code-actions">
+                      <a href="#" data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" class="badge toggle-code {{#disabled}}badge-danger{{/disabled}} {{^disabled}}badge-success{{/disabled}} badge-pill">{{badge}}</a>
+                      <button data-domain="{{domain}}" data-kind="{{kind}}" data-code="{{code}}" type="button" class="btn btn-outline-secondary btn-sm remove-code locale" data-locale="settingsRemoveButtonText"></button>
+                    </div>
+                  </li>
+                {{/codes_b}}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+    {{/rules}}
+  </div>
+</div>

@@ -1,0 +1,556 @@
+<html>
+<head>
+    <title>Luminous: JavaScript events blocker</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/popup/popup.css">
+  </head>
+  <body class="zoom-in">
+    <div>
+      <div id="loading">loading...</div>
+      <div id="options-container"><form class="options-form">
+  <div class="col-2 col-2-header">
+    <a href="https://github.com/gbaptista/luminous/releases/tag/0.0.28" id="version" target="_blank">0.0.28</a>
+    <a href="https://gbaptista.github.io/luminous/doc/en-US" id="help-link" class="top-link" target="_blank">help</a>
+    <a href="../settings/injection/enabled.html" id="settings-link" class="top-link" target="_blank">settings</a>
+  </div>
+
+  <div class="col-1">
+    <label class="general-injection-label">
+      <input type="checkbox" name="general" value="true" checked="">
+      all websites
+    </label>
+  </div>
+  <br class="clear-floats">
+  <div class="col-1">
+      <label class="valid-domain">
+        <input type="checkbox" name="www.facebook.com" value="true" checked="">
+        www.facebook.com
+      </label>
+    <br class="clear-floats">
+    <label>
+      <input type="checkbox" name="apply_to_default" value="true">
+      apply actions to default rules
+    </label>
+  </div>
+
+  <div class="col-2">
+    <label>
+      zoom in
+      <input type="checkbox" name="zoom_in" value="true" checked="">
+    </label>
+    <br class="clear-floats">
+    <label>
+      show code details
+      <input type="checkbox" name="show_code_details" value="true">
+    </label>
+</div>
+<br class="clear-floats">
+</form>
+</div>
+      <div id="counters-container">  <div class="interceptions">
+    <h2>Web APIs:</h2>
+
+      <div class="calls " data-kind="WebAPIs" data-type="fetch" data-tippy="" data-original-title="<strong>fetch</strong> -> <strong>Window</strong>">
+        <span class="name">fetch</span>
+        <span class="allowed" style="background-color:#8D8E87;">5</span>
+        <span class="execution_time">2 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setInterval" data-tippy="" data-original-title="<strong>setInterval</strong> -> <strong>Window</strong>">
+        <span class="name">setInterval</span>
+        <span class="allowed" style="background-color:#8D8E87;">17</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setInterval.call" data-tippy="" data-original-title="<strong>setInterval.call</strong> -> <strong>Window</strong>">
+        <span class="name">setInterval.call</span>
+        <span class="allowed" style="background-color:#CC3300;">2,0k</span>
+        <span class="execution_time">2277 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setTimeout" data-tippy="" data-original-title="<strong>setTimeout</strong> -> <strong>Window</strong>">
+        <span class="name">setTimeout</span>
+        <span class="allowed" style="background-color:#CC3300;">3,7k</span>
+        <span class="execution_time">93 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="setTimeout.call" data-tippy="" data-original-title="<strong>setTimeout.call</strong> -> <strong>Window</strong>">
+        <span class="name">setTimeout.call</span>
+        <span class="allowed" style="background-color:#CC3300;">3,0k</span>
+        <span class="execution_time">1422 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="XMLHttpRequest.open" data-tippy="" data-original-title="<strong>XMLHttpRequest.open</strong> -> <strong>GET</strong>">
+        <span class="name">XMLHttpRequest.open</span>
+        <span class="allowed" style="background-color:#8D8E87;">79</span>
+        <span class="execution_time">6 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="WebAPIs" data-type="XMLHttpRequest.send" data-tippy="" data-original-title="<strong>XMLHttpRequest.send</strong> -> <strong>XMLHttpRequest</strong>">
+        <span class="name">XMLHttpRequest.send</span>
+        <span class="allowed" style="background-color:#8D8E87;">79</span>
+        <span class="execution_time">31 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+
+    <h2>triggered events (handleEvent):</h2>
+
+      <div class="calls " data-kind="handleEvent" data-type="blur" data-tippy="" data-original-title="<strong>blur</strong> -> <strong>Window</strong>">
+        <span class="name">blur</span>
+        <span class="allowed" style="background-color:#8D8E87;">14</span>
+        <span class="execution_time">7 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="canplay" data-tippy="" data-original-title="<strong>canplay</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">canplay</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">2 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">DOMContentLoaded</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="focus" data-tippy="" data-original-title="<strong>focus</strong> -> <strong>Window</strong>">
+        <span class="name">focus</span>
+        <span class="allowed" style="background-color:#8D8E87;">19</span>
+        <span class="execution_time">22 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>HTMLImageElement</strong>">
+        <span class="name">load</span>
+        <span class="allowed" style="background-color:#8D8E87;">30</span>
+        <span class="execution_time">163 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="loadedmetadata" data-tippy="" data-original-title="<strong>loadedmetadata</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">loadedmetadata</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="loadend" data-tippy="" data-original-title="<strong>loadend</strong> -> <strong>XMLHttpRequest</strong>">
+        <span class="name">loadend</span>
+        <span class="allowed" style="background-color:#8D8E87;">40</span>
+        <span class="execution_time">1 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong>">
+        <span class="name">message</span>
+        <span class="allowed" style="background-color:#CC3300;">1,5k</span>
+        <span class="execution_time">236 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="mousemove" data-tippy="" data-original-title="<strong>mousemove</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">mousemove</span>
+        <span class="allowed" style="background-color:#e6b800;">196</span>
+        <span class="execution_time">54 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="mouseout" data-tippy="" data-original-title="<strong>mouseout</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">mouseout</span>
+        <span class="allowed" style="background-color:#8D8E87;">40</span>
+        <span class="execution_time">25 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="mouseover" data-tippy="" data-original-title="<strong>mouseover</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">mouseover</span>
+        <span class="allowed" style="background-color:#e6b800;">138</span>
+        <span class="execution_time">90 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="mousewheel" data-tippy="" data-original-title="<strong>mousewheel</strong> -> <strong>HTMLHtmlElement</strong>">
+        <span class="name">mousewheel</span>
+        <span class="allowed" style="background-color:#e6b800;">450</span>
+        <span class="execution_time">228 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="progress" data-tippy="" data-original-title="<strong>progress</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">progress</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="scroll" data-tippy="" data-original-title="<strong>scroll</strong> -> <strong>Window</strong>">
+        <span class="name">scroll</span>
+        <span class="allowed" style="background-color:#e6b800;">211</span>
+        <span class="execution_time">226 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="sourceopen" data-tippy="" data-original-title="<strong>sourceopen</strong> -> <strong>MediaSource</strong>">
+        <span class="name">sourceopen</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="updateend" data-tippy="" data-original-title="<strong>updateend</strong> -> <strong>SourceBuffer</strong>">
+        <span class="name">updateend</span>
+        <span class="allowed" style="background-color:#8D8E87;">10</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="handleEvent" data-type="visibilitychange" data-tippy="" data-original-title="<strong>visibilitychange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">visibilitychange</span>
+        <span class="allowed" style="background-color:#8D8E87;">13</span>
+        <span class="execution_time">24 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+
+    <h2>attached events (addEventListener):</h2>
+
+      <div class="calls " data-kind="addEventListener" data-type="blur" data-tippy="" data-original-title="<strong>blur</strong> -> <strong>HTMLInputElement</strong>">
+        <span class="name">blur</span>
+        <span class="allowed" style="background-color:#8D8E87;">27</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="canplay" data-tippy="" data-original-title="<strong>canplay</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">canplay</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="change" data-tippy="" data-original-title="<strong>change</strong> -> <strong>HTMLTextAreaElement</strong>">
+        <span class="name">change</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="click" data-tippy="" data-original-title="<strong>click</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">click</span>
+        <span class="allowed" style="background-color:#e6b800;">252</span>
+        <span class="execution_time">6 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="contextmenu" data-tippy="" data-original-title="<strong>contextmenu</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">contextmenu</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="dblclick" data-tippy="" data-original-title="<strong>dblclick</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">dblclick</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="DOMContentLoaded" data-tippy="" data-original-title="<strong>DOMContentLoaded</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">DOMContentLoaded</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="DOMMouseScroll" data-tippy="" data-original-title="<strong>DOMMouseScroll</strong> -> <strong>HTMLHtmlElement</strong>">
+        <span class="name">DOMMouseScroll</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="dragstart" data-tippy="" data-original-title="<strong>dragstart</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">dragstart</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="ended" data-tippy="" data-original-title="<strong>ended</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">ended</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="error" data-tippy="" data-original-title="<strong>error</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">error</span>
+        <span class="allowed" style="background-color:#8D8E87;">50</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="focus" data-tippy="" data-original-title="<strong>focus</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;#</strong>">
+        <span class="name">focus</span>
+        <span class="allowed" style="background-color:#8D8E87;">30</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="focusin" data-tippy="" data-original-title="<strong>focusin</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">focusin</span>
+        <span class="allowed" style="background-color:#8D8E87;">5</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="focusout" data-tippy="" data-original-title="<strong>focusout</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">focusout</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="fullscreenchange" data-tippy="" data-original-title="<strong>fullscreenchange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">fullscreenchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="input" data-tippy="" data-original-title="<strong>input</strong> -> <strong>HTMLInputElement</strong>">
+        <span class="name">input</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="invalid" data-tippy="" data-original-title="<strong>invalid</strong> -> <strong>HTMLInputElement</strong>">
+        <span class="name">invalid</span>
+        <span class="allowed" style="background-color:#8D8E87;">5</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keydown" data-tippy="" data-original-title="<strong>keydown</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">keydown</span>
+        <span class="allowed" style="background-color:#8D8E87;">34</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keypress" data-tippy="" data-original-title="<strong>keypress</strong> -> <strong>Window</strong>">
+        <span class="name">keypress</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="keyup" data-tippy="" data-original-title="<strong>keyup</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">keyup</span>
+        <span class="allowed" style="background-color:#8D8E87;">10</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="load" data-tippy="" data-original-title="<strong>load</strong> -> <strong>HTMLImageElement</strong>">
+        <span class="name">load</span>
+        <span class="allowed" style="background-color:#8D8E87;">30</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="loadedmetadata" data-tippy="" data-original-title="<strong>loadedmetadata</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">loadedmetadata</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="loadend" data-tippy="" data-original-title="<strong>loadend</strong> -> <strong>XMLHttpRequest</strong>">
+        <span class="name">loadend</span>
+        <span class="allowed" style="background-color:#8D8E87;">41</span>
+        <span class="execution_time">1 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="message" data-tippy="" data-original-title="<strong>message</strong> -> <strong>Window</strong>">
+        <span class="name">message</span>
+        <span class="allowed" style="background-color:#8D8E87;">5</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mousedown" data-tippy="" data-original-title="<strong>mousedown</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">mousedown</span>
+        <span class="allowed" style="background-color:#8D8E87;">34</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mousemove" data-tippy="" data-original-title="<strong>mousemove</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;AndersonMendesBrendaCarvalho&amp;#x2F;?ref&amp;#x3D;nf&amp;amp;hc_ref&amp;#x3D;ARSWN-spdKq1ElKt1vrY-lHzWvkVY21DkDKpau3mCGpfgYFLgpzxtZTb7y6M8zb_V_c</strong>">
+        <span class="name">mousemove</span>
+        <span class="allowed" style="background-color:#8D8E87;">8</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mouseout" data-tippy="" data-original-title="<strong>mouseout</strong> -> <strong>https:&amp;#x2F;&amp;#x2F;www.facebook.com&amp;#x2F;AndersonMendesBrendaCarvalho&amp;#x2F;?ref&amp;#x3D;nf&amp;amp;hc_ref&amp;#x3D;ARSWN-spdKq1ElKt1vrY-lHzWvkVY21DkDKpau3mCGpfgYFLgpzxtZTb7y6M8zb_V_c</strong>">
+        <span class="name">mouseout</span>
+        <span class="allowed" style="background-color:#8D8E87;">23</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mouseover" data-tippy="" data-original-title="<strong>mouseover</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">mouseover</span>
+        <span class="allowed" style="background-color:#8D8E87;">53</span>
+        <span class="execution_time">1 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mouseup" data-tippy="" data-original-title="<strong>mouseup</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">mouseup</span>
+        <span class="allowed" style="background-color:#8D8E87;">26</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mousewheel" data-tippy="" data-original-title="<strong>mousewheel</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">mousewheel</span>
+        <span class="allowed" style="background-color:#8D8E87;">6</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="mozfullscreenchange" data-tippy="" data-original-title="<strong>mozfullscreenchange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">mozfullscreenchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="MSFullscreenChange" data-tippy="" data-original-title="<strong>MSFullscreenChange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">MSFullscreenChange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="offline" data-tippy="" data-original-title="<strong>offline</strong> -> <strong>Window</strong>">
+        <span class="name">offline</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="online" data-tippy="" data-original-title="<strong>online</strong> -> <strong>Window</strong>">
+        <span class="name">online</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pagehide" data-tippy="" data-original-title="<strong>pagehide</strong> -> <strong>Window</strong>">
+        <span class="name">pagehide</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="paste" data-tippy="" data-original-title="<strong>paste</strong> -> <strong>HTMLHtmlElement</strong>">
+        <span class="name">paste</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="pause" data-tippy="" data-original-title="<strong>pause</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">pause</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="play" data-tippy="" data-original-title="<strong>play</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">play</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="playing" data-tippy="" data-original-title="<strong>playing</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">playing</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="popstate" data-tippy="" data-original-title="<strong>popstate</strong> -> <strong>Window</strong>">
+        <span class="name">popstate</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="progress" data-tippy="" data-original-title="<strong>progress</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">progress</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="resize" data-tippy="" data-original-title="<strong>resize</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">resize</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="scroll" data-tippy="" data-original-title="<strong>scroll</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">scroll</span>
+        <span class="allowed" style="background-color:#8D8E87;">4</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="seeked" data-tippy="" data-original-title="<strong>seeked</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">seeked</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="seeking" data-tippy="" data-original-title="<strong>seeking</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">seeking</span>
+        <span class="allowed" style="background-color:#8D8E87;">3</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="selectionchange" data-tippy="" data-original-title="<strong>selectionchange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">selectionchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="sourceopen" data-tippy="" data-original-title="<strong>sourceopen</strong> -> <strong>MediaSource</strong>">
+        <span class="name">sourceopen</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="storage" data-tippy="" data-original-title="<strong>storage</strong> -> <strong>Window</strong>">
+        <span class="name">storage</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="submit" data-tippy="" data-original-title="<strong>submit</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">submit</span>
+        <span class="allowed" style="background-color:#8D8E87;">22</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="success" data-tippy="" data-original-title="<strong>success</strong> -> <strong>HTMLDivElement</strong>">
+        <span class="name">success</span>
+        <span class="allowed" style="background-color:#8D8E87;">19</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="test" data-tippy="" data-original-title="<strong>test</strong> -> <strong>Window</strong>">
+        <span class="name">test</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="timeupdate" data-tippy="" data-original-title="<strong>timeupdate</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">timeupdate</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="touchstart" data-tippy="" data-original-title="<strong>touchstart</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">touchstart</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="updateend" data-tippy="" data-original-title="<strong>updateend</strong> -> <strong>SourceBuffer</strong>">
+        <span class="name">updateend</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="visibilitychange" data-tippy="" data-original-title="<strong>visibilitychange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">visibilitychange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="volumechange" data-tippy="" data-original-title="<strong>volumechange</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">volumechange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="waiting" data-tippy="" data-original-title="<strong>waiting</strong> -> <strong>HTMLVideoElement</strong>">
+        <span class="name">waiting</span>
+        <span class="allowed" style="background-color:#8D8E87;">2</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+      <div class="calls " data-kind="addEventListener" data-type="webkitfullscreenchange" data-tippy="" data-original-title="<strong>webkitfullscreenchange</strong> -> <strong>HTMLDocument</strong>">
+        <span class="name">webkitfullscreenchange</span>
+        <span class="allowed" style="background-color:#8D8E87;">1</span>
+        <span class="execution_time">0 ms</span>
+        <span class="blocked" style="background-color:#8D8E87;">0</span>
+      </div>
+  </div>
+</div>
+    </div>
+
+
+</body>
+</html>

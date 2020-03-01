@@ -8,7 +8,9 @@ Uma extensão experimental para identificar, analisar e bloquear a execução de
 - [Entendendo a interface do usuário](#entendendo-a-interface-do-usu%C3%A1rio)
 - [Como instalar](#como-instalar)
 - [Experimente!](#experimente)
+- [Capturas de tela](#capturas-de-tela)
 - [Se aprofunde no tema](#se-aprofunde-no-tema)
+- [Guias](#guias)
 - [Como colaborar](#como-colaborar)
 - [Problemas conhecidos](#problemas-conhecidos)
 - [Entendendo o código](#entendendo-o-c%C3%B3digo)
@@ -38,19 +40,18 @@ Tais ferramentas são vitais, mas inevitavelmente precisamos fazer concessões p
 
 - Chromium e Google Chorme: [Chrome Web Store](https://chrome.google.com/webstore/detail/luminous-javascript-event/baacpbikplogpeecclpnajnlghmcldkb)
 - Mozilla Firefox: [Fifrefox Add-ons](https://addons.mozilla.org/pt-BR/firefox/addon/luminous/)
-- Opera: *aguardando revisão (Opera add-ons)*
+- Opera: [Complementos do Opera](https://addons.opera.com/pt-br/extensions/details/luminous-javascript-events-blocker/)
 
 ## Experimente!
 
-[Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demo-page.html) para experimentar e entender melhor o seu funcionamento:
+[Instale](#como-instalar) a extensão e acesse a nossa [página de demonstração](https://gbaptista.github.io/luminous/html/demos/detections/index.html) para experimentar e entender melhor o seu funcionamento:
 ![Demo Page](images/doc/pt-BR/demo-page.png)
 
+## Capturas de tela
+
+Veja algumas capturas de tela [aqui](./doc/pt-BR/guides/screenshots.md).
+
 ## Se aprofunde no tema
-
-Este experimento faz parte de um livro que está sendo escrito de *WebExtensions API* sob a ótica de temas como liberdade e privacidade nos meios digitais. Se deseja saber novidades sobre a publicação do mesmo, deixe aqui o seu email: [https://gbaptistas.typeform.com/to/jCzkkm](
-https://gbaptistas.typeform.com/to/jCzkkm)
-
-Enquanto o livro não é publicado, sugiro as seguintes referências para expandir a sua visão sobre o tema:
 
 - Documentário: [*Do Not Track*](https://donottrack-doc.com)
 - Livro: [*1984*](https://www.amazon.com.br/1984-George-Orwell-ebook/dp/B009XE662U)
@@ -60,9 +61,14 @@ Enquanto o livro não é publicado, sugiro as seguintes referências para expand
 - Página na web: [*Saúde da Internet*](https://www.mozilla.org/pt-BR/internet-health/)  
 - Página na web: [*Sobre o Lightbeam*](https://www.mozilla.org/pt-BR/lightbeam/about)
 
+## Guias
+
+Guias são documentos sobre assuntos muitos específicos onde podemos ir fundo nos detalhes e encontrar facilmente as informações que estamos procurando. Veja [aqui](./doc/pt-BR/guides/) todos os guias.
+
 ## Como colaborar
 
   - [Espalhe a ideia](#espalhe-a-ideia)
+    - [Escreva algum guia](#escreva-algum-guia)
     - [Compartilhe](#compartilhe)
     - [Escreva e fale sobre](#escreva-e-fale-sobre)
     - [Ajude na tradução para outros idiomas](#ajude-na-tradu%C3%A7%C3%A3o-para-outros-idiomas)
@@ -76,6 +82,10 @@ Enquanto o livro não é publicado, sugiro as seguintes referências para expand
     - [Melhore a qualidade do código](#melhore-a-qualidade-do-c%C3%B3digo)
 
 ### Espalhe a ideia
+
+#### Escreva algum guia
+
+Colabore escrevendo algum [guia](#guias) sobre assuntos relacionados ao projeto.
 
 #### Compartilhe
 
@@ -109,7 +119,7 @@ Não temos a interface mais bonita e amigável possível. [Discussões](https://
 
 **Exemplo 1**: Quanto mais cedo conseguirmos injetar o código nos websites e quanto menos recursos utilizarmos para processar as informações, mais execuções seremos capazes de identificar e melhor será a nossa experiência ao ter uma extensão que não deixe a navegação lenta.
 
-Olhe por exemplo para a nossa página de demonstração (*`html/demo-page.html`*):
+Olhe por exemplo para a nossa página de demonstração (*`html/demos/detections/index.html`*):
 
 ```javascript
 (function() { setTimeout(function() {
@@ -186,6 +196,7 @@ No *Mozilla Firefox* e derivados, alguns sites que utlizam [*Service Workers*](h
 - [Background](#background)
 - [Content](#content)
 - [Pop-up](#pop-up)
+- [Configurações](#configurações)
 - [Utilidades](#utilidades)
 - [Bibliotecas de terceiros](#bibliotecas-de-terceiros)
 
@@ -227,6 +238,14 @@ Responsáveis por renderizar e cuidar das interações feitas no pop-up que é a
 - `js/popup/popup.js`
 - `css/popup/popup.css`
 
+### Configurações
+
+Responsáveis por renderizar e cuidar das interações feitas nas páginas de configurações:
+
+- `html/settings/*.html`
+- `js/settings/*.js`
+- `css/settings/*.css`
+
 ### Utilidades
 
 - `js/utils/colors.js`: Função utilizada para determinar a cor exibida com base no valor do contador.
@@ -234,9 +253,11 @@ Responsáveis por renderizar e cuidar das interações feitas no pop-up que é a
 
 ### Bibliotecas de terceiros
 
-- `js/vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
-- `js/vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
-- `js/vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
+- `vendor/bootstrap`: [*Bootstrap: biblioteca de componentes front-end
+*](https://github.com/twbs/bootstrap)
+- `vendor/jquery`: [*jQuery JavaScript Library*](https://github.com/jquery/jquery)
+- `vendor/mustachejs`: [*Minimal templating with {{mustaches}} in JavaScript*](https://github.com/janl/mustache.js)
+- `vendor/tippyjs`: [*A lightweight, vanilla JS tooltip library*](https://github.com/atomiks/tippyjs)
 
 ## Licença
 
@@ -244,7 +265,7 @@ Este projeto está licenciado sob a [*GPLv3*](LICENSE).
 
 ## Doações
 
-Não há nenhum tipo de organização para o recebimento de doações no momento. Veja nosso guia sobre *"[como colaborar](#como-colaborar)"* para outras maneiras de contribuição e também sobre o livro que está sendo escrito em *"[se aprofunde no tema](#se-aprofunde-no-tema)"*. Se deseja realmente realizar uma doação, eis algumas fundações incríveis que vão de encontro com os temas abordados neste projeto que você pode ajudar:
+Não há nenhum tipo de organização para o recebimento de doações no momento. Veja nosso guia sobre *"[como colaborar](#como-colaborar)"* para outras maneiras de contribuição. Se deseja realmente realizar uma doação, eis algumas fundações incríveis que vão de encontro com os temas abordados neste projeto que você pode ajudar:
 
 - [*Electronic Frontier Foundation*](https://supporters.eff.org/donate)
 - [*Free Software Foundation*](https://www.fsf.org/about/ways-to-donate)

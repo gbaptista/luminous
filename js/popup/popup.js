@@ -1,51 +1,33 @@
-var cached_templates = {};
-
-var load_template = function(path, callback_function) {
-  if(cached_templates[path]) {
-    callback_function(cached_templates[path]);
-  } else {
-    var request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-      if (request.readyState == XMLHttpRequest.DONE && request.status == 200) {
-        cached_templates[path] = request.responseText;
-
-        callback_function(cached_templates[path]);
-      }
-    }
-    request.open('GET', chrome.extension.getURL(path), true);
-    request.send(null);
-  }
-}
-
 var set_sync_option_disabled_for_kind_and_type = function(domain, kind, type, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data) sync_data = {};
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-
-      if(!sync_data['options']['disabled'][domain]) {
-        sync_data['options']['disabled'][domain] = {};
+      if(!sync_data['disabled_' + domain]) {
+        sync_data['disabled_' + domain] = {};
       }
 
-      if(!sync_data['options']['disabled'][domain][kind]) {
-        sync_data['options']['disabled'][domain][kind] = {};
+      if(!sync_data['disabled_' + domain][kind]) {
+        sync_data['disabled_' + domain][kind] = {};
       }
 
-      sync_data['options']['disabled'][domain][kind][type] = value;
+      if(sync_data['popup']['apply_to_default']) {
+        if(sync_data['disabled_' + domain][kind][type] != value) {
+          delete sync_data['disabled_' + domain][kind][type];
+        }
+
+        sync_data['default_disabled_' + kind][type] = value;
+      } else {
+        sync_data['disabled_' + domain][kind][type] = value;
+      }
 
       chrome.storage.sync.set(sync_data);
     });
   }, 0);
 }
 
-var set_sync_option = function(name, value) {
+var set_sync_popup_option = function(name, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {}
-
-      sync_data['options'][name] = value;
+      sync_data['popup'][name] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -55,10 +37,7 @@ var set_sync_option = function(name, value) {
 var set_sync_option_injection_disabled_for_name = function(name, value) {
   setTimeout(function() {
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data['options']) sync_data['options'] = {}
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {}
-
-      sync_data['options']['injection_disabled'][name] = value;
+      sync_data['injection_disabled'][name] = value;
 
       chrome.storage.sync.set(sync_data);
     });
@@ -74,12 +53,40 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
     var domain = a_element.hostname;
 
     chrome.storage.sync.get(null, function(sync_data) {
-      if(!sync_data) sync_data = {};
-      if(!sync_data['options']) sync_data['options'] = {};
-      if(!sync_data['options']['injection_disabled']) sync_data['options']['injection_disabled'] = {};
-      if(!sync_data['options']['disabled']) sync_data['options']['disabled'] = {};
-      if(!sync_data['options']['disabled'][domain]) {
-        sync_data['options']['disabled'][domain] = {};
+      if(!sync_data['disabled_' + domain]) {
+        sync_data['disabled_' + domain] = {};
+      }
+
+      if(sync_data['popup']['zoom_in']) {
+        $('body').addClass('zoom-in');
+      } else {
+        $('body').removeClass('zoom-in');
+      }
+
+      var kinds = [];
+
+      for(possible_kind in sync_data) {
+        var regex = /^default_disabled_/;
+        if(regex.test(possible_kind)) {
+          kinds.push(possible_kind.replace(regex, ''));
+        }
+      }
+
+      // Apply default rules
+      for(i in kinds) {
+        var kind = kinds[i];
+
+        if(!sync_data['disabled_' + domain][kind]) {
+          sync_data['disabled_' + domain][kind] = {};
+        }
+
+        for(code in sync_data['default_disabled_' + kind]) {
+          if(sync_data['disabled_' + domain][kind][code] == undefined) {
+            if(sync_data['default_disabled_' + kind][code]) {
+              sync_data['disabled_' + domain][kind][code] = sync_data['default_disabled_' + kind][code];
+            }
+          }
+        }
       }
 
       load_template('html/popup/templates/options.html', function(template) {
@@ -88,12 +95,23 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           Mustache.render(template, {
             domain: domain,
             general_injection_enabled_title: chrome.i18n.getMessage('checkboxInjectionEnabledGeneral'),
-            show_listener_functions_title: chrome.i18n.getMessage('checkboxShowListenerFunctions'),
-            general_injection_enabled: !sync_data['options']['injection_disabled']['general'],
-            domain_injection_enabled: !sync_data['options']['injection_disabled'][domain],
-            show_listener_functions: sync_data['options']['show_listener_functions']
+            show_code_details_title: chrome.i18n.getMessage('checkboxShowCodeDetails'),
+            general_injection_enabled: !sync_data['injection_disabled']['general'],
+            domain_injection_enabled: !sync_data['injection_disabled'][domain],
+            show_code_details: sync_data['popup']['show_code_details'],
+            zoom_in_title: chrome.i18n.getMessage('checkboxZoomIn'),
+            zoom_in: sync_data['popup']['zoom_in'],
+            show_performance_metrics_title: chrome.i18n.getMessage('checkboxShowPerformanceMetrics'),
+            show_performance_metrics: sync_data['popup']['show_performance_metrics'],
+            apply_to_default_title: chrome.i18n.getMessage('checkboxApplyToDefault'),
+            apply_to_default: sync_data['popup']['apply_to_default'],
+            no_domain: chrome.i18n.getMessage('settingsInvalidDomainMessage')
           })
         );
+
+        $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
+        $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
+        $('#settings-link').html(chrome.i18n.getMessage('linkSettingsText'));
 
         $('#options-container input').change(function() {
           $('#loading').fadeIn(200);
@@ -101,8 +119,16 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
           var value = $(this).is(':checked');
           var name = $(this).attr('name');
 
-          if(name == 'show_listener_functions') {
-            set_sync_option(name, value);
+          if(
+            name == 'show_code_details'
+            ||
+            name == 'zoom_in'
+            ||
+            name == 'apply_to_default'
+            ||
+            name == 'show_performance_metrics'
+          ) {
+            set_sync_popup_option(name, value);
           } else {
             set_sync_option_injection_disabled_for_name(name, !value);
           }
@@ -112,9 +138,13 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
       load_template('html/popup/templates/counters.html', function(template) {
         if(local_data[tab_id] && local_data[tab_id]['counters']) {
           var tooltip_content = function(name, samples) {
+            if(!samples || !samples[0]) {
+              samples = [{ name: name, target: '?' }];
+            }
+
             var target = samples[0]['target'].replace('[object ', '').replace(']', '');
 
-            if(sync_data['options']['show_listener_functions']) {
+            if(sync_data['popup']['show_code_details']) {
               var text = '';
 
               var codes = [];
@@ -142,7 +172,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -155,7 +186,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -168,7 +200,8 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               blocked: short_number_for_counter(value['blocked']),
               allowed_color: background_color_for_counter(value['allowed']),
               blocked_color: background_color_for_counter(value['blocked']),
-              title_for_tooltip: tooltip_content(name, value['samples'])
+              title_for_tooltip: tooltip_content(name, value['samples']),
+              execution_time: short_time(value['execution_time'])
             });
           });
 
@@ -186,20 +219,21 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
               handle_event_calls: handle_event_calls,
               web_apis_calls: web_apis_calls,
               options_json: JSON.stringify(
-                sync_data['options']['disabled'][domain], null, 2
+                sync_data['disabled_' + domain], null, 2
               ),
               nothing_detected: false,
               nothing_detected_message: chrome.i18n.getMessage('messageNothingDetected'),
               handle_event_title: chrome.i18n.getMessage('titleHandleEvent'),
               web_apis_title: chrome.i18n.getMessage('titleWebAPIs'),
               add_event_listener_title: chrome.i18n.getMessage('titleAddEventListener'),
+              show_performance_metrics: sync_data['popup']['show_performance_metrics'],
               disabled_class: function() {
                 return function (text, render) {
                   var keys = render(text).split(',');
                   var disabled = false;
 
-                  if(sync_data['options']['disabled'][domain][keys[0]]) {
-                    disabled = sync_data['options']['disabled'][domain][keys[0]][keys[1]];
+                  if(sync_data['disabled_' + domain][keys[0]]) {
+                    disabled = sync_data['disabled_' + domain][keys[0]][keys[1]];
                   }
 
                   if(disabled) { return 'disabled'; } else { return ''; };
@@ -228,12 +262,12 @@ var load_store_data_from_tab = function(tab_id, current_tab_url) {
 
           tippy('.interceptions .calls', {
             theme: 'js-sample', animateFill: false, size: 'small',
-            performance: true, interactive: sync_data['options']['show_listener_functions'],
-            duration: [0, 0],
+            interactive: sync_data['popup']['show_code_details'],
+            lazy: false, duration: [0, 0],
             onShown: function() {
               $('.tippy-popper:not(:last-child)').remove();
             },
-            onHidde: function() {
+            onHide: function() {
               $('.tippy-popper').remove();
             }
           });
@@ -277,8 +311,8 @@ var should_reload = false;
 var should_hidde_loading = false;
 
 chrome.storage.onChanged.addListener(function(changes, _namespace) {
-  if(changes[current_tab_id] || changes['options']) {
-    if(changes['options']) {
+  if(changes[current_tab_id] || changes) {
+    if(changes) {
       should_hidde_loading = true;
     }
     should_reload = true;
@@ -295,6 +329,4 @@ setInterval(function() {
 $(document).ready(function() {
   $('title').html(chrome.i18n.getMessage('manifestName'));
   $('#loading').html(chrome.i18n.getMessage('messageLoading'));
-  $('#help-link').attr('href', chrome.i18n.getMessage('linkHelpHref'));
-  $('#help-link').html(chrome.i18n.getMessage('linkHelpText'));
 });
