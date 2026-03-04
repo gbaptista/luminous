@@ -166,7 +166,7 @@ Cookies.remove('enabled', { path: '/' });
 
 **Warning 1:**
 
-From [MDN](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/API/webRequest/onHeadersReceived):
+From [MDN](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/webRequest/onHeadersReceived):
 
 > *Note that it is possible for extensions to conflict here. If two extensions listen to `onHeadersReceived` for the same request, then the second listener will see modifications made by the first listener, and will be able to undo any changes made by the first listener. For example, if the first listener adds a `Set-Cookie` header, and the second listener strips all `Set-Cookie` headers, then the first listener's modifications will be lost.*
 
